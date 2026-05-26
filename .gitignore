@@ -1,0 +1,60 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Runtime outputs
+results/
+eval_result/
+logs/
+*.log
+vocab_debug.log
+
+# Experiment caches and generated media
+experiments/**/cache/
+experiments/**/runs/
+experiments/**/outputs/
+
+# Do not commit benchmark videos in this repository.
+videos/
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Local models and large weights
+model/
+models/
+checkpoints/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Codex/agent local state
+.agents/
+.codex/
