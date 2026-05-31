@@ -69,119 +69,113 @@ from tools.retail.retail_init import (  # noqa: E402
 )
 
 
-VISUAL_CONTEXT_TEMPLATE = """
+VISUAL_RESOLUTION_TOOL_NAME = "resolve_visual_reference"
 
-## Visual Anchor
-The following block provides visual anchor evidence for the current user
-request. Depending on the experiment mode, it may come from the two-stage visual
-observer or from scenario key/value labels used as an oracle control. Treat this
-block as visual evidence only.
+VISUAL_RESOLUTION_TOOL = {
+    "type": "function",
+    "function": {
+        "tool_name": VISUAL_RESOLUTION_TOOL_NAME,
+        "description": (
+            "Resolve one visible referent only: a pointed item, spatial region, "
+            "visible text, category/section title, or visible object. Do not use "
+            "this tool for database facts, database keys, recommendations, "
+            "filtering, ranking, prices, nutrition, allergens, taste, inventory, "
+            "order state, or totals."
+        ),
+        "parameters": {
+            "type": "object",
+            "additionalProperties": False,
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "The user's current visual referring phrase or request.",
+                },
+                "referent_hint": {
+                    "type": "string",
+                    "description": (
+                        "Optional short phrase to resolve, such as 'the pointed bottle', "
+                        "'the one on the left', or 'it'."
+                    ),
+                },
+            },
+            "required": ["query"],
+        },
+    },
+}
 
-{visual_observation}
 
-Use these key/value facts to map the user's visual reference to a likely
-catalog/menu/ingredient anchor. They do not establish any database attribute or
-state. Prices, tax, discounts, nutrition, allergens, taste, country/origin,
-category, set membership, inventory, cart/order/menu state, and totals must come
-from tool results.
+SERVICE_PROMPT_VERSION = "database_grounded_visual_tool_v5_slim"
 
-If the block includes pointed_sequence, shelf_order, or neighbor_map, use those
-only as visual grounding for ordinal or adjacent references such as first,
-second, third, last, immediately left, or immediately right. The primary
-visual_key_values still identify the current user referent.
+
+SERVICE_COMMON_GROUNDING_INSTRUCTION = """
+
+## Evidence And Visual Tool Rules
+- Use database tools for database facts and actions: price, discount, tax,
+  nutrition, allergens, taste/flavor tags, set membership, inventory, cart/order
+  state, totals, filtering, ranking, cheapest/highest/lowest, and recommendations.
+- Use resolve_visual_reference only to identify one visible referent that is not
+  resolved yet: a pointed item, a spatial region, readable visible text, a
+  category/section title, or a visible object.
+- Do not ask the observer to decide database facts, compare options, choose a
+  restaurant/store, rank candidates, or apply conditions such as low calorie,
+  high protein, dairy, butter flavor, gluten-free, highest price, or set
+  membership. First identify the visible item/section if needed; then use tools.
+- Treat observer output as a visual clue, not a database key or database fact.
+  Before using an observer-returned product/category/name in a tool parameter,
+  match it to a user-stated official name, a prior successful tool parameter,
+  or a tool-returned candidate.
+- If a required database key is missing and only a generic phrase is available,
+  ask one concise clarification instead of substituting visible OCR, logo text,
+  cuisine type, or a guess.
+- If calling tools, output only a JSON array and no other text.
 """
 
 
-SERVICE_PROMPT_VERSION = "database_grounded_visual_normalization_v2"
+SCENARIO_SERVICE_INSTRUCTIONS = {
+    "order": """
 
+## Order Scenario Rules
+- If the user states that a menu number belongs to an official restaurant name,
+  keep that exact user-stated name as restaurant_name for that menu until the
+  user changes it.
+- In menu-ordering tasks, observer calls are for visible pointing and layout:
+  pointed dish, category title, section title, or spatial region. Do not use the
+  observer to infer restaurant_name, taste/flavor tags, allergens, nutrition,
+  prices, discounts, set membership, or lowest/highest choices.
+- Visible logos and headings such as restaurant branding or section names are
+  not restaurant_name values unless they have also appeared as a user-stated
+  official name or successful tool parameter.
+""",
+    "retail": """
 
-SERVICE_DATABASE_GROUNDING_INSTRUCTION = """
+## Retail Scenario Rules
+- Use the observer for visible shelf/product identity, pointing order, adjacent
+  products, package text, and visible product regions.
+- Product labels may be noisy OCR. Normalize any visual product clue against
+  tool-returned product candidates before using it for cart actions or
+  attribute queries.
+- Country/origin, price, discount, stock, category, recommendation, and cheaper
+  alternatives must come from tools, not label appearance or real-world product
+  knowledge.
+""",
+    "restaurant": """
 
-## Database Grounding
-- Give customer-facing factual answers only when they are supported by tool
-  results in this conversation. This includes prices, tax, discounts, nutrition,
-  allergens, taste, country/origin, category, set membership, inventory,
-  cart/order/menu state, totals, and whether an item satisfies a condition.
-- Visual observations may identify the item or region being discussed, but they
-  are not evidence for database attributes or mutable state.
-- Do not use real-world knowledge, product names, label style, or common sense
-  to fill missing database facts. If a fact is needed and not present in prior
-  tool results, call a suitable tool before answering or acting.
-- If a tool is a reverse lookup for an attribute, use the returned candidate
-  list as evidence only for items that actually appear in that list. Do not
-  apply the attribute to an item that the tool did not return.
-- For filtering, ranking, cheapest/highest/lowest, tie-sensitive choices, or
-  conditional branches, build a candidate set with tools and verify the needed
-  properties for each candidate before choosing.
-- Treat empty, partial, fuzzy, or ambiguous tool results as inconclusive. Use
-  another relevant tool or ask a minimal clarification when needed.
-- Before adding, removing, or calculating, ensure the item list and parameters
-  are grounded in visual evidence, dialogue history, and tool results rather
-  than guesses.
+## Restaurant Scenario Rules
+- Use the observer only for visible menu/table/scene references such as a
+  pointed dish, visible menu section, sign, table item, or spatial location.
+- Restaurant database fields such as cuisine, opening hours, rating,
+  availability, reservation state, prices, menu attributes, and recommendations
+  must come from tools.
+""",
+    "kitchen": """
 
-## Visual Anchor Normalization
-- Visual observer product/menu names may contain OCR errors. Treat them as
-  noisy anchors, not final catalog keys.
-- Before using a visual product/menu name for price, country/origin, category,
-  tax, discount, nutrition, cart actions, or comparisons, reconcile it with
-  actual tool-returned catalog/menu entries.
-- Required workflow when a visual anchor contains a product/menu name:
-  1. Start with the full visual anchor exactly as observed.
-  2. If the tool result is empty, generic, or drops distinctive visual tokens,
-     do not answer, ask the user to accept the generic item, or act on it.
-  3. Immediately run additional lookup(s) using stable category words and
-     distinctive visible tokens from the observation, then compare the returned
-     candidate names.
-  4. Normalize to the most specific returned candidate that preserves the
-     distinctive visual evidence and the item type.
-  5. Only after normalization should you request price, tax, discount,
-     category, country/origin candidates, nutrition, or perform cart/order
-     actions for that item.
-- When a lookup returns candidates, compare the returned names with the visual
-  anchor. Prefer the most specific complete returned item whose name preserves
-  the distinctive visual tokens. Do not blindly use the first returned item.
-- Reject generic substring matches that drop distinctive visual tokens. For
-  example, if the visual anchor is "KIM CRAFTED Sauvignon Blanc", a tool result
-  of only "sauvignon blanc" is a generic category-style match and must not be
-  treated as the identified bottle, even if the user later says "yes" to a
-  price confirmation. Probe with distinctive tokens and broader item-type
-  terms such as "kim", "crafted", and "sauvignon blanc" before proceeding.
-- If a lookup returns both a generic item and a more specific item, choose the
-  specific item when it best matches the visual anchor. For example,
-  "Kim Crawford Sauvignon Blanc" is a better catalog normalization than
-  "sauvignon blanc" for a visual anchor containing Kim/Crawford-like brand text.
-- Never continue with a generic returned item while a more specific returned
-  candidate plausibly matches the visual evidence. If the first lookup for
-  "KIM CRAFTED Sauvignon Blanc" returns only "sauvignon blanc", query broader
-  candidate lists such as "sauvignon blanc" and choose among the returned
-  catalog names before answering or taking cart actions.
-- For same-country or same-origin requests, first normalize the visual item to
-  an exact tool-returned catalog/menu item. Then use only reverse-lookup tool
-  results or other tool-returned database evidence to establish origin-based
-  candidate sets. Do not use label appearance, product name stereotypes, or
-  real-world knowledge as the country/origin source.
-- If the only available country/origin tool is a reverse lookup such as
-  find_products_by_country_of_origin(country), treat each call as a hypothesis
-  test for that country. The country is proven for the normalized target item
-  only if the returned product_names list contains that exact normalized item.
-  If the target item is absent from the returned list, that country is disproven
-  for the target and must not be used for answering, filtering alternatives, or
-  choosing cart/order actions.
-- Do not say or imply that a normalized item is from a country unless a prior
-  tool result returned that exact item in that country's product_names list.
-  For example, if find_products_by_country_of_origin("New Zealand") does not
-  return "kim crawford sauvignon blanc", then New Zealand is not supported and
-  must be discarded, even if the product name seems associated with New Zealand
-  in real-world knowledge.
-- For same-country searches, first identify the proven country by reverse
-  lookup membership for the normalized target item. Only after that membership
-  check succeeds may you use the same returned country list as the candidate
-  set for cheaper/higher/discounted/similar alternatives.
-- If the visual anchor cannot be confidently normalized to a tool-returned
-  catalog/menu item, say that the match is inconclusive or ask one concise
-  clarification. Do not infer country/origin, price, or alternatives from
-  label appearance or real-world knowledge.
-"""
+## Kitchen Scenario Rules
+- Use the observer only for visible kitchen referents such as a pointed
+  ingredient, utensil, container, appliance, spatial location, or visible state.
+- Recipe facts, nutrition, inventory, substitutions, cooking instructions, and
+  quantity calculations must come from tools or user-provided facts.
+""",
+}
 
 
 RETAIL_INIT_DATA = {
@@ -291,6 +285,7 @@ def observation_turn_key(
     args: argparse.Namespace,
     turn: int,
     current_user_message: str,
+    referent_hint: str = "",
 ) -> str:
     payload = {
         "video_path": video_path,
@@ -298,8 +293,9 @@ def observation_turn_key(
         "scenario_number": args.scenario_number,
         "turn": turn,
         "current_user_message": current_user_message,
+        "referent_hint": referent_hint,
         "observer_url": visual_observer_url(args),
-        "version": "aura_observer_turn_grounded_v5_no_dialogue",
+        "version": "aura_observer_turn_grounded_v6_visual_query",
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
 
@@ -329,12 +325,12 @@ def build_observation_trace_header(
     args: argparse.Namespace,
 ) -> dict[str, Any]:
     return {
-        "schema_version": "aura_observer_scenario_trace_v1_no_dialogue",
+        "schema_version": "visual_observer_scenario_trace_v2_no_dialogue",
         "scenario": args.scenario,
         "scenario_number": args.scenario_number,
         "scenario_key": f"{args.scenario}{args.scenario_number}",
         "run_timestamp": get_run_timestamp(args),
-        "observer_mode": "aura_event_qwenvl_sequence",
+        "observer_mode": "visual_event_qwen_sequence",
         "observer_url": visual_observer_url(args),
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
         "updated_at": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
@@ -381,7 +377,7 @@ def upsert_observation_turn(
         if item.get("turn_key") == record.get("turn_key"):
             turns[key] = record
             return
-    turns[turn_label] = record
+    turns[f"{turn_label}_{record.get('turn_key') or len(turns)}"] = record
 
 
 def get_aura_observation(
@@ -391,6 +387,7 @@ def get_aura_observation(
     args: argparse.Namespace,
     turn: int,
     current_user_message: str,
+    referent_hint: str = "",
 ) -> dict[str, Any]:
     cache_file = observation_trace_file(task, video_path, task_id, args)
     task_label = f"{args.scenario}{args.scenario_number}_task{task_id}"
@@ -401,6 +398,7 @@ def get_aura_observation(
         args,
         turn,
         current_user_message,
+        referent_hint,
     )
     trace = load_observation_trace(cache_file)
     if not args.refresh_observation:
@@ -411,12 +409,14 @@ def get_aura_observation(
     aura_task_id = f"{args.scenario}{args.scenario_number}_{task_id}_turn{turn}"
     payload = {
         "task_id": aura_task_id,
+        "request_key": turn_key,
         "experiment_id": build_output_model_name(args),
         "experiment_timestamp": get_run_timestamp(args),
         "scenario": args.scenario,
         "video_path": video_path,
         "image_description": task.get("image_description", ""),
         "current_user_message": current_user_message,
+        "referent_hint": referent_hint,
     }
     request_start = time.time()
     response = requests.post(visual_observer_url(args), json=payload, timeout=args.aura_timeout)
@@ -447,6 +447,7 @@ def get_aura_observation(
             "updated_at": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
             "elapsed_seconds": round(time.time() - request_start, 3),
             "current_user_message": current_user_message,
+            "referent_hint": referent_hint,
             "response": data,
         },
     )
@@ -503,68 +504,154 @@ def build_simulated_observer_context(task: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_scenario_value_observation(
+def build_compact_scenario_value_result(
     task: dict[str, Any],
     current_user_message: str,
+    referent_hint: str = "",
 ) -> dict[str, Any]:
     visual_key = str(task.get("key") or "visual_anchor")
     visual_values = coerce_task_values(task.get("value"))
     canonical_values = [canonical_visual_name(item) for item in visual_values]
     simulated_context = build_simulated_observer_context(task)
-    visual_summary = (
-        f"The scenario oracle resolves the user's visual reference to "
-        f"{visual_key}={', '.join(visual_values)}."
-        if visual_values
-        else "The scenario oracle did not provide a visual anchor value for this task."
-    )
-    if simulated_context.get("pointed_sequence"):
-        visual_summary += (
-            " Simulated observer context also provides pointed_sequence and "
-            "neighbor_map for ordinal/adjacent visual references."
-        )
-    visual_key_values = [
+    resolved_referents = [
         {
-            "key": visual_key,
-            "value": item,
-            "canonical_value": canonical_visual_name(item),
-            "confidence": "oracle",
-            "evidence": (
-                "Scenario oracle visual anchor. Use this value as the resolved identity "
-                "of the item or object referenced by the user's visual description."
-            ),
-            "source": "scenario_key_value",
-        }
-        for item in visual_values
-    ]
-    visual_referents = [
-        {
-            "user_referent": "scenario oracle primary visual referent",
+            "id": "primary" if idx == 0 else f"referent_{idx + 1}",
             "key": visual_key,
             "value": item,
             "canonical_value": canonical_values[idx],
-            "source": "scenario_key_value",
+            "confidence": "oracle",
         }
         for idx, item in enumerate(visual_values)
     ]
-    return {
-        "observation": {
-            "observer": "scenario_value_oracle",
-            "current_visual_request": current_user_message,
-            "visual_anchor_summary": visual_summary,
-            "visual_key_values": visual_key_values,
+    spatial_context = {
+        key: value
+        for key, value in {
             "pointed_sequence": simulated_context.get("pointed_sequence", []),
             "shelf_order": simulated_context.get("shelf_order", []),
             "neighbor_map": simulated_context.get("neighbor_map", {}),
-            "visual_referents": visual_referents,
-            "detail_evidence": [],
-            "uncertainties": simulated_context.get("notes"),
-        }
+        }.items()
+        if value
+    }
+    return {
+        "source": "scenario_value",
+        "scope": "task",
+        "query": current_user_message,
+        "referent_hint": referent_hint,
+        "resolved_referents": resolved_referents,
+        "spatial_context": spatial_context,
+        "usage": (
+            "Use resolved_referents only as visual identity grounding. Query "
+            "database tools for price, tax, discount, nutrition, allergens, taste, "
+            "country/origin, inventory, cart/order state, and totals."
+        ),
     }
 
 
-def format_visual_observation(observation: dict[str, Any]) -> str:
+def compact_visual_observer_result(
+    observation: dict[str, Any],
+    current_user_message: str,
+    referent_hint: str = "",
+) -> dict[str, Any]:
     useful = observation.get("observation", observation)
-    return json.dumps(useful, ensure_ascii=False, indent=2)
+    visual_key_values = useful.get("visual_key_values") or []
+    resolved_referents = []
+    for idx, item in enumerate(visual_key_values):
+        if not isinstance(item, dict):
+            continue
+        value = item.get("value") or item.get("name") or item.get("text")
+        key = item.get("key") or item.get("field") or item.get("type") or "visual_anchor"
+        if not value:
+            continue
+        resolved_referents.append(
+            {
+                "id": "primary" if idx == 0 else f"referent_{idx + 1}",
+                "key": key,
+                "value": value,
+                "canonical_value": canonical_visual_name(str(value)),
+                "confidence": item.get("confidence", "observer"),
+            }
+        )
+    spatial_context = {
+        key: value
+        for key, value in {
+            "pointed_sequence": useful.get("pointed_sequence", []),
+            "shelf_order": useful.get("shelf_order", []),
+            "neighbor_map": useful.get("neighbor_map", {}),
+        }.items()
+        if value
+    }
+    return {
+        "source": useful.get("observer", "observer"),
+        "scope": "turn",
+        "query": current_user_message,
+        "referent_hint": referent_hint,
+        "resolved_referents": resolved_referents,
+        "spatial_context": spatial_context,
+        "uncertainties": useful.get("uncertainties"),
+        "usage": (
+            "Use resolved_referents only as visual identity grounding. Query "
+            "database tools for price, tax, discount, nutrition, allergens, taste, "
+            "country/origin, inventory, cart/order state, and totals."
+        ),
+    }
+
+
+def visual_request_cache_key(turn: int, query: str, referent_hint: str) -> str:
+    payload = {
+        "turn": turn,
+        "query": query.strip(),
+        "referent_hint": referent_hint.strip(),
+    }
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
+
+
+def build_observer_request_message(query: str, referent_hint: str) -> str:
+    query = query.strip()
+    referent_hint = referent_hint.strip()
+    if not referent_hint:
+        return query
+    if referent_hint.lower() in query.lower():
+        return query
+    return f"{query}\nVisual referent to resolve: {referent_hint}"
+
+
+def remember_visual_referents(
+    visual_identity_memory: list[dict[str, Any]],
+    compact_result: dict[str, Any],
+    turn: int,
+    params: dict[str, Any],
+) -> None:
+    referents = compact_result.get("resolved_referents") or []
+    if not referents:
+        return
+    visual_identity_memory.append(
+        {
+            "turn": turn,
+            "query": compact_result.get("query", ""),
+            "referent_hint": compact_result.get("referent_hint", ""),
+            "source": compact_result.get("source", ""),
+            "tool_parameters": params,
+            "resolved_referents": referents,
+        }
+    )
+    del visual_identity_memory[:-12]
+
+
+def format_visual_identity_memory(visual_identity_memory: list[dict[str, Any]]) -> str:
+    if not visual_identity_memory:
+        return ""
+    lines = [
+        "## Resolved Visual Reference Memory",
+        "Use these prior visual resolutions for later pronouns or repeated references. "
+        "They identify visible referents only; verify database facts with tools.",
+    ]
+    for idx, item in enumerate(visual_identity_memory, start=1):
+        lines.append(
+            f"{idx}. turn={item.get('turn')}; query={item.get('query')!r}; "
+            f"referent_hint={item.get('referent_hint')!r}; "
+            f"resolved_referents={json.dumps(item.get('resolved_referents', []), ensure_ascii=False)}"
+        )
+    return "\n".join(lines)
 
 
 def normalize_model_text(value: Any, fallback: str = "") -> str:
@@ -592,7 +679,12 @@ def build_dialogue_context(dialogue: list[dict[str, Any]], summarized_history: s
 
 def run_simulation(input_path: str, tool_info_path: str, output_path: str, args: argparse.Namespace) -> None:
     with open(tool_info_path, "r", encoding="utf-8") as f:
-        tool_descriptions = json.dumps(json.load(f), indent=2, ensure_ascii=False)
+        tool_description_data = json.load(f)
+    tool_descriptions = json.dumps(
+        [*tool_description_data, VISUAL_RESOLUTION_TOOL],
+        indent=2,
+        ensure_ascii=False,
+    )
     with open(input_path, "r", encoding="utf-8") as f:
         scenarios = json.load(f)
     visual_context_source = getattr(args, "visual_context_source", "observer")
@@ -624,6 +716,8 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
             "input_tokens": 0,
             "output_tokens": 0,
             "tool_calls_count": 0,
+            "visual_resolution_calls": [],
+            "visual_identity_memory": [],
             "user_response_time_seconds": 0.0,
             "agent_response_time_seconds": 0.0,
             "start_time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time)),
@@ -634,7 +728,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
             history_log["aura_observation"] = None
             history_log["aura_observations"] = []
             history_log["aura_observation_time_seconds"] = 0.0
-            history_log["visual_observer_mode"] = "first_turn_only" if args.observe_once else "per_turn"
+            history_log["visual_observer_mode"] = "cache_identical_visual_requests" if args.observe_once else "per_request"
         elif visual_context_source == "scenario_value":
             simulated_context = build_simulated_observer_context(sc)
             history_log["scenario_value_oracle"] = {
@@ -666,14 +760,16 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
             },
         ]
 
-        service_agent_sys_prompt_base = SERVICE_AGENT_PROMPT_BASE.format(
-            tool_descriptions=tool_descriptions
-        ) + SERVICE_DATABASE_GROUNDING_INSTRUCTION
+        service_agent_sys_prompt_base = (
+            SERVICE_AGENT_PROMPT_BASE.format(tool_descriptions=tool_descriptions)
+            + SERVICE_COMMON_GROUNDING_INSTRUCTION
+            + SCENARIO_SERVICE_INSTRUCTIONS.get(args.scenario, "")
+        )
         history_log["service_prompt_contains_database_grounding"] = (
-            "## Database Grounding" in service_agent_sys_prompt_base
+            "## Evidence And Visual Tool Rules" in service_agent_sys_prompt_base
         )
         history_log["service_prompt_contains_visual_normalization"] = (
-            "## Visual Anchor Normalization" in service_agent_sys_prompt_base
+            f"## {args.scenario.title()} Scenario Rules" in service_agent_sys_prompt_base
         )
 
         service_history = []
@@ -686,8 +782,8 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
         valid_evaluation_count = 0
         last_agent_response_for_check = "Dear customer, how can I help you?"
         summarized_history_str = ""
-        frozen_aura_observation = None
-        frozen_visual_observation_text = None
+        visual_observation_cache = {}
+        visual_identity_memory = history_log["visual_identity_memory"]
         executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
 
         for turn in range(args.max_turns):
@@ -745,54 +841,6 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                 print("Stop signal detected")
                 break
 
-            if args.observe_once and frozen_visual_observation_text is not None:
-                aura_observation = frozen_aura_observation
-                visual_observation_text = frozen_visual_observation_text
-                observation_time = 0.0
-                print(f"Reusing first-turn visual observation for turn {turn}.")
-            elif visual_context_source == "scenario_value":
-                print(f"Using scenario key/value visual oracle for turn {turn}.")
-                observation_start = time.time()
-                aura_observation = build_scenario_value_observation(sc, user_reply)
-                observation_time = time.time() - observation_start
-                visual_observation_text = format_visual_observation(aura_observation)
-                if args.observe_once:
-                    frozen_aura_observation = aura_observation
-                    frozen_visual_observation_text = visual_observation_text
-                print(f"[Time] Scenario value visual context (Turn {turn}): {observation_time:.3f} seconds")
-            else:
-                print(f"Observing video with visual observer for turn {turn}: {video_path}")
-                observation_start = time.time()
-                aura_observation = get_aura_observation(
-                    sc,
-                    video_path,
-                    task_id,
-                    args,
-                    turn,
-                    user_reply,
-                )
-                observation_time = time.time() - observation_start
-                visual_observation_text = format_visual_observation(aura_observation)
-                if args.observe_once:
-                    frozen_aura_observation = aura_observation
-                    frozen_visual_observation_text = visual_observation_text
-                print(f"[Time] Visual observation (Turn {turn}): {observation_time:.3f} seconds")
-            if args.include_aura_debug_in_results:
-                history_log["aura_observation"] = aura_observation
-                history_log["aura_observations"].append(
-                    {
-                        "turn": turn,
-                        "user_message": user_reply,
-                        "observation": aura_observation,
-                        "elapsed_seconds": round(observation_time, 3),
-                        "reused": args.observe_once and turn > 0,
-                    }
-                )
-                history_log["aura_observation_time_seconds"] += observation_time
-            current_turn_service_prompt = service_agent_sys_prompt_base + VISUAL_CONTEXT_TEMPLATE.format(
-                visual_observation=visual_observation_text
-            )
-
             service_history.append({"role": "user", "content": user_reply})
             user_messages.append({"role": "assistant", "content": user_reply})
 
@@ -800,7 +848,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
             current_agent_response = last_agent_response_for_check
             current_service_history = [msg for msg in service_history]
             current_summary = summarized_history_str
-            current_service_agent_sys_prompt = current_turn_service_prompt
+            current_service_agent_sys_prompt = service_agent_sys_prompt_base
 
             def generate_summary_task() -> str | None:
                 if not args.summary_user:
@@ -834,8 +882,142 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                 local_dialogue_logs = []
                 local_service_history = [msg for msg in current_service_history]
 
+                def execute_agent_tools(tool_call_data: Any) -> list[dict[str, Any]]:
+                    if isinstance(tool_call_data, dict):
+                        tool_calls = [tool_call_data]
+                    elif isinstance(tool_call_data, list):
+                        tool_calls = tool_call_data
+                    else:
+                        return [
+                            {
+                                "role": "tool",
+                                "tool_name": "unknown",
+                                "parameters": {},
+                                "content": json.dumps(
+                                    {"error": "Invalid tool call format. Expected dict or list."},
+                                    ensure_ascii=False,
+                                ),
+                            }
+                        ]
+
+                    results = []
+                    for tool_call_obj in tool_calls:
+                        method_name = tool_call_obj.get("tool_name") or tool_call_obj.get("name")
+                        if method_name != VISUAL_RESOLUTION_TOOL_NAME:
+                            results.extend(execute_tool(db, tool_call_obj))
+                            continue
+
+                        params = tool_call_obj.get("parameters", tool_call_obj.get("arguments", {})) or {}
+                        query = str(params.get("query") or current_user_reply)
+                        referent_hint = str(params.get("referent_hint") or "")
+                        observation_start = time.time()
+                        raw_observation = None
+                        reused = False
+                        cache_key = visual_request_cache_key(turn, query, referent_hint)
+                        observer_request_message = build_observer_request_message(query, referent_hint)
+                        visual_call_log = {
+                            "turn": turn,
+                            "user_message": current_user_reply,
+                            "tool_parameters": params,
+                            "observer_request_message": observer_request_message,
+                            "source": visual_context_source,
+                            "status": "started",
+                            "reused": False,
+                        }
+                        try:
+                            if visual_context_source == "scenario_value":
+                                print(f"  [Visual Resolution] Using scenario key/value oracle for turn {turn}")
+                                compact_result = build_compact_scenario_value_result(sc, query, referent_hint)
+                            else:
+                                if args.observe_once and cache_key in visual_observation_cache:
+                                    raw_observation = visual_observation_cache[cache_key]
+                                    reused = True
+                                    print(
+                                        "  [Visual Resolution] Reusing observed visual result "
+                                        f"for turn {turn}, query={query!r}, referent_hint={referent_hint!r}"
+                                    )
+                                else:
+                                    print(
+                                        "  [Visual Resolution] Observing video "
+                                        f"for turn {turn}, query={query!r}, referent_hint={referent_hint!r}: {video_path}"
+                                    )
+                                    raw_observation = get_aura_observation(
+                                        sc,
+                                        video_path,
+                                        task_id,
+                                        args,
+                                        turn,
+                                        observer_request_message,
+                                        referent_hint,
+                                    )
+                                    if args.observe_once:
+                                        visual_observation_cache[cache_key] = raw_observation
+                                compact_result = compact_visual_observer_result(
+                                    raw_observation,
+                                    query,
+                                    referent_hint,
+                                )
+                            remember_visual_referents(visual_identity_memory, compact_result, turn, params)
+                            elapsed = time.time() - observation_start
+                            print(f"  [Visual Resolution] Result: {compact_result}")
+                            visual_call_log.update(
+                                {
+                                    "status": "ok",
+                                    "elapsed_seconds": round(elapsed, 3),
+                                    "reused": reused,
+                                    "result": compact_result,
+                                }
+                            )
+                            history_log["visual_resolution_calls"].append(visual_call_log)
+                            if args.include_aura_debug_in_results:
+                                history_log["aura_observation"] = raw_observation or compact_result
+                                history_log["aura_observations"].append(
+                                    {
+                                        "turn": turn,
+                                        "user_message": current_user_reply,
+                                        "tool_parameters": params,
+                                        "observation": raw_observation,
+                                        "compact_result": compact_result,
+                                        "elapsed_seconds": round(elapsed, 3),
+                                        "reused": reused,
+                                    }
+                                )
+                                history_log["aura_observation_time_seconds"] += elapsed
+                            results.append(
+                                {
+                                    "role": "tool",
+                                    "tool_name": VISUAL_RESOLUTION_TOOL_NAME,
+                                    "parameters": params,
+                                    "content": json.dumps(compact_result, ensure_ascii=False, default=str),
+                                }
+                            )
+                        except Exception as exc:
+                            elapsed = time.time() - observation_start
+                            visual_call_log.update(
+                                {
+                                    "status": "error",
+                                    "elapsed_seconds": round(elapsed, 3),
+                                    "reused": reused,
+                                    "error": str(exc),
+                                }
+                            )
+                            history_log["visual_resolution_calls"].append(visual_call_log)
+                            results.append(
+                                {
+                                    "role": "tool",
+                                    "tool_name": VISUAL_RESOLUTION_TOOL_NAME,
+                                    "parameters": params,
+                                    "content": json.dumps({"error": str(exc)}, ensure_ascii=False),
+                                }
+                            )
+
+                    return results
+
                 for _ in range(args.max_inner_tool_rounds):
                     current_service_msgs = [{"role": "system", "content": current_service_agent_sys_prompt}]
+                    visual_memory_context = format_visual_identity_memory(visual_identity_memory)
+                    if visual_memory_context:
+                        current_service_msgs.append({"role": "system", "content": visual_memory_context})
                     current_service_msgs.extend(local_service_history)
 
                     agent_reply, agent_input_tokens, agent_output_tokens = call_llm(
@@ -862,7 +1044,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         break
 
                     inner_calls += calls_this_round
-                    tool_results = execute_tool(db, tool_call_obj)
+                    tool_results = execute_agent_tools(tool_call_obj)
                     local_tool_logs.append(
                         {
                             "turn": turn,
@@ -1013,7 +1195,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--observe_once",
         action="store_true",
-        help="Observe the video only for the first non-STOP user turn, then reuse that visual context for the whole task.",
+        help=(
+            "Cache repeated identical visual-resolution requests within a task. "
+            "Different turns, queries, or referent hints still call the observer separately."
+        ),
     )
     parser.add_argument(
         "--include_aura_debug_in_results",

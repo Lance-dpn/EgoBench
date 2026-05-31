@@ -24,6 +24,7 @@ import traceback
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote, urlparse
 
 import requests
 
@@ -66,8 +67,16 @@ Rules:
 - For spatial language, follow the visible spatial layout.
 - Do not output entity names, prices, nutrition, allergens, country/origin,
   discounts, cart/order state, or actions to take.
+- For pointing or interaction events, do not put guessed object names or exact
+  visible text identities in referent or target_region. Use the user's visual
+  referent wording and coarse spatial localization only; the next vision reader
+  is responsible for identifying the visible anchor.
 - Do not solve the database question. Only localize the visual event and guide
   the next vision model.
+- Ignore database-only filters and rankings such as price, discount, tax,
+  nutrition, allergens, taste/flavor tags, set membership, inventory,
+  lowest/highest/cheapest, and recommendations. Localize only the visible item,
+  section, text region, or pointing event involved.
 - Prefer one best referent. If truly uncertain between visual events, return up
   to three candidate referents ordered by confidence.
 - Timestamps may be any decimal seconds from the original video. Do not round
@@ -112,24 +121,56 @@ the visual event(s) that ground the user's request. The attached images are
 ordered from early to late. Each image is preceded by a frame id and timestamp.
 
 Your responsibility:
-- Resolve event timing and visual references only: action order, selected or
-  referenced entity, interaction state, spatial relation, visible region, and
-  any region that a downstream vision reader should inspect.
-- If the user request explicitly mentions multiple visual objects, comparisons,
-  or relations, return one referent per required object in the same order as
-  mentioned by the user.
-- Prefer one referent only when the user request contains one visual referent.
+- Resolve event timing and visual references only: pointing/selection order,
+  object state, spatial relation, visible text region, and any region that a
+  downstream vision reader should inspect.
+- Each observer request should resolve one target for downstream reading. If
+  deciding that one target requires comparing a sequence of candidate events or
+  regions, list the candidates first, select exactly one, and put only the
+  selected target in referents.
+- Return exactly one selected referent. If the user message contains extra
+  background objects or conditions, use the current visual referent and request
+  wording to decide the single target for this observer call.
 - Write a concise downstream_instruction that tells the next vision model what
   visual detail to identify for this referent.
 
 Rules:
 - Use only the attached frames and their timestamps, not outside knowledge.
 - For ordinal language, follow the relevant visible order in the frame sequence.
+- For temporal or ordinal references such as first/second/third/last, do not
+  jump directly to the clearest frame. First segment the relevant visible
+  actions or states into distinct candidate_events in chronological order, then
+  select the requested one. A distinct event is a stable relation between an
+  actor, pointer, tool, object, region, or state and its target; when the target
+  changes, that is a new event.
+- If the user request scopes the reference to a context, page, screen, menu,
+  region, object, category, or current sequence, first identify that scope and
+  enumerate candidate_events only inside it. Do not count earlier or later
+  actions outside the requested scope when resolving first/second/third/last.
+- For pointing actions, localize the target at the pointing endpoint: the
+  fingertip, contact point, cursor tip, tool tip, or extension of the pointing
+  direction. Do not treat text or objects covered by the middle/lower part of a
+  finger, hand, tool, or pointer as the target unless the endpoint supports it.
+  If the pointer overlaps nearby rows or objects, choose the candidate nearest
+  to the endpoint and pointing direction, not the candidate most covered by the
+  pointer body.
+- For non-temporal spatial or text-region references, candidate_events may be
+  candidate visible regions instead of actions. Select the region that best
+  matches the user's spatial description, not merely the largest or clearest
+  visible region.
 - For spatial language, follow the visible spatial layout.
 - Do not output entity names, prices, nutrition, allergens, country/origin,
   discounts, cart/order state, or actions to take.
+- For pointing or interaction events, do not put guessed object names or exact
+  visible text identities in referent or target_region. Use the user's visual
+  referent wording and coarse spatial localization only; the next vision reader
+  is responsible for identifying the visible anchor.
 - Do not solve the database question. Only localize the visual event and guide
   the next vision model.
+- Ignore database-only filters and rankings such as price, discount, tax,
+  nutrition, allergens, taste/flavor tags, set membership, inventory,
+  lowest/highest/cheapest, and recommendations. Localize only the visible item,
+  section, text region, or pointing event involved.
 - Timestamps may be any decimal seconds from the original video. Do not round
   them to 0.5-second steps unless that is the best visible estimate.
 
@@ -142,6 +183,20 @@ Scene description:
 Return JSON only:
 {{
   "current_visual_request": "...",
+  "visual_reference_type": "temporal_ordinal_event|spatial_region|visible_text_region|object_state|single_visible_object|other",
+  "selection_rule": "How the single selected target was chosen from the user request.",
+  "candidate_events": [
+    {{
+      "event_order": 1,
+      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
+      "time_range": "5.37-6.42s",
+      "event_time_range": {{"start": 5.37, "end": 6.42}},
+      "anchor_timestamp": 6.0,
+      "target_region": "coarse region in the frame",
+      "boundary_reason": "why this is one distinct candidate event or region"
+    }}
+  ],
+  "selected_event_order": 1,
   "referents": [
     {{
       "referent": "...",
@@ -176,24 +231,52 @@ event(s) that ground the user's request. The video is provided directly; do not
 assume any externally controlled frame rate.
 
 Your responsibility:
-- Resolve event timing and visual references only: action order, selected or
-  referenced entity, interaction state, spatial relation, visible region, and
-  any region that a downstream vision reader should inspect.
-- If the user request explicitly mentions multiple visual objects, comparisons,
-  or relations, return one referent per required object in the same order as
-  mentioned by the user.
-- Prefer one referent only when the user request contains one visual referent.
+- Resolve event timing and visual references only: pointing/selection order,
+  object state, spatial relation, visible text region, and any region that a
+  downstream vision reader should inspect.
+- Each observer request should resolve one target for downstream reading. If
+  deciding that one target requires comparing a sequence of candidate events or
+  regions, list the candidates first, select exactly one, and put only the
+  selected target in referents.
+- Return exactly one selected referent. If the user message contains extra
+  background objects or conditions, use the current visual referent and request
+  wording to decide the single target for this observer call.
 - Write a concise downstream_instruction that tells the next vision model what
   visual detail to identify for this referent.
 
 Rules:
 - Use only the video, not outside knowledge.
 - For ordinal language, follow the relevant visible order in the video.
+- For temporal or ordinal references such as first/second/third/last, do not
+  jump directly to the clearest frame. First segment the relevant visible
+  actions or states into distinct candidate_events in chronological order, then
+  select the requested one. A distinct event is a stable relation between an
+  actor, pointer, tool, object, region, or state and its target; when the target
+  changes, that is a new event.
+- If the user request scopes the reference to a context, page, screen, menu,
+  region, object, category, or current sequence, first identify that scope and
+  enumerate candidate_events only inside it. Do not count earlier or later
+  actions outside the requested scope when resolving first/second/third/last.
+- For pointing actions, localize the target at the pointing endpoint: the
+  fingertip, contact point, cursor tip, tool tip, or extension of the pointing
+  direction. Do not treat text or objects covered by the middle/lower part of a
+  finger, hand, tool, or pointer as the target unless the endpoint supports it.
+  If the pointer overlaps nearby rows or objects, choose the candidate nearest
+  to the endpoint and pointing direction, not the candidate most covered by the
+  pointer body.
+- For non-temporal spatial or text-region references, candidate_events may be
+  candidate visible regions instead of actions. Select the region that best
+  matches the user's spatial description, not merely the largest or clearest
+  visible region.
 - For spatial language, follow the visible spatial layout.
 - Do not output entity names, prices, nutrition, allergens, country/origin,
   discounts, cart/order state, or actions to take.
 - Do not solve the database question. Only localize the visual event and guide
   the next vision model.
+- Ignore database-only filters and rankings such as price, discount, tax,
+  nutrition, allergens, taste/flavor tags, set membership, inventory,
+  lowest/highest/cheapest, and recommendations. Localize only the visible item,
+  section, text region, or pointing event involved.
 - All timestamps must be seconds from the start of the original video.
 - Timestamps may be any decimal seconds from the original video. Do not round
   them to 0.5-second steps unless that is the best visible estimate.
@@ -207,6 +290,20 @@ Scene description:
 Return JSON only:
 {{
   "current_visual_request": "...",
+  "visual_reference_type": "temporal_ordinal_event|spatial_region|visible_text_region|object_state|single_visible_object|other",
+  "selection_rule": "How the single selected target was chosen from the user request.",
+  "candidate_events": [
+    {{
+      "event_order": 1,
+      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
+      "time_range": "5.37-6.42s",
+      "event_time_range": {{"start": 5.37, "end": 6.42}},
+      "anchor_timestamp": 6.0,
+      "target_region": "coarse region in the frame",
+      "boundary_reason": "why this is one distinct candidate event or region"
+    }}
+  ],
+  "selected_event_order": 1,
   "referents": [
     {{
       "referent": "...",
@@ -246,8 +343,11 @@ ordered from early to late and come from this event segment.
 Localized event summary:
 - referent: {user_referent}
 - event type: {event_type}
+- selected event order: {selected_event_order}
+- selection rule: {selection_rule}
 - time range: {time_range}
 - target region: {target_region}
+- sampling anchor timestamp: {anchor_timestamp}
 - instruction: {downstream_instruction}
 
 Your job:
@@ -255,6 +355,22 @@ Use the ordered image sequence to identify the single most likely visible anchor
 requested by the localizer. Trust the event timing and do not reinterpret which
 occurrence or spatial relation is intended unless the image sequence itself is
 ambiguous.
+Treat the first-stage referent and target region as localization hints, not as
+the final identity. If the localizer includes a possible object name or text
+value, verify it visually and ignore it if the pointing endpoint or image
+evidence supports a different visible anchor.
+The sampling anchor timestamp only explains how these frames were selected. It
+is not a guarantee that the nearest frame contains the final target identity.
+Use the entire ordered sequence inside the localized event to identify the
+visible anchor. Use earlier and later frames to resolve motion, occlusion, blur,
+and readable text; do not let the anchor frame override stronger evidence from
+the sequence.
+For pointing actions, identify the target at the pointing endpoint: fingertip,
+contact point, cursor tip, tool tip, or extension of the pointing direction.
+Do not choose text or objects covered by the middle/lower part of the pointer
+body unless the endpoint supports that choice. If the pointer overlaps adjacent
+rows or objects, choose the visible anchor nearest the endpoint and pointing
+direction.
 Combine evidence across all attached frames before deciding. The target text or
 object may be occluded, blurred, cropped, or unreadable in a single frame; track
 the same localized target through the sequence and use the clearest frame(s) for
@@ -271,6 +387,10 @@ Boundaries:
   background anchors into visual_key_values.
 - Do not output price, discount, tax, nutrition, allergens, taste,
   country/origin, cart state, or other database attributes as key/value pairs.
+- Ignore database-only filters and rankings in the request, such as low calorie,
+  highest price, dairy, gluten-free, butter flavor, high protein, set
+  membership, or recommendations. Identify only the visible anchor localized by
+  the first stage.
 - If the target cannot be identified, set target_identity to null, return an
   empty visual_key_values list, and explain the ambiguity in uncertainty.
 
@@ -351,7 +471,17 @@ def task_turn_key(payload: dict[str, Any]) -> tuple[str, str | None]:
     task_id = str(payload.get("task_id") or "task")
     match = re.match(r"^(.+)_turn(\d+)$", task_id)
     if match:
-        return slugify_name(match.group(1), "task"), f"turn{match.group(2)}"
+        turn_key = f"turn{match.group(2)}"
+        request_key = payload.get("request_key")
+        if not request_key:
+            request_key = stable_hash(
+                {
+                    "current_user_message": payload.get("current_user_message"),
+                    "referent_hint": payload.get("referent_hint"),
+                },
+                8,
+            )
+        return slugify_name(match.group(1), "task"), f"{turn_key}_{slugify_name(request_key, 'request')}"
     return slugify_name(task_id, "task"), None
 
 
@@ -364,7 +494,7 @@ def write_scenario_trace(cache_dir: Path, payload: dict[str, Any], trace: dict[s
         doc = json.loads(path.read_text(encoding="utf-8"))
     else:
         doc = {
-            "schema_version": "aura_qwenvl_observer_scenario_trace_v1",
+            "schema_version": "visual_observer_scenario_trace_v2",
             "scenario": payload.get("scenario"),
             "scenario_key": scenario_trace_key(payload),
             "experiment_id": cache_dir.name,
@@ -381,6 +511,8 @@ def write_scenario_trace(cache_dir: Path, payload: dict[str, Any], trace: dict[s
         {"task_key": task_key, "turns": {}, "observations": []},
     )
     if turn_key:
+        trace.setdefault("turn_label", re.sub(r"_.*$", "", turn_key))
+        trace.setdefault("observer_request_key", turn_key)
         task_entry.setdefault("turns", {})[turn_key] = trace
     else:
         task_entry.setdefault("observations", []).append(trace)
@@ -448,10 +580,19 @@ def make_labeled_video(video_path: Path, cache_dir: Path, fps: float, fontfile: 
     return output_path
 
 
-def keyframe_output_name(scenario: str, task_id: str, timestamp: float, referent_index: int, frame_index: int) -> str:
+def keyframe_output_name(
+    scenario: str,
+    task_id: str,
+    timestamp: float,
+    referent_index: int,
+    frame_index: int,
+    request_key: str | None = None,
+) -> str:
     scene_part = slugify_name(scenario or "scene", "scene")
     task_part = slugify_name(task_id or "task", "task")
-    return f"{scene_part}-{task_part}-t{timestamp:.2f}-r{referent_index:02d}-k{frame_index:02d}.png"
+    request_part = slugify_name(request_key or "", "")
+    request_prefix = f"-{request_part}" if request_part else ""
+    return f"{scene_part}-{task_part}{request_prefix}-t{timestamp:.2f}-r{referent_index:02d}-k{frame_index:02d}.png"
 
 
 def event_frame_output_name(scenario: str, task_id: str, frame_index: int, timestamp: float) -> str:
@@ -535,6 +676,62 @@ def local_video_file_url(path: Path) -> str:
     return path.resolve().as_uri()
 
 
+def is_local_api_base_url(base_url: str | None) -> bool:
+    if not base_url:
+        return False
+    parsed = urlparse(base_url)
+    host = (parsed.hostname or "").lower()
+    return host in {"127.0.0.1", "localhost", "0.0.0.0", "::1"}
+
+
+def qwen_image_url(path: Path, base_url: str | None) -> str:
+    if is_local_api_base_url(base_url):
+        return path.resolve().as_uri()
+    return local_image_data_url(path)
+
+
+def load_video_url_mapping(raw_mapping: str | None = None) -> dict[str, str]:
+    raw_mapping = raw_mapping if raw_mapping is not None else os.environ.get("VIDEO_URL_MAPPING", "")
+    if not raw_mapping:
+        return {}
+    try:
+        parsed = json.loads(raw_mapping)
+    except json.JSONDecodeError:
+        print("[Warning] Failed to parse VIDEO_URL_MAPPING for observer qwen_video URL mode.")
+        return {}
+    if not isinstance(parsed, dict):
+        print("[Warning] VIDEO_URL_MAPPING must be a JSON object.")
+        return {}
+    return {str(key): str(value) for key, value in parsed.items()}
+
+
+def public_video_url(path: Path, args: argparse.Namespace) -> str:
+    filename = path.name
+    mapping = load_video_url_mapping(args.video_url_mapping)
+    if filename in mapping:
+        return mapping[filename]
+
+    base_url = args.video_url_base or os.environ.get("OBSERVER_VIDEO_URL_BASE") or os.environ.get("VIDEO_URL_BASE")
+    if base_url:
+        return f"{base_url.rstrip('/')}/{quote(filename)}"
+
+    raise ValueError(
+        f"No public URL configured for video {filename!r}. "
+        "Set VIDEO_URL_MAPPING, OBSERVER_VIDEO_URL_BASE, or VIDEO_URL_BASE."
+    )
+
+
+def qwen_video_url(video_path: Path, base_url: str, args: argparse.Namespace) -> str:
+    mode = args.qwen_video_url_mode
+    if mode == "local":
+        return local_video_file_url(video_path)
+    if mode == "url":
+        return public_video_url(video_path, args)
+    if is_local_api_base_url(base_url):
+        return local_video_file_url(video_path)
+    return public_video_url(video_path, args)
+
+
 def qwen_vl_env(args: argparse.Namespace, stage: str = "event") -> tuple[str, str, str]:
     stage = stage.lower()
     if stage not in {"event", "detail"}:
@@ -592,11 +789,56 @@ def qwen_generation_config(args: argparse.Namespace, stage: str) -> dict[str, An
     temperature = getattr(args, f"qwen_{stage}_temperature", None)
     max_tokens = getattr(args, f"qwen_{stage}_max_tokens", None)
     enable_thinking = getattr(args, f"qwen_{stage}_enable_thinking", None)
+    thinking_budget = getattr(args, f"qwen_{stage}_thinking_budget", None)
+    high_resolution_images = getattr(args, f"qwen_{stage}_high_resolution_images", "off")
+    global_thinking = args.qwen_enable_thinking
+    global_thinking_mode = getattr(args, "qwen_thinking", "off")
+    if global_thinking_mode == "on":
+        global_thinking = True
+    elif global_thinking_mode == "off":
+        global_thinking = False
+
+    stage_thinking_mode = getattr(args, f"qwen_{stage}_thinking", "inherit")
+    if stage_thinking_mode == "on":
+        resolved_enable_thinking = True
+    elif stage_thinking_mode == "off":
+        resolved_enable_thinking = False
+    else:
+        resolved_enable_thinking = global_thinking if enable_thinking is None else enable_thinking
+
     return {
         "temperature": args.qwen_temperature if temperature is None else temperature,
         "max_tokens": args.qwen_max_tokens if max_tokens is None else max_tokens,
-        "enable_thinking": args.qwen_enable_thinking if enable_thinking is None else enable_thinking,
+        "enable_thinking": resolved_enable_thinking,
+        "thinking_budget": args.qwen_thinking_budget if thinking_budget is None else thinking_budget,
+        "include_reasoning": args.qwen_include_reasoning,
+        "vl_high_resolution_images": high_resolution_images == "on",
     }
+
+
+def is_dashscope_base_url(base_url: str | None) -> bool:
+    host = urlparse(base_url or "").netloc.lower()
+    return "dashscope" in host or "aliyuncs.com" in host
+
+
+def qwen_extra_body(generation: dict[str, Any], base_url: str | None = None) -> dict[str, Any]:
+    body: dict[str, Any] = {}
+    thinking_budget = generation.get("thinking_budget")
+    if is_dashscope_base_url(base_url):
+        body["enable_thinking"] = generation["enable_thinking"]
+        if generation["enable_thinking"] and thinking_budget is not None:
+            body["thinking_budget"] = thinking_budget
+    else:
+        body["chat_template_kwargs"] = {
+            "enable_thinking": generation["enable_thinking"],
+        }
+        if generation.get("include_reasoning"):
+            body["include_reasoning"] = True
+        if generation["enable_thinking"] and thinking_budget is not None:
+            body["thinking_token_budget"] = thinking_budget
+    if generation.get("vl_high_resolution_images"):
+        body["vl_high_resolution_images"] = True
+    return body
 
 
 def aura_event_url(args: argparse.Namespace) -> str:
@@ -612,6 +854,61 @@ def build_planner_user_message(current_user_message: str, image_description: str
         "Visual request:\n"
         f"{current_user_message}"
     )
+
+
+def build_scene_description(scenario: str, image_description: str) -> str:
+    parts = [image_description.strip()] if image_description and image_description.strip() else []
+    scenario_key = (scenario or "").strip().lower()
+    if scenario_key == "order":
+        parts.append(
+            "Order/menu guidance: In menu-ordering scenes, the user may point to different dishes on the "
+            "menu in sequence. The key visual cue is the pointing action over time, not the most readable "
+            "or salient menu item. For ordinal requests such as first/second/third pointed dish, resolve "
+            "the ordinal by the chronological order of the user's distinct pointing actions in the video. "
+            "A distinct pointing action is a stable indication of one visible menu item, section, or text "
+            "region; if the finger moves from one item or region to another, treat the later stable target "
+            "as a new pointing action rather than evidence for the earlier one. For an ordinal pointing "
+            "request, choose a keyframe near the stable target for that ordinal and do not replace it with "
+            "a later, clearer, larger, or more salient target after the finger has moved. A finger pointing "
+            "at a dish usually does not completely cover the intended dish. When resolving a pointed dish, "
+            "use the menu item nearest to the fingertip or pointing direction as the intended dish, as long "
+            "as the visible evidence supports it. For non-pointing requests about a menu region, card, "
+            "fold, section, or visible title, localize the requested spatial region itself; do not jump to "
+            "a different later menu page, poster, or larger readable area only because it is clearer. "
+            "Numbered menu/page references should be grounded by the user's context and visible layout, "
+            "not assumed solely from the chronological order in which pages appear in the video."
+        )
+    return "\n".join(parts)
+
+
+TEMPORAL_ORDINAL_PATTERN = re.compile(
+    r"\b(first|second|third|fourth|fifth|last|previous|next|before|after|sequence|ordered|ordinal)\b",
+    re.IGNORECASE,
+)
+TEMPORAL_ACTION_PATTERN = re.compile(
+    r"\b(point(?:ed|ing)?|touch(?:ed|ing)?|tap(?:ped|ping)?|click(?:ed|ing)?|press(?:ed|ing)?|"
+    r"pick(?:ed|ing)?|select(?:ed|ing)?|choose|chose|chosen|grab(?:bed|bing)?|hold(?:ing)?|held|"
+    r"open(?:ed|ing)?|close(?:d|ing)?|move(?:d|ing)?|place(?:d|ing)?|put|take|took|taken|"
+    r"show(?:ed|ing)?|indicat(?:ed|ing)?|gesture(?:d|ing)?)\b",
+    re.IGNORECASE,
+)
+
+
+def is_temporal_action_request(current_user_message: str) -> bool:
+    text = current_user_message or ""
+    return bool(TEMPORAL_ORDINAL_PATTERN.search(text) and TEMPORAL_ACTION_PATTERN.search(text))
+
+
+def effective_event_backend(args: argparse.Namespace, current_user_message: str) -> tuple[str, str | None]:
+    backend = args.event_localizer_backend
+    if backend == "qwen_video" and is_temporal_action_request(current_user_message):
+        temporal_backend = getattr(args, "temporal_event_backend", "qwen_frames")
+        if temporal_backend in {"qwen_frames", "qwen_video"} and temporal_backend != backend:
+            return temporal_backend, (
+                "temporal_action_request: ordinal/action wording is routed to labeled frame sequence "
+                "so event ordering is explicit."
+            )
+    return backend, None
 
 
 def extract_json_object(text: str) -> Any:
@@ -794,6 +1091,166 @@ def parse_timestamp_list(value: Any, labeled_fps: float) -> list[float]:
     return timestamps
 
 
+def first_present(mapping: dict[str, Any], keys: list[str]) -> Any:
+    for key in keys:
+        if key in mapping and mapping.get(key) not in (None, ""):
+            return mapping.get(key)
+    return None
+
+
+def normalize_order_marker(value: Any) -> str | None:
+    if value in (None, ""):
+        return None
+    text = str(value).strip().lower()
+    ordinal_words = {"first": "1", "second": "2", "third": "3", "fourth": "4", "last": "last"}
+    return ordinal_words.get(text, text)
+
+
+def visual_referent_hint(current_user_message: str) -> str | None:
+    match = re.search(r"visual referent to resolve\s*:\s*(.+)", current_user_message or "", flags=re.IGNORECASE)
+    if not match:
+        return None
+    hint = match.group(1).strip()
+    return hint or None
+
+
+def sanitize_target_region_for_detail(target_region: Any, event_type: Any) -> Any:
+    if target_region in (None, ""):
+        return target_region
+    text = str(target_region)
+    if "point" not in str(event_type or "").lower():
+        return text
+    lowered = text.lower()
+    for marker in [", specifically", "; specifically", " specifically "]:
+        idx = lowered.find(marker)
+        if idx > 0:
+            return text[:idx].strip().rstrip(",;:")
+    return text
+
+
+def clean_event_keyframes(ref: dict[str, Any], labeled_fps: float, max_items: int = 3) -> list[dict[str, Any]]:
+    keyframes = []
+    for keyframe in coerce_list(ref.get("best_keyframes") or ref.get("keyframes"), max_items=max_items):
+        if not isinstance(keyframe, dict):
+            continue
+        timestamp = frame_id_to_timestamp(keyframe.get("frame_id"), labeled_fps)
+        if timestamp is None:
+            timestamp = parse_timestamp(keyframe.get("timestamp") or keyframe.get("time"))
+        keyframes.append(
+            {
+                "frame_id": keyframe.get("frame_id"),
+                "timestamp": timestamp,
+                "target_region": keyframe.get("target_region") or ref.get("target_region"),
+                "reason": keyframe.get("reason"),
+            }
+        )
+
+    if not keyframes:
+        anchor_timestamp = parse_timestamp(
+            first_present(ref, ["anchor_timestamp", "best_timestamp", "timestamp", "time"])
+        )
+        if anchor_timestamp is not None:
+            keyframes.append(
+                {
+                    "frame_id": ref.get("frame_id"),
+                    "timestamp": anchor_timestamp,
+                    "target_region": ref.get("target_region"),
+                    "reason": ref.get("boundary_reason") or ref.get("reason"),
+                }
+            )
+    return keyframes
+
+
+def clean_candidate_event(candidate: dict[str, Any], labeled_fps: float) -> dict[str, Any]:
+    event_order = first_present(candidate, ["event_order", "candidate_order", "order", "request_order"])
+    user_referent = str(candidate.get("referent") or candidate.get("user_referent") or candidate.get("target") or "")
+    ordinal = candidate.get("ordinal")
+    event_type = normalize_event_type(candidate.get("event_type"), ordinal, user_referent)
+    event_time_range = parse_event_time_range(candidate)
+    keyframes = clean_event_keyframes(candidate, labeled_fps)
+    sequence_timestamps = parse_timestamp_list(
+        candidate.get("sequence_timestamps") or candidate.get("ordered_timestamps") or candidate.get("frame_sequence"),
+        labeled_fps,
+    )
+    if not sequence_timestamps and keyframes:
+        sequence_timestamps = [round(float(kf["timestamp"]), 3) for kf in keyframes if kf.get("timestamp") is not None]
+    return {
+        "event_order": event_order,
+        "event_type": event_type,
+        "ordinal": ordinal,
+        "event_time_range": event_time_range,
+        "time_range": candidate.get("time_range"),
+        "anchor_timestamp": parse_timestamp(first_present(candidate, ["anchor_timestamp", "best_timestamp"])),
+        "target_region": sanitize_target_region_for_detail(candidate.get("target_region"), event_type),
+        "detail_needed": coerce_list(candidate.get("detail_needed"), max_items=8),
+        "sequence_timestamps": sequence_timestamps,
+        "downstream_instruction": candidate.get("downstream_instruction")
+        or candidate.get("vision_instruction")
+        or candidate.get("next_model_instruction"),
+        "keyframes": keyframes,
+        "boundary_reason": candidate.get("boundary_reason") or candidate.get("reason"),
+        "uncertainty": candidate.get("uncertainty"),
+    }
+
+
+def clean_candidate_events(observation: dict[str, Any], labeled_fps: float) -> list[dict[str, Any]]:
+    raw_candidates = observation.get("candidate_events") or observation.get("candidates") or []
+    if not isinstance(raw_candidates, list):
+        raw_candidates = [raw_candidates]
+    cleaned = []
+    for candidate in raw_candidates:
+        if isinstance(candidate, dict):
+            cleaned.append(clean_candidate_event(candidate, labeled_fps))
+    return cleaned
+
+
+def selected_candidate_event(
+    candidate_events: list[dict[str, Any]],
+    selected_order: Any,
+) -> dict[str, Any] | None:
+    if not candidate_events:
+        return None
+    marker = normalize_order_marker(selected_order)
+    if marker is not None:
+        for candidate in candidate_events:
+            if normalize_order_marker(candidate.get("event_order")) == marker:
+                return candidate
+        if marker.isdigit():
+            idx = int(marker) - 1
+            if 0 <= idx < len(candidate_events):
+                return candidate_events[idx]
+    return candidate_events[0]
+
+
+def candidate_to_referent(
+    candidate: dict[str, Any],
+    current_user_message: str,
+    selection_rule: Any,
+) -> dict[str, Any]:
+    user_referent = str(visual_referent_hint(current_user_message) or candidate.get("user_referent") or current_user_message)
+    event_type = candidate.get("event_type") or normalize_event_type(None, candidate.get("ordinal"), user_referent)
+    return {
+        "user_referent": user_referent,
+        "event_type": event_type,
+        "ordinal": candidate.get("ordinal"),
+        "selected_event_order": candidate.get("event_order"),
+        "selection_rule": selection_rule,
+        "event_time_range": candidate.get("event_time_range"),
+        "time_range": candidate.get("time_range"),
+        "target_region": sanitize_target_region_for_detail(candidate.get("target_region"), event_type),
+        "detail_needed": candidate.get("detail_needed") or ["identify anchor"],
+        "sequence_timestamps": candidate.get("sequence_timestamps") or [],
+        "downstream_instruction": clean_downstream_instruction(
+            candidate.get("downstream_instruction"),
+            user_referent,
+            event_type,
+        ),
+        "keyframes": candidate.get("keyframes") or [],
+        "uncertainty": candidate.get("uncertainty"),
+        "selection_boundary_reason": candidate.get("boundary_reason"),
+    }
+
+
 def evenly_spaced(start: float, end: float, count: int) -> list[float]:
     if count <= 1 or end <= start:
         return [round(max(0.0, start), 3)]
@@ -858,6 +1315,53 @@ def sample_timestamps_from_range(
     return limit_timestamps(timestamps, max_frames)
 
 
+def first_keyframe_timestamp(referent: dict[str, Any]) -> float | None:
+    for keyframe in referent.get("keyframes", []):
+        if isinstance(keyframe, dict) and keyframe.get("timestamp") is not None:
+            return float(keyframe["timestamp"])
+    return None
+
+
+def sample_timestamps_around_anchor(
+    start: float,
+    end: float,
+    anchor: float,
+    fps: float,
+    max_frames: int,
+) -> list[float]:
+    if max_frames <= 0:
+        return []
+    start = max(0.0, float(start))
+    end = max(start, float(end))
+    anchor = min(max(float(anchor), start), end)
+    effective_fps = max(0.1, float(fps))
+    interval = 1.0 / effective_fps
+
+    timestamps = [anchor]
+    step = 1
+    while len(timestamps) < max_frames:
+        added = False
+        left = anchor - interval * step
+        right = anchor + interval * step
+        if left > start + 1e-6:
+            append_unique_timestamp(timestamps, left)
+            added = True
+        elif left <= start + 1e-6:
+            append_unique_timestamp(timestamps, start)
+        if len(timestamps) >= max_frames:
+            break
+        if right < end - 1e-6:
+            append_unique_timestamp(timestamps, right)
+            added = True
+        elif right >= end - 1e-6:
+            append_unique_timestamp(timestamps, end)
+        if not added and (start in timestamps or round(start, 3) in timestamps) and (end in timestamps or round(end, 3) in timestamps):
+            break
+        step += 1
+
+    return sorted(timestamps)
+
+
 def event_sequence_timestamps(
     referent: dict[str, Any],
     max_frames: int,
@@ -868,7 +1372,12 @@ def event_sequence_timestamps(
     event_range = referent.get("event_time_range") or {}
     start = event_range.get("start") if isinstance(event_range, dict) else None
     end = event_range.get("end") if isinstance(event_range, dict) else None
+    anchor = first_keyframe_timestamp(referent)
     if start is not None and end is not None and float(end) > float(start):
+        sample_start = max(0.0, float(start) - max(0.0, float(boundary_offset)))
+        sample_end = float(end) + max(0.0, float(boundary_offset))
+        if anchor is not None:
+            return sample_timestamps_around_anchor(sample_start, sample_end, anchor, sample_fps, max_frames)
         return sample_timestamps_from_range(float(start), float(end), sample_fps, max_frames, boundary_offset)
 
     explicit = referent.get("sequence_timestamps") or referent.get("ordered_timestamps")
@@ -877,12 +1386,7 @@ def event_sequence_timestamps(
     if timestamps:
         return timestamps[:max_frames]
 
-    keyframe_times = [
-        float(kf["timestamp"])
-        for kf in referent.get("keyframes", [])
-        if isinstance(kf, dict) and kf.get("timestamp") is not None
-    ]
-    center = keyframe_times[0] if keyframe_times else start or end
+    center = anchor if anchor is not None else start or end
     if center is None:
         return []
     half = max(0.0, window_seconds / 2.0)
@@ -891,6 +1395,22 @@ def event_sequence_timestamps(
 
 def clean_aura_plan(aura_response: dict[str, Any], current_user_message: str, labeled_fps: float) -> dict[str, Any]:
     observation = aura_observation_payload(aura_response)
+    referent_hint = visual_referent_hint(current_user_message)
+    candidate_events: list[dict[str, Any]] = []
+    selected_event_order = None
+    selection_rule = None
+    visual_reference_type = None
+    selected_candidate: dict[str, Any] | None = None
+    if isinstance(observation, dict):
+        candidate_events = clean_candidate_events(observation, labeled_fps)
+        selected_event_order = first_present(
+            observation,
+            ["selected_event_order", "selected_candidate_order", "selected_request_order", "selected_order"],
+        )
+        selection_rule = observation.get("selection_rule")
+        visual_reference_type = observation.get("visual_reference_type")
+        selected_candidate = selected_candidate_event(candidate_events, selected_event_order)
+
     raw_refs = []
     if isinstance(observation, dict):
         raw_refs = observation.get("referents") or observation.get("resolved_referents") or observation.get("visual_referents") or []
@@ -909,22 +1429,7 @@ def clean_aura_plan(aura_response: dict[str, Any], current_user_message: str, la
             ref.get("sequence_timestamps") or ref.get("ordered_timestamps") or ref.get("frame_sequence"),
             labeled_fps,
         )
-
-        keyframes = []
-        for keyframe in coerce_list(ref.get("best_keyframes") or ref.get("keyframes"), max_items=3):
-            if not isinstance(keyframe, dict):
-                continue
-            timestamp = frame_id_to_timestamp(keyframe.get("frame_id"), labeled_fps)
-            if timestamp is None:
-                timestamp = parse_timestamp(keyframe.get("timestamp"))
-            keyframes.append(
-                {
-                    "frame_id": keyframe.get("frame_id"),
-                    "timestamp": timestamp,
-                    "target_region": keyframe.get("target_region") or ref.get("target_region"),
-                    "reason": keyframe.get("reason"),
-                }
-            )
+        keyframes = clean_event_keyframes(ref, labeled_fps)
 
         if not sequence_timestamps and keyframes:
             sequence_timestamps = [round(float(kf["timestamp"]), 3) for kf in keyframes if kf.get("timestamp") is not None]
@@ -934,9 +1439,14 @@ def clean_aura_plan(aura_response: dict[str, Any], current_user_message: str, la
                 "user_referent": user_referent,
                 "event_type": event_type,
                 "ordinal": ordinal,
+                "selected_event_order": ref.get("selected_event_order") or selected_event_order,
+                "selection_rule": ref.get("selection_rule") or selection_rule,
                 "event_time_range": event_time_range,
                 "time_range": ref.get("time_range"),
-                "target_region": ref.get("target_region") or (keyframes[0].get("target_region") if keyframes else None),
+                "target_region": sanitize_target_region_for_detail(
+                    ref.get("target_region") or (keyframes[0].get("target_region") if keyframes else None),
+                    event_type,
+                ),
                 "detail_needed": coerce_list(ref.get("detail_needed"), max_items=8),
                 "sequence_timestamps": sequence_timestamps,
                 "downstream_instruction": clean_downstream_instruction(
@@ -949,20 +1459,54 @@ def clean_aura_plan(aura_response: dict[str, Any], current_user_message: str, la
             }
         )
 
+    if selected_candidate:
+        selected_ref = candidate_to_referent(selected_candidate, current_user_message, selection_rule)
+        if cleaned_refs:
+            existing = cleaned_refs[0]
+            selected_ref.update(
+                {
+                    "user_referent": referent_hint or existing.get("user_referent") or selected_ref.get("user_referent"),
+                    "event_type": existing.get("event_type") or selected_ref.get("event_type"),
+                    "ordinal": existing.get("ordinal") or selected_ref.get("ordinal"),
+                    "detail_needed": existing.get("detail_needed") or selected_ref.get("detail_needed"),
+                    "downstream_instruction": existing.get("downstream_instruction")
+                    or selected_ref.get("downstream_instruction"),
+                    "uncertainty": existing.get("uncertainty") or selected_ref.get("uncertainty"),
+                }
+            )
+        cleaned_refs = [selected_ref]
+    else:
+        cleaned_refs = cleaned_refs[:1]
+
     return {
         "current_visual_request": (
             observation.get("current_visual_request") or observation.get("current_request")
             if isinstance(observation, dict)
             else current_user_message
         ),
+        "visual_reference_type": visual_reference_type,
+        "selection_rule": selection_rule,
+        "candidate_events": candidate_events,
+        "selected_event_order": selected_event_order,
         "referents": cleaned_refs,
         "uncertainties": observation.get("uncertainties") if isinstance(observation, dict) else None,
     }
 
 
 def parse_vision_text(text: str) -> Any:
-    parsed = extract_json_object(text)
-    return parsed if parsed is not None else {"raw_text": text}
+    content = strip_qwen_reasoning_prefix(text)
+    parsed = extract_json_object(content)
+    if parsed is not None:
+        return parsed
+    return {"raw_text": content, "raw_model_content": text} if content != text else {"raw_text": text}
+
+
+def strip_qwen_reasoning_prefix(text: str) -> str:
+    if not isinstance(text, str):
+        return ""
+    if "</think>" not in text:
+        return text
+    return text.rsplit("</think>", 1)[-1].lstrip()
 
 
 def clean_vision_detail(detail: Any) -> dict[str, Any]:
@@ -974,6 +1518,81 @@ def clean_vision_detail(detail: Any) -> dict[str, Any]:
     if str(cleaned.get("uncertainty")).lower() in {"none", "null", ""}:
         cleaned["uncertainty"] = None
     return cleaned
+
+
+def infer_visual_key(referent: dict[str, Any] | None, current_user_message: str = "") -> str:
+    text = " ".join(
+        str(value or "")
+        for value in (
+            (referent or {}).get("user_referent"),
+            (referent or {}).get("target_region"),
+            (referent or {}).get("downstream_instruction"),
+            current_user_message,
+        )
+    ).lower()
+    if "category" in text or "section" in text or "title" in text:
+        return "category"
+    if "ingredient" in text:
+        return "ingredient_name"
+    if "recipe" in text:
+        return "recipe_name"
+    if "set meal" in text or "set_meal" in text:
+        return "set_meal_name"
+    if "dish" in text or "menu item" in text or "food" in text:
+        return "dish_name"
+    if "product" in text or "item" in text:
+        return "product_name"
+    return "visible_region"
+
+
+def canonicalize_visual_value(value: str) -> str:
+    text = str(value or "").strip().strip(",.;:")
+    if not text:
+        return text
+    match = re.match(r"^([A-Za-z0-9][A-Za-z0-9 '&/().,-]*?)(?=\s*[\u3400-\u9fff])", text)
+    if match:
+        ascii_prefix = match.group(1).strip().strip(",.;:")
+        if ascii_prefix:
+            return ascii_prefix
+    return text
+
+
+def extract_json_string_field(raw_text: str, field_name: str) -> str | None:
+    pattern = rf'"{re.escape(field_name)}"\s*:\s*"([^"]*)'
+    match = re.search(pattern, raw_text or "", flags=re.DOTALL)
+    if not match:
+        return None
+    return match.group(1).replace("\\n", " ").strip()
+
+
+def enrich_detail_from_raw_text(
+    detail: dict[str, Any],
+    referent: dict[str, Any],
+    current_user_message: str,
+) -> dict[str, Any]:
+    if primary_visual_key_values(detail):
+        return detail
+    raw_text = str(detail.get("raw_text") or detail.get("raw_model_content") or "")
+    target_identity = str(detail.get("target_identity") or "").strip()
+    if not target_identity:
+        target_identity = extract_json_string_field(raw_text, "target_identity") or ""
+    target_identity = canonicalize_visual_value(target_identity)
+    if not target_identity:
+        return detail
+
+    key = infer_visual_key(referent, current_user_message)
+    enriched = dict(detail)
+    enriched["target_identity"] = target_identity
+    enriched["visual_key_values"] = [
+        {
+            "key": key,
+            "value": target_identity,
+            "confidence": "medium",
+            "evidence": "Recovered target_identity from an incomplete detail-model response.",
+        }
+    ]
+    enriched["parse_warning"] = "detail response was incomplete or not valid JSON; visual_key_values were recovered from target_identity"
+    return enriched
 
 
 def extract_visual_key_values(detail: Any) -> list[dict[str, Any]]:
@@ -1056,8 +1675,11 @@ def build_qwen_sequence_prompt(referent: dict[str, Any], current_user_message: s
         image_description=image_description or "N/A",
         user_referent=referent.get("user_referent"),
         event_type=referent.get("event_type"),
+        selected_event_order=referent.get("selected_event_order") or "N/A",
+        selection_rule=referent.get("selection_rule") or "N/A",
         time_range=time_range,
         target_region=referent.get("target_region"),
+        anchor_timestamp=first_keyframe_timestamp(referent) if first_keyframe_timestamp(referent) is not None else "N/A",
         downstream_instruction=build_downstream_instruction(referent),
     )
 
@@ -1081,10 +1703,11 @@ def call_qwen_video_event_localizer(prompt: str, video_path: Path, args: argpars
 
     api_key, base_url, model = qwen_vl_env(args, stage="event")
     generation = qwen_generation_config(args, "event")
-    client = OpenAI(api_key=api_key, base_url=base_url)
+    client = OpenAI(api_key=api_key, base_url=base_url, timeout=args.qwen_timeout)
+    video_url = qwen_video_url(video_path, base_url, args)
     content: list[dict[str, Any]] = [
         {"type": "text", "text": prompt},
-        {"type": "video_url", "video_url": {"url": local_video_file_url(video_path)}},
+        {"type": "video_url", "video_url": {"url": video_url}, "fps": args.qwen_video_fps},
     ]
 
     response = client.chat.completions.create(
@@ -1092,9 +1715,9 @@ def call_qwen_video_event_localizer(prompt: str, video_path: Path, args: argpars
         messages=[{"role": "user", "content": content}],
         temperature=generation["temperature"],
         max_tokens=generation["max_tokens"],
-        extra_body={"enable_thinking": generation["enable_thinking"]},
+        extra_body=qwen_extra_body(generation, base_url),
     )
-    text = response.choices[0].message.content
+    text = response.choices[0].message.content or ""
     raw = response.model_dump() if hasattr(response, "model_dump") else response
     return raw, text, parse_vision_text(text)
 
@@ -1104,23 +1727,23 @@ def call_qwen_frame_event_localizer(prompt: str, frame_records: list[dict[str, A
 
     api_key, base_url, model = qwen_vl_env(args, stage="event")
     generation = qwen_generation_config(args, "event")
-    client = OpenAI(api_key=api_key, base_url=base_url)
+    client = OpenAI(api_key=api_key, base_url=base_url, timeout=args.qwen_timeout)
     content: list[dict[str, Any]] = [{"type": "text", "text": prompt}]
     for item in frame_records:
         frame_id = item.get("frame_id")
         timestamp = item.get("timestamp")
         path = Path(item["path"])
         content.append({"type": "text", "text": f"{frame_id}: timestamp={timestamp}s file={path.name}"})
-        content.append({"type": "image_url", "image_url": {"url": local_image_data_url(path)}})
+        content.append({"type": "image_url", "image_url": {"url": qwen_image_url(path, base_url)}})
 
     response = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": content}],
         temperature=generation["temperature"],
         max_tokens=generation["max_tokens"],
-        extra_body={"enable_thinking": generation["enable_thinking"]},
+        extra_body=qwen_extra_body(generation, base_url),
     )
-    text = response.choices[0].message.content
+    text = response.choices[0].message.content or ""
     raw = response.model_dump() if hasattr(response, "model_dump") else response
     return raw, text, parse_vision_text(text)
 
@@ -1130,20 +1753,20 @@ def call_qwen_vl_sequence(prompt: str, frame_paths: list[Path], args: argparse.N
 
     api_key, base_url, model = qwen_vl_env(args, stage="detail")
     generation = qwen_generation_config(args, "detail")
-    client = OpenAI(api_key=api_key, base_url=base_url)
+    client = OpenAI(api_key=api_key, base_url=base_url, timeout=args.qwen_timeout)
     content: list[dict[str, Any]] = [{"type": "text", "text": prompt}]
     for idx, frame_path in enumerate(frame_paths, start=1):
         content.append({"type": "text", "text": f"Frame {idx}: {frame_path.name}"})
-        content.append({"type": "image_url", "image_url": {"url": local_image_data_url(frame_path)}})
+        content.append({"type": "image_url", "image_url": {"url": qwen_image_url(frame_path, base_url)}})
 
     response = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": content}],
         temperature=generation["temperature"],
         max_tokens=generation["max_tokens"],
-        extra_body={"enable_thinking": generation["enable_thinking"]},
+        extra_body=qwen_extra_body(generation, base_url),
     )
-    text = response.choices[0].message.content
+    text = response.choices[0].message.content or ""
     raw = response.model_dump() if hasattr(response, "model_dump") else response
     return raw, text, parse_vision_text(text)
 
@@ -1175,6 +1798,8 @@ def compact_observation(plan: dict[str, Any], details: list[dict[str, Any]]) -> 
             {
                 "user_referent": item.get("user_referent"),
                 "mode": item.get("detail_mode"),
+                "anchor_timestamp": item.get("anchor_timestamp"),
+                "sampling_strategy": item.get("sampling_strategy"),
                 "timestamps": item.get("timestamps"),
                 "sample_fps": item.get("sample_fps"),
                 "boundary_offset": item.get("boundary_offset"),
@@ -1190,21 +1815,28 @@ def compact_observation(plan: dict[str, Any], details: list[dict[str, Any]]) -> 
 
 def compact_trace(trace: dict[str, Any]) -> dict[str, Any]:
     stages = trace.get("stages", {})
-    event_stage = stages.get("event_localizer") or stages.get("aura_event_localizer", {})
+    event_stage = stages.get("event_localizer", {})
     vision_stage = stages.get("vision_details", [])
     compact_details = []
     for item in vision_stage if isinstance(vision_stage, list) else []:
         compact_details.append(
             {
                 "referent_index": item.get("referent_index"),
+                "status": item.get("status"),
                 "detail_mode": item.get("detail_mode"),
                 "qwen_base_url": item.get("qwen_base_url"),
                 "qwen_model": item.get("qwen_model"),
+                "generation": item.get("generation"),
+                "extra_body": item.get("extra_body"),
                 "user_referent": item.get("user_referent"),
+                "anchor_timestamp": item.get("anchor_timestamp"),
+                "sampling_strategy": item.get("sampling_strategy"),
                 "timestamps": item.get("timestamps"),
                 "target_region": item.get("target_region"),
                 "sample_fps": item.get("sample_fps"),
                 "boundary_offset": item.get("boundary_offset"),
+                "scene_description": item.get("scene_description"),
+                "frame_resize": item.get("frame_resize"),
                 "frame_paths": item.get("frame_paths"),
                 "elapsed_seconds": item.get("elapsed_seconds"),
                 "error": item.get("error"),
@@ -1214,33 +1846,38 @@ def compact_trace(trace: dict[str, Any]) -> dict[str, Any]:
 
     request = trace.get("request", {})
     compact = {
-        "schema_version": "aura_qwenvl_observer_trace_compact_v1",
+        "schema_version": "visual_observer_trace_compact_v2",
         "created_at": trace.get("created_at"),
+        "status": trace.get("status"),
         "experiment_id": trace.get("experiment_id"),
         "experiment_timestamp": trace.get("experiment_timestamp"),
         "experiment_cache_dir": trace.get("experiment_cache_dir"),
         "request": {
             "task_id": request.get("task_id"),
+            "request_key": request.get("request_key"),
             "scenario": request.get("scenario"),
             "video_path": request.get("video_path"),
             "image_description": request.get("image_description"),
             "current_user_message": request.get("current_user_message"),
         },
+        "scene_description": trace.get("scene_description"),
         "stages": {
             "labeled_video": stages.get("labeled_video"),
             "event_localizer": {
                 "backend": event_stage.get("backend"),
+                "configured_backend": event_stage.get("configured_backend"),
+                "backend_selection_reason": event_stage.get("backend_selection_reason"),
                 "qwen_base_url": event_stage.get("qwen_base_url"),
                 "qwen_model": event_stage.get("qwen_model"),
+                "generation": event_stage.get("generation"),
+                "extra_body": event_stage.get("extra_body"),
                 "elapsed_seconds": event_stage.get("elapsed_seconds"),
+                "video_path": event_stage.get("video_path"),
+                "video_url": event_stage.get("video_url"),
+                "video_fps": event_stage.get("video_fps"),
                 "event_frame_fps": event_stage.get("event_frame_fps"),
                 "event_max_frames": event_stage.get("event_max_frames"),
                 "event_frames": event_stage.get("event_frames"),
-                "clean_plan": event_stage.get("clean_plan"),
-            },
-            "aura_event_localizer": {
-                "backend": event_stage.get("backend"),
-                "elapsed_seconds": event_stage.get("elapsed_seconds"),
                 "clean_plan": event_stage.get("clean_plan"),
             },
             "vision_details": compact_details,
@@ -1262,7 +1899,7 @@ def trace_for_storage(trace: dict[str, Any], args: argparse.Namespace) -> dict[s
 def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     started = time.time()
     trace: dict[str, Any] = {
-        "schema_version": "aura_qwenvl_observer_trace_v1",
+        "schema_version": "visual_observer_trace_v2",
         "created_at": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
         "request": payload,
         "stages": {},
@@ -1276,6 +1913,9 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
         task_id = str(payload.get("task_id") or "")
         current_user_message = str(payload.get("current_user_message") or "")
         image_description = str(payload.get("image_description") or "")
+        scene_description = build_scene_description(scenario, image_description)
+        trace["scene_description"] = scene_description
+        event_backend, backend_selection_reason = effective_event_backend(args, current_user_message)
 
         local_video = local_video_path(video_path)
         cache_dir = experiment_cache_dir(Path(args.cache_dir), payload)
@@ -1285,7 +1925,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
         trace["experiment_cache_dir"] = str(cache_dir)
 
         labeled_video: Path | None = None
-        if args.event_localizer_backend in {"aura_http", "qwen_frames"}:
+        if event_backend in {"aura_http", "qwen_frames"}:
             labeled_video = make_labeled_video(local_video, cache_dir, args.labeled_fps, args.fontfile, args.refresh)
             trace["stages"]["labeled_video"] = {"path": str(labeled_video), "fps": args.labeled_fps}
         else:
@@ -1296,7 +1936,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
             }
 
         event_start = time.time()
-        if args.event_localizer_backend == "qwen_frames":
+        if event_backend == "qwen_frames":
             assert labeled_video is not None
             _, event_base_url, event_model = qwen_vl_env(args, stage="event")
             event_frame_dir = cache_dir / "event_frames"
@@ -1309,15 +1949,18 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 args.event_max_frames,
                 args.frame_max_side,
             )
-            prompt = build_qwen_event_prompt(current_user_message, image_description)
+            prompt = build_qwen_event_prompt(current_user_message, scene_description)
             raw_response, text, parsed = call_qwen_frame_event_localizer(prompt, event_frames, args)
             event_data = {"observation": parsed if isinstance(parsed, dict) else {"raw": text}}
             clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
             event_stage = {
                 "backend": "qwen_frames",
+                "configured_backend": args.event_localizer_backend,
+                "backend_selection_reason": backend_selection_reason,
                 "qwen_base_url": event_base_url,
                 "qwen_model": event_model,
                 "generation": qwen_generation_config(args, "event"),
+                "extra_body": qwen_extra_body(qwen_generation_config(args, "event"), event_base_url),
                 "elapsed_seconds": round(time.time() - event_start, 3),
                 "event_frame_fps": args.event_frame_fps,
                 "event_max_frames": args.event_max_frames,
@@ -1336,20 +1979,24 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 "parsed_response": parsed,
                 "clean_plan": clean_plan,
             }
-        elif args.event_localizer_backend == "qwen_video":
+        elif event_backend == "qwen_video":
             _, event_base_url, event_model = qwen_vl_env(args, stage="event")
-            prompt = build_qwen_video_event_prompt(current_user_message, image_description)
+            prompt = build_qwen_video_event_prompt(current_user_message, scene_description)
             raw_response, text, parsed = call_qwen_video_event_localizer(prompt, local_video, args)
             event_data = {"observation": parsed if isinstance(parsed, dict) else {"raw": text}}
             clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
             event_stage = {
                 "backend": "qwen_video",
+                "configured_backend": args.event_localizer_backend,
+                "backend_selection_reason": backend_selection_reason,
                 "qwen_base_url": event_base_url,
                 "qwen_model": event_model,
                 "generation": qwen_generation_config(args, "event"),
+                "extra_body": qwen_extra_body(qwen_generation_config(args, "event"), event_base_url),
                 "elapsed_seconds": round(time.time() - event_start, 3),
                 "video_path": str(local_video),
-                "video_url": local_video_file_url(local_video),
+                "video_url": qwen_video_url(local_video, event_base_url, args),
+                "video_fps": args.qwen_video_fps,
                 "request_level_fps": None,
                 "prompt": prompt,
                 "raw_response": raw_response,
@@ -1364,7 +2011,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 "scenario": scenario,
                 "service_instruction": AURA_EVENT_LOCALIZER_PROMPT,
                 "video_path": str(labeled_video),
-                "current_user_message": build_planner_user_message(current_user_message, image_description),
+                "current_user_message": build_planner_user_message(current_user_message, scene_description),
             }
             aura_response = requests.post(aura_event_url(args), json=aura_payload, timeout=args.aura_timeout)
             aura_response.raise_for_status()
@@ -1372,17 +2019,22 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
             clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
             event_stage = {
                 "backend": "aura_http",
+                "configured_backend": args.event_localizer_backend,
+                "backend_selection_reason": backend_selection_reason,
                 "elapsed_seconds": round(time.time() - event_start, 3),
                 "request": aura_payload,
                 "raw_response": event_data,
                 "clean_plan": clean_plan,
             }
         trace["stages"]["event_localizer"] = event_stage
-        trace["stages"]["aura_event_localizer"] = event_stage
+        trace["status"] = "event_completed"
+        write_scenario_trace(cache_dir, payload, trace_for_storage(trace, args))
 
         detail_records = []
         frame_dir = cache_dir / "keyframes"
+        request_key = str(payload.get("request_key") or "")
         for ref_idx, referent in enumerate(clean_plan.get("referents", [])):
+            anchor_timestamp = first_keyframe_timestamp(referent)
             timestamps = event_sequence_timestamps(
                 referent,
                 args.sequence_frames,
@@ -1394,18 +2046,60 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 continue
             frame_paths = []
             for frame_idx, timestamp in enumerate(timestamps):
-                frame_name = keyframe_output_name(scenario, task_id, float(timestamp), ref_idx, frame_idx)
+                frame_name = keyframe_output_name(
+                    scenario,
+                    task_id,
+                    float(timestamp),
+                    ref_idx,
+                    frame_idx,
+                    request_key,
+                )
                 frame_paths.append(extract_frame(local_video, float(timestamp), frame_dir, frame_name, None))
 
-            prompt = build_qwen_sequence_prompt(referent, current_user_message, image_description)
+            prompt = build_qwen_sequence_prompt(referent, current_user_message, scene_description)
             _, detail_base_url, detail_model = qwen_vl_env(args, stage="detail")
+            detail_record = {
+                "referent_index": ref_idx,
+                "status": "pending",
+                "detail_mode": "qwen_sequence",
+                "qwen_base_url": detail_base_url,
+                "qwen_model": detail_model,
+                "generation": qwen_generation_config(args, "detail"),
+                "extra_body": qwen_extra_body(qwen_generation_config(args, "detail"), detail_base_url),
+                "user_referent": referent.get("user_referent"),
+                "anchor_timestamp": anchor_timestamp,
+                "sampling_strategy": "anchor_within_event_range" if anchor_timestamp is not None else "event_range",
+                "timestamps": timestamps,
+                "target_region": referent.get("target_region"),
+                "sample_fps": args.detail_sample_fps,
+                "boundary_offset": args.detail_boundary_offset,
+                "scene_description": scene_description,
+                "frame_resize": "none",
+                "frame_paths": [str(path) for path in frame_paths],
+                "prompt": prompt,
+                "elapsed_seconds": None,
+                "error": None,
+                "raw_response": None,
+                "raw_text": "",
+                "parsed_detail": None,
+                "clean_detail": None,
+            }
+            detail_records.append(detail_record)
+            trace["stages"]["vision_details"] = detail_records
+            trace["status"] = "detail_pending"
+            write_scenario_trace(cache_dir, payload, trace_for_storage(trace, args))
+
             detail_start = time.time()
             raw_response = None
             text = ""
             parsed: Any = None
             try:
                 raw_response, text, parsed = call_qwen_vl_sequence(prompt, frame_paths, args)
-                clean_detail = clean_vision_detail(parsed)
+                clean_detail = enrich_detail_from_raw_text(
+                    clean_vision_detail(parsed),
+                    referent,
+                    current_user_message,
+                )
                 detail_error = None
             except Exception as exc:
                 clean_detail = {
@@ -1417,21 +2111,9 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                     "message": str(exc),
                     "traceback": traceback.format_exc(),
                 }
-            detail_records.append(
+            detail_record.update(
                 {
-                    "referent_index": ref_idx,
-                    "detail_mode": "qwen_sequence",
-                    "qwen_base_url": detail_base_url,
-                    "qwen_model": detail_model,
-                    "generation": qwen_generation_config(args, "detail"),
-                    "user_referent": referent.get("user_referent"),
-                    "timestamps": timestamps,
-                    "target_region": referent.get("target_region"),
-                    "sample_fps": args.detail_sample_fps,
-                    "boundary_offset": args.detail_boundary_offset,
-                    "frame_resize": "none",
-                    "frame_paths": [str(path) for path in frame_paths],
-                    "prompt": prompt,
+                    "status": "completed" if detail_error is None else "failed",
                     "elapsed_seconds": round(time.time() - detail_start, 3),
                     "error": detail_error,
                     "raw_response": raw_response,
@@ -1440,8 +2122,11 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                     "clean_detail": clean_detail,
                 }
             )
+            trace["status"] = "detail_completed" if detail_error is None else "detail_failed"
+            write_scenario_trace(cache_dir, payload, trace_for_storage(trace, args))
 
         trace["stages"]["vision_details"] = detail_records
+        trace["status"] = "completed"
         observation = compact_observation(clean_plan, detail_records)
         trace["observation"] = observation
         trace["elapsed_seconds"] = round(time.time() - started, 3)
@@ -1452,6 +2137,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
             "video_path": video_path,
             "observer": "visual_event_qwen_sequence",
             "event_localizer_backend": args.event_localizer_backend,
+            "effective_event_localizer_backend": event_backend,
             "experiment_id": cache_dir.name,
             "experiment_cache_dir": str(cache_dir),
             "elapsed_seconds": trace["elapsed_seconds"],
@@ -1490,6 +2176,10 @@ class ObserverHandler(BaseHTTPRequestHandler):
         _, qwen_detail_base_url, qwen_detail_model = qwen_vl_env(self.args, stage="detail")
         event_localizer: dict[str, Any] = {
             "backend": self.args.event_localizer_backend,
+            "temporal_event_backend": self.args.temporal_event_backend,
+            "temporal_frame_fps": self.args.event_frame_fps,
+            "temporal_max_frames": self.args.event_max_frames,
+            "temporal_frame_max_side": self.args.frame_max_side,
         }
         if self.args.event_localizer_backend == "qwen_video":
             event_localizer.update(
@@ -1497,6 +2187,9 @@ class ObserverHandler(BaseHTTPRequestHandler):
                     "input": "original_video",
                     "base_url": qwen_event_base_url,
                     "model": qwen_event_model,
+                    "video_url_mode": self.args.qwen_video_url_mode,
+                    "video_url_base": self.args.video_url_base,
+                    "video_fps": self.args.qwen_video_fps,
                     "request_level_fps": None,
                     "generation": qwen_generation_config(self.args, "event"),
                 }
@@ -1565,6 +2258,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=18082)
     parser.add_argument("--event_localizer_backend", choices=["aura_http", "qwen_frames", "qwen_video"], default="aura_http")
+    parser.add_argument(
+        "--temporal_event_backend",
+        choices=["inherit", "qwen_frames", "qwen_video"],
+        default=os.environ.get("OBSERVER_TEMPORAL_EVENT_BACKEND", "qwen_frames"),
+        help="Backend used for temporal/ordinal action requests when the configured event backend is qwen_video.",
+    )
     parser.add_argument("--aura_event_url", default=None)
     parser.add_argument(
         "--aura_observer_url",
@@ -1592,15 +2291,76 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--qwen_detail_api_base_url", default=None)
     parser.add_argument("--qwen_detail_api_key", default=None)
     parser.add_argument("--qwen_detail_model", default=None)
+    parser.add_argument(
+        "--qwen_video_url_mode",
+        choices=["auto", "local", "url"],
+        default=os.environ.get("OBSERVER_QWEN_VIDEO_URL_MODE", "auto"),
+        help="Video URL mode for qwen_video event localization. auto uses file:// for local APIs and public URLs for remote APIs.",
+    )
+    parser.add_argument(
+        "--video_url_base",
+        default=os.environ.get("OBSERVER_VIDEO_URL_BASE") or os.environ.get("VIDEO_URL_BASE"),
+        help="Base URL for public videos when qwen_video_url_mode uses url. The video filename is appended and URL-encoded.",
+    )
+    parser.add_argument(
+        "--video_url_mapping",
+        default=os.environ.get("VIDEO_URL_MAPPING"),
+        help="JSON mapping from video filename to public URL for qwen_video online mode.",
+    )
+    parser.add_argument(
+        "--qwen_video_fps",
+        type=float,
+        default=float(os.environ.get("OBSERVER_QWEN_VIDEO_FPS", "2")),
+        help="fps field sent with OpenAI-compatible video_url input.",
+    )
     parser.add_argument("--qwen_temperature", type=float, default=0.0)
     parser.add_argument("--qwen_max_tokens", type=int, default=1024)
+    parser.add_argument("--qwen_timeout", type=float, default=float(os.environ.get("OBSERVER_QWEN_TIMEOUT", "300")))
     parser.add_argument("--qwen_enable_thinking", action="store_true")
+    parser.add_argument("--qwen_thinking_budget", type=int, default=None)
+    parser.add_argument(
+        "--qwen_thinking",
+        choices=["on", "off"],
+        default="off",
+        help="Global Qwen thinking switch. Stage-specific --qwen_event_thinking/--qwen_detail_thinking can override it.",
+    )
+    parser.add_argument(
+        "--qwen_include_reasoning",
+        action="store_true",
+        help="Include separated reasoning in vLLM responses when the server runs with --reasoning-parser qwen3.",
+    )
     parser.add_argument("--qwen_event_temperature", type=float, default=None)
     parser.add_argument("--qwen_event_max_tokens", type=int, default=None)
+    parser.add_argument("--qwen_event_thinking_budget", type=int, default=None)
+    parser.add_argument(
+        "--qwen_event_thinking",
+        choices=["inherit", "on", "off"],
+        default="inherit",
+        help="Thinking switch for the event localizer stage. Overrides --qwen_thinking when not inherit.",
+    )
     parser.add_argument("--qwen_event_enable_thinking", action="store_true", default=None)
+    parser.add_argument(
+        "--qwen_event_high_resolution_images",
+        choices=["on", "off"],
+        default=os.environ.get("OBSERVER_EVENT_HIGH_RESOLUTION_IMAGES", "off"),
+        help="Send DashScope/OpenAI-compatible vl_high_resolution_images=true for event image-frame requests.",
+    )
     parser.add_argument("--qwen_detail_temperature", type=float, default=None)
     parser.add_argument("--qwen_detail_max_tokens", type=int, default=None)
+    parser.add_argument("--qwen_detail_thinking_budget", type=int, default=None)
+    parser.add_argument(
+        "--qwen_detail_thinking",
+        choices=["inherit", "on", "off"],
+        default="inherit",
+        help="Thinking switch for the detail recognizer stage. Overrides --qwen_thinking when not inherit.",
+    )
     parser.add_argument("--qwen_detail_enable_thinking", action="store_true", default=None)
+    parser.add_argument(
+        "--qwen_detail_high_resolution_images",
+        choices=["on", "off"],
+        default=os.environ.get("OBSERVER_DETAIL_HIGH_RESOLUTION_IMAGES", "off"),
+        help="Send DashScope/OpenAI-compatible vl_high_resolution_images=true for detail image-sequence requests.",
+    )
     parser.add_argument(
         "--trace_detail",
         choices=["compact", "full"],

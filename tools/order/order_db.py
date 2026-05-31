@@ -71,6 +71,18 @@ class OrderDB:
             }
         return self.restaurants[restaurant_name]
 
+    def _find_store(self, restaurant_name: str) -> Optional[Dict[str, Any]]:
+        """Find restaurant data storage without creating a new empty restaurant."""
+        if restaurant_name in self.restaurants:
+            return self.restaurants[restaurant_name]
+
+        target = (restaurant_name or "").strip().lower()
+        for existing_name, store in self.restaurants.items():
+            if existing_name.strip().lower() == target:
+                return store
+
+        return None
+
     def _find_matching_dishes(self, restaurant_name: str, query: str) -> List[Dish]:
         store = self._get_store(restaurant_name)
         query_lower = query.lower()
@@ -653,9 +665,8 @@ class OrderDB:
         sum(price * discount * qty).
         """
         total_payment = 0.0
-        restaurant_key = (restaurant_name or "").lower()
 
-        store = self.restaurants.get(restaurant_key)
+        store = self._find_store(restaurant_name)
         if not store:
             return {
                 "restaurant_name": restaurant_name,
@@ -664,18 +675,18 @@ class OrderDB:
             }
 
         for item in dishes:
-            product_name = item.get("product_name", " ").lower()
+            dish_name = item.get("dish_name", " ").lower()
             quantity = item.get("quantity", 0)
 
             if quantity <= 0:
                 continue
 
-            dish = store["catalog"].get(product_name)
+            dish = store["catalog"].get(dish_name)
             if dish:
                 amount = dish.price * dish.discount * quantity
                 total_payment += amount
-            elif product_name in store["set_meals"]:
-                set_meal = store["set_meals"][product_name]
+            elif dish_name in store["set_meals"]:
+                set_meal = store["set_meals"][dish_name]
                 amount = set_meal.set_meal_price * set_meal.set_meal_discount * quantity
                 total_payment += amount
 
@@ -693,9 +704,8 @@ class OrderDB:
         (price * tax_rate / (1 + tax_rate)) * discount * qty.
         """
         total_tax = 0.0
-        restaurant_key = (restaurant_name or "").lower()
 
-        store = self.restaurants.get(restaurant_key)
+        store = self._find_store(restaurant_name)
         if not store:
             return {
                 "restaurant_name": restaurant_name,
@@ -704,19 +714,19 @@ class OrderDB:
             }
 
         for item in dishes:
-            product_name = item.get("product_name", " ").lower()
+            dish_name = item.get("dish_name", " ").lower()
             quantity = item.get("quantity", 0)
 
             if quantity <= 0:
                 continue
 
-            dish = store["catalog"].get(product_name)
+            dish = store["catalog"].get(dish_name)
             if dish:
                 pre_tax_price = (dish.price * dish.tax_rate) / (1 + dish.tax_rate)
                 tax = pre_tax_price * dish.discount * quantity
                 total_tax += tax
-            elif product_name in store["set_meals"]:
-                set_meal = store["set_meals"][product_name]
+            elif dish_name in store["set_meals"]:
+                set_meal = store["set_meals"][dish_name]
                 # 套餐税额按包含菜品逐项计算
                 for included_item in set_meal.included_dishes:
                     included_dish_name = included_item.get("dish_name", " ").lower()
@@ -749,8 +759,7 @@ class OrderDB:
             "fiber_g": 0.0
         }
 
-        restaurant_key = (restaurant_name or "").lower()
-        store = self.restaurants.get(restaurant_key)
+        store = self._find_store(restaurant_name)
         if not store:
             return {
                 "restaurant_name": restaurant_name,
@@ -759,13 +768,13 @@ class OrderDB:
             }
 
         for item in dishes:
-            product_name = item.get("product_name", " ").lower()
+            dish_name = item.get("dish_name", " ").lower()
             quantity = item.get("quantity", 0)
 
             if quantity <= 0:
                 continue
 
-            dish = store["catalog"].get(product_name)
+            dish = store["catalog"].get(dish_name)
             if dish and dish.nutrition:
                 nut_info = dish.nutrition
                 multiplier = quantity / 100.0 if nut_info.basis == "PER_100G" else quantity
@@ -778,8 +787,8 @@ class OrderDB:
                 total_nutrition["sodium_mg"] += (nut_info.sodium_mg or 0) * multiplier
                 total_nutrition["fiber_g"] += (nut_info.fiber_g or 0) * multiplier
 
-            elif product_name in store["set_meals"]:
-                set_meal = store["set_meals"][product_name]
+            elif dish_name in store["set_meals"]:
+                set_meal = store["set_meals"][dish_name]
                 # 套餐营养按包含菜品逐项累加
                 for included_item in set_meal.included_dishes:
                     included_dish_name = included_item.get("dish_name", " ").lower()

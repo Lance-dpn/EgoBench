@@ -398,7 +398,8 @@
               "Cheese & Olives",
               "Cold Cuts",
               "Steaks",
-              "Handmade Bread"
+              "Handmade Bread",
+              "Italian Pasta"
             ]
           }
         },
@@ -617,7 +618,7 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "product_name": {
+              "dish_name": {
                 "type": "string",
                 "description": "Name of the dish"
               },
@@ -627,7 +628,7 @@
               }
             },
             "required": [
-              "product_name",
+              "dish_name",
               "quantity"
             ]
           }
@@ -662,7 +663,7 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "product_name": {
+              "dish_name": {
                 "type": "string",
                 "description": "Name of the dish"
               },
@@ -672,7 +673,7 @@
               }
             },
             "required": [
-              "product_name",
+              "dish_name",
               "quantity"
             ]
           }
@@ -707,7 +708,7 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "product_name": {
+              "dish_name": {
                 "type": "string",
                 "description": "Name of the dish"
               },
@@ -717,7 +718,7 @@
               }
             },
             "required": [
-              "product_name",
+              "dish_name",
               "quantity"
             ]
           }
