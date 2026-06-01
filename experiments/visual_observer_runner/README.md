@@ -372,6 +372,22 @@ experiments/visual_observer_runner/cache/visual_observations/
 experiments/visual_observer_runner/cache/visual_observer/runs/
 ```
 
+To run specific 1-based tasks instead of the first `--num_tasks` tasks, use
+`--task_ids`:
+
+```bash
+python -u experiments/visual_observer_runner/run_interaction.py \
+  --scenario order \
+  --scenario_number 1 \
+  --task_ids 3 \
+  --visual_context_source observer \
+  --visual_observer_url http://127.0.0.1:18082/observe \
+  --output_model_name order1-task3-debug
+```
+
+`--task_ids` also accepts comma-separated ids and ranges, for example
+`--task_ids 3,7,10-12`.
+
 Evaluate a finished run:
 
 ```bash

@@ -602,6 +602,42 @@ def contains_stop_signal(text: str) -> bool:
     return any(line.strip() == "STOP" for line in text.splitlines())
 
 
+def parse_task_ids(value: str) -> list[int]:
+    """Parse 1-based task ids from comma-separated ids or ranges."""
+
+    task_ids: list[int] = []
+    seen: set[int] = set()
+    for raw_part in value.split(","):
+        part = raw_part.strip()
+        if not part:
+            continue
+        if "-" in part:
+            start_text, end_text = [item.strip() for item in part.split("-", 1)]
+            if not start_text.isdigit() or not end_text.isdigit():
+                raise argparse.ArgumentTypeError(f"Invalid task range: {part!r}")
+            start = int(start_text)
+            end = int(end_text)
+            if start <= 0 or end <= 0 or end < start:
+                raise argparse.ArgumentTypeError(f"Invalid task range: {part!r}")
+            candidates = range(start, end + 1)
+        else:
+            if not part.isdigit():
+                raise argparse.ArgumentTypeError(f"Invalid task id: {part!r}")
+            task_id = int(part)
+            if task_id <= 0:
+                raise argparse.ArgumentTypeError(f"Task ids are 1-based: {part!r}")
+            candidates = [task_id]
+
+        for task_id in candidates:
+            if task_id not in seen:
+                task_ids.append(task_id)
+                seen.add(task_id)
+
+    if not task_ids:
+        raise argparse.ArgumentTypeError("At least one task id is required.")
+    return task_ids
+
+
 def build_dialogue_context(dialogue: list[dict[str, Any]], summarized_history: str, last_agent_response: str) -> str:
     if summarized_history:
         return summarized_history
@@ -627,13 +663,21 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
         scenarios = json.load(f)
     visual_context_source = getattr(args, "visual_context_source", "observer")
 
-    if args.num_tasks > 0:
-        scenarios = scenarios[: args.num_tasks]
+    if args.task_ids:
+        selected_scenarios = []
+        total_scenarios = len(scenarios)
+        for task_id in args.task_ids:
+            if task_id > total_scenarios:
+                raise ValueError(f"Task id {task_id} is out of range; only {total_scenarios} tasks are available.")
+            selected_scenarios.append((task_id, scenarios[task_id - 1]))
+    else:
+        if args.num_tasks > 0:
+            scenarios = scenarios[: args.num_tasks]
+        selected_scenarios = list(enumerate(scenarios, start=1))
 
     all_results = []
 
-    for idx, sc in enumerate(scenarios):
-        task_id = idx + 1
+    for task_id, sc in selected_scenarios:
         print(f"\n{'=' * 20} Hybrid Scenario {args.scenario}{args.scenario_number}: {task_id} {'=' * 20}")
 
         db = init_db(args.scenario, args.scenario_number)
@@ -1117,6 +1161,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--scenario", choices=["retail", "kitchen", "restaurant", "order"], default="retail")
     parser.add_argument("--scenario_number", type=int, default=1)
     parser.add_argument("--num_tasks", type=int, default=0)
+    parser.add_argument(
+        "--task_ids",
+        type=parse_task_ids,
+        default=None,
+        help=(
+            "Run specific 1-based task ids instead of the first --num_tasks tasks. "
+            "Supports comma-separated ids and ranges, e.g. 3 or 3,7,10-12."
+        ),
+    )
     parser.add_argument("--max_turns", type=int, default=10)
     parser.add_argument("--max_inner_tool_rounds", type=int, default=12)
     parser.add_argument("--max_tool_calls", type=int, default=100)
