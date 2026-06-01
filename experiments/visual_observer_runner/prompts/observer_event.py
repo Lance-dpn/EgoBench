@@ -10,14 +10,20 @@ from __future__ import annotations
 from experiments.visual_observer_runner.prompts.observer_scenario import build_observer_event_scene_description
 
 
-OBSERVER_EVENT_PROMPT_VERSION = "observer_event_prompts_v5_grounded"
+OBSERVER_EVENT_PROMPT_VERSION = "observer_event_prompts_v6_ordinal_grounded"
 
 
 EVENT_LOCALIZER_COMMON_RULES = """
 - Use only the visual input.
 - Localize one requested visible event/region; do not identify final dish/product names.
 - Keep the user's menu/page/region/sequence scope.
-- For ordinal requests, list distinct candidate events in visible time order and select the requested one.
+- For first/second/third/last pointing requests, first segment all distinct
+  stable pointing events in the requested scope into candidates in visible time
+  order. Then set selected_event to the candidate matching the requested ordinal.
+- A stable pointing event starts when the endpoint settles on one target and
+  ends when the endpoint leaves it or switches to another target.
+- Do not select the clearest or latest event before completing this candidate
+  sequence count.
 - For pointing, localize the endpoint target: fingertip/contact point/tool tip/pointing direction.
 - Only report events you can visually ground. Do not invent timestamps, regions, or targets from the request text.
 - If the requested event is unclear, use a wider visible time range and set uncertainty; if it is not visible, set selected_event to null.

@@ -8,6 +8,8 @@ EVENT_SCENARIO_VISUAL_GUIDANCE = {
 - Menus may be referenced as Menu 1/Menu 2, page, fold, side, or section.
 - For ordinal pointing, count distinct stable pointing targets in time order
   within the requested menu/region.
+- Count only the relevant pointing sequence after the requested menu/region is
+  in scope; ignore setup gestures, hovering, and movement between targets.
 - Localize the fingertip/contact point or pointing direction, not the hand body.
 - Do not switch to a clearer menu, logo, or header outside the requested
   Menu/page/region. If scope is not visible, mark uncertainty instead.
