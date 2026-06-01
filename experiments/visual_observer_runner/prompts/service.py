@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v5"
+SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v6"
 
 
 @dataclass(frozen=True)
@@ -107,6 +107,11 @@ SCENARIO_SERVICE_INSTRUCTIONS = {
   partial visual label, cuisine label, menu number, or header text as
   restaurant_name; if only a partial name is known, ask for or recover the full
   user-stated restaurant name before calling database tools.
+- If restaurant-scoped tools return empty or not-found results and there is no
+  user-requested conditional branch that requires proceeding with a known
+  fallback, suspect that restaurant_name may be incomplete or wrong. Do not keep
+  using the same uncertain key; recover the complete name from the user's
+  menu-to-restaurant mapping or ask one concise clarification.
 - Use resolve_visual_reference only for visual menu grounding, such as pointed
   item, ordinal pointing order, visible section/title, menu area, page/fold, or
   spatial relation. Include the currently bound menu/order label or visible
@@ -205,6 +210,11 @@ TOOL_USE_REQUIREMENTS = PromptSection(
 - Ensure required parameters are known before calling a tool. If a required
   parameter is missing and cannot be inferred from state or prior successful
   tool calls, ask one concise clarification.
+- Use schema enum values carefully. An enum lists known valid options and often
+  encodes useful domain information for that tool. Prefer exact enum values for
+  enum-constrained parameters, use them to choose valid modes/categories/fields,
+  and do not invent values outside the enum unless the tool schema explicitly
+  allows free-form input.
 - You may call multiple independent tools in one JSON array.
 - When a user asks to calculate information related to current persistent state,
   prefer tools whose parameters accept lists or aggregate state instead of
