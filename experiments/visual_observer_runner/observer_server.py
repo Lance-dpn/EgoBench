@@ -19,6 +19,7 @@ import mimetypes
 import os
 import re
 import subprocess
+import sys
 import time
 import traceback
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -26,11 +27,17 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote, urlparse
 
-import requests
-
 
 CURRENT_FILE = Path(__file__).resolve()
 PROJECT_ROOT = CURRENT_FILE.parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from experiments.visual_observer_runner.prompts import (  # noqa: E402
+    build_qwen_event_prompt,
+    build_qwen_sequence_prompt,
+    build_qwen_video_event_prompt,
+)
+
 DEFAULT_CACHE_DIR = CURRENT_FILE.parent / "cache" / "visual_observer"
 DEFAULT_FONT = "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf"
 
@@ -43,373 +50,6 @@ ALLOWED_VISUAL_KEYS = {
     "set_meal_name",
     "visible_region",
 }
-
-
-AURA_EVENT_LOCALIZER_PROMPT = """You are the first-stage event localizer in a two-model visual observer.
-
-Task:
-Given the current user message and a labeled low-fps video, locate the visual
-event that grounds the user's request. Then write a concise instruction for the
-next vision model.
-
-Your responsibility:
-- Resolve event timing and visual references only: action order, selected or
-  referenced entity, interaction state, spatial relation, visible region, and
-  any region that a downstream vision reader should inspect.
-- Return one short event time segment and 3-4 frame timestamps from that segment,
-  ordered from early to late.
-- Write a concise downstream_instruction that tells the next vision model what
-  visual detail to identify for this referent.
-
-Rules:
-- Use the video, not outside knowledge.
-- For ordinal language, follow the relevant visible order in the video.
-- For spatial language, follow the visible spatial layout.
-- Do not output entity names, prices, nutrition, allergens, country/origin,
-  discounts, cart/order state, or actions to take.
-- For pointing or interaction events, do not put guessed object names or exact
-  visible text identities in referent or target_region. Use the user's visual
-  referent wording and coarse spatial localization only; the next vision reader
-  is responsible for identifying the visible anchor.
-- Do not solve the database question. Only localize the visual event and guide
-  the next vision model.
-- Ignore database-only filters and rankings such as price, discount, tax,
-  nutrition, allergens, taste/flavor tags, set membership, inventory,
-  lowest/highest/cheapest, and recommendations. Localize only the visible item,
-  section, text region, or pointing event involved.
-- Prefer one best referent. If truly uncertain between visual events, return up
-  to three candidate referents ordered by confidence.
-- Timestamps may be any decimal seconds from the original video. Do not round
-  them to 0.5-second steps unless that is the best visible estimate.
-
-Return JSON only:
-{
-  "current_visual_request": "...",
-  "referents": [
-    {
-      "referent": "...",
-      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
-      "ordinal": "first|second|third|last|null",
-      "event_time_range": {"start": 5.37, "end": 6.42},
-      "time_range": "5.37-6.42s",
-      "target_region": "coarse region in the frame",
-  "detail_needed": ["identify anchor"],
-      "downstream_instruction": "Identify the visible anchor for this localized referent.",
-      "best_keyframes": [
-        {
-          "frame_id": "F12",
-          "timestamp": 6.0,
-          "target_region": "coarse region in the frame",
-          "reason": "short visual reason"
-        }
-      ],
-      "uncertainty": null
-    }
-  ],
-  "uncertainties": null
-}
-
-If the video frame label is visible, set frame_id to that exact label, for
-example "F12"."""
-
-
-QWEN_FRAME_EVENT_LOCALIZER_PROMPT = """You are the first-stage event localizer in a two-model visual observer.
-
-Task:
-Given the current user message and a sequence of sampled video frames, locate
-the visual event(s) that ground the user's request. The attached images are
-ordered from early to late. Each image is preceded by a frame id and timestamp.
-
-Your responsibility:
-- Resolve event timing and visual references only: pointing/selection order,
-  object state, spatial relation, visible text region, and any region that a
-  downstream vision reader should inspect.
-- Each observer request should resolve one target for downstream reading. If
-  deciding that one target requires comparing a sequence of candidate events or
-  regions, list the candidates first, select exactly one, and put only the
-  selected target in referents.
-- Return exactly one selected referent. If the user message contains extra
-  background objects or conditions, use the current visual referent and request
-  wording to decide the single target for this observer call.
-- Write a concise downstream_instruction that tells the next vision model what
-  visual detail to identify for this referent.
-
-Rules:
-- Use only the attached frames and their timestamps, not outside knowledge.
-- For ordinal language, follow the relevant visible order in the frame sequence.
-- For temporal or ordinal references such as first/second/third/last, do not
-  jump directly to the clearest frame. First segment the relevant visible
-  actions or states into distinct candidate_events in chronological order, then
-  select the requested one. A distinct event is a stable relation between an
-  actor, pointer, tool, object, region, or state and its target; when the target
-  changes, that is a new event.
-- If the user request scopes the reference to a context, page, screen, menu,
-  region, object, category, or current sequence, first identify that scope and
-  enumerate candidate_events only inside it. Do not count earlier or later
-  actions outside the requested scope when resolving first/second/third/last.
-- For pointing actions, localize the target at the pointing endpoint: the
-  fingertip, contact point, cursor tip, tool tip, or extension of the pointing
-  direction. Do not treat text or objects covered by the middle/lower part of a
-  finger, hand, tool, or pointer as the target unless the endpoint supports it.
-  If the pointer overlaps nearby rows or objects, choose the candidate nearest
-  to the endpoint and pointing direction, not the candidate most covered by the
-  pointer body.
-- For non-temporal spatial or text-region references, candidate_events may be
-  candidate visible regions instead of actions. Select the region that best
-  matches the user's spatial description, not merely the largest or clearest
-  visible region.
-- For spatial language, follow the visible spatial layout.
-- Do not output entity names, prices, nutrition, allergens, country/origin,
-  discounts, cart/order state, or actions to take.
-- For pointing or interaction events, do not put guessed object names or exact
-  visible text identities in referent or target_region. Use the user's visual
-  referent wording and coarse spatial localization only; the next vision reader
-  is responsible for identifying the visible anchor.
-- Do not solve the database question. Only localize the visual event and guide
-  the next vision model.
-- Ignore database-only filters and rankings such as price, discount, tax,
-  nutrition, allergens, taste/flavor tags, set membership, inventory,
-  lowest/highest/cheapest, and recommendations. Localize only the visible item,
-  section, text region, or pointing event involved.
-- Timestamps may be any decimal seconds from the original video. Do not round
-  them to 0.5-second steps unless that is the best visible estimate.
-
-Current user message:
-{current_user_message}
-
-Scene description:
-{image_description}
-
-Return JSON only:
-{{
-  "current_visual_request": "...",
-  "visual_reference_type": "temporal_ordinal_event|spatial_region|visible_text_region|object_state|single_visible_object|other",
-  "selection_rule": "How the single selected target was chosen from the user request.",
-  "candidate_events": [
-    {{
-      "event_order": 1,
-      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
-      "time_range": "5.37-6.42s",
-      "event_time_range": {{"start": 5.37, "end": 6.42}},
-      "anchor_timestamp": 6.0,
-      "target_region": "coarse region in the frame",
-      "boundary_reason": "why this is one distinct candidate event or region"
-    }}
-  ],
-  "selected_event_order": 1,
-  "referents": [
-    {{
-      "referent": "...",
-      "request_order": 1,
-      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
-      "ordinal": "first|second|third|last|null",
-      "event_time_range": {{"start": 5.37, "end": 6.42}},
-      "time_range": "5.37-6.42s",
-      "target_region": "coarse region in the frame",
-      "detail_needed": ["identify anchor"],
-      "downstream_instruction": "Identify the visible anchor for this localized referent.",
-      "best_keyframes": [
-        {{
-          "frame_id": "F012",
-          "timestamp": 6.0,
-          "target_region": "coarse region in the frame",
-          "reason": "short visual reason"
-        }}
-      ],
-      "uncertainty": null
-    }}
-  ],
-  "uncertainties": null
-}}"""
-
-
-QWEN_VIDEO_EVENT_LOCALIZER_PROMPT = """You are the first-stage event localizer in a two-model visual observer.
-
-Task:
-Given the current user message and the original video, locate the visual
-event(s) that ground the user's request. The video is provided directly; do not
-assume any externally controlled frame rate.
-
-Your responsibility:
-- Resolve event timing and visual references only: pointing/selection order,
-  object state, spatial relation, visible text region, and any region that a
-  downstream vision reader should inspect.
-- Each observer request should resolve one target for downstream reading. If
-  deciding that one target requires comparing a sequence of candidate events or
-  regions, list the candidates first, select exactly one, and put only the
-  selected target in referents.
-- Return exactly one selected referent. If the user message contains extra
-  background objects or conditions, use the current visual referent and request
-  wording to decide the single target for this observer call.
-- Write a concise downstream_instruction that tells the next vision model what
-  visual detail to identify for this referent.
-
-Rules:
-- Use only the video, not outside knowledge.
-- For ordinal language, follow the relevant visible order in the video.
-- For temporal or ordinal references such as first/second/third/last, do not
-  jump directly to the clearest frame. First segment the relevant visible
-  actions or states into distinct candidate_events in chronological order, then
-  select the requested one. A distinct event is a stable relation between an
-  actor, pointer, tool, object, region, or state and its target; when the target
-  changes, that is a new event.
-- If the user request scopes the reference to a context, page, screen, menu,
-  region, object, category, or current sequence, first identify that scope and
-  enumerate candidate_events only inside it. Do not count earlier or later
-  actions outside the requested scope when resolving first/second/third/last.
-- For pointing actions, localize the target at the pointing endpoint: the
-  fingertip, contact point, cursor tip, tool tip, or extension of the pointing
-  direction. Do not treat text or objects covered by the middle/lower part of a
-  finger, hand, tool, or pointer as the target unless the endpoint supports it.
-  If the pointer overlaps nearby rows or objects, choose the candidate nearest
-  to the endpoint and pointing direction, not the candidate most covered by the
-  pointer body.
-- For non-temporal spatial or text-region references, candidate_events may be
-  candidate visible regions instead of actions. Select the region that best
-  matches the user's spatial description, not merely the largest or clearest
-  visible region.
-- For spatial language, follow the visible spatial layout.
-- Do not output entity names, prices, nutrition, allergens, country/origin,
-  discounts, cart/order state, or actions to take.
-- Do not solve the database question. Only localize the visual event and guide
-  the next vision model.
-- Ignore database-only filters and rankings such as price, discount, tax,
-  nutrition, allergens, taste/flavor tags, set membership, inventory,
-  lowest/highest/cheapest, and recommendations. Localize only the visible item,
-  section, text region, or pointing event involved.
-- All timestamps must be seconds from the start of the original video.
-- Timestamps may be any decimal seconds from the original video. Do not round
-  them to 0.5-second steps unless that is the best visible estimate.
-
-Current user message:
-{current_user_message}
-
-Scene description:
-{image_description}
-
-Return JSON only:
-{{
-  "current_visual_request": "...",
-  "visual_reference_type": "temporal_ordinal_event|spatial_region|visible_text_region|object_state|single_visible_object|other",
-  "selection_rule": "How the single selected target was chosen from the user request.",
-  "candidate_events": [
-    {{
-      "event_order": 1,
-      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
-      "time_range": "5.37-6.42s",
-      "event_time_range": {{"start": 5.37, "end": 6.42}},
-      "anchor_timestamp": 6.0,
-      "target_region": "coarse region in the frame",
-      "boundary_reason": "why this is one distinct candidate event or region"
-    }}
-  ],
-  "selected_event_order": 1,
-  "referents": [
-    {{
-      "referent": "...",
-      "request_order": 1,
-      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
-      "ordinal": "first|second|third|last|null",
-      "event_time_range": {{"start": 5.37, "end": 6.42}},
-      "time_range": "5.37-6.42s",
-      "target_region": "coarse region in the frame",
-      "detail_needed": ["identify anchor"],
-      "downstream_instruction": "Identify the visible anchor for this localized referent.",
-      "best_keyframes": [
-        {{
-          "timestamp": 6.0,
-          "target_region": "coarse region in the frame",
-          "reason": "short visual reason"
-        }}
-      ],
-      "uncertainty": null
-    }}
-  ],
-  "uncertainties": null
-}}"""
-
-
-QWEN_SEQUENCE_DETAIL_PROMPT = """You are the second-stage vision reader in a two-model visual observer.
-
-Current user request:
-{current_user_message}
-
-Scene description:
-{image_description}
-
-The first-stage localizer has already localized the relevant video event. The attached images are
-ordered from early to late and come from this event segment.
-
-Localized event summary:
-- referent: {user_referent}
-- event type: {event_type}
-- selected event order: {selected_event_order}
-- selection rule: {selection_rule}
-- time range: {time_range}
-- target region: {target_region}
-- sampling anchor timestamp: {anchor_timestamp}
-- instruction: {downstream_instruction}
-
-Your job:
-Use the ordered image sequence to identify the single most likely visible anchor
-requested by the localizer. Trust the event timing and do not reinterpret which
-occurrence or spatial relation is intended unless the image sequence itself is
-ambiguous.
-Treat the first-stage referent and target region as localization hints, not as
-the final identity. If the localizer includes a possible object name or text
-value, verify it visually and ignore it if the pointing endpoint or image
-evidence supports a different visible anchor.
-The sampling anchor timestamp only explains how these frames were selected. It
-is not a guarantee that the nearest frame contains the final target identity.
-Use the entire ordered sequence inside the localized event to identify the
-visible anchor. Use earlier and later frames to resolve motion, occlusion, blur,
-and readable text; do not let the anchor frame override stronger evidence from
-the sequence.
-For pointing actions, identify the target at the pointing endpoint: fingertip,
-contact point, cursor tip, tool tip, or extension of the pointing direction.
-Do not choose text or objects covered by the middle/lower part of the pointer
-body unless the endpoint supports that choice. If the pointer overlaps adjacent
-rows or objects, choose the visible anchor nearest the endpoint and pointing
-direction.
-Combine evidence across all attached frames before deciding. The target text or
-object may be occluded, blurred, cropped, or unreadable in a single frame; track
-the same localized target through the sequence and use the clearest frame(s) for
-the final identity.
-
-Boundaries:
-- Use only visible text and visual evidence in these images.
-- Focus on the target region and the object/person/state involved in the
-  localized event.
-- Choose one best target_identity. Do not output top-k alternatives.
-- visual_key_values must contain exactly one item for the primary visible anchor
-  of this localized referent.
-- Put other readable text in visible_text only. Do not promote neighboring or
-  background anchors into visual_key_values.
-- Do not output price, discount, tax, nutrition, allergens, taste,
-  country/origin, cart state, or other database attributes as key/value pairs.
-- Ignore database-only filters and rankings in the request, such as low calorie,
-  highest price, dairy, gluten-free, butter flavor, high protein, set
-  membership, or recommendations. Identify only the visible anchor localized by
-  the first stage.
-- If the target cannot be identified, set target_identity to null, return an
-  empty visual_key_values list, and explain the ambiguity in uncertainty.
-
-Return JSON only:
-{{
-  "target_identity": "... or null",
-  "visible_text": [],
-  "visual_key_values": [
-    {{
-      "key": "product_name|dish_name|ingredient_name|recipe_name|category|set_meal_name|visible_region",
-      "value": "... or null",
-      "confidence": "high|medium|low",
-      "evidence": "which frame(s), visible text, action/order cues, region, color, shape, or spatial relation"
-    }}
-  ],
-  "spatial_evidence": "...",
-  "uncertainty": null
-}}"""
-
 
 def load_env_file(path: Path) -> None:
     if not path.exists():
@@ -841,44 +481,8 @@ def qwen_extra_body(generation: dict[str, Any], base_url: str | None = None) -> 
     return body
 
 
-def aura_event_url(args: argparse.Namespace) -> str:
-    return args.aura_event_url or args.aura_observer_url or "http://127.0.0.1:18081/observe"
-
-
-def build_planner_user_message(current_user_message: str, image_description: str) -> str:
-    if not image_description:
-        return current_user_message
-    return (
-        "Short scene note:\n"
-        f"{image_description}\n\n"
-        "Visual request:\n"
-        f"{current_user_message}"
-    )
-
-
 def build_scene_description(scenario: str, image_description: str) -> str:
-    parts = [image_description.strip()] if image_description and image_description.strip() else []
-    scenario_key = (scenario or "").strip().lower()
-    if scenario_key == "order":
-        parts.append(
-            "Order/menu guidance: In menu-ordering scenes, the user may point to different dishes on the "
-            "menu in sequence. The key visual cue is the pointing action over time, not the most readable "
-            "or salient menu item. For ordinal requests such as first/second/third pointed dish, resolve "
-            "the ordinal by the chronological order of the user's distinct pointing actions in the video. "
-            "A distinct pointing action is a stable indication of one visible menu item, section, or text "
-            "region; if the finger moves from one item or region to another, treat the later stable target "
-            "as a new pointing action rather than evidence for the earlier one. For an ordinal pointing "
-            "request, choose a keyframe near the stable target for that ordinal and do not replace it with "
-            "a later, clearer, larger, or more salient target after the finger has moved. A finger pointing "
-            "at a dish usually does not completely cover the intended dish. When resolving a pointed dish, "
-            "use the menu item nearest to the fingertip or pointing direction as the intended dish, as long "
-            "as the visible evidence supports it. For non-pointing requests about a menu region, card, "
-            "fold, section, or visible title, localize the requested spatial region itself; do not jump to "
-            "a different later menu page, poster, or larger readable area only because it is clearer. "
-            "Numbered menu/page references should be grounded by the user's context and visible layout, "
-            "not assumed solely from the chronological order in which pages appear in the video."
-        )
-    return "\n".join(parts)
+    return image_description or "N/A"
 
 
 TEMPORAL_ORDINAL_PATTERN = re.compile(
@@ -1657,47 +1261,6 @@ def primary_visual_key_values(detail: Any) -> list[dict[str, Any]]:
     ]
 
 
-def build_downstream_instruction(referent: dict[str, Any]) -> str:
-    if referent.get("downstream_instruction"):
-        return str(referent["downstream_instruction"])
-    referent_text = referent.get("user_referent") or "the localized visual referent"
-    return f"These frames show {referent_text}. Identify the specific visible anchor involved in this event."
-
-
-def build_qwen_sequence_prompt(referent: dict[str, Any], current_user_message: str, image_description: str) -> str:
-    event_range = referent.get("event_time_range") or {}
-    if isinstance(event_range, dict) and (event_range.get("start") is not None or event_range.get("end") is not None):
-        time_range = f"{event_range.get('start')}s-{event_range.get('end')}s"
-    else:
-        time_range = referent.get("time_range")
-    return QWEN_SEQUENCE_DETAIL_PROMPT.format(
-        current_user_message=current_user_message,
-        image_description=image_description or "N/A",
-        user_referent=referent.get("user_referent"),
-        event_type=referent.get("event_type"),
-        selected_event_order=referent.get("selected_event_order") or "N/A",
-        selection_rule=referent.get("selection_rule") or "N/A",
-        time_range=time_range,
-        target_region=referent.get("target_region"),
-        anchor_timestamp=first_keyframe_timestamp(referent) if first_keyframe_timestamp(referent) is not None else "N/A",
-        downstream_instruction=build_downstream_instruction(referent),
-    )
-
-
-def build_qwen_event_prompt(current_user_message: str, image_description: str) -> str:
-    return QWEN_FRAME_EVENT_LOCALIZER_PROMPT.format(
-        current_user_message=current_user_message,
-        image_description=image_description or "N/A",
-    )
-
-
-def build_qwen_video_event_prompt(current_user_message: str, image_description: str) -> str:
-    return QWEN_VIDEO_EVENT_LOCALIZER_PROMPT.format(
-        current_user_message=current_user_message,
-        image_description=image_description or "N/A",
-    )
-
-
 def call_qwen_video_event_localizer(prompt: str, video_path: Path, args: argparse.Namespace) -> tuple[Any, str, Any]:
     from openai import OpenAI
 
@@ -1925,7 +1488,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
         trace["experiment_cache_dir"] = str(cache_dir)
 
         labeled_video: Path | None = None
-        if event_backend in {"aura_http", "qwen_frames"}:
+        if event_backend == "qwen_frames":
             labeled_video = make_labeled_video(local_video, cache_dir, args.labeled_fps, args.fontfile, args.refresh)
             trace["stages"]["labeled_video"] = {"path": str(labeled_video), "fps": args.labeled_fps}
         else:
@@ -1949,7 +1512,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 args.event_max_frames,
                 args.frame_max_side,
             )
-            prompt = build_qwen_event_prompt(current_user_message, scene_description)
+            prompt = build_qwen_event_prompt(current_user_message, image_description, scenario)
             raw_response, text, parsed = call_qwen_frame_event_localizer(prompt, event_frames, args)
             event_data = {"observation": parsed if isinstance(parsed, dict) else {"raw": text}}
             clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
@@ -1981,7 +1544,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
             }
         elif event_backend == "qwen_video":
             _, event_base_url, event_model = qwen_vl_env(args, stage="event")
-            prompt = build_qwen_video_event_prompt(current_user_message, scene_description)
+            prompt = build_qwen_video_event_prompt(current_user_message, image_description, scenario)
             raw_response, text, parsed = call_qwen_video_event_localizer(prompt, local_video, args)
             event_data = {"observation": parsed if isinstance(parsed, dict) else {"raw": text}}
             clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
@@ -2002,28 +1565,6 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 "raw_response": raw_response,
                 "raw_text": text,
                 "parsed_response": parsed,
-                "clean_plan": clean_plan,
-            }
-        else:
-            assert labeled_video is not None
-            aura_payload = {
-                "task_id": f"{task_id}_aura_event",
-                "scenario": scenario,
-                "service_instruction": AURA_EVENT_LOCALIZER_PROMPT,
-                "video_path": str(labeled_video),
-                "current_user_message": build_planner_user_message(current_user_message, scene_description),
-            }
-            aura_response = requests.post(aura_event_url(args), json=aura_payload, timeout=args.aura_timeout)
-            aura_response.raise_for_status()
-            event_data = aura_response.json()
-            clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
-            event_stage = {
-                "backend": "aura_http",
-                "configured_backend": args.event_localizer_backend,
-                "backend_selection_reason": backend_selection_reason,
-                "elapsed_seconds": round(time.time() - event_start, 3),
-                "request": aura_payload,
-                "raw_response": event_data,
                 "clean_plan": clean_plan,
             }
         trace["stages"]["event_localizer"] = event_stage
@@ -2056,7 +1597,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 )
                 frame_paths.append(extract_frame(local_video, float(timestamp), frame_dir, frame_name, None))
 
-            prompt = build_qwen_sequence_prompt(referent, current_user_message, scene_description)
+            prompt = build_qwen_sequence_prompt(referent, current_user_message, image_description, scenario)
             _, detail_base_url, detail_model = qwen_vl_env(args, stage="detail")
             detail_record = {
                 "referent_index": ref_idx,
@@ -2206,14 +1747,6 @@ class ObserverHandler(BaseHTTPRequestHandler):
                     "frame_max_side": self.args.frame_max_side,
                 }
             )
-        else:
-            event_localizer.update(
-                {
-                    "input": "labeled_low_fps_video",
-                    "aura_event_url": aura_event_url(self.args),
-                    "labeled_fps": self.args.labeled_fps,
-                }
-            )
         self._send_json(
             200,
             {
@@ -2257,18 +1790,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Visual observer server")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=18082)
-    parser.add_argument("--event_localizer_backend", choices=["aura_http", "qwen_frames", "qwen_video"], default="aura_http")
+    parser.add_argument("--event_localizer_backend", choices=["qwen_frames", "qwen_video"], default="qwen_video")
     parser.add_argument(
         "--temporal_event_backend",
         choices=["inherit", "qwen_frames", "qwen_video"],
         default=os.environ.get("OBSERVER_TEMPORAL_EVENT_BACKEND", "qwen_frames"),
         help="Backend used for temporal/ordinal action requests when the configured event backend is qwen_video.",
-    )
-    parser.add_argument("--aura_event_url", default=None)
-    parser.add_argument(
-        "--aura_observer_url",
-        default=None,
-        help="Deprecated alias for --aura_event_url.",
     )
     parser.add_argument("--cache_dir", default=str(DEFAULT_CACHE_DIR))
     parser.add_argument("--labeled_fps", type=float, default=2.0)
@@ -2377,7 +1904,6 @@ def main() -> None:
     server = ThreadingHTTPServer((args.host, args.port), ObserverHandler)
     print(f"Visual observer running on http://{args.host}:{args.port}")
     print(f"Event localizer backend: {args.event_localizer_backend}")
-    print(f"AURA event URL: {aura_event_url(args)}")
     print(f"Cache dir: {args.cache_dir}")
     try:
         server.serve_forever()

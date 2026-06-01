@@ -53,7 +53,7 @@ if [[ "$EVENT_PROVIDER" == "local" ]]; then
   DEFAULT_EVENT_FRAME_FPS="1"
   DEFAULT_EVENT_MAX_FRAMES="16"
 else
-  DEFAULT_TEMPORAL_EVENT_BACKEND="qwen_frames"
+  DEFAULT_TEMPORAL_EVENT_BACKEND="qwen_video"
   DEFAULT_EVENT_FRAME_FPS="2"
   DEFAULT_EVENT_MAX_FRAMES="32"
 fi
@@ -94,12 +94,42 @@ provider_model() {
   esac
 }
 
+is_legacy_qwen3_vl_model() {
+  local model_lc
+  model_lc="${1,,}"
+  [[ "$model_lc" == qwen3-vl* || "$model_lc" == qwen3_vl* ]]
+}
+
+is_thinking_on() {
+  case "${1,,}" in
+    on|true|1|yes|y) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 EVENT_BASE_URL="${OBSERVER_EVENT_BASE_URL:-$(provider_base_url "$EVENT_PROVIDER")}"
 EVENT_API_KEY="${OBSERVER_EVENT_API_KEY:-$(provider_api_key "$EVENT_PROVIDER")}"
 EVENT_MODEL="${OBSERVER_EVENT_MODEL:-$(provider_model "$EVENT_PROVIDER")}"
 DETAIL_BASE_URL="${OBSERVER_DETAIL_BASE_URL:-$(provider_base_url "$DETAIL_PROVIDER")}"
 DETAIL_API_KEY="${OBSERVER_DETAIL_API_KEY:-$(provider_api_key "$DETAIL_PROVIDER")}"
 DETAIL_MODEL="${OBSERVER_DETAIL_MODEL:-$(provider_model "$DETAIL_PROVIDER")}"
+
+if [[ "$EVENT_PROVIDER" == "online" ]] && is_legacy_qwen3_vl_model "$EVENT_MODEL" && is_thinking_on "$EVENT_THINKING"; then
+  echo "event: disabling thinking for $EVENT_MODEL; this online Qwen3-VL model rejects thinking_budget/enable_thinking." >&2
+  EVENT_THINKING="off"
+  EVENT_THINKING_BUDGET=""
+fi
+if [[ "$DETAIL_PROVIDER" == "online" ]] && is_legacy_qwen3_vl_model "$DETAIL_MODEL" && is_thinking_on "$DETAIL_THINKING"; then
+  echo "detail: disabling thinking for $DETAIL_MODEL; this online Qwen3-VL model rejects thinking_budget/enable_thinking." >&2
+  DETAIL_THINKING="off"
+  DETAIL_THINKING_BUDGET=""
+fi
+if ! is_thinking_on "$EVENT_THINKING"; then
+  EVENT_THINKING_BUDGET=""
+fi
+if ! is_thinking_on "$DETAIL_THINKING"; then
+  DETAIL_THINKING_BUDGET=""
+fi
 
 if [[ -z "$EVENT_BASE_URL" || -z "$DETAIL_BASE_URL" ]]; then
   echo "Missing observer base URL. Set OBSERVER_LOCAL_BASE_URL or OBSERVER_ONLINE_BASE_URL." >&2

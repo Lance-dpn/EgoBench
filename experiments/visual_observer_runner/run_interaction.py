@@ -46,7 +46,11 @@ def load_env_file(path: Path) -> None:
 load_env_file(PROJECT_ROOT / ".env")
 
 from config.service_agent_config import SERVICE_MODEL_NAME, VIDEO_LOCAL_PATH, get_video_path  # noqa: E402
-from run.prompts import SERVICE_AGENT_PROMPT_BASE, USER_TEXT_ONLY_PROMPT_EASY, USER_TURN_SUMMARY_PROMPT  # noqa: E402
+from experiments.visual_observer_runner.prompts import (  # noqa: E402
+    SERVICE_PROMPT_VERSION,
+    build_service_agent_prompt,
+)
+from run.prompts import USER_TEXT_ONLY_PROMPT_EASY, USER_TURN_SUMMARY_PROMPT  # noqa: E402
 from run.utils import call_llm, check_tool_call, check_user_contradiction, execute_tool  # noqa: E402
 from tools.kitchen.kitchen_db import KitchenDB  # noqa: E402
 from tools.kitchen.kitchen_init import kitchen_init_data  # noqa: E402
@@ -76,11 +80,10 @@ VISUAL_RESOLUTION_TOOL = {
     "function": {
         "tool_name": VISUAL_RESOLUTION_TOOL_NAME,
         "description": (
-            "Resolve one visible referent only: a pointed item, spatial region, "
-            "visible text, category/section title, or visible object. Do not use "
-            "this tool for database facts, database keys, recommendations, "
-            "filtering, ranking, prices, nutrition, allergens, taste, inventory, "
-            "order state, or totals."
+            "Resolve exactly one visible referent from the video: a pointed item, "
+            "spatial region, visible text, category/section title, or visible "
+            "object. The result is only a visual clue. Include any known official "
+            "menu, restaurant, store, or scene context in the query."
         ),
         "parameters": {
             "type": "object",
@@ -88,7 +91,11 @@ VISUAL_RESOLUTION_TOOL = {
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "The user's current visual referring phrase or request.",
+                    "description": (
+                        "The user's current visual referring phrase or request, with "
+                        "known disambiguating context such as menu number or official "
+                        "restaurant/store name."
+                    ),
                 },
                 "referent_hint": {
                     "type": "string",
@@ -101,80 +108,6 @@ VISUAL_RESOLUTION_TOOL = {
             "required": ["query"],
         },
     },
-}
-
-
-SERVICE_PROMPT_VERSION = "database_grounded_visual_tool_v5_slim"
-
-
-SERVICE_COMMON_GROUNDING_INSTRUCTION = """
-
-## Evidence And Visual Tool Rules
-- Use database tools for database facts and actions: price, discount, tax,
-  nutrition, allergens, taste/flavor tags, set membership, inventory, cart/order
-  state, totals, filtering, ranking, cheapest/highest/lowest, and recommendations.
-- Use resolve_visual_reference only to identify one visible referent that is not
-  resolved yet: a pointed item, a spatial region, readable visible text, a
-  category/section title, or a visible object.
-- Do not ask the observer to decide database facts, compare options, choose a
-  restaurant/store, rank candidates, or apply conditions such as low calorie,
-  high protein, dairy, butter flavor, gluten-free, highest price, or set
-  membership. First identify the visible item/section if needed; then use tools.
-- Treat observer output as a visual clue, not a database key or database fact.
-  Before using an observer-returned product/category/name in a tool parameter,
-  match it to a user-stated official name, a prior successful tool parameter,
-  or a tool-returned candidate.
-- If a required database key is missing and only a generic phrase is available,
-  ask one concise clarification instead of substituting visible OCR, logo text,
-  cuisine type, or a guess.
-- If calling tools, output only a JSON array and no other text.
-"""
-
-
-SCENARIO_SERVICE_INSTRUCTIONS = {
-    "order": """
-
-## Order Scenario Rules
-- If the user states that a menu number belongs to an official restaurant name,
-  keep that exact user-stated name as restaurant_name for that menu until the
-  user changes it.
-- In menu-ordering tasks, observer calls are for visible pointing and layout:
-  pointed dish, category title, section title, or spatial region. Do not use the
-  observer to infer restaurant_name, taste/flavor tags, allergens, nutrition,
-  prices, discounts, set membership, or lowest/highest choices.
-- Visible logos and headings such as restaurant branding or section names are
-  not restaurant_name values unless they have also appeared as a user-stated
-  official name or successful tool parameter.
-""",
-    "retail": """
-
-## Retail Scenario Rules
-- Use the observer for visible shelf/product identity, pointing order, adjacent
-  products, package text, and visible product regions.
-- Product labels may be noisy OCR. Normalize any visual product clue against
-  tool-returned product candidates before using it for cart actions or
-  attribute queries.
-- Country/origin, price, discount, stock, category, recommendation, and cheaper
-  alternatives must come from tools, not label appearance or real-world product
-  knowledge.
-""",
-    "restaurant": """
-
-## Restaurant Scenario Rules
-- Use the observer only for visible menu/table/scene references such as a
-  pointed dish, visible menu section, sign, table item, or spatial location.
-- Restaurant database fields such as cuisine, opening hours, rating,
-  availability, reservation state, prices, menu attributes, and recommendations
-  must come from tools.
-""",
-    "kitchen": """
-
-## Kitchen Scenario Rules
-- Use the observer only for visible kitchen referents such as a pointed
-  ingredient, utensil, container, appliance, spatial location, or visible state.
-- Recipe facts, nutrition, inventory, substitutions, cooking instructions, and
-  quantity calculations must come from tools or user-provided facts.
-""",
 }
 
 
@@ -643,7 +576,9 @@ def format_visual_identity_memory(visual_identity_memory: list[dict[str, Any]]) 
     lines = [
         "## Resolved Visual Reference Memory",
         "Use these prior visual resolutions for later pronouns or repeated references. "
-        "They identify visible referents only; verify database facts with tools.",
+        "They identify visible referents only; verify database facts with tools. "
+        "For a new ordinal action, new spatial reference, or different visual target, "
+        "call resolve_visual_reference again instead of reusing old memory.",
     ]
     for idx, item in enumerate(visual_identity_memory, start=1):
         lines.append(
@@ -760,13 +695,13 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
             },
         ]
 
-        service_agent_sys_prompt_base = (
-            SERVICE_AGENT_PROMPT_BASE.format(tool_descriptions=tool_descriptions)
-            + SERVICE_COMMON_GROUNDING_INSTRUCTION
-            + SCENARIO_SERVICE_INSTRUCTIONS.get(args.scenario, "")
+        service_agent_sys_prompt_base = build_service_agent_prompt(
+            tool_descriptions=tool_descriptions,
+            scenario=args.scenario,
+            scenario_number=args.scenario_number,
         )
         history_log["service_prompt_contains_database_grounding"] = (
-            "## Evidence And Visual Tool Rules" in service_agent_sys_prompt_base
+            "## Runner-Specific Evidence Contract" in service_agent_sys_prompt_base
         )
         history_log["service_prompt_contains_visual_normalization"] = (
             f"## {args.scenario.title()} Scenario Rules" in service_agent_sys_prompt_base
@@ -876,6 +811,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                 inner_input_tokens = 0
                 inner_output_tokens = 0
                 inner_calls = 0
+                inner_db_calls = 0
                 inner_rounds = 0
                 agent_final_reply = ""
                 local_tool_logs = []
@@ -1045,13 +981,24 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
 
                     inner_calls += calls_this_round
                     tool_results = execute_agent_tools(tool_call_obj)
-                    local_tool_logs.append(
-                        {
-                            "turn": turn,
-                            "calls": tool_call_obj if isinstance(tool_call_obj, list) else [tool_call_obj],
-                            "results": tool_results,
-                        }
-                    )
+                    calls_for_log = tool_call_obj if isinstance(tool_call_obj, list) else [tool_call_obj]
+                    db_calls_for_log = [
+                        call
+                        for call in calls_for_log
+                        if (call.get("tool_name") or call.get("name")) != VISUAL_RESOLUTION_TOOL_NAME
+                    ]
+                    db_results_for_log = [
+                        result for result in tool_results if result.get("tool_name") != VISUAL_RESOLUTION_TOOL_NAME
+                    ]
+                    inner_db_calls += len(db_calls_for_log)
+                    if db_calls_for_log:
+                        local_tool_logs.append(
+                            {
+                                "turn": turn,
+                                "calls": db_calls_for_log,
+                                "results": db_results_for_log,
+                            }
+                        )
                     combined_result = "; ".join(res.get("content", str(res)) for res in tool_results)
                     local_service_history.append({"role": "assistant", "content": agent_reply})
                     local_service_history.append({"role": "user", "content": f"Tool execution result: {combined_result}"})
@@ -1062,7 +1009,8 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                     "reply": agent_final_reply,
                     "input_tokens": inner_input_tokens,
                     "output_tokens": inner_output_tokens,
-                    "calls": inner_calls,
+                    "calls": inner_db_calls,
+                    "all_tool_calls": inner_calls,
                     "rounds": inner_rounds,
                     "tool_logs": local_tool_logs,
                     "dialogue_logs": local_dialogue_logs,

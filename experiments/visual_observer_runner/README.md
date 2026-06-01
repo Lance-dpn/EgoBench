@@ -110,7 +110,7 @@ Expected key fields:
 
 ```text
 stages.event_localizer.backend=qwen_video
-stages.event_localizer.temporal_event_backend=qwen_frames
+stages.event_localizer.temporal_event_backend=qwen_video
 stages.event_localizer.base_url=https://dashscope.aliyuncs.com/compatible-mode/v1
 stages.event_localizer.generation.enable_thinking=false
 stages.event_localizer.generation.max_tokens=2048
@@ -196,11 +196,9 @@ qwen_frames
 Recommended defaults:
 
 ```bash
-# Online DashScope: frames are usually better for ordinal pointing actions.
+# Online DashScope: use video by default for the temporal event stage.
 OBSERVER_MODEL_PROVIDER=online \
-OBSERVER_TEMPORAL_EVENT_BACKEND=qwen_frames \
-OBSERVER_EVENT_FRAME_FPS=2 \
-OBSERVER_EVENT_MAX_FRAMES=32 \
+OBSERVER_TEMPORAL_EVENT_BACKEND=qwen_video \
   bash experiments/visual_observer_runner/start_observer.sh
 
 # Local vLLM: prefer video to avoid large multi-image context/cache failures.
@@ -209,9 +207,9 @@ OBSERVER_TEMPORAL_EVENT_BACKEND=qwen_video \
   bash experiments/visual_observer_runner/start_observer.sh
 ```
 
-Use `qwen_frames` when the task depends on chronological ordering of actions
-such as first/second/third pointing. Use `qwen_video` for local smoke tests or
-when local multi-image requests fail.
+Use `qwen_video` as the default for both online and local runs. Switch to
+`qwen_frames` only for targeted debugging when you explicitly want the event
+stage to see sampled frames instead of a video input.
 
 ## 3. Thinking Mode
 
@@ -267,6 +265,11 @@ event thinking on:
 
 Use `OBSERVER_EVENT_THINKING=off` for normal runs. Thinking mode is useful for
 debugging, but it is slower and can shift spatial interpretation.
+
+For online `qwen3-vl-*` models such as `qwen3-vl-32b-instruct`, keep event and
+detail thinking off. These models can reject `thinking_budget` request
+parameters with a 400 error. `start_observer.sh` automatically disables thinking
+and clears thinking budgets for online `qwen3-vl-*` models.
 
 ## 4. Manual Observer Smoke Test
 
@@ -657,7 +660,7 @@ stage receives one visual target only and should use the full sampled sequence
 around the event range. The keyframe is only a sampling anchor, not the answer.
 
 If the selected moment is consistently late or outside the intended screen
-region, try online `qwen_frames` for event localization:
+region, you can run a targeted online `qwen_frames` comparison:
 
 ```bash
 OBSERVER_MODEL_PROVIDER=online \
