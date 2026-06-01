@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v4"
+SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v5"
 
 
 @dataclass(frozen=True)
@@ -119,12 +119,15 @@ SCENARIO_SERVICE_INSTRUCTIONS = {
   rankings, totals, payment calculations, and order state. The visual-reference
   tool must not decide these facts or conditions.
 - When the user asks for a restaurant recommendation based on preferences, first
-  preserve the user's menu-to-restaurant mapping. If tools cannot directly find
-  preference-relevant dishes for a candidate restaurant, use
-  resolve_visual_reference once per relevant menu to identify visible dish names,
-  category names, or menu text matching the preference keywords. Then verify any
-  returned candidates with database tools under the complete official
-  restaurant name before making the recommendation when verification is
+  preserve the user's menu-to-restaurant mapping and reason from the preference
+  into likely database-search hypotheses, such as relevant categories, dish
+  types, taste terms, nutrition tags, allergen constraints, or keywords. Query
+  the order tools under each complete official restaurant name before using the
+  visual tool. Use resolve_visual_reference for recommendation support only when
+  tool queries cannot find reliable preference-relevant candidates or when the
+  user explicitly asks about visible menu content; then ask it to inspect the
+  relevant Menu 1/Menu 2 visible text for matching dish names, category names,
+  or menu text, and verify returned candidates with database tools when
   possible.
 - If a dish-name lookup fails or a current order item cannot be verified as a
   catalog dish, check whether the same name is a set meal or bundled orderable
