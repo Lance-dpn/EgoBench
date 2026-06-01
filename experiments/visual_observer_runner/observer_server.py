@@ -481,6 +481,106 @@ def qwen_extra_body(generation: dict[str, Any], base_url: str | None = None) -> 
     return body
 
 
+def response_to_raw(response: Any) -> dict[str, Any]:
+    if hasattr(response, "model_dump"):
+        return response.model_dump()
+    if isinstance(response, dict):
+        return response
+    return {"raw_response": str(response)}
+
+
+def text_from_message_field(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        parts = []
+        for item in value:
+            if isinstance(item, str):
+                parts.append(item)
+            elif isinstance(item, dict):
+                parts.append(str(item.get("text") or item.get("content") or ""))
+            else:
+                parts.append(str(item))
+        return "".join(parts)
+    return str(value)
+
+
+def first_choice_message(raw: dict[str, Any]) -> tuple[dict[str, Any], str | None]:
+    choices = raw.get("choices") if isinstance(raw, dict) else None
+    if not isinstance(choices, list) or not choices:
+        return {}, None
+    choice = choices[0] if isinstance(choices[0], dict) else {}
+    message = choice.get("message") if isinstance(choice.get("message"), dict) else {}
+    return message, choice.get("finish_reason")
+
+
+def qwen_response_text(raw: dict[str, Any]) -> tuple[str, str, dict[str, Any]]:
+    message, finish_reason = first_choice_message(raw)
+    content = text_from_message_field(message.get("content"))
+    if content.strip():
+        return content, "content", {"finish_reason": finish_reason, "message_keys": sorted(message.keys())}
+
+    # Thinking-enabled Qwen-compatible APIs may put the useful JSON in a
+    # reasoning field when final content is empty. Use it only if it contains a
+    # parseable JSON object; otherwise retry rather than treating reasoning prose
+    # as the observation.
+    for field in ("reasoning_content", "reasoning", "thinking_content", "reasoning_text"):
+        reasoning = text_from_message_field(message.get(field))
+        if reasoning.strip() and extract_json_object(reasoning) is not None:
+            return reasoning, field, {"finish_reason": finish_reason, "message_keys": sorted(message.keys())}
+
+    return "", "empty", {"finish_reason": finish_reason, "message_keys": sorted(message.keys())}
+
+
+def retry_generation_for_empty_thinking(generation: dict[str, Any]) -> dict[str, Any]:
+    retry_generation = dict(generation)
+    current_max = int(retry_generation.get("max_tokens") or 0)
+    retry_generation["max_tokens"] = max(current_max + 2048, current_max * 2, 4096)
+    return retry_generation
+
+
+def call_qwen_chat_completion(
+    client: Any,
+    *,
+    model: str,
+    messages: list[dict[str, Any]],
+    generation: dict[str, Any],
+    base_url: str,
+) -> tuple[dict[str, Any], str, Any]:
+    def request_once(active_generation: dict[str, Any]) -> tuple[dict[str, Any], str, str, dict[str, Any]]:
+        response = client.chat.completions.create(
+            model=model,
+            messages=messages,
+            temperature=active_generation["temperature"],
+            max_tokens=active_generation["max_tokens"],
+            extra_body=qwen_extra_body(active_generation, base_url),
+        )
+        raw = response_to_raw(response)
+        text, source, metadata = qwen_response_text(raw)
+        raw["_observer_extracted_text_source"] = source
+        raw["_observer_extracted_text_metadata"] = metadata
+        return raw, text, source, metadata
+
+    raw, text, source, metadata = request_once(generation)
+    if generation.get("enable_thinking") and not text.strip():
+        retry_generation = retry_generation_for_empty_thinking(generation)
+        retry_raw, retry_text, retry_source, retry_metadata = request_once(retry_generation)
+        retry_raw["_observer_retry"] = {
+            "reason": "empty_content_with_thinking",
+            "first_finish_reason": metadata.get("finish_reason"),
+            "first_message_keys": metadata.get("message_keys"),
+            "first_text_source": source,
+            "retry_max_tokens": retry_generation.get("max_tokens"),
+            "retry_text_source": retry_source,
+            "retry_finish_reason": retry_metadata.get("finish_reason"),
+        }
+        raw, text = retry_raw, retry_text
+
+    return raw, text, parse_vision_text(text)
+
+
 def build_scene_description(scenario: str, image_description: str) -> str:
     return image_description or "N/A"
 
@@ -1273,16 +1373,13 @@ def call_qwen_video_event_localizer(prompt: str, video_path: Path, args: argpars
         {"type": "video_url", "video_url": {"url": video_url}, "fps": args.qwen_video_fps},
     ]
 
-    response = client.chat.completions.create(
+    return call_qwen_chat_completion(
+        client,
         model=model,
         messages=[{"role": "user", "content": content}],
-        temperature=generation["temperature"],
-        max_tokens=generation["max_tokens"],
-        extra_body=qwen_extra_body(generation, base_url),
+        generation=generation,
+        base_url=base_url,
     )
-    text = response.choices[0].message.content or ""
-    raw = response.model_dump() if hasattr(response, "model_dump") else response
-    return raw, text, parse_vision_text(text)
 
 
 def call_qwen_frame_event_localizer(prompt: str, frame_records: list[dict[str, Any]], args: argparse.Namespace) -> tuple[Any, str, Any]:
@@ -1299,16 +1396,13 @@ def call_qwen_frame_event_localizer(prompt: str, frame_records: list[dict[str, A
         content.append({"type": "text", "text": f"{frame_id}: timestamp={timestamp}s file={path.name}"})
         content.append({"type": "image_url", "image_url": {"url": qwen_image_url(path, base_url)}})
 
-    response = client.chat.completions.create(
+    return call_qwen_chat_completion(
+        client,
         model=model,
         messages=[{"role": "user", "content": content}],
-        temperature=generation["temperature"],
-        max_tokens=generation["max_tokens"],
-        extra_body=qwen_extra_body(generation, base_url),
+        generation=generation,
+        base_url=base_url,
     )
-    text = response.choices[0].message.content or ""
-    raw = response.model_dump() if hasattr(response, "model_dump") else response
-    return raw, text, parse_vision_text(text)
 
 
 def call_qwen_vl_sequence(prompt: str, frame_paths: list[Path], args: argparse.Namespace) -> tuple[Any, str, Any]:
@@ -1322,16 +1416,13 @@ def call_qwen_vl_sequence(prompt: str, frame_paths: list[Path], args: argparse.N
         content.append({"type": "text", "text": f"Frame {idx}: {frame_path.name}"})
         content.append({"type": "image_url", "image_url": {"url": qwen_image_url(frame_path, base_url)}})
 
-    response = client.chat.completions.create(
+    return call_qwen_chat_completion(
+        client,
         model=model,
         messages=[{"role": "user", "content": content}],
-        temperature=generation["temperature"],
-        max_tokens=generation["max_tokens"],
-        extra_body=qwen_extra_body(generation, base_url),
+        generation=generation,
+        base_url=base_url,
     )
-    text = response.choices[0].message.content or ""
-    raw = response.model_dump() if hasattr(response, "model_dump") else response
-    return raw, text, parse_vision_text(text)
 
 
 def compact_observation(plan: dict[str, Any], details: list[dict[str, Any]]) -> dict[str, Any]:

@@ -266,6 +266,13 @@ event thinking on:
 Use `OBSERVER_EVENT_THINKING=off` for normal runs. Thinking mode is useful for
 debugging, but it is slower and can shift spatial interpretation.
 
+When thinking is enabled, some Qwen-compatible responses may contain reasoning
+but leave final `message.content` empty. The observer now first checks
+`message.content`, then parseable reasoning fields such as `reasoning_content`.
+If thinking is enabled and no parseable text is available, it retries the same
+request once with a larger `max_tokens` budget. Full traces record this as
+`_observer_retry.reason=empty_content_with_thinking` in the raw response.
+
 For online `qwen3-vl-*` models such as `qwen3-vl-32b-instruct`, keep event and
 detail thinking off. These models can reject `thinking_budget` request
 parameters with a 400 error. `start_observer.sh` automatically disables thinking
