@@ -82,8 +82,10 @@ VISUAL_RESOLUTION_TOOL = {
         "description": (
             "Resolve exactly one visible referent from the video: a pointed item, "
             "spatial region, visible text, category/section title, or visible "
-            "object. The result is only a visual clue. Include any known official "
-            "menu, restaurant, store, or scene context in the query."
+            "object. The result is only a visual clue. For menu or shelf tasks, "
+            "identify the visible target by user-facing labels such as Menu 1, "
+            "Menu 2, left/right page, or selected option; the visual tool cannot "
+            "verify official database names."
         ),
         "parameters": {
             "type": "object",
@@ -92,9 +94,10 @@ VISUAL_RESOLUTION_TOOL = {
                 "query": {
                     "type": "string",
                     "description": (
-                        "The user's current visual referring phrase or request, with "
-                        "known disambiguating context such as menu number or official "
-                        "restaurant/store name."
+                        "A concise visual question for one target, with disambiguating "
+                        "context such as menu number, page/fold, side, selected option, "
+                        "or pointing order. Do not ask the visual tool to infer official "
+                        "database entity names."
                     ),
                 },
                 "referent_hint": {

@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v3"
+SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v4"
 
 
 @dataclass(frozen=True)
@@ -78,6 +78,10 @@ RUNNER_EVIDENCE_CONTRACT = PromptSection(
   prior successful tool parameter, or a candidate returned by a database tool.
 - Do not substitute OCR text, branding, visible labels, visual categories,
   colors, or visual guesses for a required database key.
+- Visual evidence cannot establish official database entity names. In menu or
+  shelf tasks, use user-provided labels such as "Menu 1", "Menu 2", "the left
+  menu", or "the right shelf" to tell resolve_visual_reference where to look;
+  use only full user-stated or tool-verified names for database-tool parameters.
 - Do not enumerate broad catalogs only to guess a visual identity. Use broad
   retrieval only when the user asks for that operation or when a verification
   workflow requires candidate lookup.
@@ -98,13 +102,30 @@ SCENARIO_SERVICE_INSTRUCTIONS = {
   artifact associated with that name, use the user-stated name as the database
   context. Do not replace it with OCR, branding, cuisine labels, colors, or
   visual guesses.
+- For every order database tool call, use the complete official restaurant name
+  from the user's mapping or a prior successful tool parameter. Never pass a
+  partial visual label, cuisine label, menu number, or header text as
+  restaurant_name; if only a partial name is known, ask for or recover the full
+  user-stated restaurant name before calling database tools.
 - Use resolve_visual_reference only for visual menu grounding, such as pointed
   item, ordinal pointing order, visible section/title, menu area, page/fold, or
-  spatial relation. Include the currently bound ordered label or database
+  spatial relation. Include the currently bound menu/order label or visible
   context in visual-reference queries when available.
+- Keep resolve_visual_reference queries short and visual. For menu tasks, name
+  the target menu by its user-provided order label such as "Menu 1" or "Menu 2"
+  plus the exact visible target to inspect. Do not ask the visual tool to infer
+  or confirm the official restaurant name.
 - Use order tools for database facts, condition checks, set/group membership,
   rankings, totals, payment calculations, and order state. The visual-reference
   tool must not decide these facts or conditions.
+- When the user asks for a restaurant recommendation based on preferences, first
+  preserve the user's menu-to-restaurant mapping. If tools cannot directly find
+  preference-relevant dishes for a candidate restaurant, use
+  resolve_visual_reference once per relevant menu to identify visible dish names,
+  category names, or menu text matching the preference keywords. Then verify any
+  returned candidates with database tools under the complete official
+  restaurant name before making the recommendation when verification is
+  possible.
 - If a dish-name lookup fails or a current order item cannot be verified as a
   catalog dish, check whether the same name is a set meal or bundled orderable
   unit before giving up. Use set-meal tools to verify the bundle and retrieve
@@ -203,14 +224,16 @@ VISUAL_RESOLUTION_WORKFLOW = PromptSection(
    category/section title, or visible object.
 2. If visual resolution is needed, call resolve_visual_reference for exactly one
    unresolved target at a time.
-3. Include all known disambiguating state in the query, such as the user's
-   ordered reference, selected option, locked database context, or prior
-   successful database candidate.
+3. Write the query as a concise visual question. Include only the disambiguating
+   state that helps a vision model look at the right place, such as the user's
+   ordered reference, selected option, menu number, page/fold, side, or prior
+   visual clue.
 4. Treat the resolve_visual_reference result as a clue. Verify names,
    categories, and visible text against database tools before using them for
    facts or actions.
 5. If verification fails under the locked context, retry resolve_visual_reference
-   once with a narrower query that explicitly names the locked context.
+   once with a narrower query that explicitly names the same visual target and
+   user-provided menu/order label.
 6. If the referent is still unresolved after the retry, ask one concise
    clarification instead of guessing.
 """,
