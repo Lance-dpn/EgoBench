@@ -10,7 +10,7 @@ from __future__ import annotations
 from experiments.visual_observer_runner.prompts.observer_scenario import build_observer_event_scene_description
 
 
-OBSERVER_EVENT_PROMPT_VERSION = "observer_event_prompts_v3_compact"
+OBSERVER_EVENT_PROMPT_VERSION = "observer_event_prompts_v4_compact_schema"
 
 
 EVENT_LOCALIZER_COMMON_RULES = """
@@ -28,34 +28,23 @@ QWEN_EVENT_RESPONSE_SCHEMA = """
   "current_visual_request": "...",
   "visual_reference_type": "temporal_ordinal_event|spatial_region|visible_text_region|object_state|single_visible_object|other",
   "selection_rule": "...",
-  "candidate_events": [
+  "selected_event": {{
+    "event_order": 1,
+    "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
+    "ordinal": "first|second|third|last|null",
+    "event_time_range": {{"start": 5.37, "end": 6.42}},
+    "time_range": "5.37-6.42s",
+    "anchor_timestamp": 6.0,
+    "target_region": "coarse visual region",
+    "downstream_instruction": "Identify the visible anchor at this localized target.",
+    "uncertainty": null
+  }},
+  "candidates": [
     {{
       "event_order": 1,
       "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
-      "time_range": "5.37-6.42s",
       "event_time_range": {{"start": 5.37, "end": 6.42}},
-      "anchor_timestamp": 6.0,
       "target_region": "coarse visual region"
-    }}
-  ],
-  "selected_event_order": 1,
-  "referents": [
-    {{
-      "referent": "user's requested visible target",
-      "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
-      "ordinal": "first|second|third|last|null",
-      "event_time_range": {{"start": 5.37, "end": 6.42}},
-      "time_range": "5.37-6.42s",
-      "target_region": "coarse visual region",
-      "detail_needed": ["identify anchor"],
-      "downstream_instruction": "Identify the visible anchor at this localized target.",
-      "best_keyframes": [
-        {{
-          "frame_id": "F012",
-          "timestamp": 6.0
-        }}
-      ],
-      "uncertainty": null
     }}
   ],
   "uncertainties": null

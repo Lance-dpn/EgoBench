@@ -1107,10 +1107,23 @@ def clean_aura_plan(aura_response: dict[str, Any], current_user_message: str, la
     selected_candidate: dict[str, Any] | None = None
     if isinstance(observation, dict):
         candidate_events = clean_candidate_events(observation, labeled_fps)
+        selected_event = observation.get("selected_event")
+        if isinstance(selected_event, dict):
+            selected_event_clean = clean_candidate_event(selected_event, labeled_fps)
+            if not candidate_events:
+                candidate_events = [selected_event_clean]
+            elif not any(
+                normalize_order_marker(item.get("event_order"))
+                == normalize_order_marker(selected_event_clean.get("event_order"))
+                for item in candidate_events
+            ):
+                candidate_events.insert(0, selected_event_clean)
         selected_event_order = first_present(
             observation,
             ["selected_event_order", "selected_candidate_order", "selected_request_order", "selected_order"],
         )
+        if selected_event_order is None and isinstance(observation.get("selected_event"), dict):
+            selected_event_order = observation["selected_event"].get("event_order")
         selection_rule = observation.get("selection_rule")
         visual_reference_type = observation.get("visual_reference_type")
         selected_candidate = selected_candidate_event(candidate_events, selected_event_order)
@@ -1190,7 +1203,7 @@ def clean_aura_plan(aura_response: dict[str, Any], current_user_message: str, la
         ),
         "visual_reference_type": visual_reference_type,
         "selection_rule": selection_rule,
-        "candidate_events": candidate_events,
+        "candidate_events": candidate_events if len(candidate_events) > 1 else [],
         "selected_event_order": selected_event_order,
         "referents": cleaned_refs,
         "uncertainties": observation.get("uncertainties") if isinstance(observation, dict) else None,
