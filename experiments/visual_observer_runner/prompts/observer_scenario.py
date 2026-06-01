@@ -9,6 +9,10 @@ EVENT_SCENARIO_VISUAL_GUIDANCE = {
 - For ordinal pointing, count distinct stable pointing targets in time order
   within the requested menu/region.
 - Localize the fingertip/contact point or pointing direction, not the hand body.
+- Do not switch to a clearer menu, logo, or header outside the requested
+  Menu/page/region. If scope is not visible, mark uncertainty instead.
+- A stable pointing target requires a visible pointer endpoint aimed at one
+  menu row/section; hand movement alone is not a new target.
 """,
     "retail": """
 - Use shelf layout, rows/columns, adjacency, and package regions.
