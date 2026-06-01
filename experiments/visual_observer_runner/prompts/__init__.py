@@ -22,7 +22,11 @@ from experiments.visual_observer_runner.prompts.observer_event import (  # noqa:
     build_qwen_video_event_prompt,
 )
 from experiments.visual_observer_runner.prompts.observer_scenario import (  # noqa: F401
+    DETAIL_SCENARIO_VISUAL_GUIDANCE,
+    EVENT_SCENARIO_VISUAL_GUIDANCE,
     SCENARIO_VISUAL_GUIDANCE,
+    build_observer_detail_scene_description,
+    build_observer_event_scene_description,
     build_observer_scene_description,
 )
 from experiments.visual_observer_runner.prompts.service import (  # noqa: F401
