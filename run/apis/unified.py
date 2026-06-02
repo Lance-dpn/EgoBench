@@ -81,7 +81,7 @@ def extract_video_url_from_messages(messages):
     return None
 
 
-def call_llm(messages, agent_type="service", service_model_name="qwen3-vl-225b", enable_thinking=None):
+def call_llm(messages, agent_type="service", service_model_name="qwen3-vl-225b", enable_thinking=False):
     """
     Unified LLM call interface
 
@@ -118,9 +118,6 @@ def _call_service_model(messages, model_name, max_retries, base_delay, enable_th
     # If using the default configured model, use service_agent_config
     if model_name == SERVICE_MODEL_NAME or model_name == "Qwen3.5-397B-A17B":
         return service_call_llm(messages, max_retries, enable_thinking)
-
-    if enable_thinking is None:
-        enable_thinking = SERVICE_ENABLE_THINKING
 
     # Extract and convert video URL from messages
     video_url = extract_video_url_from_messages(messages)

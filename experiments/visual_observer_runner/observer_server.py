@@ -824,12 +824,11 @@ def sanitize_target_region_for_detail(target_region: Any, event_type: Any) -> An
     text = str(target_region)
     if "point" not in str(event_type or "").lower():
         return text
-    lowered = text.lower()
-    for marker in [", specifically", "; specifically", " specifically "]:
-        idx = lowered.find(marker)
-        if idx > 0:
-            return text[:idx].strip().rstrip(",;:")
-    return text
+    return (
+        "fingertip/contact point or pointing direction in the localized event "
+        "time range; identify the item directly from the frames, not from any "
+        "event-stage entity name"
+    )
 
 
 def clean_event_keyframes(ref: dict[str, Any], labeled_fps: float, max_items: int = 3) -> list[dict[str, Any]]:

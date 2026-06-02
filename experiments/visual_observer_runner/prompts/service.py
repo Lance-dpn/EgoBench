@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v7"
+SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v9"
 
 
 @dataclass(frozen=True)
@@ -119,20 +119,83 @@ SCENARIO_SERVICE_INSTRUCTIONS = {
   tools cannot find reliable candidates and the request depends on visible menu
   content; then inspect the relevant Menu 1/Menu 2 visible dish/category/menu
   text and verify returned candidates with tools when possible.
+- Restaurant selection must be database-first. Compare all user-provided
+  restaurant candidates with tools before recommending one. Do not choose a
+  restaurant from cuisine stereotypes, real-world assumptions, or a single
+  failed exact category lookup.
+- If an exact category or keyword query returns no candidates, try benchmark
+  menu aliases before falling back. Examples: beef/steak can map to selected
+  steaks, ribeye, sirloin, wagyu, filet, or meat dish names; potato/fries can
+  map to snack, side, antipasti, handmade bread, starch, or dish-name keyword
+  searches; sandwich/ciabatta/panini can map to sandwiches & panini or bread.
+- Category enum values in the order tool schema may be incomplete or coarser
+  than the catalog. Treat them as hints, not as a complete category list. If an
+  enum category such as Pasta or Steaks returns empty, try visible/category
+  aliases and exact catalog-style names such as Italian Pasta or Selected
+  Steaks before concluding no dish exists.
+- Treat later user-mentioned set meals, dish names, or successful tool
+  parameters as evidence about the active restaurant. If the current restaurant
+  cannot verify multiple such names but another user-provided restaurant can,
+  re-evaluate the restaurant choice before continuing.
 - If a dish-name lookup fails or a current order item cannot be verified as a
   catalog dish, check whether the same name is a set meal or bundled orderable
   unit before giving up. Use set-meal tools to verify the bundle and retrieve
-  included dish names; then use those included dishes for item-level facts,
-  membership checks, nutrition/allergen/tax queries, or aggregate calculations
-  when the requested operation requires dish-level inputs.
+  included dish names; then use those included dishes only when the requested
+  operation requires dish-level comparison or a tool does not expand set meals
+  itself.
+- Treat set meals as single orderable/removable items, but as bundles of
+  included dishes for reasoning. When the current order contains a possible set
+  meal name, call get_set_meal_details before price, tax, nutrition, allergen,
+  taste, or ranking decisions involving that order.
+- Use display capitalization in tool parameters even if order summaries or tool
+  results return names in lowercase: dish_name should start with an uppercase
+  first letter, such as "Turkey breast ham" or "Salmon affumicato"; set_meal_name
+  should use title-style word initials, such as "Cold Cuts & Cheese Platter" or
+  "Italian Classic Set". Do not intentionally lowercase set_meal_name values.
+- Do not rely only on compute_total_payment over top-level set meal names when
+  judging whether an order total crosses a threshold; set_meal_price may be 0.
+  Expand set meals into their included dishes and use dish prices/discounts for
+  the threshold judgment when set meals affect the decision.
+- For compute_total_tax and compute_total_nutrition, keep set meals as the
+  current order item names in the calculation input. These tools expand set
+  meals internally, so manually replacing a set meal with its included dishes is
+  unnecessary and can make the tool-call trace diverge from the order state.
+- For compute_total_payment, set meals are not expanded internally; the tool
+  uses the set meal's own price and discount. If a set meal has price 0 or the
+  threshold decision depends on the included dishes, retrieve details and pass
+  the included dish list for the payment/threshold calculation.
+- For final payment, payable amount, total amount after discount, or discount
+  savings requests, make sure compute_total_payment is called for the final
+  order state. If the final order contains set meals, first call the aggregate
+  payment tool with the exact top-level current order state, including set meal
+  names, so the tool trace reflects the order. If that result is 0 or clearly
+  omits set-meal value, retrieve set-meal details and use included dishes for a
+  secondary calculation or explanation rather than skipping the aggregate tool.
+- If the user asks how much was saved due to discounts and there is no dedicated
+  savings tool, still call compute_total_payment for the final order state.
+  Use price/discount detail tools only to derive the savings amount after the
+  aggregate payment call has captured the final order.
+- For conditions that say "including set meals", compare ordinary dishes and
+  included dishes inside set meals. If the chosen highest/lowest item is inside
+  a set meal, remove the whole set meal with remove_set_meal_from_order rather
+  than removing the included dish directly.
+- For conditions that say "non-set meal dishes/items", ignore set meals and
+  their included dishes when choosing what to remove or compare.
+- For final aggregate calculations, pass the exact final order state unless the
+  specific aggregate tool requires expanded dish inputs. After a set meal is
+  removed, omit that set meal. For remaining set meals, pass the set meal name to
+  compute_total_tax and compute_total_nutrition; expand only for
+  compute_total_payment when needed as described above.
 - Conditional workflow: resolve the visible item/section if needed; verify the
   visual clue with database tools under the complete official restaurant name;
   check the database condition; apply only the requested branch; then compute
   the requested final result with the appropriate aggregate tool.
-- If a visual item/category cannot be verified, do not switch context, invent
-  aliases, or use unrelated visible regions. Retry the same visual target once
-  using the same Menu 1/Menu 2 or visible-region label; if still unresolved, ask
-  one concise clarification.
+- If a visual item/category cannot be verified in the active restaurant, do not
+  invent aliases or use unrelated visible regions. Retry the same visual target
+  once using the same Menu 1/Menu 2 or visible-region label. If the retried
+  visual clue still conflicts with the active restaurant, compare against the
+  other user-provided restaurant candidates before asking one concise
+  clarification.
 - Treat bundled or grouped menu options as orderable units when the tools
   support them. Do not expand, remove, or clear such units unless the user
   explicitly requests that operation or the task condition requires it.

@@ -10,12 +10,18 @@ from __future__ import annotations
 from experiments.visual_observer_runner.prompts.observer_scenario import build_observer_event_scene_description
 
 
-OBSERVER_EVENT_PROMPT_VERSION = "observer_event_prompts_v6_ordinal_grounded"
+OBSERVER_EVENT_PROMPT_VERSION = "observer_event_prompts_v8_menu_scope"
 
 
 EVENT_LOCALIZER_COMMON_RULES = """
 - Use only the visual input.
 - Localize one requested visible event/region; do not identify final dish/product names.
+- The event stage must output only timing and coarse spatial regions. Do not
+  put visible dish names, product names, menu item text, category titles, OCR
+  labels, or guessed entity names in selected_event, candidates, target_region,
+  selection_rule, downstream_instruction, or uncertainties.
+- For menu or shelf targets, describe the location with neutral geometry such
+  as page/fold/side/row/column/box/relative position, not the printed item text.
 - Keep the user's menu/page/region/sequence scope.
 - For first/second/third/last pointing requests, first segment all distinct
   stable pointing events in the requested scope into candidates in visible time
@@ -43,8 +49,8 @@ QWEN_EVENT_RESPONSE_SCHEMA = """
     "event_time_range": {{"start": 5.37, "end": 6.42}},
     "time_range": "5.37-6.42s",
     "anchor_timestamp": 6.0,
-    "target_region": "coarse visual region",
-    "downstream_instruction": "Identify the visible anchor at this localized target.",
+    "target_region": "coarse visual region without printed item text or entity names",
+    "downstream_instruction": "Read the visible anchor from this localized region in the detail stage.",
     "uncertainty": null
   }},
   "candidates": [
@@ -52,7 +58,7 @@ QWEN_EVENT_RESPONSE_SCHEMA = """
       "event_order": 1,
       "event_type": "pointing|holding|menu_region|object_state|spatial_region|other",
       "event_time_range": {{"start": 5.37, "end": 6.42}},
-      "target_region": "coarse visual region"
+      "target_region": "coarse visual region without printed item text or entity names"
     }}
   ],
   "uncertainties": null

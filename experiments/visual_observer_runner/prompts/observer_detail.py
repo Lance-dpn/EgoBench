@@ -12,7 +12,7 @@ from typing import Any
 from experiments.visual_observer_runner.prompts.observer_scenario import build_observer_detail_scene_description
 
 
-OBSERVER_DETAIL_PROMPT_VERSION = "observer_detail_prompts_v2_compact"
+OBSERVER_DETAIL_PROMPT_VERSION = "observer_detail_prompts_v4_scope_key_type"
 
 
 QWEN_SEQUENCE_DETAIL_PROMPT = """You are a vision reader for one localized event.
@@ -23,7 +23,11 @@ Current user request:
 Scene:
 {image_description}
 
-The attached frames are ordered and come from the localized event. Trust this event localization.
+The attached frames are ordered and come from the localized event. Use the
+localized time range and region only; do not trust any entity name, dish name,
+product name, category title, OCR text, or label that appears in the event
+summary. Identify the anchor directly from the visible endpoint/contact point in
+the frames.
 
 Localized event summary:
 - referent: {user_referent}
@@ -38,6 +42,8 @@ Your job:
 - For pointing, use the endpoint/contact point/pointing direction, not the hand body.
 - Use the whole frame sequence to handle motion, blur, occlusion, and readable text.
 - If localizer text conflicts with the visible endpoint, trust the visible endpoint.
+- Never copy an entity name from target_region or downstream_instruction unless
+  the same text is visibly anchored at the endpoint in the attached frames.
 
 Boundaries:
 - Use only visible evidence. Do not answer database facts, rankings, calculations, or actions.

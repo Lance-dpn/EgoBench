@@ -13,7 +13,6 @@ Environment Variables Required:
 """
 
 import os
-from openai import OpenAI
 
 # ==============================================================================
 # USER SIMULATION MODEL CONFIGURATION
@@ -41,12 +40,6 @@ USER_TEMPERATURE = 0.7
 
 # Whether to enable thinking mode (if supported by the model)
 USER_ENABLE_THINKING = False
-
-
-def _build_extra_body(model_name, enable_thinking):
-    if model_name.startswith("MiniMax-"):
-        return {"reasoning_split": True}
-    return {"enable_thinking": enable_thinking}
 
 
 # ==============================================================================
@@ -84,7 +77,7 @@ def call_user_model(messages, max_retries=3, enable_thinking=None):
             kwargs = {
                 "model": USER_MODEL_NAME,
                 "messages": messages,
-                "extra_body": _build_extra_body(USER_MODEL_NAME, enable_thinking),
+                "extra_body": {"enable_thinking": enable_thinking}
             }
             completion = client.chat.completions.create(**kwargs)
             content = completion.choices[0].message.content

@@ -6,6 +6,9 @@ from __future__ import annotations
 EVENT_SCENARIO_VISUAL_GUIDANCE = {
     "order": """
 - Menus may be referenced as Menu 1/Menu 2, page, fold, side, or section.
+- Keep the requested menu identity locked. If the request says Menu 1/Menu 2,
+  left/right menu, or a named menu, do not localize an equivalent-looking item
+  on another menu.
 - For ordinal pointing, count distinct stable pointing targets in time order
   within the requested menu/region.
 - Count only the relevant pointing sequence after the requested menu/region is
@@ -15,6 +18,8 @@ EVENT_SCENARIO_VISUAL_GUIDANCE = {
   Menu/page/region. If scope is not visible, mark uncertainty instead.
 - A stable pointing target requires a visible pointer endpoint aimed at one
   menu row/section; hand movement alone is not a new target.
+- For ordinal pointing, preserve the selected event order even if a later target
+  is clearer or easier to read.
 """,
     "retail": """
 - Use shelf layout, rows/columns, adjacency, and package regions.
@@ -36,6 +41,13 @@ DETAIL_SCENARIO_VISUAL_GUIDANCE = {
 - Read the localized menu target only; use visible text near that target.
 - Do not use restaurant logos or headers as dish/category identity unless they
   are the localized target.
+- If the user asks for a pointed dish or item, return a dish_name whenever a
+  specific dish row can be read. Do not return only a category just because the
+  section title is clearer.
+- If the user asks for a category/section/area, return category or
+  visible_region and do not promote a nearby dish row to the primary value.
+- Keep Menu 1/Menu 2 or left/right menu scope from the event stage. A visible
+  item from another menu is not a valid replacement.
 """,
     "retail": """
 - Read the localized product/package/label only.

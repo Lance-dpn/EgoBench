@@ -157,6 +157,11 @@ scores. For failed or suspicious tasks, perform a concrete task-level audit:
      and naming variants.
    - `tools/<domain>/<domain>_db.py`: fuzzy matching behavior, parameter
      handling, state mutation semantics, and final computation logic.
+   - For order set meals, explicitly check whether the tool treats the set meal
+     as a top-level order item or expands included dishes. In the current order
+     data, `compute_total_payment` over top-level set meals can return `0.0`
+     because set-meal prices are missing, while tax and nutrition tools expand
+     included dishes.
 
 6. Reconstruct the expected and actual database effect. When needed, replay the
    ground-truth calls and the model calls through the same DB class rather than
@@ -183,6 +188,21 @@ scores. For failed or suspicious tasks, perform a concrete task-level audit:
    - tool wrapper or validation changes for parameter normalization;
    - benchmark data fixes only when `scenarios/final`, `tools`, and evaluator
      evidence show a real inconsistency.
+
+9. Treat result-based success as insufficient when tool-based success fails.
+   Add-then-remove workflows and non-mutating final calculations can make the
+   final database hash look correct even when the agent skipped required tool
+   calls or chose the wrong branch.
+
+10. For visual-observer order failures, audit restaurant selection before
+    auditing only the pointed item. If the service agent selected the wrong
+    restaurant, subsequent visual names, set meals, categories, and database
+    checks may all become inconsistent. Look for later user-mentioned set meals
+    or dish names that contradict the active restaurant.
+
+11. Record likely author data or grounding issues in
+    `experiments/visual_observer_runner/docs/order_grounding_issues.md` instead
+    of silently changing official scenario, tool, or evaluation files.
 
 ## Reporting Standard
 

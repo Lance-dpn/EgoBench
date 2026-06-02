@@ -71,18 +71,6 @@ class OrderDB:
             }
         return self.restaurants[restaurant_name]
 
-    def _find_store(self, restaurant_name: str) -> Optional[Dict[str, Any]]:
-        """Find restaurant data storage without creating a new empty restaurant."""
-        if restaurant_name in self.restaurants:
-            return self.restaurants[restaurant_name]
-
-        target = (restaurant_name or "").strip().lower()
-        for existing_name, store in self.restaurants.items():
-            if existing_name.strip().lower() == target:
-                return store
-
-        return None
-
     def _find_matching_dishes(self, restaurant_name: str, query: str) -> List[Dish]:
         store = self._get_store(restaurant_name)
         query_lower = query.lower()
@@ -665,8 +653,9 @@ class OrderDB:
         sum(price * discount * qty).
         """
         total_payment = 0.0
+        restaurant_key = (restaurant_name or "").lower()
 
-        store = self._find_store(restaurant_name)
+        store = self.restaurants.get(restaurant_key)
         if not store:
             return {
                 "restaurant_name": restaurant_name,
@@ -704,8 +693,9 @@ class OrderDB:
         (price * tax_rate / (1 + tax_rate)) * discount * qty.
         """
         total_tax = 0.0
+        restaurant_key = (restaurant_name or "").lower()
 
-        store = self._find_store(restaurant_name)
+        store = self.restaurants.get(restaurant_key)
         if not store:
             return {
                 "restaurant_name": restaurant_name,
@@ -759,7 +749,8 @@ class OrderDB:
             "fiber_g": 0.0
         }
 
-        store = self._find_store(restaurant_name)
+        restaurant_key = (restaurant_name or "").lower()
+        store = self.restaurants.get(restaurant_key)
         if not store:
             return {
                 "restaurant_name": restaurant_name,

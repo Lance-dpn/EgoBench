@@ -41,12 +41,14 @@ if [ -f ".env" ]; then
     source ".env"
 fi
 
-# Default settings. Values from .env or the current shell take precedence.
-export USER_MODEL_NAME="${USER_MODEL_NAME:-Qwen3.5-397B-A17B}"
-export SERVICE_MODEL_NAME="${SERVICE_MODEL_NAME:-Qwen3.5-397B-A17B}"
-export LLM_API_BASE_URL="${LLM_API_BASE_URL:-https://api.example.com/v1}"
-export SERVICE_API_BASE_URL="${SERVICE_API_BASE_URL:-$LLM_API_BASE_URL}"
-export VIDEO_MODE="${VIDEO_MODE:-local}"
+# Your settings here
+export USER_MODEL_NAME="Qwen3.5-397B-A17B"
+export SERVICE_MODEL_NAME="Qwen3.5-397B-A17B"
+export USER_API_BASE_URL=""
+export SERVICE_API_BASE_URL=""
+export API_KEY=""
+export SERVICE_API_KEY=""
+export VIDEO_MODE="url"
 
 
 # Print configuration
@@ -57,20 +59,21 @@ echo ""
 echo "Configuration:"
 echo "  User Model: $USER_MODEL_NAME"
 echo "  Service Model: $SERVICE_MODEL_NAME"
-echo "  User API URL: $LLM_API_BASE_URL"
+echo "  User API URL: $USER_API_BASE_URL"
 echo "  Service API URL: $SERVICE_API_BASE_URL"
 echo "  Video Mode: $VIDEO_MODE"
+$0
 echo "  Num tasks: $NUM_tasks"
 echo ""
 
 
 
 # Check if required environment variables are set
-if [ -z "$API_KEY" ] && [ -z "$SERVICE_API_KEY" ]; then
-    echo "Error: API_KEY or SERVICE_API_KEY environment variable is not set."
-    echo "Please set your API key in .env file or as environment variable."
-    exit 1
-fi
+# if [ -z "$API_KEY" ] && [ -z "$SERVICE_API_KEY" ]; then
+#     echo "Error: API_KEY or SERVICE_API_KEY environment variable is not set."
+#     echo "Please set your API key in .env file or as environment variable."
+#     exit 1
+# fi
 
 # Create results directory if it doesn't exist
 mkdir -p results

@@ -89,21 +89,6 @@ def encode_video(video_path):
         return base64.b64encode(f.read()).decode('utf-8')
 
 
-def build_local_media_data_url(media_path, mime_type):
-    """Convert a local image or video file into a data URL for OpenAI-compatible APIs."""
-    if not media_path or is_url(media_path) or not os.path.exists(media_path):
-        return media_path
-
-    if mime_type.startswith("video"):
-        base64_media = encode_video(media_path)
-    else:
-        base64_media = encode_image(media_path)
-
-    if not base64_media:
-        return media_path
-    return f"data:{mime_type};base64,{base64_media}"
-
-
 def download_media_from_url(url):
     """Download media content from URL"""
     try:
@@ -165,14 +150,13 @@ def build_message_with_media(text, media_path=None, use_vision=False, service_mo
     if use_vision and media_path:
         media_type = "video"
         mime_type = get_media_mime_type(media_path)
-        media_url = media_path if is_url(media_path) else build_local_media_data_url(media_path, mime_type)
 
         # Build different message formats for different models
         if service_model_name in ["glm-5v-turbo", "qwen3.6-plus", "mimo-v2-omni", "kimi-k2.5"]:
             if media_type == 'video':
-                content.append({"type": "video_url", "video_url": {"url": media_url}, "fps": 2})
+                content.append({"type": "video_url", "video_url": {"url": media_path}})
             else:
-                content.append({"type": "image_url", "image_url": {"url": media_url}})
+                content.append({"type": "image_url", "image_url": {"url": media_path}})
 
         elif service_model_name == "gemini-3.1-pro-preview":
             # Gemini format
@@ -180,10 +164,10 @@ def build_message_with_media(text, media_path=None, use_vision=False, service_mo
                 if media_type == 'video':
                     content.append({
                         "type": "input_audio",
-                        "input_audio": {"data": media_url, "format": "video/mp4"}
+                        "input_audio": {"data": media_path, "format": "video/mp4"}
                     })
                 else:
-                    content.append({"type": "image_url", "image_url": {"url": media_url}})
+                    content.append({"type": "image_url", "image_url": {"url": media_path}})
             else:
                 if media_type == 'video':
                     base64_media = encode_video(media_path)
@@ -199,9 +183,9 @@ def build_message_with_media(text, media_path=None, use_vision=False, service_mo
         else:
             # Default format
             if media_type == 'video':
-                content.append({"type": "video_url", "video_url": {"url": media_url}, "fps": 2})
+                content.append({"type": "video_url", "video_url": {"url": media_path}})
             else:
-                content.append({"type": "image_url", "image_url": {"url": media_url}})
+                content.append({"type": "image_url", "image_url": {"url": media_path}})
 
     return content
 

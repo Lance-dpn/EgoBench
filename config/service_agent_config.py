@@ -23,14 +23,6 @@ Environment Variables for Video URLs:
 
 import os
 import json
-from openai import OpenAI
-
-
-def _env_bool(name: str, default: bool = False) -> bool:
-    value = os.environ.get(name)
-    if value is None:
-        return default
-    return value.strip().lower() in {"1", "true", "yes", "y", "on"}
 
 # ==============================================================================
 # SERVICE AGENT MODEL CONFIGURATION
@@ -52,60 +44,13 @@ SERVICE_API_KEY = os.environ.get("SERVICE_API_KEY", os.environ.get("API_KEY", ""
 SERVICE_API_BASE_URL = os.environ.get("SERVICE_API_BASE_URL", os.environ.get("LLM_API_BASE_URL", "https://api.example.com/v1"))
 
 # Maximum tokens for service model responses
-SERVICE_MAX_TOKENS = int(os.environ.get("SERVICE_MAX_TOKENS", "32768"))
+SERVICE_MAX_TOKENS = 32768
 
 # Temperature for service model (0.0 - 2.0)
-SERVICE_TEMPERATURE = float(os.environ.get("SERVICE_TEMPERATURE", "0.7"))
+SERVICE_TEMPERATURE = 0.7
 
 # Whether to enable thinking mode (if supported by the model)
-SERVICE_ENABLE_THINKING = _env_bool("SERVICE_ENABLE_THINKING", True)
-
-# Reasoning effort for providers that expose a level control.
-SERVICE_REASONING_EFFORT = os.environ.get("SERVICE_REASONING_EFFORT", "high")
-
-
-def _is_gpt_reasoning_model(model_name: str) -> bool:
-    return model_name.lower().startswith("gpt-5")
-
-
-def _is_deepseek_model(model_name: str) -> bool:
-    return model_name.lower().startswith("deepseek")
-
-
-def _build_extra_body(model_name, enable_thinking):
-    if model_name.startswith("MiniMax-"):
-        return {"reasoning_split": True}
-    if _is_deepseek_model(model_name):
-        return {"thinking": {"type": "enabled" if enable_thinking else "disabled"}}
-    return {"enable_thinking": enable_thinking}
-
-
-def _split_responses_messages(messages):
-    instructions = []
-    response_input = []
-    for message in messages:
-        role = message.get("role", "user")
-        content = message.get("content", "")
-        if role in {"system", "developer"}:
-            instructions.append(str(content))
-            continue
-        if role not in {"user", "assistant"}:
-            role = "user"
-        response_input.append({"role": role, "content": content})
-    return "\n\n".join(instructions), response_input
-
-
-def _response_usage_tokens(usage):
-    input_tokens = 0
-    output_tokens = 0
-    if usage:
-        input_tokens = getattr(usage, "input_tokens", None)
-        if input_tokens is None:
-            input_tokens = getattr(usage, "prompt_tokens", 0) or 0
-        output_tokens = getattr(usage, "output_tokens", None)
-        if output_tokens is None:
-            output_tokens = getattr(usage, "completion_tokens", 0) or 0
-    return input_tokens or 0, output_tokens or 0
+SERVICE_ENABLE_THINKING = False
 
 
 # ==============================================================================
@@ -229,32 +174,11 @@ def call_service_model(messages, max_retries=3, enable_thinking=None):
                 api_key=SERVICE_API_KEY,
                 base_url=SERVICE_API_BASE_URL
             )
-            if _is_gpt_reasoning_model(SERVICE_MODEL_NAME):
-                instructions, response_input = _split_responses_messages(messages)
-                kwargs = {
-                    "model": SERVICE_MODEL_NAME,
-                    "input": response_input,
-                    "max_output_tokens": SERVICE_MAX_TOKENS,
-                }
-                if instructions:
-                    kwargs["instructions"] = instructions
-                if enable_thinking:
-                    kwargs["reasoning"] = {
-                        "effort": SERVICE_REASONING_EFFORT,
-                        "summary": "auto",
-                    }
-                response = client.responses.create(**kwargs)
-                content = response.output_text
-                input_tokens, output_tokens = _response_usage_tokens(getattr(response, "usage", None))
-                return content, input_tokens, output_tokens
-
             kwargs = {
                 "model": SERVICE_MODEL_NAME,
                 "messages": messages,
-                "extra_body": _build_extra_body(SERVICE_MODEL_NAME, enable_thinking),
+                "extra_body": {"enable_thinking": enable_thinking}
             }
-            if _is_deepseek_model(SERVICE_MODEL_NAME) and enable_thinking:
-                kwargs["reasoning_effort"] = SERVICE_REASONING_EFFORT
             completion = client.chat.completions.create(**kwargs)
             content = completion.choices[0].message.content
 
@@ -312,7 +236,6 @@ def print_config():
     print(f"  Max Tokens: {SERVICE_MAX_TOKENS}")
     print(f"  Temperature: {SERVICE_TEMPERATURE}")
     print(f"  Thinking Mode: {SERVICE_ENABLE_THINKING}")
-    print(f"  Reasoning Effort: {SERVICE_REASONING_EFFORT}")
     print(f"  Video Mode: {VIDEO_MODE}")
     if VIDEO_MODE == "local":
         print(f"  Video Local Path: {VIDEO_LOCAL_PATH}")
