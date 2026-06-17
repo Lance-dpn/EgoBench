@@ -30,9 +30,9 @@ LISTS = {
 VISUAL = {
     "first heart-shaped cookie": "st michel le palmier crispy caramel",
     "second chocolate cookie": "bahlsen",
-    "third white-packaged cookie box": "leibniz keks",
+    "third white-packaged cookie box": "desobry speculoos",
     "red-lid cylindrical cookie above third box": "nutella biscuits",
-    "yellow-packaged cookie below third box": "pallets biscuits",
+    "yellow-packaged cookie below third box": "leibniz keks",
 }
 
 
@@ -158,7 +158,11 @@ class TaskBuilder:
         for row in retail_init_data6["user_carts"]:
             if row["user_id"] == user_id:
                 for item in row.get("items", []):
-                    self.cart[item["product_name"].lower()] = float(item["quantity"])
+                    name = item["product_name"].lower()
+                    if name in PRODUCTS:
+                        self.cart[name] = float(item["quantity"])
+                    else:
+                        self.notes.append(f"skip uncatalogued initial cart item: {item['product_name']}")
 
     def note(self, text: str) -> None:
         self.notes.append(text)
@@ -275,14 +279,14 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add(lowest_price(lambda p: p["category"] == "cookie" and has_tag(p, "high calorie")), reason="second Bahlsen is discounted and from Germany")
         b.compute("payment")
     elif task_id == 3:
-        b.note("third Leibniz protein is not < 7, so inspect first cookie milk allergen")
+        b.note("third Desobry protein is < 7 but price is not > 40, so inspect first cookie milk allergen")
         b.add(by_nutrition(lambda p: 0.7 <= p["discount"] <= 0.9 and has_taste(p, "sweet"), "calories_kcal", True), reason="first Palmier contains milk")
         b.compute("nutrition")
     elif task_id == 4:
         b.add(best_discount(lambda p: is_origin(p, "Italy") and 60 <= p["price"] <= 80), reason="red-lid Nutella is sweet and carbs exceed 60g")
         b.compute("nutrition")
     elif task_id == 5:
-        b.note("yellow Pallets is from Japan, so use second-cookie sweet fallback")
+        b.note("yellow Leibniz is not from France and fat is not > 25, so use second-cookie sweet fallback")
         b.add(by_nutrition(lambda p: p["category"] == "cookie" and has_allergen(p, "nuts") and p["discount"] < 0.85, "calories_kcal"), reason="second Bahlsen is sweet")
         b.compute("payment")
     elif task_id == 6:
@@ -294,15 +298,15 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add(uk_milk_free or lowest_price(lambda p: is_origin(p, "UK") and has_allergen(p, "soy")), reason="red-lid Nutella is high calorie with sugar > 30")
         b.compute("nutrition")
     elif task_id == 8:
-        b.note("yellow Pallets is on list but tax is exactly 0.08, not higher; third Leibniz contains soy")
-        b.add(best_discount(lambda p: 20 <= p["price"] <= 80 and has_taste(p, "sweet")), reason="third white box contains soy")
+        b.note("yellow Leibniz tax is not higher than 0.08; third Desobry does not contain soy")
+        b.add(highest_price(lambda p: has_allergen(p, "soy") and has_taste(p, "nutty")), reason="third white box lacks soy")
         b.compute("tax")
     elif task_id == 9:
         b.note("first Palmier is not bitter; second Bahlsen is from Germany")
         b.add(by_nutrition(lambda p: p["category"] == "cookie" and has_tag(p, "high oil") and p["tax_rate"] < 0.1, "calories_kcal", True), reason="second cookie origin is Germany")
         b.compute("payment")
     elif task_id == 10:
-        b.add(lowest_price(lambda p: is_origin(p, "Denmark", "Japan", "Germany") and p["discount"] < 0.95), reason="third Leibniz is < 25 and lacks high-sodium label")
+        b.add(by_nutrition(lambda p: 15 <= p["price"] <= 40 and has_taste(p, "bitter"), "protein_g", True), reason="third Desobry price is not below 25; red-lid Nutella sugar exceeds 20g")
         b.compute("tax")
     elif task_id == 11:
         b.note("second Bahlsen is not from France; yellow price is between 10 and 60")
@@ -314,36 +318,36 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add(lowest_price(lambda p: 0.05 <= p["tax_rate"] <= 0.1 and discounted(p)), qty=2, reason="first Palmier high-fat fallback")
         b.compute("payment")
     elif task_id == 13:
-        b.note("third Leibniz has no nuts; second Bahlsen is not bitter")
+        b.add(lowest_price(lambda p: has_allergen(p, "gluten") and is_origin(p, "Italy")), reason="third Desobry contains nuts and exceeds 400 kcal")
         b.compute("tax")
     elif task_id == 14:
-        b.add(by_nutrition(lambda p: has_tag(p, "high sodium") and has_allergen(p, "soy"), "fat_g"), reason="yellow Pallets sugar exceeds 30")
+        b.add(by_nutrition(lambda p: has_taste(p, "nutty") and p["tax_rate"] < 0.1 and is_origin(p, "Italy"), "calories_kcal", True), reason="yellow Leibniz sugar does not exceed 30 and red-lid Nutella is not discounted better than 0.8")
         b.compute("nutrition")
     elif task_id == 15:
         b.note("second Bahlsen is not France; first Palmier is not Germany/Denmark/Japan")
         b.add(all_products(lambda p: has_tag(p, "low sodium") and is_origin(p, "France") and no_allergen(p, "soy")), reason="low-sodium France fallback without soy")
         b.compute("tax")
     elif task_id == 16:
-        b.note("red-lid Nutella sugar is not > 35; third Leibniz is not gluten-free")
+        b.note("red-lid Nutella sugar is not > 35; third Desobry is not gluten-free")
         b.add(lowest_price(lambda p: 15 <= p["price"] <= 40 and has_taste(p, "minty")), reason="third white box contains gluten")
         b.compute("payment")
     elif task_id == 17:
-        b.note("first Palmier discount is not < 0.85; yellow fat exceeds 20")
-        b.add(by_nutrition(lambda p: p["category"] == "cookie" and has_taste(p, "sweet") and has_allergen(p, "nuts"), "calories_kcal"), reason="yellow high-fat fallback")
+        b.note("first Palmier discount is not < 0.85; yellow Leibniz fat does not exceed 20")
         b.compute("nutrition")
     elif task_id == 18:
-        b.note("second Bahlsen fat is not < 20; third Leibniz price is not > 40")
+        b.note("second Bahlsen fat is not < 20; third Desobry price is not > 40")
         b.add(lowest_price(lambda p: has_taste(p, "sweet") and has_taste(p, "bitter") and has_allergen(p, "soy")), reason="third price fallback")
         b.compute("payment")
     elif task_id == 19:
-        b.note("red-lid Nutella calories are exactly 500, not > 500; yellow has high-fat label")
-        b.add(by_nutrition(lambda p: 15 <= p["price"] <= 40 and has_taste(p, "bitter"), "calories_kcal"), reason="yellow high-fat fallback")
+        b.note("red-lid Nutella calories are exactly 500, not > 500; yellow Leibniz lacks high-fat label")
+        b.add(by_nutrition(lambda p: p["price"] > 40 and has_taste(p, "bitter"), "calories_kcal"), reason="yellow lacks high-fat label")
         b.compute("tax")
     elif task_id == 20:
         b.add(best_discount(lambda p: p["category"] == "cookie" and is_origin(p, "Germany", "Denmark", "Japan") and no_allergen(p, "nuts")), qty=2, reason="first Palmier is sweet and < 30")
         b.compute("payment")
     elif task_id == 21:
-        b.note("third Leibniz sugar does not exceed 40; yellow Pallets has no soy")
+        b.note("third Desobry sugar does not exceed 40; yellow Leibniz contains soy")
+        b.add(lowest_price(lambda p: has_taste(p, "nutty") and discounted(p)), reason="yellow contains soy")
         if b.avg_nutrition("calories_kcal") > 500:
             b.remove_extreme_nutrition("calories_kcal", True, "weighted average calories > 500")
         b.compute("tax")
@@ -354,18 +358,17 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
             b.remove_extreme_price(True, "cart unit-price total > 50")
         b.compute("tax")
     elif task_id == 23:
-        b.note("second Bahlsen contains gluten and is outside France; third tax exceeds 0.06")
-        b.add(lowest_price(lambda p: has_taste(p, "bitter") and has_tag(p, "high sugar")), reason="third-tax fallback")
+        b.note("second Bahlsen contains gluten and is outside France; third Desobry tax does not exceed 0.06")
         if b.total_nutrition("sugar_g") > 100:
             b.remove_extreme_nutrition("sugar_g", True, "total sugar > 100g")
         b.compute("payment")
     elif task_id == 24:
-        b.note("yellow fat is not < 20 and red-lid Nutella is not bitter")
+        b.add(by_nutrition(lambda p: has_tag(p, "high protein") and no_allergen(p, "soy"), "calories_kcal"), reason="yellow Leibniz fat < 20 and origin is Germany")
         if b.total_nutrition("calories_kcal") > 1000:
             b.remove_extreme_nutrition("fat_g", True, "total calories > 1000")
         b.compute("tax")
     elif task_id == 25:
-        b.note("first Palmier is not Italy; third Leibniz contains milk")
+        b.note("first Palmier is not Italy; third Desobry contains milk")
         b.add(best_discount(lambda p: has_taste(p, "sweet") and p["tax_rate"] < 0.08), reason="third milk-allergen fallback")
         if b.total_payment_unit_price() > 40:
             b.remove_extreme_price(True, "cart unit-price total > 40")
@@ -382,7 +385,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
             b.remove_extreme_price(True, "cart unit-price total > 30")
         b.compute("tax")
     elif task_id == 28:
-        b.add(lowest_price(lambda p: is_origin(p, "Denmark", "Japan", "Germany") and has_tag(p, "high sugar")), reason="yellow Pallets is Japan with discount 0.8")
+        b.add(lowest_price(lambda p: is_origin(p, "Denmark", "Japan", "Germany") and has_tag(p, "high sugar")), reason="yellow Leibniz is Germany with discount 0.9")
         if b.total_nutrition("fat_g") > 30:
             b.remove_extreme_nutrition("fat_g", True, "total fat > 30g")
         b.compute("payment")
@@ -392,13 +395,12 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
             b.remove_extreme_price(True, "cart unit-price total > 35")
         b.compute("tax")
     elif task_id == 30:
-        b.note("first Palmier is not high-protein and third Leibniz is not bitter")
+        b.note("first Palmier is not high-protein and third Desobry is not bitter")
         if b.total_nutrition("protein_g") > 10:
             b.remove_extreme_nutrition("protein_g", True, "total protein > 10g")
         b.compute("payment")
     elif task_id == 31:
-        b.note("third Leibniz does not contain nuts, so use country/discount fallback")
-        b.add(by_nutrition(lambda p: is_origin(p, second["country_of_origin"]) and p["discount"] < 0.9, "protein_g", True), reason="same origin as second cookie and discount < 0.9")
+        b.add([F, T], reason="first is high sugar under 30 and third Desobry contains nuts")
         b.add_list_missing("shopping-list item absent from cart")
         b.compute("tax")
     elif task_id == 32:
@@ -412,7 +414,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
             b.remove_extreme_price(True, "cart unit-price total > 100")
         b.compute("nutrition")
     elif task_id == 34:
-        b.add([S], reason="yellow protein < 7 and red-lid Nutella is high sugar")
+        b.add(best_discount(lambda p: has_tag(p, "high protein") and 15 <= p["price"] <= 40), reason="yellow Leibniz protein is not < 7")
         b.add_list_missing("shopping-list item not fully purchased", top_up=True)
         b.compute("payment")
     elif task_id == 35:
@@ -420,7 +422,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add_list_missing("shopping-list item absent from cart")
         b.compute("tax")
     elif task_id == 36:
-        b.add([T, Y], reason="third is sweet and yellow is from Japan")
+        b.add([T, Y], reason="third is sweet and yellow is from Germany")
         b.add_list_missing("shopping-list item absent from cart")
         b.compute("payment")
     elif task_id == 37:
@@ -437,7 +439,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add_list_missing("unpurchased shopping-list item")
         b.compute("tax")
     elif task_id == 40:
-        b.add([S], reason="first calories < 500 and third has high-sugar label")
+        b.add(by_nutrition(lambda p: is_origin(p, "Denmark", "Japan", "Germany") and p["price"] < 40, "calories_kcal"), reason="first Palmier calories are not below 500")
         b.add_list_missing("shopping-list item absent from cart")
         b.compute("payment")
     elif task_id == 41:
@@ -447,16 +449,15 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.compute("nutrition")
         b.compute("tax")
     elif task_id == 42:
-        b.add([T], reason="Leibniz is cheapest among picked items and costs < 20")
+        b.add(by_nutrition(lambda p: is_origin(p, first["country_of_origin"]) and p["discount"] < 0.9 and p["tax_rate"] < 0.1, "protein_g", True), reason="cheapest picked item is Palmier but not under 20")
         b.add_list_missing("shopping-list item absent from cart")
         b.compute("payment")
     elif task_id == 43:
-        b.note("yellow sugar > 30; second Bahlsen has lower sugar but is not from Scotland")
-        b.add(lowest_price(lambda p: n(p["name"].lower(), "sugar_g") < 25 and has_allergen(p, "gluten")), reason="low-sugar gluten fallback")
+        b.note("yellow Leibniz sugar does not exceed 30")
         b.remove_if(lambda p: n(p["name"].lower(), "sugar_g") > 30 and p["name"].lower() not in {x["product_name"] for x in LISTS.get(b.user_id, [])}, "high-sugar item not on shopping list")
         b.compute("nutrition")
     elif task_id == 44:
-        b.note("most expensive picked item is Bahlsen at 32.8, not > 40")
+        b.note("most expensive picked item is Desobry at 33.8, not > 40")
         b.add(best_discount(lambda p: has_taste(p, "sweet") and p["tax_rate"] < 0.1), reason="picked-item max price fallback")
         if b.avg_price() > 25:
             b.remove_extreme_price(True, "weighted average unit price > 25")
@@ -472,7 +473,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add_list_missing("shopping-list item absent from cart")
         b.compute("payment")
     elif task_id == 47:
-        b.note("yellow Pallets is not bitter; second Bahlsen contains milk")
+        b.note("yellow Leibniz is not bitter; second Bahlsen contains milk")
         b.add([S], reason="second cookie contains milk")
         b.add_list_missing("shopping-list item absent from cart")
         b.compute("tax")

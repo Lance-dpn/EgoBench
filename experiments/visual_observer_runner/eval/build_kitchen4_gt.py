@@ -208,7 +208,7 @@ class Builder:
         for r in list(self.menu):
             for item in recipe_ingredients(r):
                 name = item["ingredient_name"].lower()
-                if pred(name):
+                if name in ING and pred(name):
                     self.add_item(name, float(item["quantity"]) * mult, reason or f"from {DISPLAY_REC[r]}")
 
     def final_order(self) -> str:

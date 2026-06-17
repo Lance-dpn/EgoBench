@@ -29,6 +29,10 @@ CORRECTION_SCENARIO_RULES = {
         "  tools to prove that the image truly shows that product. Audit only whether\n"
         "  product tools map the hypothesis to a clear canonical catalog product and\n"
         "  whether later product facts use that canonical item.\n"
+        "- If the service proposes read-only product lookups for a visually inferred\n"
+        "  product name, price label, country label, shelf position, or OCR fragment,\n"
+        "  approve those lookups unless the tool schema is invalid. These calls are\n"
+        "  how retail visual hypotheses are canonicalized.\n"
         "- Complete retail list tools such as find_products_by_taste and\n"
         "  find_products_by_nutritional_characteristic can support negative\n"
         "  classification. If a canonical product is absent from the returned list,\n"
@@ -99,7 +103,8 @@ tool evidence, branch logic, state changes, and final replies.
 ## Core Audit Rules
 
 The correct evidence flow is: visual/dialogue hypothesis -> non-mutating tool
-call -> executed tool result -> state-changing mutation and/or final reply.
+calls, including broad list/search tools -> executed tool results -> selected
+canonical target and active branch -> state-changing mutation and/or final reply.
 Use the service prompt and current turn context to judge whether the service
 agent's tool plan and final reply are coherent with the user's request and
 the tool evidence.
@@ -109,12 +114,19 @@ hypotheses. Keep stricter evidence requirements for state-changing calls and
 final replies, but apply those requirements to the non-visual tool chain:
 official tool schema, returned candidates, filters, ranks, ties, quantities,
 state, and calculations.
-Apply branch gating without being over-strict: the service agent may batch
-read-only calls for the same current decision point over the same active
-candidate set, but should not pre-query tools that are only needed for inactive
-future branches. Reject or request revision only when the proposed call clearly
-belongs to an unrelated downstream branch, an alternative branch that has not
-been selected, or a state change whose prerequisites are not yet proven.
+When proposed_kind="tool_calls", a proposed read-only lookup may be the first
+official evidence for a visually inferred candidate. Do not reject it for
+"assuming" that candidate, product, dish, country, category, or label if the
+candidate came from the service agent's current visual/dialogue hypothesis.
+Reject only schema errors, non-tool outputs, unrelated non-read-only actions, or
+unsupported mutations. Do not reject read-only calls merely because they may
+belong to a branch that is not yet proven; the branch must be audited before a
+state change or final answer.
+Apply branch gating at mutation/final-reply time without being over-strict at
+read-only time: broad list/search/get/compute calls may be used to discover
+fields, candidates, enum options, and branch facts. Reject or request revision
+only when a state change or final answer uses an inactive branch, unsupported
+candidate, or unverified calculation.
 Do not reject merely because a read-only batch could be smaller, because the
 service is exploring plausible candidates, or because several calls are needed
 to decide the current branch condition.
@@ -183,20 +195,25 @@ For tool calls:
   the official tool catalog before approving it.
 - Use the tool descriptions to decide whether the proposed tool is the right
   one for the user's requested fact, calculation, or state change.
-- Treat read-only tools such as find_*, get_*, tally_*, and compute_* as
+- Treat read-only tools such as find_*, get_*, list_*, tally_*, and compute_* as
   evidence gathering or calculation. They do not change database state and
   should normally be allowed to execute so the service agent can gather facts.
 - Do not audit whether visually grounded read-only calls selected the correct
   visual target. Approve them when the tool exists and the parameters are valid
   enough to gather evidence for the user's request.
+- If a read-only lookup contains a name-like parameter such as product_name,
+  dish_name, recipe_name, ingredient_name, item_name, or category, treat it as
+  candidate canonicalization. Approve it unless the tool or parameter schema is
+  invalid or it is bundled with an unsupported mutation.
 - A read-only batch is appropriate when all calls answer the same current
   branch condition, candidate filtering step, ranking step, calculation, or
   canonicalization step.
-- A read-only batch is inappropriate when it clearly mixes evidence for both
-  sides of an unresolved if/otherwise branch, or includes calls that are useful
-  only after a different branch has become active.
+- A read-only batch may include broad candidate-listing, attribute-listing, or
+  field-lookup tools even before the active branch is fully proven. Approve it
+  if the calls plausibly gather evidence for the task.
 - If the branch status is ambiguous but the calls are read-only and plausibly
-  relevant to the current user request, prefer APPROVE over REJECT.
+  relevant to the current user request, approve the batch and audit branch use
+  before mutation or final reply.
 - Focus tool-call rejection on state-changing tools such as add_*, remove_*,
   and clear_*.
 - For mutation calls, audit the non-visual chain: user requested a state change;
@@ -225,9 +242,8 @@ For tool calls:
 - If a proposed batch combines mutation calls with read-only calls, review the
   whole batch in its given order. Approve only when the order is logically valid
   under the official tools; never reorder calls yourself.
-- If a proposed batch prefetches inactive-branch read-only calls together with
-  a valid current-branch lookup, reject with a suggestion to execute only the
-  current decision-point calls first.
+- Do not reject a proposed batch for prefetching read-only calls. Reject only if
+  it also contains an unsupported state-changing call or invalid tool schema.
 
 ## Final-Reply Audit
 
@@ -241,11 +257,20 @@ For final replies:
 - Reject final replies that choose or describe a branch without executed tool
   evidence for the branch condition, unless the branch condition was purely
   visual and the reply does not claim unsupported database facts.
-- For visually derived item names, require support for the selected
-  discriminative token, not exact full-name preservation. A unique tool result
-  that preserves a strong brand/proper-name/store-specific token can support a
-  reply even if medium tokens such as variety/flavor/type differ from the
-  service agent's visual/OCR hypothesis.
+- When a tool lookup was seeded by a visual/OCR hypothesis, audit whether the
+  returned canonical name(s) actually support the name or field that the service
+  uses later. If the service keeps using the original visual string after tools
+  returned a different canonical item, require clarification or another lookup.
+- If a fuzzy or broad lookup returns multiple candidates, reject definitive
+  final claims or mutations until the service narrows to one canonical item or
+  explicitly handles all tied/ambiguous candidates required by the task.
+- For visually derived item names, compare the service's visual/OCR hypothesis,
+  the lookup query, the returned canonical name(s), and the item name used in
+  later tool calls or the final reply. Require the later item name to be one of
+  the returned canonical names, or a token-preserving unambiguous shorthand.
+- A unique tool result that preserves a strong brand/proper-name/store-specific
+  token can support a reply even if medium tokens such as variety/flavor/type
+  differ from the service agent's visual/OCR hypothesis.
 - If a full visual/OCR lookup returned a generic item that dropped the strong
   token, ignore that generic result once a later strong-token lookup returns a
   unique canonical item preserving the strong token. Do not reject the reply as
@@ -253,6 +278,9 @@ For final replies:
 - For replies after mutation calls, verify that the claimed state change and
   final quantity are supported by executed tool results and their returned
   fields.
+- For replies after fuzzy or broad product/dish lookups, verify that claimed
+  prices, nutrition, allergen, origin, tax, discount, category, recipe, or
+  ingredient facts come from the same canonical item that the service names.
 - Reject replies that use a tool result for a generic or different canonical
   item when the claimed item or query included an available strong
   discriminative token and the returned item does not preserve that token.
@@ -273,10 +301,13 @@ replan: one sentence, at most 25 words; use "none" for APPROVE.
 Never reject because of visual recognition, visual target identity, OCR quality,
 frame selection, or pointing/spatial interpretation. If rejecting, state the
 tool-schema, tool-evidence, state-change, branch, or calculation problem.
+Never tell the service to ask the user for product/dish names merely because a
+read-only lookup uses a visually inferred name. Let official tools canonicalize
+that hypothesis first.
 Do not reject a tool batch just because a different valid tool sequence might be
 more efficient. Reject only clear schema errors, unsupported mutations,
 unsupported replies, wrong calculations, missed ties, or clear inactive-branch
-prefetching.
+use in a mutation/final reply.
 Never tell the service agent to output NEED_VISUAL_CONTEXT in suggestion or
 replan.
 
@@ -297,8 +328,8 @@ def build_correction_system_prompt(*, scenario: str, scenario_number: int) -> st
     )
 
 
-READ_ONLY_PREFIXES = ("find_", "get_", "tally_", "compute_")
-LOOKUP_PREFIXES = ("find_", "get_")
+READ_ONLY_PREFIXES = ("find_", "get_", "list_", "tally_", "compute_")
+LOOKUP_PREFIXES = ("find_", "get_", "list_")
 MUTATION_PREFIXES = ("add_", "remove_", "clear_")
 
 GENERIC_NAME_TOKENS = {
@@ -654,13 +685,40 @@ def is_mutation_call(call: dict[str, Any]) -> bool:
     return name.startswith(MUTATION_PREFIXES)
 
 
+NAME_LIKE_PARAMETER_KEYS = {
+    "product_name",
+    "dish_name",
+    "recipe_name",
+    "ingredient_name",
+    "item_name",
+    "category",
+    "section",
+}
+
+
+def call_parameters(call: dict[str, Any]) -> dict[str, Any]:
+    params = call.get("parameters", {})
+    return params if isinstance(params, dict) else {}
+
+
+def has_name_like_parameter(call: dict[str, Any]) -> bool:
+    params = call_parameters(call)
+    for key in NAME_LIKE_PARAMETER_KEYS:
+        value = params.get(key)
+        if isinstance(value, str) and value.strip():
+            return True
+    return False
+
+
+def is_candidate_canonicalization_batch(calls: list[dict[str, Any]]) -> bool:
+    if not calls or not all(is_lookup_call(call) for call in calls):
+        return False
+    return any(has_name_like_parameter(call) for call in calls)
+
+
 def compact_json(value: Any, max_chars: int = 3000) -> str:
-    text = json.dumps(value, ensure_ascii=False, default=str)
-    if max_chars <= 0:
-        return text
-    if len(text) <= max_chars:
-        return text
-    return text[:max_chars].rstrip() + f"... [context_truncated {len(text) - max_chars} chars]"
+    _ = max_chars
+    return json.dumps(value, ensure_ascii=False, default=str)
 
 
 def normalized_tokens(text: str) -> list[str]:
@@ -745,10 +803,16 @@ def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, 
             dropped = canonical_match_drops_too_much(query_distinctive, returned_token_set)
             if not dropped:
                 continue
-            returned_text = " ".join(returned_names).lower()
             fact_strings = numeric_fact_strings(products)
             reply_uses_returned_name = any(name and name.lower() in reply_lower for name in returned_names)
+            reply_uses_query_name = str(query_name).lower() in reply_lower
             reply_uses_returned_fact = any(fact and re.search(rf"\b{re.escape(fact)}\b", reply_lower) for fact in fact_strings)
+            if reply_uses_query_name and not reply_uses_returned_name:
+                return (
+                    "The proposed reply keeps the visual/OCR query name "
+                    f"{query_name!r}, but the lookup returned canonical item(s) {returned_names}. "
+                    "Use the returned canonical name or run another lookup before answering."
+                )
             if reply_uses_returned_name or reply_uses_returned_fact:
                 return (
                     "The proposed reply relies on a lookup whose returned canonical item drops distinctive "
@@ -764,10 +828,10 @@ def json_char_count(value: Any) -> int:
 
 
 def compact_tool_logs(tool_logs: list[dict[str, Any]], *, max_entries: int, max_result_chars: int) -> list[dict[str, Any]]:
+    _ = max_entries
     _ = max_result_chars
     compacted: list[dict[str, Any]] = []
-    selected_logs = tool_logs[-max_entries:] if max_entries > 0 else tool_logs
-    for entry in selected_logs:
+    for entry in tool_logs:
         calls = normalize_calls(entry.get("calls", []))
         results = []
         for result in entry.get("results", []):
@@ -804,6 +868,8 @@ def build_audit_context(
     max_tool_result_chars: int,
     max_audit_context_chars: int,
 ) -> str:
+    _ = max_tool_log_entries
+    _ = max_tool_result_chars
     _ = max_audit_context_chars
     dialogue_history = service_history
     stage_contract = {
@@ -827,8 +893,9 @@ def build_audit_context(
         "Only the current turn tool ledger is available as tool evidence; do not infer facts from older tool results not shown here.",
         "Do not use video or hidden ground truth.",
         "Do not audit visual recognition accuracy, frame selection, OCR quality, pointing target identity, or spatial interpretation.",
-        "Read-only tools such as find_*, get_*, tally_*, and compute_* do not change database state.",
-        "Read-only tool calls may be based on dialogue or visual hypotheses and should not be blocked only for lack of visual proof.",
+        "Read-only tools such as find_*, get_*, list_*, tally_*, and compute_* do not change database state.",
+        "Read-only tool calls may be based on dialogue or visual hypotheses and should not be blocked only for lack of visual proof or branch timing.",
+        "Broad read-only list/search tools are allowed to discover candidates, fields, enum options, and branch evidence.",
         "Do not invent visual evidence or reject only because visual mapping is unproven.",
         "For final replies, audit non-visual tool facts, completed actions, branch decisions, and calculations.",
         "For visually derived names or OCR text, do not require exact full-name matching to the returned canonical database name.",
@@ -852,6 +919,7 @@ def build_audit_context(
             [
                 "For retail, a visually inferred product name is allowed as a hypothesis; do not require official tools to prove the image-to-product mapping.",
                 "For retail, if product tools map a visual hypothesis to one clear canonical catalog product, audit later facts and mutations against that canonical product.",
+                "For retail, if a fuzzy lookup returns a different or multiple canonical products, audit that later facts and mutations use only the supported canonical product set.",
                 "For retail, complete list tools such as find_products_by_taste and find_products_by_nutritional_characteristic support negative classification when the canonical product is absent from the returned list.",
             ]
         )
@@ -900,7 +968,7 @@ def audit_context_stats(audit_context: str) -> dict[str, Any]:
     text = str(audit_context or "")
     return {
         "chars": len(text),
-        "context_truncated": "[context_truncated " in text,
+        "context_truncated": False,
         "has_dialogue_history": '"dialogue_history"' in text,
         "has_current_turn_tool_ledger": '"current_turn_tool_ledger"' in text,
         "has_official_tool_catalog": '"official_tool_catalog"' in text,
@@ -1017,12 +1085,14 @@ def _result_item_names(value: Any) -> set[str]:
 
 def deterministic_batch_approval(calls: list[dict[str, Any]]) -> str | None:
     if calls and all(is_read_only_call(call) for call in calls):
-        tool_names = {call_name(call) for call in calls}
-        if len(calls) > 1 and len(tool_names) > 1:
-            return None
+        if is_candidate_canonicalization_batch(calls):
+            return (
+                "The proposed calls are read-only lookup/canonicalization calls seeded by a "
+                "dialogue or visual hypothesis. They may execute before stronger database evidence exists."
+            )
         return (
             "All proposed calls are read-only official tools. They do not change database state, "
-            "so the service agent can gather evidence or run calculations before deciding next steps."
+            "so the service agent can gather evidence, candidates, fields, branch facts, or calculations before deciding next steps."
         )
     return None
 

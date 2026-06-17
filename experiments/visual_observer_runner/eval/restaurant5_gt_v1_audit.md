@@ -34,6 +34,7 @@ Manual review update:
 - Reviewed all 50 tasks against the video mapping, `restaurant_init_data5`, and branch logic.
 - Found and fixed one error in task 39: `White Tea` was tied with `Oolong Tea` and `Jasmine Tea` for the lowest calories among sweet, nut-free items, so it must be added with quantity 2 and included in the final nutrition calculation.
 - After the fix, the GT contains 169 calls across 50 tasks.
+- Follow-up: corrected task 8's stored visual anchor `value` from the later bottom-right drink `R` to the initial stemmed cocktail `E`; the reviewed GT operations already matched the `E, then R` branch logic below.
 
 Per-task review summary:
 

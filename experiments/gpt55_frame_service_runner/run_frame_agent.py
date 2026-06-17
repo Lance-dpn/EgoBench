@@ -447,10 +447,8 @@ def split_repeated_state_changes(
 
 
 def concise_text(value: Any, max_chars: int = 500) -> str:
-    text = str(value)
-    if len(text) <= max_chars:
-        return text
-    return text[:max_chars].rstrip() + f"... [truncated {len(text) - max_chars} chars]"
+    _ = max_chars
+    return str(value)
 
 
 def load_results(path: str) -> list[dict[str, Any]]:
@@ -1835,7 +1833,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--correction_on_max_rounds", choices=["execute", "stop"], default="execute")
     parser.add_argument("--correction_on_max_tool_rounds", choices=["execute", "stop"], default=None)
     parser.add_argument("--correction_on_max_reply_rounds", choices=["accept", "stop"], default="accept")
-    parser.add_argument("--correction_max_tool_log_entries", type=int, default=0)
+    parser.add_argument(
+        "--correction_max_tool_log_entries",
+        type=int,
+        default=0,
+        help="Deprecated no-op: correction audit context now includes all current-turn tool log entries.",
+    )
     parser.add_argument(
         "--correction_max_tool_result_chars",
         type=int,

@@ -43,9 +43,9 @@ def first_match(text: str, patterns: list[tuple[str, list[str]]], scenario: str,
 RETAIL6 = {
     "heart": "St Michel Le Palmier Crispy Caramel",
     "second": "Bahlsen",
-    "third": "Leibniz Keks",
+    "third": "Desobry Speculoos",
     "red": "Nutella Biscuits",
-    "yellow": "Pallets Biscuits",
+    "yellow": "Leibniz Keks",
 }
 
 RETAIL10_PATTERNS = [
@@ -71,9 +71,9 @@ RETAIL10_PATTERNS = [
     ("square cheese that is closest to you", ["Switzerland Swiss Cheese"]),
     ("square cheese piece that is closest to you", ["Switzerland Swiss Cheese"]),
     ("square cheese closest to you", ["Switzerland Swiss Cheese"]),
-    ("wedge-shaped cheese closest to you", ["Beaujolais Cheese"]),
-    ("wedge-shaped cheese that is closest to you", ["Beaujolais Cheese"]),
-    ("wedge of cheese closest to you", ["Beaujolais Cheese"]),
+    ("wedge-shaped cheese closest to you", ["Appenzeller Cheese"]),
+    ("wedge-shaped cheese that is closest to you", ["Appenzeller Cheese"]),
+    ("wedge of cheese closest to you", ["Appenzeller Cheese"]),
 ]
 
 RESTAURANT5_PATTERNS = [
@@ -98,6 +98,8 @@ RESTAURANT5_PATTERNS = [
     ("dark horizontal middle band", ["T"]),
     ("top right corner", ["E"]),
     ("top-right corner", ["E"]),
+    ("cocktail in a stemmed glass", ["E"]),
+    ("orange on the bottom and white on the top", ["E"]),
     ("stemmed cocktail", ["E"]),
     ("only beverage served in a stemmed cocktail glass", ["E"]),
     ("only drink served in a cocktail glass", ["E"]),

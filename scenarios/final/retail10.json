@@ -56,7 +56,7 @@
               "quantity": 1
             },
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 1
             },
             {
@@ -157,7 +157,7 @@
           "user_id": "user_456",
           "products": [
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 2
             },
             {
@@ -232,7 +232,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 4,
@@ -241,24 +241,12 @@
         "tool_name": "add_to_cart",
         "parameters": {
           "user_id": "user_101",
-          "product_name": "Camembert Cheese",
+          "product_name": "Gruyere AOP Cheese",
           "qty": 1,
           "category": "cheese",
-          "price": 22.8,
-          "tax_rate": 0.08,
+          "price": 37.6,
+          "tax_rate": 0.12,
           "discount": 0.9
-        }
-      },
-      {
-        "tool_name": "add_to_cart",
-        "parameters": {
-          "user_id": "user_101",
-          "product_name": "Brie Cheese",
-          "qty": 1,
-          "category": "cheese",
-          "price": 25.8,
-          "tax_rate": 0.05,
-          "discount": 0.8
         }
       },
       {
@@ -267,11 +255,7 @@
           "user_id": "user_101",
           "products": [
             {
-              "product_name": "Camembert Cheese",
-              "quantity": 1
-            },
-            {
-              "product_name": "Brie Cheese",
+              "product_name": "Gruyere AOP Cheese",
               "quantity": 1
             }
           ]
@@ -523,7 +507,7 @@
               "quantity": 1
             },
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 1
             },
             {
@@ -561,7 +545,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 9,
@@ -596,7 +580,7 @@
           "user_id": "user_456",
           "products": [
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 2
             },
             {
@@ -821,7 +805,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 13,
@@ -830,11 +814,11 @@
         "tool_name": "add_to_cart",
         "parameters": {
           "user_id": "user_303",
-          "product_name": "Gruyere AOP Cheese",
+          "product_name": "Basiron Gouda Cheese",
           "qty": 1,
           "category": "cheese",
-          "price": 37.6,
-          "tax_rate": 0.12,
+          "price": 12.8,
+          "tax_rate": 0.05,
           "discount": 0.9
         }
       },
@@ -852,7 +836,7 @@
               "quantity": 2
             },
             {
-              "product_name": "Gruyere AOP Cheese",
+              "product_name": "Basiron Gouda Cheese",
               "quantity": 1
             }
           ]
@@ -1186,7 +1170,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 18,
@@ -1322,7 +1306,7 @@
           "user_id": "user_456",
           "products": [
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 2
             },
             {
@@ -1438,7 +1422,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 22,
@@ -1692,7 +1676,7 @@
               "quantity": 1
             },
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 1
             },
             {
@@ -1838,7 +1822,7 @@
               "quantity": 1
             },
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 1
             },
             {
@@ -1872,7 +1856,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 28,
@@ -2068,7 +2052,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 32,
@@ -2249,7 +2233,7 @@
           "user_id": "user_123",
           "products": [
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 1
             },
             {
@@ -2334,7 +2318,7 @@
           "user_id": "user_456",
           "products": [
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 2
             },
             {
@@ -2478,7 +2462,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 38,
@@ -2673,7 +2657,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 41,
@@ -2943,7 +2927,7 @@
               "quantity": 1
             },
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 1
             },
             {
@@ -2981,7 +2965,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 45,
@@ -3052,7 +3036,7 @@
           "user_id": "user_456",
           "products": [
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 2
             },
             {
@@ -3229,7 +3213,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 49,
@@ -3238,12 +3222,12 @@
         "tool_name": "add_to_cart",
         "parameters": {
           "user_id": "user_303",
-          "product_name": "Roquefort Cheese",
+          "product_name": "Bamachon Cheese",
           "qty": 1,
           "category": "cheese",
-          "price": 80.8,
-          "tax_rate": 0.07,
-          "discount": 0.9
+          "price": 18.9,
+          "tax_rate": 0.05,
+          "discount": 0.8
         }
       },
       {
@@ -3260,7 +3244,7 @@
               "quantity": 2
             },
             {
-              "product_name": "Roquefort Cheese",
+              "product_name": "Bamachon Cheese",
               "quantity": 1
             }
           ]
@@ -3597,8 +3581,8 @@
               "quantity": 1
             },
             {
-              "product_name": "switzerland switzerland swiss cheese",
-              "quantity": 1
+              "product_name": "Switzerland Swiss Cheese",
+              "quantity": 2
             },
             {
               "product_name": "Manchego Cheese",
@@ -3615,10 +3599,6 @@
             {
               "product_name": "Roquefort Cheese",
               "quantity": 2
-            },
-            {
-              "product_name": "Switzerland Swiss Cheese",
-              "quantity": 1
             },
             {
               "product_name": "Goat Cheese",
@@ -3706,7 +3686,7 @@
           "user_id": "user_456",
           "products": [
             {
-              "product_name": "switzerland switzerland swiss cheese",
+              "product_name": "Switzerland Swiss Cheese",
               "quantity": 2
             },
             {
@@ -3744,7 +3724,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 56,
@@ -3753,12 +3733,12 @@
         "tool_name": "add_to_cart",
         "parameters": {
           "user_id": "user_789",
-          "product_name": "Basiron Gouda Cheese",
+          "product_name": "Appenzeller Cheese",
           "qty": 1,
           "category": "cheese",
-          "price": 12.8,
-          "tax_rate": 0.05,
-          "discount": 0.9
+          "price": 37.6,
+          "tax_rate": 0.1,
+          "discount": 0.7
         }
       },
       {
@@ -3768,11 +3748,7 @@
           "products": [
             {
               "product_name": "Appenzeller Cheese",
-              "quantity": 1
-            },
-            {
-              "product_name": "Basiron Gouda Cheese",
-              "quantity": 1
+              "quantity": 2
             }
           ]
         }
@@ -3976,7 +3952,7 @@
     "image_path": "retail10.mp4",
     "key": "product_name",
     "value": [
-      "Beaujolais Cheese"
+      "Appenzeller Cheese"
     ],
     "image_description": "You're currently choosing cheese, and you're torn because there are so many options. Finally, you're shown a rectangular cheese at the very back, which appears to be from Switzerland and costs 43.80 yuan.",
     "task_id": 60,
