@@ -51,6 +51,26 @@ ALLOWED_VISUAL_KEYS = {
     "visible_region",
 }
 
+DETAIL_EVENT_WINDOW_SECONDS = 2.0
+
+def normalized_visual_request_from_payload(payload: dict[str, Any]) -> dict[str, Any] | None:
+    visual_query = payload.get("visual_query")
+    if isinstance(visual_query, dict):
+        return visual_query
+    observer_input = payload.get("observer_input")
+    if isinstance(observer_input, dict):
+        return observer_input
+    normalized_slots = payload.get("normalized_slots")
+    if not isinstance(normalized_slots, dict):
+        return None
+    normalized_request: dict[str, Any] = {"slots": normalized_slots}
+    for key in ("schema_version", "problem_id", "video_path", "menu_label", "task_type", "target_kind"):
+        if payload.get(key) is not None:
+            normalized_request[key] = payload[key]
+    normalized_request.setdefault("schema_version", "observer_input_v1_inline")
+    return normalized_request
+
+
 def load_env_file(path: Path) -> None:
     if not path.exists():
         return
@@ -697,29 +717,6 @@ def normalize_event_type(event_type: Any, ordinal: Any, referent: str) -> str:
     return base or "visual_reference"
 
 
-def default_downstream_instruction(user_referent: str, event_type: str | None = None) -> str:
-    if event_type:
-        return (
-            f"These frames show the localized {event_type} event for: {user_referent}. "
-            "Identify the visible anchor involved in this event."
-        )
-    return f"These frames show {user_referent}. Identify the visible anchor involved in this event."
-
-
-def clean_downstream_instruction(value: Any, user_referent: str, event_type: str | None = None) -> str:
-    text = str(value or "").strip()
-    lower = text.lower()
-    placeholder_patterns = (
-        "...",
-        "please identify ...",
-        "these frames show ...",
-        "these frames show the localized visual event",
-    )
-    if not text or any(pattern in lower for pattern in placeholder_patterns):
-        return default_downstream_instruction(user_referent, event_type)
-    return text
-
-
 def frame_id_to_timestamp(frame_id: Any, fps: float) -> float | None:
     if not frame_id:
         return None
@@ -747,67 +744,14 @@ def parse_timestamp(value: Any) -> float | None:
     return (int(match.group(1)) * 60 if match.group(1) else 0) + float(match.group(2))
 
 
-def parse_time_range_endpoint(value: Any, endpoint: str) -> float | None:
-    if value is None:
-        return None
-    matches = re.findall(r"(?:(\d+):)?(\d+(?:\.\d+)?)", str(value))
-    if not matches:
-        return None
-    seconds = [(int(minute) * 60 if minute else 0) + float(second) for minute, second in matches]
-    if endpoint == "start":
-        return seconds[0]
-    if endpoint == "midpoint" and len(seconds) >= 2:
-        return (seconds[0] + seconds[-1]) / 2
-    return seconds[-1]
-
-
 def parse_event_time_range(ref: dict[str, Any]) -> dict[str, float | None]:
-    raw = ref.get("event_time_range") or ref.get("event_segment") or ref.get("time_segment")
+    raw = ref.get("event_time_range")
     start = None
     end = None
     if isinstance(raw, dict):
-        start = parse_timestamp(raw.get("start") or raw.get("start_time"))
-        end = parse_timestamp(raw.get("end") or raw.get("end_time"))
-    elif raw is not None:
-        start = parse_time_range_endpoint(raw, "start")
-        end = parse_time_range_endpoint(raw, "end")
-    if start is None:
-        start = parse_time_range_endpoint(ref.get("time_range"), "start")
-    if end is None:
-        end = parse_time_range_endpoint(ref.get("time_range"), "end")
+        start = parse_timestamp(raw["start"] if "start" in raw else raw.get("start_time"))
+        end = parse_timestamp(raw["end"] if "end" in raw else raw.get("end_time"))
     return {"start": start, "end": end}
-
-
-def parse_timestamp_list(value: Any, labeled_fps: float) -> list[float]:
-    timestamps = []
-    for item in coerce_list(value, max_items=8):
-        timestamp = None
-        if isinstance(item, dict):
-            timestamp = frame_id_to_timestamp(item.get("frame_id"), labeled_fps)
-            if timestamp is None:
-                timestamp = parse_timestamp(item.get("timestamp") or item.get("time"))
-        else:
-            timestamp = frame_id_to_timestamp(item, labeled_fps)
-            if timestamp is None:
-                timestamp = parse_timestamp(item)
-        if timestamp is not None and timestamp not in timestamps:
-            timestamps.append(round(max(0.0, float(timestamp)), 3))
-    return timestamps
-
-
-def first_present(mapping: dict[str, Any], keys: list[str]) -> Any:
-    for key in keys:
-        if key in mapping and mapping.get(key) not in (None, ""):
-            return mapping.get(key)
-    return None
-
-
-def normalize_order_marker(value: Any) -> str | None:
-    if value in (None, ""):
-        return None
-    text = str(value).strip().lower()
-    ordinal_words = {"first": "1", "second": "2", "third": "3", "fourth": "4", "last": "last"}
-    return ordinal_words.get(text, text)
 
 
 def visual_referent_hint(current_user_message: str) -> str | None:
@@ -831,73 +775,52 @@ def sanitize_target_region_for_detail(target_region: Any, event_type: Any) -> An
     )
 
 
-def clean_event_keyframes(ref: dict[str, Any], labeled_fps: float, max_items: int = 3) -> list[dict[str, Any]]:
+def clean_event_keyframes(
+    ref: dict[str, Any],
+    labeled_fps: float,
+    event_type: Any = None,
+    max_items: int = 3,
+) -> list[dict[str, Any]]:
     keyframes = []
-    for keyframe in coerce_list(ref.get("best_keyframes") or ref.get("keyframes"), max_items=max_items):
+    for keyframe in coerce_list(ref.get("keyframes"), max_items=max_items):
         if not isinstance(keyframe, dict):
             continue
         timestamp = frame_id_to_timestamp(keyframe.get("frame_id"), labeled_fps)
         if timestamp is None:
-            timestamp = parse_timestamp(keyframe.get("timestamp") or keyframe.get("time"))
+            timestamp = parse_timestamp(keyframe["timestamp"] if "timestamp" in keyframe else keyframe.get("time"))
         keyframes.append(
             {
                 "frame_id": keyframe.get("frame_id"),
                 "timestamp": timestamp,
-                "target_region": keyframe.get("target_region") or ref.get("target_region"),
-                "reason": keyframe.get("reason"),
+                "target_region": sanitize_target_region_for_detail(
+                    keyframe.get("target_region") or ref.get("target_region"),
+                    event_type or ref.get("event_type"),
+                ),
             }
         )
-
-    if not keyframes:
-        anchor_timestamp = parse_timestamp(
-            first_present(ref, ["anchor_timestamp", "best_timestamp", "timestamp", "time"])
-        )
-        if anchor_timestamp is not None:
-            keyframes.append(
-                {
-                    "frame_id": ref.get("frame_id"),
-                    "timestamp": anchor_timestamp,
-                    "target_region": ref.get("target_region"),
-                    "reason": ref.get("boundary_reason") or ref.get("reason"),
-                }
-            )
     return keyframes
 
 
 def clean_candidate_event(candidate: dict[str, Any], labeled_fps: float) -> dict[str, Any]:
-    event_order = first_present(candidate, ["event_order", "candidate_order", "order", "request_order"])
-    user_referent = str(candidate.get("referent") or candidate.get("user_referent") or candidate.get("target") or "")
+    event_order = candidate.get("event_order")
+    user_referent = str(candidate.get("user_referent") or "the requested visual referent")
     ordinal = candidate.get("ordinal")
     event_type = normalize_event_type(candidate.get("event_type"), ordinal, user_referent)
     event_time_range = parse_event_time_range(candidate)
-    keyframes = clean_event_keyframes(candidate, labeled_fps)
-    sequence_timestamps = parse_timestamp_list(
-        candidate.get("sequence_timestamps") or candidate.get("ordered_timestamps") or candidate.get("frame_sequence"),
-        labeled_fps,
-    )
-    if not sequence_timestamps and keyframes:
-        sequence_timestamps = [round(float(kf["timestamp"]), 3) for kf in keyframes if kf.get("timestamp") is not None]
+    keyframes = clean_event_keyframes(candidate, labeled_fps, event_type)
     return {
         "event_order": event_order,
         "event_type": event_type,
         "ordinal": ordinal,
         "event_time_range": event_time_range,
-        "time_range": candidate.get("time_range"),
-        "anchor_timestamp": parse_timestamp(first_present(candidate, ["anchor_timestamp", "best_timestamp"])),
         "target_region": sanitize_target_region_for_detail(candidate.get("target_region"), event_type),
-        "detail_needed": coerce_list(candidate.get("detail_needed"), max_items=8),
-        "sequence_timestamps": sequence_timestamps,
-        "downstream_instruction": candidate.get("downstream_instruction")
-        or candidate.get("vision_instruction")
-        or candidate.get("next_model_instruction"),
         "keyframes": keyframes,
-        "boundary_reason": candidate.get("boundary_reason") or candidate.get("reason"),
         "uncertainty": candidate.get("uncertainty"),
     }
 
 
-def clean_candidate_events(observation: dict[str, Any], labeled_fps: float) -> list[dict[str, Any]]:
-    raw_candidates = observation.get("candidate_events") or observation.get("candidates") or []
+def clean_candidates(observation: dict[str, Any], labeled_fps: float) -> list[dict[str, Any]]:
+    raw_candidates = observation.get("candidates") or []
     if not isinstance(raw_candidates, list):
         raw_candidates = [raw_candidates]
     cleaned = []
@@ -907,51 +830,45 @@ def clean_candidate_events(observation: dict[str, Any], labeled_fps: float) -> l
     return cleaned
 
 
-def selected_candidate_event(
-    candidate_events: list[dict[str, Any]],
-    selected_order: Any,
-) -> dict[str, Any] | None:
-    if not candidate_events:
-        return None
-    marker = normalize_order_marker(selected_order)
-    if marker is not None:
-        for candidate in candidate_events:
-            if normalize_order_marker(candidate.get("event_order")) == marker:
-                return candidate
-        if marker.isdigit():
-            idx = int(marker) - 1
-            if 0 <= idx < len(candidate_events):
-                return candidate_events[idx]
-    return candidate_events[0]
-
-
 def candidate_to_referent(
     candidate: dict[str, Any],
     current_user_message: str,
     selection_rule: Any,
 ) -> dict[str, Any]:
-    user_referent = str(visual_referent_hint(current_user_message) or candidate.get("user_referent") or current_user_message)
-    event_type = candidate.get("event_type") or normalize_event_type(None, candidate.get("ordinal"), user_referent)
+    event_type = candidate.get("event_type") or normalize_event_type(
+        None,
+        candidate.get("ordinal"),
+        str(candidate.get("user_referent") or current_user_message or ""),
+    )
+    if "point" in str(event_type or "").lower():
+        user_referent = "the selected pointing event"
+        detail_event_type = "pointing"
+    else:
+        detail_event_type = event_type
+        user_referent = str(
+            visual_referent_hint(current_user_message)
+            or candidate.get("user_referent")
+            or current_user_message
+            or "the requested visual referent"
+        )
     return {
         "user_referent": user_referent,
-        "event_type": event_type,
+        "event_type": detail_event_type,
         "ordinal": candidate.get("ordinal"),
         "selected_event_order": candidate.get("event_order"),
         "selection_rule": selection_rule,
         "event_time_range": candidate.get("event_time_range"),
-        "time_range": candidate.get("time_range"),
         "target_region": sanitize_target_region_for_detail(candidate.get("target_region"), event_type),
-        "detail_needed": candidate.get("detail_needed") or ["identify anchor"],
-        "sequence_timestamps": candidate.get("sequence_timestamps") or [],
-        "downstream_instruction": clean_downstream_instruction(
-            candidate.get("downstream_instruction"),
-            user_referent,
-            event_type,
-        ),
         "keyframes": candidate.get("keyframes") or [],
         "uncertainty": candidate.get("uncertainty"),
-        "selection_boundary_reason": candidate.get("boundary_reason"),
     }
+
+
+def detail_referents_from_plan(plan: dict[str, Any], current_user_message: str) -> list[dict[str, Any]]:
+    selected = plan.get("selected_event")
+    if not isinstance(selected, dict):
+        return []
+    return [candidate_to_referent(selected, current_user_message, plan.get("selection_rule"))]
 
 
 def evenly_spaced(start: float, end: float, count: int) -> list[float]:
@@ -967,62 +884,21 @@ def append_unique_timestamp(items: list[float], value: float) -> None:
         items.append(rounded)
 
 
-def limit_timestamps(items: list[float], max_frames: int) -> list[float]:
-    if max_frames <= 0:
-        return []
-    if len(items) <= max_frames:
-        return items
-    if max_frames == 1:
-        return [items[0]]
-
-    middle_slots = max_frames - 2
-    head_slots = middle_slots // 2
-    tail_slots = middle_slots - head_slots
-    middle = items[1:-1]
-    limited = [items[0]]
-    for value in middle[:head_slots]:
-        append_unique_timestamp(limited, value)
-    for value in middle[-tail_slots:] if tail_slots else []:
-        append_unique_timestamp(limited, value)
-    append_unique_timestamp(limited, items[-1])
-    return limited
-
-
-def sample_timestamps_from_range(
-    start: float,
-    end: float,
-    fps: float,
-    max_frames: int,
-    boundary_offset: float,
-) -> list[float]:
-    if max_frames <= 0:
-        return []
-    start = max(0.0, float(start))
-    end = max(start, float(end))
-    effective_fps = max(0.1, float(fps))
-    interval = 1.0 / effective_fps
-    offset = max(0.0, float(boundary_offset))
-
-    timestamps: list[float] = []
-    if offset:
-        append_unique_timestamp(timestamps, start - offset)
-
-    current = start
-    while current <= end + 1e-6:
-        append_unique_timestamp(timestamps, current)
-        current += interval
-
-    if offset:
-        append_unique_timestamp(timestamps, end + offset)
-
-    return limit_timestamps(timestamps, max_frames)
-
-
 def first_keyframe_timestamp(referent: dict[str, Any]) -> float | None:
     for keyframe in referent.get("keyframes", []):
         if isinstance(keyframe, dict) and keyframe.get("timestamp") is not None:
             return float(keyframe["timestamp"])
     return None
+
+
+def is_static_region_referent(referent: dict[str, Any]) -> bool:
+    event_type = str(referent.get("event_type") or "").lower()
+    if event_type in {"menu_region", "spatial_region"}:
+        return True
+    if event_type in {"pointing", "holding", "object_state"}:
+        return False
+    target_region = str(referent.get("target_region") or "").lower()
+    return any(token in target_region for token in ("menu", "fold", "section", "page", "region"))
 
 
 def sample_timestamps_around_anchor(
@@ -1065,6 +941,32 @@ def sample_timestamps_around_anchor(
     return sorted(timestamps)
 
 
+def capped_window(
+    start: float,
+    end: float,
+    anchor: float | None,
+    max_seconds: float = DETAIL_EVENT_WINDOW_SECONDS,
+) -> tuple[float, float]:
+    start = max(0.0, float(start))
+    end = max(start, float(end))
+    limit = max(0.0, float(max_seconds))
+    if limit <= 0 or end - start <= limit:
+        return start, end
+
+    center = float(anchor) if anchor is not None else (start + end) / 2.0
+    center = min(max(center, start), end)
+    half = limit / 2.0
+    capped_start = center - half
+    capped_end = center + half
+    if capped_start < start:
+        capped_end += start - capped_start
+        capped_start = start
+    if capped_end > end:
+        capped_start -= capped_end - end
+        capped_end = end
+    return max(0.0, capped_start), min(end, capped_end)
+
+
 def event_sequence_timestamps(
     referent: dict[str, Any],
     max_frames: int,
@@ -1076,18 +978,18 @@ def event_sequence_timestamps(
     start = event_range.get("start") if isinstance(event_range, dict) else None
     end = event_range.get("end") if isinstance(event_range, dict) else None
     anchor = first_keyframe_timestamp(referent)
+
     if start is not None and end is not None and float(end) > float(start):
         sample_start = max(0.0, float(start) - max(0.0, float(boundary_offset)))
         sample_end = float(end) + max(0.0, float(boundary_offset))
+        range_center = anchor if anchor is not None else (float(start) + float(end)) / 2.0
+        sample_start, sample_end = capped_window(sample_start, sample_end, range_center)
+        if is_static_region_referent(referent):
+            return evenly_spaced(sample_start, sample_end, max_frames)
         if anchor is not None:
             return sample_timestamps_around_anchor(sample_start, sample_end, anchor, sample_fps, max_frames)
-        return sample_timestamps_from_range(float(start), float(end), sample_fps, max_frames, boundary_offset)
-
-    explicit = referent.get("sequence_timestamps") or referent.get("ordered_timestamps")
-    timestamps = [parse_timestamp(item) for item in coerce_list(explicit, max_items=max_frames)]
-    timestamps = [round(max(0.0, float(item)), 3) for item in timestamps if item is not None]
-    if timestamps:
-        return timestamps[:max_frames]
+        center = (float(start) + float(end)) / 2.0
+        return sample_timestamps_around_anchor(sample_start, sample_end, center, sample_fps, max_frames)
 
     center = anchor if anchor is not None else start or end
     if center is None:
@@ -1096,115 +998,40 @@ def event_sequence_timestamps(
     return evenly_spaced(max(0.0, float(center) - half), float(center) + half, max_frames)
 
 
+def detail_sampling_strategy(referent: dict[str, Any], keyframe_timestamp: float | None) -> str:
+    event_range = referent.get("event_time_range") or {}
+    if (
+        is_static_region_referent(referent)
+        and isinstance(event_range, dict)
+        and event_range.get("start") is not None
+        and event_range.get("end") is not None
+    ):
+        return "event_range_evenly_spaced_static_region_2s_cap"
+    if keyframe_timestamp is not None:
+        return "keyframe_centered_within_event_range_2s_cap"
+    if isinstance(event_range, dict) and event_range.get("start") is not None and event_range.get("end") is not None:
+        return "event_midpoint_centered"
+    if isinstance(event_range, dict) and (event_range.get("start") is not None or event_range.get("end") is not None):
+        return "event_endpoint_centered_window"
+    return "explicit_or_empty"
+
+
 def clean_aura_plan(aura_response: dict[str, Any], current_user_message: str, labeled_fps: float) -> dict[str, Any]:
     observation = aura_observation_payload(aura_response)
-    referent_hint = visual_referent_hint(current_user_message)
-    candidate_events: list[dict[str, Any]] = []
-    selected_event_order = None
+    candidates: list[dict[str, Any]] = []
     selection_rule = None
-    visual_reference_type = None
     selected_candidate: dict[str, Any] | None = None
     if isinstance(observation, dict):
-        candidate_events = clean_candidate_events(observation, labeled_fps)
+        candidates = clean_candidates(observation, labeled_fps)
         selected_event = observation.get("selected_event")
         if isinstance(selected_event, dict):
-            selected_event_clean = clean_candidate_event(selected_event, labeled_fps)
-            if not candidate_events:
-                candidate_events = [selected_event_clean]
-            elif not any(
-                normalize_order_marker(item.get("event_order"))
-                == normalize_order_marker(selected_event_clean.get("event_order"))
-                for item in candidate_events
-            ):
-                candidate_events.insert(0, selected_event_clean)
-        selected_event_order = first_present(
-            observation,
-            ["selected_event_order", "selected_candidate_order", "selected_request_order", "selected_order"],
-        )
-        if selected_event_order is None and isinstance(observation.get("selected_event"), dict):
-            selected_event_order = observation["selected_event"].get("event_order")
+            selected_candidate = clean_candidate_event(selected_event, labeled_fps)
         selection_rule = observation.get("selection_rule")
-        visual_reference_type = observation.get("visual_reference_type")
-        selected_candidate = selected_candidate_event(candidate_events, selected_event_order)
-
-    raw_refs = []
-    if isinstance(observation, dict):
-        raw_refs = observation.get("referents") or observation.get("resolved_referents") or observation.get("visual_referents") or []
-    if not isinstance(raw_refs, list):
-        raw_refs = [raw_refs]
-
-    cleaned_refs = []
-    for ref in raw_refs:
-        if not isinstance(ref, dict):
-            continue
-        user_referent = str(ref.get("referent") or ref.get("user_referent") or current_user_message)
-        ordinal = ref.get("ordinal")
-        event_type = normalize_event_type(ref.get("event_type"), ordinal, user_referent)
-        event_time_range = parse_event_time_range(ref)
-        sequence_timestamps = parse_timestamp_list(
-            ref.get("sequence_timestamps") or ref.get("ordered_timestamps") or ref.get("frame_sequence"),
-            labeled_fps,
-        )
-        keyframes = clean_event_keyframes(ref, labeled_fps)
-
-        if not sequence_timestamps and keyframes:
-            sequence_timestamps = [round(float(kf["timestamp"]), 3) for kf in keyframes if kf.get("timestamp") is not None]
-
-        cleaned_refs.append(
-            {
-                "user_referent": user_referent,
-                "event_type": event_type,
-                "ordinal": ordinal,
-                "selected_event_order": ref.get("selected_event_order") or selected_event_order,
-                "selection_rule": ref.get("selection_rule") or selection_rule,
-                "event_time_range": event_time_range,
-                "time_range": ref.get("time_range"),
-                "target_region": sanitize_target_region_for_detail(
-                    ref.get("target_region") or (keyframes[0].get("target_region") if keyframes else None),
-                    event_type,
-                ),
-                "detail_needed": coerce_list(ref.get("detail_needed"), max_items=8),
-                "sequence_timestamps": sequence_timestamps,
-                "downstream_instruction": clean_downstream_instruction(
-                    ref.get("downstream_instruction") or ref.get("vision_instruction") or ref.get("next_model_instruction"),
-                    user_referent,
-                    event_type,
-                ),
-                "keyframes": keyframes,
-                "uncertainty": ref.get("uncertainty"),
-            }
-        )
-
-    if selected_candidate:
-        selected_ref = candidate_to_referent(selected_candidate, current_user_message, selection_rule)
-        if cleaned_refs:
-            existing = cleaned_refs[0]
-            selected_ref.update(
-                {
-                    "user_referent": referent_hint or existing.get("user_referent") or selected_ref.get("user_referent"),
-                    "event_type": existing.get("event_type") or selected_ref.get("event_type"),
-                    "ordinal": existing.get("ordinal") or selected_ref.get("ordinal"),
-                    "detail_needed": existing.get("detail_needed") or selected_ref.get("detail_needed"),
-                    "downstream_instruction": existing.get("downstream_instruction")
-                    or selected_ref.get("downstream_instruction"),
-                    "uncertainty": existing.get("uncertainty") or selected_ref.get("uncertainty"),
-                }
-            )
-        cleaned_refs = [selected_ref]
-    else:
-        cleaned_refs = cleaned_refs[:1]
 
     return {
-        "current_visual_request": (
-            observation.get("current_visual_request") or observation.get("current_request")
-            if isinstance(observation, dict)
-            else current_user_message
-        ),
-        "visual_reference_type": visual_reference_type,
         "selection_rule": selection_rule,
-        "candidate_events": candidate_events if len(candidate_events) > 1 else [],
-        "selected_event_order": selected_event_order,
-        "referents": cleaned_refs,
+        "selected_event": selected_candidate,
+        "candidates": candidates,
         "uncertainties": observation.get("uncertainties") if isinstance(observation, dict) else None,
     }
 
@@ -1242,10 +1069,13 @@ def infer_visual_key(referent: dict[str, Any] | None, current_user_message: str 
         for value in (
             (referent or {}).get("user_referent"),
             (referent or {}).get("target_region"),
-            (referent or {}).get("downstream_instruction"),
             current_user_message,
-        )
+    )
     ).lower()
+    if re.search(r"\bcategory\b.*\bcontain", text) or re.search(r"\bcontain.*\bcategory\b", text):
+        return "category"
+    if re.search(r"\b(what|which)\b.*\bdish\b", text) or re.search(r"\b(last|first|second|third|final)\s+dish\b", text):
+        return "dish_name"
     if "category" in text or "section" in text or "title" in text:
         return "category"
     if "ingredient" in text:
@@ -1281,6 +1111,20 @@ def extract_json_string_field(raw_text: str, field_name: str) -> str | None:
     return match.group(1).replace("\\n", " ").strip()
 
 
+def extract_markdown_final_answer(raw_text: str) -> str | None:
+    candidates = [
+        item.strip()
+        for item in re.findall(r"\*\*([^*\n]{1,80})\*\*", raw_text or "")
+        if item.strip()
+    ]
+    if not candidates:
+        return None
+    answer = candidates[-1].strip().strip(",.;:")
+    if not answer or ":" in answer:
+        return None
+    return answer
+
+
 def enrich_detail_from_raw_text(
     detail: dict[str, Any],
     referent: dict[str, Any],
@@ -1292,6 +1136,8 @@ def enrich_detail_from_raw_text(
     target_identity = str(detail.get("target_identity") or "").strip()
     if not target_identity:
         target_identity = extract_json_string_field(raw_text, "target_identity") or ""
+    if not target_identity:
+        target_identity = extract_markdown_final_answer(raw_text) or ""
     target_identity = canonicalize_visual_value(target_identity)
     if not target_identity:
         return detail
@@ -1445,26 +1291,14 @@ def compact_observation(plan: dict[str, Any], details: list[dict[str, Any]]) -> 
                 visual_key_values.append(kv)
     return {
         "observer": "visual_event_qwen_sequence",
-        "current_visual_request": plan.get("current_visual_request"),
+        "selected_event": plan.get("selected_event"),
+        "candidates": plan.get("candidates") or [],
         "visual_key_values": visual_key_values,
-        "visual_referents": [
-            {
-                "user_referent": ref.get("user_referent"),
-                "event_type": ref.get("event_type"),
-                "ordinal": ref.get("ordinal"),
-                "event_time_range": ref.get("event_time_range"),
-                "time_range": ref.get("time_range"),
-                "target_region": ref.get("target_region"),
-                "downstream_instruction": ref.get("downstream_instruction"),
-                "uncertainty": ref.get("uncertainty"),
-            }
-            for ref in plan.get("referents", [])
-        ],
         "detail_evidence": [
             {
                 "user_referent": item.get("user_referent"),
                 "mode": item.get("detail_mode"),
-                "anchor_timestamp": item.get("anchor_timestamp"),
+                "keyframe_timestamp": item.get("keyframe_timestamp"),
                 "sampling_strategy": item.get("sampling_strategy"),
                 "timestamps": item.get("timestamps"),
                 "sample_fps": item.get("sample_fps"),
@@ -1495,12 +1329,13 @@ def compact_trace(trace: dict[str, Any]) -> dict[str, Any]:
                 "generation": item.get("generation"),
                 "extra_body": item.get("extra_body"),
                 "user_referent": item.get("user_referent"),
-                "anchor_timestamp": item.get("anchor_timestamp"),
+                "keyframe_timestamp": item.get("keyframe_timestamp"),
                 "sampling_strategy": item.get("sampling_strategy"),
                 "timestamps": item.get("timestamps"),
                 "target_region": item.get("target_region"),
                 "sample_fps": item.get("sample_fps"),
                 "boundary_offset": item.get("boundary_offset"),
+                "max_frames": item.get("max_frames"),
                 "scene_description": item.get("scene_description"),
                 "frame_resize": item.get("frame_resize"),
                 "frame_paths": item.get("frame_paths"),
@@ -1525,7 +1360,11 @@ def compact_trace(trace: dict[str, Any]) -> dict[str, Any]:
             "video_path": request.get("video_path"),
             "image_description": request.get("image_description"),
             "current_user_message": request.get("current_user_message"),
+            "referent_hint": request.get("referent_hint"),
+            "observer_input": request.get("observer_input"),
+            "normalized_slots": request.get("normalized_slots"),
         },
+        "normalized_visual_request": trace.get("normalized_visual_request"),
         "scene_description": trace.get("scene_description"),
         "stages": {
             "labeled_video": stages.get("labeled_video"),
@@ -1579,6 +1418,9 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
         task_id = str(payload.get("task_id") or "")
         current_user_message = str(payload.get("current_user_message") or "")
         image_description = str(payload.get("image_description") or "")
+        normalized_request = normalized_visual_request_from_payload(payload)
+        if normalized_request:
+            trace["normalized_visual_request"] = normalized_request
         scene_description = build_scene_description(scenario, image_description)
         trace["scene_description"] = scene_description
         event_backend, backend_selection_reason = effective_event_backend(args, current_user_message)
@@ -1615,7 +1457,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 args.event_max_frames,
                 args.frame_max_side,
             )
-            prompt = build_qwen_event_prompt(current_user_message, image_description, scenario)
+            prompt = build_qwen_event_prompt(current_user_message, image_description, scenario, normalized_request)
             raw_response, text, parsed = call_qwen_frame_event_localizer(prompt, event_frames, args)
             event_data = {"observation": parsed if isinstance(parsed, dict) else {"raw": text}}
             clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
@@ -1647,7 +1489,7 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
             }
         elif event_backend == "qwen_video":
             _, event_base_url, event_model = qwen_vl_env(args, stage="event")
-            prompt = build_qwen_video_event_prompt(current_user_message, image_description, scenario)
+            prompt = build_qwen_video_event_prompt(current_user_message, image_description, scenario, normalized_request)
             raw_response, text, parsed = call_qwen_video_event_localizer(prompt, local_video, args)
             event_data = {"observation": parsed if isinstance(parsed, dict) else {"raw": text}}
             clean_plan = clean_aura_plan(event_data, current_user_message, args.labeled_fps)
@@ -1677,8 +1519,9 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
         detail_records = []
         frame_dir = cache_dir / "keyframes"
         request_key = str(payload.get("request_key") or "")
-        for ref_idx, referent in enumerate(clean_plan.get("referents", [])):
-            anchor_timestamp = first_keyframe_timestamp(referent)
+        detail_referents = detail_referents_from_plan(clean_plan, current_user_message)
+        for ref_idx, referent in enumerate(detail_referents):
+            keyframe_timestamp = first_keyframe_timestamp(referent)
             timestamps = event_sequence_timestamps(
                 referent,
                 args.sequence_frames,
@@ -1700,7 +1543,13 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 )
                 frame_paths.append(extract_frame(local_video, float(timestamp), frame_dir, frame_name, None))
 
-            prompt = build_qwen_sequence_prompt(referent, current_user_message, image_description, scenario)
+            prompt = build_qwen_sequence_prompt(
+                referent,
+                current_user_message,
+                image_description,
+                scenario,
+                normalized_request,
+            )
             _, detail_base_url, detail_model = qwen_vl_env(args, stage="detail")
             detail_record = {
                 "referent_index": ref_idx,
@@ -1711,12 +1560,13 @@ def run_observation(payload: dict[str, Any], args: argparse.Namespace) -> tuple[
                 "generation": qwen_generation_config(args, "detail"),
                 "extra_body": qwen_extra_body(qwen_generation_config(args, "detail"), detail_base_url),
                 "user_referent": referent.get("user_referent"),
-                "anchor_timestamp": anchor_timestamp,
-                "sampling_strategy": "anchor_within_event_range" if anchor_timestamp is not None else "event_range",
+                "keyframe_timestamp": keyframe_timestamp,
+                "sampling_strategy": detail_sampling_strategy(referent, keyframe_timestamp),
                 "timestamps": timestamps,
                 "target_region": referent.get("target_region"),
                 "sample_fps": args.detail_sample_fps,
                 "boundary_offset": args.detail_boundary_offset,
+                "max_frames": args.sequence_frames,
                 "scene_description": scene_description,
                 "frame_resize": "none",
                 "frame_paths": [str(path) for path in frame_paths],

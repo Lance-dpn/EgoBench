@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+from typing import Any
+
 
 EVENT_SCENARIO_VISUAL_GUIDANCE = {
     "order": """
@@ -91,6 +94,46 @@ def build_observer_event_scene_description(scenario: str, image_description: str
 
 def build_observer_detail_scene_description(scenario: str, image_description: str) -> str:
     return build_observer_scene_description(scenario, image_description, stage="detail")
+
+
+def format_normalized_visual_context(normalized_request: dict[str, Any] | None) -> str:
+    """Format observer-facing visual query or legacy normalized slots."""
+
+    if not isinstance(normalized_request, dict) or not normalized_request:
+        return "N/A"
+    if normalized_request.get("schema_version") == "visual_query_v1" or (
+        "target" in normalized_request and "referent" in normalized_request
+    ):
+        allowed_visual_query = {
+            "schema_version",
+            "scenario",
+            "surface",
+            "target",
+            "referent",
+            "scope",
+            "video_path",
+            "problem_id",
+        }
+        compact = {
+            key: normalized_request.get(key)
+            for key in allowed_visual_query
+            if key in normalized_request
+        }
+        return json.dumps(compact, ensure_ascii=False, indent=2, sort_keys=True)
+
+    allowed_top_level = {
+        "schema_version",
+        "problem_id",
+        "video_path",
+        "menu_label",
+        "task_type",
+        "target_kind",
+        "slots",
+    }
+    compact = {key: normalized_request.get(key) for key in allowed_top_level if key in normalized_request}
+    if "slots" not in compact and isinstance(normalized_request.get("normalized_slots"), dict):
+        compact["slots"] = normalized_request["normalized_slots"]
+    return json.dumps(compact or normalized_request, ensure_ascii=False, indent=2, sort_keys=True)
 
 
 # Backward-compatible name for older imports.

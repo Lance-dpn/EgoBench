@@ -578,7 +578,7 @@
     "type": "function",
     "function": {
       "tool_name": "compute_total_payment",
-      "description": "Compute total payable amount for the specified dishes: sum(price * discount * qty).",
+      "description": "Compute total payable amount for the specified dishes: sum(price * discount * qty). If a set meal has no set_meal_price, it is priced from its included dishes.",
       "parameters": {
         "type": "object",
         "additionalProperties": false,

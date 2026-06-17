@@ -1,0 +1,86 @@
+{
+  "annotations": [
+    {
+      "case_id": "retail_clean_v2_problem_0217",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          9.5
+        ],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Third-shelf brown Grisbi boxes with yellow lemon graphics; the relevant box is the third brown box from the left.",
+          "coarse_region": "third shelf center",
+          "notes": "Frame t06 shows the Grisbi Limone boxes clearly."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail8/t06.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Grisbi Limone Citron",
+        "acceptable_aliases": [
+          "Grisbi Limone",
+          "Grisbi lemon cookies",
+          "brown Grisbi box with yellow lemon pattern"
+        ],
+        "negative_neighbors": [
+          "Grisbi Nocciola",
+          "Grisbi Chocolate",
+          "Crispy Cups Strawberry"
+        ],
+        "confidence": "high",
+        "evidence": "The third brown Grisbi box on the shelf has the yellow lemon graphic matching Grisbi Limone Citron."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0235",
+      "event_gt": {
+        "primary_content_range": [
+          2.0,
+          4.0
+        ],
+        "expected_time_range": [
+          1.0,
+          5.0
+        ],
+        "allowed_transition_range": [
+          0.5,
+          5.5
+        ],
+        "key_frame_time": 2.0,
+        "expected_region": {
+          "description": "Finger points to an orange St Michel box on the upper middle shelf.",
+          "coarse_region": "upper middle shelf",
+          "notes": "Frame t02 shows the pointing target and orange box layout."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail8/t02.jpg and t03.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "St Michel Le Palmier Crispy Caramel",
+        "acceptable_aliases": [
+          "St Michel orange box",
+          "St Michel palmier crispy caramel",
+          "orange St Michel cookie box"
+        ],
+        "negative_neighbors": [
+          "St Michel Le Sablé de Reims Coconut",
+          "St Michel La Galette All Butter",
+          "Lu Petit Beurre"
+        ],
+        "confidence": "medium",
+        "evidence": "The pointed orange St Michel box has palmier-style imagery; exact flavor text is partially small and should be manually confirmed."
+      }
+    }
+  ]
+}

@@ -1,0 +1,652 @@
+{
+  "annotations": [
+    {
+      "case_id": "retail_clean_v2_problem_0124",
+      "event_gt": {
+        "primary_content_range": [
+          3,
+          5
+        ],
+        "expected_time_range": [
+          3,
+          5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "hands holding the green-liquid Sangre de Toro bottle",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 frames around 3-6s show the green-liquid Sangre de Toro bottle being picked up and held."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The picked green-liquid bottle label reads Sangre de Toro and matches DB item Sangre de Toro(Green)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0125",
+      "event_gt": {
+        "primary_content_range": [
+          3,
+          5
+        ],
+        "expected_time_range": [
+          3,
+          5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "green-liquid Sangre de Toro bottle picked up from the shelf",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 around 3-6s clearly shows a green-liquid Sangre de Toro bottle being picked up."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The green-liquid picked bottle is the Sangre de Toro(Green) product."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0126",
+      "event_gt": {
+        "primary_content_range": [
+          3,
+          5
+        ],
+        "expected_time_range": [
+          3,
+          5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "first picked bottle, green-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The first picked bottle in retail5 is the green-liquid Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The picked green-liquid wine maps to DB item Sangre de Toro(Green)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0127",
+      "event_gt": {
+        "primary_content_range": [
+          13,
+          15
+        ],
+        "expected_time_range": [
+          13,
+          15
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "hands holding the orange-liquid Sangre de Toro bottle with orange cap/seal",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 around 12-16s shows the orange-liquid Sangre de Toro bottle being picked up, with an orange cap/seal."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The orange-seal picked bottle is the orange-liquid Sangre de Toro product."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0134",
+      "event_gt": {
+        "primary_content_range": [
+          13,
+          15
+        ],
+        "expected_time_range": [
+          13,
+          15
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "second picked bottle, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The second picked bottle in retail5 is the orange-liquid Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second picked bottle is Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0135",
+      "event_gt": {
+        "primary_content_range": [
+          13,
+          15
+        ],
+        "expected_time_range": [
+          13,
+          15
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "second picked wine, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 second pick-up sequence shows the orange-liquid Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second wine picked up is Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0136",
+      "event_gt": {
+        "primary_content_range": [
+          13,
+          15
+        ],
+        "expected_time_range": [
+          13,
+          15
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "second picked wine, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The second picked wine is the orange-liquid Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second picked wine maps to Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0141",
+      "event_gt": {
+        "primary_content_range": [
+          16.0,
+          18.0
+        ],
+        "expected_time_range": [
+          16.0,
+          18.0
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 17.0,
+        "expected_region": {
+          "description": "second bottle being put back, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 around 16-18s shows the second picked orange Sangre de Toro bottle being put back."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second bottle put back is Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0143",
+      "event_gt": {
+        "primary_content_range": [
+          16.0,
+          18.0
+        ],
+        "expected_time_range": [
+          16.0,
+          18.0
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 17.0,
+        "expected_region": {
+          "description": "second wine put back on the shelf, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The second returned wine in retail5 is the orange-liquid Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second wine put back is Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0144",
+      "event_gt": {
+        "primary_content_range": [
+          16.0,
+          18.0
+        ],
+        "expected_time_range": [
+          16.0,
+          18.0
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 17.0,
+        "expected_region": {
+          "description": "second wine put back, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 around 16-18s shows the second wine, Sangre de Toro(Orange), being returned."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second wine put back is the orange Sangre de Toro bottle."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0145",
+      "event_gt": {
+        "primary_content_range": [
+          16.0,
+          18.0
+        ],
+        "expected_time_range": [
+          16.0,
+          18.0
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 17.0,
+        "expected_region": {
+          "description": "second wine returned to the shelf, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The second put-back wine is visually the orange-liquid Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second wine put back is Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0146",
+      "event_gt": {
+        "primary_content_range": [
+          16.0,
+          18.0
+        ],
+        "expected_time_range": [
+          16.0,
+          18.0
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 17.0,
+        "expected_region": {
+          "description": "second wine put back, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 around 16-18s shows the orange-liquid Sangre de Toro bottle being put back."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The second wine put back is Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0153",
+      "event_gt": {
+        "primary_content_range": [
+          3,
+          5
+        ],
+        "expected_time_range": [
+          3,
+          5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "green-liquid Sangre de Toro bottle",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The green-liquid bottle in retail5 is clearly the Sangre de Toro green bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The green-liquid wine is Sangre de Toro(Green)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0154",
+      "event_gt": {
+        "primary_content_range": [
+          3,
+          5
+        ],
+        "expected_time_range": [
+          3,
+          5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "green-liquid Sangre de Toro bottle",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The green-liquid wine in the retail5 scene is the green Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The green-liquid wine maps to DB item Sangre de Toro(Green)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0155",
+      "event_gt": {
+        "primary_content_range": [
+          3,
+          5
+        ],
+        "expected_time_range": [
+          3,
+          5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "green-liquid Sangre de Toro bottle",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail5 frames around 3-6s show the green-liquid Sangre de Toro bottle clearly."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The green-liquid wine is Sangre de Toro(Green)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0156",
+      "event_gt": {
+        "primary_content_range": [
+          13,
+          15
+        ],
+        "expected_time_range": [
+          13,
+          15
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "orange-liquid Sangre de Toro bottle",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The orange-liquid wine in retail5 is clearly the orange Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "high",
+        "evidence": "The orange-liquid wine maps to DB item Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0160",
+      "event_gt": {
+        "primary_content_range": [
+          13,
+          15
+        ],
+        "expected_time_range": [
+          13,
+          15
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "second bottle in the action sequence, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "The second picked bottle in retail5 is the orange-liquid Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "medium",
+        "evidence": "The second bottle in the action sequence is Sangre de Toro(Orange)."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0161",
+      "event_gt": {
+        "primary_content_range": [
+          13,
+          15
+        ],
+        "expected_time_range": [
+          13,
+          15
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "second wine in the action sequence, orange-liquid Sangre de Toro",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "The second picked wine in retail5 is the orange Sangre de Toro bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Orange)",
+        "acceptable_aliases": [
+          "Sangre de Toro Orange",
+          "Sangre de Toro"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "MICHEL Lynch nature"
+        ],
+        "confidence": "medium",
+        "evidence": "The second wine is Sangre de Toro(Orange)."
+      }
+    }
+  ]
+}

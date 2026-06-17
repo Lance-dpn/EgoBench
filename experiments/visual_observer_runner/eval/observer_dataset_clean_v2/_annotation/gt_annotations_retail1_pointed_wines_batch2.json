@@ -1,0 +1,508 @@
+{
+  "annotations": [
+    {
+      "case_id": "retail_clean_v2_problem_0001",
+      "event_gt": {
+        "primary_content_range": [1.0, 2.5],
+        "expected_time_range": [1.0, 2.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 1.5,
+        "expected_region": {
+          "description": "middle shelf, first pointed bottle with white label and brown oval badge",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 1.5-2s shows the finger pointing at the middle-shelf bottle with the Oyster Bay label and brown oval badge."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Merlot Oyster Bay",
+        "acceptable_aliases": ["Oyster Bay"],
+        "negative_neighbors": ["RIVER TERRACE Chardonnay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The pointed white-label bottle reads Oyster Bay and matches DB item Merlot Oyster Bay."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0002",
+      "event_gt": {
+        "primary_content_range": [1.0, 2.5],
+        "expected_time_range": [1.0, 2.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 1.5,
+        "expected_region": {
+          "description": "middle shelf, first pointed Oyster Bay bottle with brown-toned capsule/label detail",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "retail1 around 1.5-2s shows the finger on the Oyster Bay bottle; its top and label details are brown/gray toned."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Merlot Oyster Bay",
+        "acceptable_aliases": ["Oyster Bay"],
+        "negative_neighbors": ["RIVER TERRACE Chardonnay", "Sauvignon Blanc"],
+        "confidence": "medium",
+        "evidence": "The visually referenced bottle is the Oyster Bay bottle, canonicalized to Merlot Oyster Bay."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0003",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "middle shelf, dark-label bottle with a white circular logo",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 6s shows the finger pointing at the dark-label bottle with a white circular Sauvignon Blanc label."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The dark-label bottle's visible text reads Sauvignon Blanc."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0004",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "middle shelf, dark-label bottle under the left hand",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 6s shows the left hand pointing at the dark-label Sauvignon Blanc bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The pointed dark-label bottle reads Sauvignon Blanc."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0005",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "middle shelf, white-label bottle with a gold cap",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 4.5s shows the gold-cap white-label River Terrace bottle in the pointed group."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The white-label gold-cap bottle reads RIVER TERRACE and matches DB item RIVER TERRACE Chardonnay."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0006",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "middle shelf, pointed white-label bottle with gold foil cap",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 4.5s shows the pointed bottle with a gold foil cap and RIVER TERRACE label."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The pointed gold-foil-cap bottle reads RIVER TERRACE."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0007",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "middle shelf, dark bottle with green cap and white circular label",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "retail1 around 6s shows the pointed dark bottle with a green cap and white circular Sauvignon Blanc label."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "medium",
+        "evidence": "The dark bottle with green cap has a readable Sauvignon Blanc label."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0008",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "middle shelf, predominantly white-label bottle with gold cap",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 4.5s shows the River Terrace bottle with a mostly white label and gold cap."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The visible label reads RIVER TERRACE, matching DB item RIVER TERRACE Chardonnay."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0009",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "middle shelf, bottle with white circular logo on dark label",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 6s shows the finger pointing at the bottle with a white circular logo."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The white-circle dark label reads Sauvignon Blanc."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0010",
+      "event_gt": {
+        "primary_content_range": [1.0, 2.5],
+        "expected_time_range": [1.0, 2.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 1.5,
+        "expected_region": {
+          "description": "middle shelf, pointed Oyster Bay bottle with white label",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "retail1 around 1.5-2s shows a pointed white-label Oyster Bay bottle."
+      },
+      "detail_gt": {
+        "target_kind": "visible_text",
+        "canonical_value": "Merlot Oyster Bay",
+        "acceptable_aliases": ["Oyster Bay"],
+        "negative_neighbors": ["RIVER TERRACE Chardonnay", "Sauvignon Blanc"],
+        "confidence": "medium",
+        "evidence": "The visible text on the pointed white label includes Oyster Bay."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0011",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "middle shelf, yellow/gold cap River Terrace bottle",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 4.5s shows the pointed yellow/gold-cap River Terrace bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The yellow/gold-cap bottle reads RIVER TERRACE."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0014",
+      "event_gt": {
+        "primary_content_range": [1.0, 2.5],
+        "expected_time_range": [1.0, 2.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 1.5,
+        "expected_region": {
+          "description": "leftmost bottle in the pointed sequence, Oyster Bay on the middle shelf",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The leftmost stable pointed bottle in the sequence is the Oyster Bay bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Merlot Oyster Bay",
+        "acceptable_aliases": ["Oyster Bay"],
+        "negative_neighbors": ["RIVER TERRACE Chardonnay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The leftmost pointed bottle reads Oyster Bay and maps to Merlot Oyster Bay."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0015",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "rightmost stable pointed bottle in the sequence, dark-label Sauvignon Blanc",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The rightmost stable pointed bottle is the dark-label Sauvignon Blanc bottle around 6s."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The rightmost pointed bottle reads Sauvignon Blanc."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0016",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "second stable pointed bottle in the sequence, River Terrace",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "After Oyster Bay, the second stable pointed bottle is River Terrace around 4.5s."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The second stable pointed bottle reads RIVER TERRACE."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0017",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "second stable pointed bottle in the sequence, River Terrace",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The second stable pointed bottle in retail1 is River Terrace."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The second pointed bottle reads RIVER TERRACE."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0018",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "second-to-last stable pointed bottle, River Terrace",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "The stable sequence is Oyster Bay, River Terrace, then Sauvignon Blanc; second-to-last is River Terrace."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "medium",
+        "evidence": "River Terrace is second-to-last in the three-bottle pointing sequence."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0019",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "third stable pointed bottle in the sequence, dark-label Sauvignon Blanc",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The third stable pointed bottle is the dark-label Sauvignon Blanc bottle around 6s."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The third pointed bottle reads Sauvignon Blanc."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0020",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "last stable pointed bottle in the sequence, dark-label Sauvignon Blanc",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The last stable pointed bottle in retail1 is the dark-label Sauvignon Blanc bottle."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The last pointed bottle reads Sauvignon Blanc."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0021",
+      "event_gt": {
+        "primary_content_range": [4.0, 5.5],
+        "expected_time_range": [4.0, 5.5],
+        "allowed_transition_range": null,
+        "key_frame_time": 4.5,
+        "expected_region": {
+          "description": "second stable pointed bottle, River Terrace",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The second stable pointed bottle in the sequence is River Terrace."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "RIVER TERRACE Chardonnay",
+        "acceptable_aliases": ["River Terrace"],
+        "negative_neighbors": ["Merlot Oyster Bay", "Sauvignon Blanc"],
+        "confidence": "high",
+        "evidence": "The second pointed bottle reads RIVER TERRACE."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0022",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "third stable pointed bottle, dark-label Sauvignon Blanc",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "The third stable pointed bottle in the sequence is Sauvignon Blanc."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The third pointed bottle reads Sauvignon Blanc."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0024",
+      "event_gt": {
+        "primary_content_range": [5.5, 7.0],
+        "expected_time_range": [5.5, 7.0],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "middle shelf, dark-label bottle with a white circular logo",
+          "coarse_region": "shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail1 around 6s shows a middle-shelf wine with a white circular logo on a dark label."
+      },
+      "detail_gt": {
+        "target_kind": "visible_text",
+        "canonical_value": "Sauvignon Blanc",
+        "acceptable_aliases": [],
+        "negative_neighbors": ["Merlot Oyster Bay", "RIVER TERRACE Chardonnay"],
+        "confidence": "high",
+        "evidence": "The white-circle label reads Sauvignon Blanc."
+      }
+    }
+  ]
+}

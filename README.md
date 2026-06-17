@@ -1,17 +1,114 @@
+## Final Evaluation Phase
+
+The final evaluation test set will be released on **June 16, 2026 at 20:00 (GMT+8)**. All participants are required to submit their result files and technical report by the deadline of **June 22, 2026 at 20:00 (GMT+8)**.
+
+> ⚠️ **Important Notice on Schedule Adjustment**
+> Since the detailed technical report deadline for outstanding teams is June 25, 2026, we have advanced both the test set release date and the submission deadline. To prevent direct tampering with interaction answers, we are releasing the **entire test set**. Participants are expected to complete testing on all samples within this six-day window. If you have any questions or concerns regarding this timeline, please raise an issue or contact us via email.
+
+The following 309 tasks in 5 scenarios constitute the **final test set**:
+
+| Scenario | Scenario Number |
+|----------|-----------------|
+| Retail   | 6, 10           |
+| Kitchen  | 4               |
+| Restaurant | 5             |
+| Order    | 2               |
+
+The corresponding task files (`retail6.json`, `retail10.json`, `kitchen4.json`, `restaurant5.json`, `order2.json`) are located in the `scenarios/final/` directory. These files do **not** contain the `ground_truth` field.
+
+⏰ Deadline: June 22, 2026 at 20:00 (GMT+8)
+
+## Public Responses to Participant Questions(Continuously updated) :
+#### Q1:
+In the June 16 version, although the ground-truth annotations have been removed from the evaluation JSON files under EgoBench/scenarios/final, the files still contain certain keys and values. Can the service agent access or use this information?
+#### A1:
+No. The JSON files under EgoBench/scenarios/final, as well as any information contained in them, must not be directly accessed or used by the service agent. The service agent is only allowed to obtain information from the video and the Simulated User’s feedback. In the evaluation workflow, the files under EgoBench/scenarios/final are intended to be used only by the Simulated User. Moreover, the remaining key-value pairs in these files were included merely as supplementary information to assist human annotators’ understanding, and they do not represent the ground truth used in the final evaluation.
+To avoid causing similar confusion for other participants, we will remove irrelevant information from the files under EgoBench/scenarios/final. In addition, during the evaluation phase, we will also strictly examine whether the service agent designed by any participant directly uses information from the files under EgoBench/scenarios/final. Any such use will be considered cheating and handled accordingly.
+
+
+### How to Run the Final Evaluation Scenarios (has released on 2026.06.16)
+
+**Step 1**: Make sure your model configuration and environment variables are properly set (refer to the [Configuration](#configuration) section above).
+
+**Step 2**: Run the final evaluation scenarios using the `--final_eval` flag:
+
+```bash
+bash run_all_scenarios.sh --final_eval
+```
+
+You can also limit the number of tasks per scenario for a quick test before running all tasks:
+
+```bash
+bash run_all_scenarios.sh --final_eval --num_tasks 5
+```
+
+**Step 3**: After execution completes, the interaction results will be saved under the `results/{model_name}/` directory:
+
+```
+results/
+└── {model_name}/
+    ├── retail6_easy.json
+    ├── retail10_easy.json
+    ├── kitchen4_easy.json
+    ├── restaurant5_easy.json
+    └── order2_easy.json
+```
+
+### Submission
+Please rename the results/{model_name}/ folder containing the above 5 result files to results/{your_team_name}/ before submission. The submission email address is:
+
+
+> **egolink.challenge@gmail.com**
+
+Note: To increase the cost of manual tampering and reduce the possibility of human-edited interaction trajectories, we have released all examples from these five scenarios. However, during the final evaluation, we will only score a randomly selected subset of 50–100 tasks from them (the evaluated tasks will be the same for every participating team).
+
+In addition, to ensure transparency and openness in the evaluation process, we plan to release the ground-truth answers for the finally selected evaluation tasks after the submission deadline, so that all participants can verify and inspect the results.
+
+Submission requirements:
+
+1. Only submit the interaction results for the final evaluation scenarios: retail6, retail10, kitchen4, restaurant5, and order2. Please keep the original file names and place these 5 result files under results/{your_team_name}/.
+
+2. In addition to the result files, **all participants are required to submit a technical report**. We recommend that participants prepare this report in **ACM MM format** (official template: https://www.acm.org/publications/proceedings-template). **Due to the limited timeline, for the submission due by June 22, 2026 at 20:00 (GMT+8), we do not require participants to provide a fully polished technical report, nor do we strictly require the full 6 pages of main content.** Instead, the report should **focus on describing the implementation method**. The implementation details should include, but are not limited to: **the GitHub code repository link (required)**, the agent construction framework, the training method of the backbone/foundation model, experimental settings, and other essential details needed to reproduce the experiments.
+   - The technical report should be named `{your_team_name}.pdf`.
+
+3. Place the result folder and the technical pdf report into one folder, compress it, and send it as an email attachment.
+
+4. The email subject and the attachment name must follow the format: {your_team_name}_track2.
+
+5. After comprehensively evaluating the implementation approach, code quality, and benchmark results, teams with outstanding performance will be contacted by email **by June 23, 2026 at 20:00 (GMT+8)** and invited to **submit a complete and polished technical report in ACM MM format before 23:59 AOE on June 25, 2026**. The **official ACM MM submission link and detailed submission instructions will be provided in the invitation email**.
+
+6. Each team is strongly encouraged to submit only once. If the same team submits multiple times, only the latest submission received before June 22, 2026 at 20:00 (GMT+8) will be considered. During the submission period, the organizers will not provide real-time feedback on the accuracy of your submitted answers. However, after receiving your email, we will send a confirmation of receipt within 24 hours. If you do not receive a reply within 24 hours, please feel free to contact us by email.
+
+7. If you have any other questions or encounter any difficulties, please feel free to contact us by email at any time.
+
+Example submission structure:
+
+```
+{your_team_name}_track2.zip
+└──your_team_name.pdf
+└──results/
+    └──your_team_name/
+        ├── retail6_easy.json
+        ├── retail10_easy.json
+        ├── kitchen4_easy.json
+        ├── restaurant5_easy.json
+        └── order2_easy.json
+
+```
+
+
+
 # EgoBench Competition - Participant Guide
 
 We propose a framework for evaluating (MLLM) customer service agents (under test), which comprises an interaction sandbox and an automated evaluation pipeline. The interaction sandbox features a simulated user, a tool library, and a database. The simulated user is responsible for issuing tasks to the agents under test. In response, these agents can output two types of content within the sandbox: natural language responses for conversational engagement with the user, and tool calls that either retrieve information or modify the database as requested. Following each task interaction, the automated evaluation pipeline assesses performance by measuring tool-call accuracy and verifying the final state of the database.
 
 ![Figure 1](figure/fig1.png)
 
-## News
-2026.05.29: We have made a consolidated update to address several issues identified in the test set release, including incorrect video links (order1), task–ground-truth mismatches (retail1, retail7, and retail8), and inconsistencies in tool design (order and kitchen scenarios). Please make sure to update your codebase accordingly.
-
-## Overview
+## Competition Overview
 
 ### Timeline
 
-- **Testing Phase**: 2026.05.18 - 2026.06.25
+- **Offline Testing Phase**: 2026.05.18 - 2026.06.25
 - **Final Evaluation Phase**: 2026.06.18 - 2026.06.25
 - **Scenarios**: Retail (10), Kitchen (4), Restaurant (5), Order (2)
 
@@ -36,13 +133,11 @@ During the **Final Evaluation Phase (2026.06.18 - 2026.06.25)**, 100 tasks will 
 | Order | 2 |
 
 
-
-
 ## Configuration
 
 ### 1. User Agent Configuration (`config/user_agent_config.py`)
 
-We have already implemented the prompts and the corresponding framework for the simulated user. You only need to follow the steps below to configure the LLM that drives the simulated user framework, whether through local deployment or via an API. No other modifications are required.
+We have already implemented the prompts and corresponding framework for the simulated user; you only need to configure the specific deployment of the simulated user themselves, whether via local deployment or by using an API. Configure the model used to simulated user behavior.
 
 ```python
 # Default: Qwen3.5-397B-A17B
@@ -65,13 +160,13 @@ export LLM_API_BASE_URL="https://your-api-endpoint.com/v1"
 > [NOTE]
 > This part is not required for setup, but helps developers understand the design.
 
-> The simulated user framework need to ensure that the user's responses satisfy the following points. The simulated user is considered successful when the user completes all instructions without issues in the following dimensions:
+> We need to ensure that our user's responses satisfy the following points. The simulated user is considered successful when the user completes all instructions without issues in the following dimensions:
 > - **Role Consistency**: The user maintains their assigned role throughout the conversation
 > - **Instruction Following & Anti-Hallucination**: The user follows the given instructions and does not generate hallucinated information
 > - **Resilience & Anti-Interference**: The user is not misled by the agent's confusing responses
 > - **Contextual Robustness**: The user maintains context and does not contradict previous statements
 
-> We have evaluated various open-source models for simulating user behavior. The success rate (percentage of tasks where the user successfully completes all instructions) is as follows. To more accurately evaluate the capabilities of the service agent you develop, we recommend using a larger-parameter model to drive the simulated user framework.:
+> We have evaluated various open-source models for simulating user behavior. The success rate (percentage of tasks where the user successfully completes all instructions) is as follows:
 
 > | Model | Success Rate |
 > |-------|----------------------------|
@@ -98,7 +193,7 @@ SERVICE_API_KEY = os.environ.get("SERVICE_API_KEY", os.environ.get("API_KEY", ""
 SERVICE_API_BASE_URL = os.environ.get("SERVICE_API_BASE_URL", "https://api.example.com/v1")
 ```
 
-Service agents(under test) can only output two types of content within the sandbox: natural language responses for conversational engagement with the user, and tool calls that either retrieve information or modify the database as requested.
+Service agents(under test) can output two types of content within the sandbox: natural language responses for conversational engagement with the user, and tool calls that either retrieve information or modify the database as requested.
 
 #### Tool Call Format
 When the service agent needs to invoke tools, it must output **ONLY** a JSON array with the following format:
@@ -130,19 +225,12 @@ When **NOT** calling tools, the service agent should respond in natural, concise
 
 #### Output Rules Summary
 
-| Type | Output Format |
+| Scenario | Output Format |
 |----------|---------------|
 | Calling tools | JSON array only: `[{"tool_name": "...", "parameters": {...}}]` |
-| Response for users | Natural language response only |
+| Not calling tools | Natural language response only |
 
 **Never mix formats** - Either output pure JSON OR pure natural language in a single response 
-
-** Each task interaction has two stopping conditions **:
-1. The simulated user determines from the agent’s dialogue that the agent has completed the entire task and returns "STOP".
-2. The conversation between the user and the agent reaches 10 turns. Only dialogue turns are counted here; turns involving tool calls made by the user are not included.
-The interaction ends when either of the above conditions is met.
-This functionality has already been implemented in the sandbox, so participants do not need to implement it themselves. This explanation is provided only to help participants better understand the interaction process.
-
 
 #### Video Storage Configuration
 
@@ -154,7 +242,6 @@ VIDEO_MODE = "local"
 VIDEO_LOCAL_PATH = "./videos"
 
 # Option 2: Use public URLs
-# Participants need to download the video themselves and upload it to a publicly accessible online location.
 VIDEO_MODE = "url"
 # Set via environment variable:
 export VIDEO_URL_MAPPING='{"retail1.mp4": "https://example.com/retail1.mp4"}'
@@ -239,8 +326,6 @@ python run/multi_agent.py \
   --summary_user \
   --num_tasks 10
 ```
-> [NOTE]
-> The sandbox already resets the database state after each task is completed, ensuring that the database state is correct for the next task interaction. However, please note that only one agent is allowed to interact with the sandbox within a single process. If you need to run experiments in parallel, please launch multiple sandbox instances.
 
 ## Prompt Structure
 
@@ -279,11 +364,6 @@ results/
     ├── kitchen1_easy.json
     └── ...
 ```
-The files in the above directory are for reference only and are not the standard answers.
-
-> Note
-> This example result was generated by the service agent using Qwen3.5-397B-A17B. Specifically, it used the service agent prompt provided in the run/prompts.py, with thinking mode disabled. Parameters such as temperature were set to the default values for Qwen3.5-397B-A17B. The video was provided as a publicly accessible video_url, rather than being converted to Base64 encoding. 
-
 
 Each JSON file contains:
 - `task_id`: Task identifier
@@ -296,7 +376,7 @@ Each JSON file contains:
 ### Evaluation Results
 
 Evaluation results are saved to `eval_result/{model_name}/`:
-The files in the following directory are only for reference.
+
 ```
 eval_result/
 └── Qwen3.5-397B-A17B/
@@ -310,9 +390,6 @@ Each evaluation file contains:
 - `result_based.success_rate`: Whether tool results are correct
 - `joint_success.success_rate`: Both tool and result are correct
 - `micro_tool_stats.micro_accuracy`: Tool call accuracy
-
-> [NOTE]
-> Evaluation is based on the benchmark-provided database and tool outputs in this repository. In some cases, the dataset values may differ from external real-world knowledge sources. During evaluation, the benchmark database/tool results are treated as the only ground truth. 
 
 ### Evaluation Criteria
 
@@ -403,6 +480,35 @@ If using URL mode, verify your `VIDEO_URL_MAPPING` is correct:
 ```bash
 export VIDEO_URL_MAPPING='{"retail1.mp4": "https://your-url.com/retail1.mp4"}'
 ```
+
+## Update on Kitchen Scenario Ground Truth Fixes
+
+We reviewed the relevant ground truth annotations across **all kitchen scenarios** and corrected confirmed quantity bugs, along with several ambiguous cases where the original instruction did not clearly specify the required amount.
+
+### What was updated
+
+- Corrected quantity errors in `add_to_shopping_list` annotations to make them consistent with:
+  - recipe requirements,
+  - inventory conditions,
+  - ingredient categories,
+  - storage locations,
+  - and task semantics.
+- Updated related function arguments where necessary (such as `compute_total_nutritions`) to keep them aligned with the corrected ingredient quantities.
+- Revised ambiguous cases in which the instruction asked the agent to add ingredients to the shopping list but did not clearly define the quantity rule.
+
+### Clarification on quantity interpretation
+
+For Kitchen tasks, when an instruction refers to adding an ingredient according to the **original usage amount**, it means:
+
+> the **total amount of that ingredient used in the recipe**
+
+This refers to the total quantity required by the recipe, rather than the current stock level, remaining quantity, or the amount used in a single step.
+
+### Notes
+
+- These updates have been applied to the relevant Kitchen scenario annotations.
+- The purpose of this revision is to improve consistency, correctness, and interpretability of quantity-related ground truth labels used for evaluation.
+
 
 ## Support
 

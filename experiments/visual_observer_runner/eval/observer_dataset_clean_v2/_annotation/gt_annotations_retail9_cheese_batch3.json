@@ -1,0 +1,739 @@
+{
+  "annotations": [
+    {
+      "case_id": "retail_clean_v2_problem_0237",
+      "event_gt": {
+        "primary_content_range": [
+          2.0,
+          4.0
+        ],
+        "expected_time_range": [
+          1.0,
+          5.0
+        ],
+        "allowed_transition_range": [
+          0.5,
+          5.5
+        ],
+        "key_frame_time": 3.0,
+        "expected_region": {
+          "description": "Finger points to the cheese on red wrapping paper with a Bamachon Cheese label.",
+          "coarse_region": "lower center cheese display",
+          "notes": "Frame t03 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t02.jpg and t03.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Bamachon Cheese",
+        "acceptable_aliases": [
+          "bamachon cheese",
+          "red-wrapped Bamachon cheese",
+          "cheese on red wrapping paper"
+        ],
+        "negative_neighbors": [
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the pointed red-wrapped cheese reads Bamachon Cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0238",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          10.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          10.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "Finger points to Garlic Flavored Cheese above the green diamond-labeled cheese.",
+          "coarse_region": "center cheese display",
+          "notes": "Frame t07 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t07.jpg through t09.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Garlic Flavored Cheese",
+        "acceptable_aliases": [
+          "garlic flavored cheese",
+          "garlic cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Chardonnay wine flavored cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the second pointed cheese reads Garlic Flavored Cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0239",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          10.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          10.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "Finger points to Garlic Flavored Cheese above the green diamond-labeled cheese.",
+          "coarse_region": "center cheese display",
+          "notes": "Frame t07 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t07.jpg through t09.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Garlic Flavored Cheese",
+        "acceptable_aliases": [
+          "garlic flavored cheese",
+          "garlic cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Chardonnay wine flavored cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the second pointed cheese reads Garlic Flavored Cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0240",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          10.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          10.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "Finger points to Garlic Flavored Cheese above the green diamond-labeled cheese.",
+          "coarse_region": "center cheese display",
+          "notes": "Frame t07 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t07.jpg through t09.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Garlic Flavored Cheese",
+        "acceptable_aliases": [
+          "garlic flavored cheese",
+          "garlic cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Chardonnay wine flavored cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the second pointed cheese reads Garlic Flavored Cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0241",
+      "event_gt": {
+        "primary_content_range": [
+          2.0,
+          4.0
+        ],
+        "expected_time_range": [
+          1.0,
+          5.0
+        ],
+        "allowed_transition_range": [
+          0.5,
+          5.5
+        ],
+        "key_frame_time": 3.0,
+        "expected_region": {
+          "description": "Finger points to the cheese on red wrapping paper with a Bamachon Cheese label.",
+          "coarse_region": "lower center cheese display",
+          "notes": "Frame t03 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t02.jpg and t03.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Bamachon Cheese",
+        "acceptable_aliases": [
+          "bamachon cheese",
+          "red-wrapped Bamachon cheese",
+          "cheese on red wrapping paper"
+        ],
+        "negative_neighbors": [
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the pointed red-wrapped cheese reads Bamachon Cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0242",
+      "event_gt": {
+        "primary_content_range": [
+          2.0,
+          4.0
+        ],
+        "expected_time_range": [
+          1.0,
+          5.0
+        ],
+        "allowed_transition_range": [
+          0.5,
+          5.5
+        ],
+        "key_frame_time": 3.0,
+        "expected_region": {
+          "description": "Finger points to the cheese on red wrapping paper with a Bamachon Cheese label.",
+          "coarse_region": "lower center cheese display",
+          "notes": "Frame t03 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t02.jpg and t03.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Bamachon Cheese",
+        "acceptable_aliases": [
+          "bamachon cheese",
+          "red-wrapped Bamachon cheese",
+          "cheese on red wrapping paper"
+        ],
+        "negative_neighbors": [
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the pointed red-wrapped cheese reads Bamachon Cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0243",
+      "event_gt": {
+        "primary_content_range": [
+          8.0,
+          10.0
+        ],
+        "expected_time_range": [
+          7.0,
+          11.0
+        ],
+        "allowed_transition_range": [
+          6.5,
+          11.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Light cheese with green diamond Bellavita-style label and pale ring-shaped cheese face.",
+          "coarse_region": "center lower cheese display",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t07.jpg through t10.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Chardonnay wine flavored cheese",
+        "acceptable_aliases": [
+          "Chardonnay wine flavored cheese",
+          "wine flavored cheese with green diamond label",
+          "Bellavita green-label cheese"
+        ],
+        "negative_neighbors": [
+          "Garlic Flavored Cheese",
+          "Bamachon Cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the pale cheese over the green diamond package reads Chardonnay wine flavored cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0244",
+      "event_gt": {
+        "primary_content_range": [
+          8.0,
+          10.0
+        ],
+        "expected_time_range": [
+          7.0,
+          11.0
+        ],
+        "allowed_transition_range": [
+          6.5,
+          11.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Light cheese with green diamond Bellavita-style label and pale ring-shaped cheese face.",
+          "coarse_region": "center lower cheese display",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t07.jpg through t10.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Chardonnay wine flavored cheese",
+        "acceptable_aliases": [
+          "Chardonnay wine flavored cheese",
+          "wine flavored cheese with green diamond label",
+          "Bellavita green-label cheese"
+        ],
+        "negative_neighbors": [
+          "Garlic Flavored Cheese",
+          "Bamachon Cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the pale cheese over the green diamond package reads Chardonnay wine flavored cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0245",
+      "event_gt": {
+        "primary_content_range": [
+          8.0,
+          10.0
+        ],
+        "expected_time_range": [
+          7.0,
+          11.0
+        ],
+        "allowed_transition_range": [
+          6.5,
+          11.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Light cheese with green diamond Bellavita-style label and pale ring-shaped cheese face.",
+          "coarse_region": "center lower cheese display",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t07.jpg through t10.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Chardonnay wine flavored cheese",
+        "acceptable_aliases": [
+          "Chardonnay wine flavored cheese",
+          "wine flavored cheese with green diamond label",
+          "Bellavita green-label cheese"
+        ],
+        "negative_neighbors": [
+          "Garlic Flavored Cheese",
+          "Bamachon Cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the pale cheese over the green diamond package reads Chardonnay wine flavored cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0246",
+      "event_gt": {
+        "primary_content_range": [
+          8.0,
+          10.0
+        ],
+        "expected_time_range": [
+          7.0,
+          11.0
+        ],
+        "allowed_transition_range": [
+          6.5,
+          11.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Light cheese with green diamond Bellavita-style label and pale ring-shaped cheese face.",
+          "coarse_region": "center lower cheese display",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t07.jpg through t10.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Chardonnay wine flavored cheese",
+        "acceptable_aliases": [
+          "Chardonnay wine flavored cheese",
+          "wine flavored cheese with green diamond label",
+          "Bellavita green-label cheese"
+        ],
+        "negative_neighbors": [
+          "Garlic Flavored Cheese",
+          "Bamachon Cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The label on the pale cheese over the green diamond package reads Chardonnay wine flavored cheese."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0247",
+      "event_gt": {
+        "primary_content_range": [
+          3.0,
+          5.0
+        ],
+        "expected_time_range": [
+          2.0,
+          6.0
+        ],
+        "allowed_transition_range": [
+          1.5,
+          6.5
+        ],
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "Cheese package directly behind the red-wrapped Bamachon Cheese, with blue/yellow Grana Padano-style label visible.",
+          "coarse_region": "center display behind red-wrapped cheese",
+          "notes": "Frame t04 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t03.jpg and t04.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Bezza Lepadano cheese",
+        "acceptable_aliases": [
+          "Grana Padano-style cheese",
+          "cheese behind the red-wrapped Bamachon Cheese",
+          "blue and yellow label cheese behind red wrapper"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Cheddar Cheese"
+        ],
+        "confidence": "medium",
+        "evidence": "The visible package behind the red-wrapped cheese has a blue/yellow Grana Padano-style label; DB spelling may require manual confirmation."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0248",
+      "event_gt": {
+        "primary_content_range": [
+          9.0,
+          11.0
+        ],
+        "expected_time_range": [
+          8.0,
+          12.0
+        ],
+        "allowed_transition_range": [
+          7.5,
+          12.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Cheese with a black packaging sticker located to the left of the red-wrapped cheese.",
+          "coarse_region": "lower-left area relative to red-wrapped cheese",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t10.jpg and t11.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Cheddar Cheese",
+        "acceptable_aliases": [
+          "cheddar cheese",
+          "cheese with black sticker left of red wrapper",
+          "dark yellow cheese left of red-wrapped cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The lower-left cheese relative to the red-wrapped item has a black sticker and a visible Cheddar Cheese label in the close frame."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0249",
+      "event_gt": {
+        "primary_content_range": [
+          9.0,
+          11.0
+        ],
+        "expected_time_range": [
+          8.0,
+          12.0
+        ],
+        "allowed_transition_range": [
+          7.5,
+          12.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Cheese with a black packaging sticker located to the left of the red-wrapped cheese.",
+          "coarse_region": "lower-left area relative to red-wrapped cheese",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t10.jpg and t11.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Cheddar Cheese",
+        "acceptable_aliases": [
+          "cheddar cheese",
+          "cheese with black sticker left of red wrapper",
+          "dark yellow cheese left of red-wrapped cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The lower-left cheese relative to the red-wrapped item has a black sticker and a visible Cheddar Cheese label in the close frame."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0250",
+      "event_gt": {
+        "primary_content_range": [
+          9.0,
+          11.0
+        ],
+        "expected_time_range": [
+          8.0,
+          12.0
+        ],
+        "allowed_transition_range": [
+          7.5,
+          12.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Cheese with a black packaging sticker located to the left of the red-wrapped cheese.",
+          "coarse_region": "lower-left area relative to red-wrapped cheese",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t10.jpg and t11.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Cheddar Cheese",
+        "acceptable_aliases": [
+          "cheddar cheese",
+          "cheese with black sticker left of red wrapper",
+          "dark yellow cheese left of red-wrapped cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The lower-left cheese relative to the red-wrapped item has a black sticker and a visible Cheddar Cheese label in the close frame."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0251",
+      "event_gt": {
+        "primary_content_range": [
+          9.0,
+          11.0
+        ],
+        "expected_time_range": [
+          8.0,
+          12.0
+        ],
+        "allowed_transition_range": [
+          7.5,
+          12.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Cheese with a black packaging sticker located to the left of the red-wrapped cheese.",
+          "coarse_region": "lower-left area relative to red-wrapped cheese",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t10.jpg and t11.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Cheddar Cheese",
+        "acceptable_aliases": [
+          "cheddar cheese",
+          "cheese with black sticker left of red wrapper",
+          "dark yellow cheese left of red-wrapped cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The lower-left cheese relative to the red-wrapped item has a black sticker and a visible Cheddar Cheese label in the close frame."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0252",
+      "event_gt": {
+        "primary_content_range": [
+          9.0,
+          11.0
+        ],
+        "expected_time_range": [
+          8.0,
+          12.0
+        ],
+        "allowed_transition_range": [
+          7.5,
+          12.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Cheese with a black packaging sticker located to the left of the red-wrapped cheese.",
+          "coarse_region": "lower-left area relative to red-wrapped cheese",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t10.jpg and t11.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Cheddar Cheese",
+        "acceptable_aliases": [
+          "cheddar cheese",
+          "cheese with black sticker left of red wrapper",
+          "dark yellow cheese left of red-wrapped cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The lower-left cheese relative to the red-wrapped item has a black sticker and a visible Cheddar Cheese label in the close frame."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0253",
+      "event_gt": {
+        "primary_content_range": [
+          9.0,
+          11.0
+        ],
+        "expected_time_range": [
+          8.0,
+          12.0
+        ],
+        "allowed_transition_range": [
+          7.5,
+          12.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Cheese with a black packaging sticker located to the left of the red-wrapped cheese.",
+          "coarse_region": "lower-left area relative to red-wrapped cheese",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t10.jpg and t11.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Cheddar Cheese",
+        "acceptable_aliases": [
+          "cheddar cheese",
+          "cheese with black sticker left of red wrapper",
+          "dark yellow cheese left of red-wrapped cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The lower-left cheese relative to the red-wrapped item has a black sticker and a visible Cheddar Cheese label in the close frame."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0254",
+      "event_gt": {
+        "primary_content_range": [
+          9.0,
+          11.0
+        ],
+        "expected_time_range": [
+          8.0,
+          12.0
+        ],
+        "allowed_transition_range": [
+          7.5,
+          12.5
+        ],
+        "key_frame_time": 10.0,
+        "expected_region": {
+          "description": "Cheese with a black packaging sticker located to the left of the red-wrapped cheese.",
+          "coarse_region": "lower-left area relative to red-wrapped cheese",
+          "notes": "Frame t10 gives the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail9/t10.jpg and t11.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Cheddar Cheese",
+        "acceptable_aliases": [
+          "cheddar cheese",
+          "cheese with black sticker left of red wrapper",
+          "dark yellow cheese left of red-wrapped cheese"
+        ],
+        "negative_neighbors": [
+          "Bamachon Cheese",
+          "Garlic Flavored Cheese",
+          "Chardonnay wine flavored cheese"
+        ],
+        "confidence": "high",
+        "evidence": "The lower-left cheese relative to the red-wrapped item has a black sticker and a visible Cheddar Cheese label in the close frame."
+      }
+    }
+  ]
+}

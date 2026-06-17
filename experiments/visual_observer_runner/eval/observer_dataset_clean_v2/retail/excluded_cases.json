@@ -1,0 +1,4441 @@
+{
+  "schema_version": "observer_dataset_clean_v2",
+  "scenario": "retail",
+  "status": "visual_problem_clusters_ready_gt_pending",
+  "generated_at_utc": "2026-06-06T10:15:09.368338+00:00",
+  "source_policy": {
+    "allowed_inputs": [
+      "scenarios/final/*.json instruction fields"
+    ],
+    "disallowed_inputs": [
+      "observer_problem_set_*",
+      "observer_dataset_rebuild_v1",
+      "old bootstrap files",
+      "eval_result",
+      "DB/tool data",
+      "scenario final key/value for extraction, clustering, or GT"
+    ]
+  },
+  "process_doc": "experiments/visual_observer_runner/eval/eval-process.md",
+  "excluded_cases": [
+    {
+      "case_id": "retail_clean_v2_problem_0030",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine has \"sour\" taste, and",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        16
+      ],
+      "source_problem_ids": [
+        "retail1_task016_visual_05_00"
+      ],
+      "source_instruction_snippets": [
+        "the wine has a \"sour\" taste, and"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0031",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine with specific taste characteristics for dinner party",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        12
+      ],
+      "source_problem_ids": [
+        "retail1_task012_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a customer (User ID: sarah_liu_789), looking for wine with specific taste characteristics for a dinner party"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0036",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "wine enthusiast (user id: grace_liu_999) who has just picked up two bottles of wine",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        2
+      ],
+      "source_problem_ids": [
+        "retail2_task002_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine enthusiast (User ID: grace_liu_999) who has just picked up two bottles of wine"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0043",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottle of third wine to right of wine in your left hand and one bottle of third wine to left of wine in your right hand",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "third",
+          "region": {
+            "container": "shelf",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "left_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        22
+      ],
+      "source_problem_ids": [
+        "retail2_task022_visual_06_00"
+      ],
+      "source_instruction_snippets": [
+        "neither is bitter, ask the AI service agent to add one bottle of the third wine to the right of the wine in your left hand and one bottle of the third wine to the left of the wine in your right hand"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0048",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine enthusiast (user id: grace_liu_999) who has just selected two wines",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        10
+      ],
+      "source_problem_ids": [
+        "retail2_task010_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine enthusiast (User ID: grace_liu_999) who has just selected two wines"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0049",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine enthusiast who prefers italian wines (user id: david_brown_777)",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        25
+      ],
+      "source_problem_ids": [
+        "retail2_task025_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine enthusiast who prefers Italian wines (User ID: david_brown_777)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0050",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine suitable for pairing with desserts",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        33
+      ],
+      "source_problem_ids": [
+        "retail2_task033_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a shopper (User ID: sarah_green_888) looking for a wine suitable for pairing with desserts"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0051",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wines has \"sour taste\"",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        17
+      ],
+      "source_problem_ids": [
+        "retail2_task017_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "You need to ask the AI Service Agent to check whether either of these two wines has a \"sour taste\""
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0052",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wines has \"sweet\" taste",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        10
+      ],
+      "source_problem_ids": [
+        "retail2_task010_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to confirm whether either of these two wines has a \"sweet\" taste"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0053",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wines that",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        28
+      ],
+      "source_problem_ids": [
+        "retail2_task028_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "the tax rate is higher than 5%, ask the AI Service Agent to search for other French wines that have a tax rate no higher than this wine and a price within 50 yuan of this wine's price"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0068",
+      "scenario": "retail",
+      "video_id": "retail3.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "gold",
+            "content_hint": "wine wrapped in gold foil at bottle neck is same as that of wine with copper-colored seal",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail3.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        27
+      ],
+      "source_problem_ids": [
+        "retail3_task027_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to confirm whether the origin of the wine wrapped in gold foil at the bottle neck is the same as that of the wine with a copper-colored seal"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0075",
+      "scenario": "retail",
+      "video_id": "retail3.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wines (user id: charlie_brown_789)",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail3.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        48
+      ],
+      "source_problem_ids": [
+        "retail3_task048_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are an enthusiast who enjoys sour wines (User ID: charlie_brown_789)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0082",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": "white",
+            "content_hint": "wine with white label among wines you are pointing at and bottle to right of the",
+            "shape": "bottle",
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        7
+      ],
+      "source_problem_ids": [
+        "retail4_task007_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check whether the wine with a white label among the wines you are pointing at and the bottle to the right of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0085",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": null,
+            "content_hint": "among wines you pointed to",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        29
+      ],
+      "source_problem_ids": [
+        "retail4_task029_visual_01_01"
+      ],
+      "source_instruction_snippets": [
+        "Among the wines you pointed to, ask the AI Service Agent to check whether the wine with a white label and the wine containing red liquid are from France"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0086",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": null,
+            "content_hint": "among wines you pointed to, please",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        33
+      ],
+      "source_problem_ids": [
+        "retail4_task033_visual_01_01"
+      ],
+      "source_instruction_snippets": [
+        "Among the wines you pointed to, please ask the AI Service Agent to query the country of origin for the wine with a white label and the wine containing red liquid"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0088",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__pointing_sequence",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": null,
+            "content_hint": "bottles to right of second bottle you are pointing at",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "pointing_sequence"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        45
+      ],
+      "source_problem_ids": [
+        "retail4_task045_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI Service Agent to compare the tax rates of the two bottles to the right of the second bottle you are pointing at"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0094",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__pointing_sequence",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": null,
+            "content_hint": "wine with thickest bottle body and second bottle to right of second bottle you are pointing at",
+            "shape": "bottle",
+            "size": "large",
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "pointing_sequence"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        32
+      ],
+      "source_problem_ids": [
+        "retail4_task032_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to compare the sugar content of the wine with the thickest bottle body and the second bottle to the right of the second bottle you are pointing at"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0096",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__visible_text__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "pink",
+            "content_hint": "wine with pink label and the",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        21
+      ],
+      "source_problem_ids": [
+        "retail4_task021_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check the respective discounts for the wine with a pink label and the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0100",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "pink",
+            "content_hint": "wine with thickest bottle and wine with pink label exceeds 50 yuan",
+            "shape": "bottle",
+            "size": "large",
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        36
+      ],
+      "source_problem_ids": [
+        "retail4_task036_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check whether the price difference between the wine with the thickest bottle and the wine with the pink label exceeds 50 yuan"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0116",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottle to right of the",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        6,
+        27
+      ],
+      "source_problem_ids": [
+        "retail4_task006_visual_01_00",
+        "retail4_task027_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI Service Agent to check whether the bottle to the right of the",
+        "Ask the AI Service Agent to retrieve the tax-inclusive prices for the bottle to the right of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0118",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "category and of bottle to right of the",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        13
+      ],
+      "source_problem_ids": [
+        "retail4_task013_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to confirm the category and price of the bottle to the right of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0120",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine lover (user id: emma_brown_123)",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        7
+      ],
+      "source_problem_ids": [
+        "retail4_task007_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a budget wine lover (User ID: emma_brown_123)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0121",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine novice (user id: charlie_brown_789)",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        25
+      ],
+      "source_problem_ids": [
+        "retail4_task025_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine novice (User ID: charlie_brown_789)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0122",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine with thickest bottle is from germany and whether second bottle of wine you are referring to is from belgium",
+            "shape": "bottle",
+            "size": "large",
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        24
+      ],
+      "source_problem_ids": [
+        "retail4_task024_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check whether the wine with the thickest bottle is from Germany and whether the second bottle of wine you are referring to is from Belgium"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0123",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": "copper",
+            "content_hint": "wine you picked up and wine with copper capsule on left of the",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "left_of"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        17
+      ],
+      "source_problem_ids": [
+        "retail5_task017_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "wine you picked up and the wine with a copper capsule on the left of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0128",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": "orange",
+            "content_hint": "wine you picked up and orange-colored wine are both from spain",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        13
+      ],
+      "source_problem_ids": [
+        "retail5_task013_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "wine you picked up and the orange-colored wine are both from Spain"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0130",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__visible_text__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": "white",
+            "content_hint": "wine you picked up and dark wine with white label above the",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        43
+      ],
+      "source_problem_ids": [
+        "retail5_task043_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "wine you picked up and the dark wine with a white label above the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0131",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__visible_text__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": "white",
+            "content_hint": "wine you picked up and white-label dark-bodied wine above the",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        23
+      ],
+      "source_problem_ids": [
+        "retail5_task023_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "wine you picked up and the white-label dark-bodied wine above the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0148",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "copper",
+            "content_hint": "bottle with copper-colored capsule on left of the",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "left_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        2,
+        8
+      ],
+      "source_problem_ids": [
+        "retail5_task002_visual_01_00",
+        "retail5_task008_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI Service Agent to check the calorie content of the bottle with the copper-colored capsule on the left  of the",
+        "Ask the AI service agent to confirm whether the bottle with the copper-colored capsule on the left of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0149",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "copper",
+            "content_hint": "wine with copper cap on left of the",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "left_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        43,
+        49
+      ],
+      "source_problem_ids": [
+        "retail5_task043_visual_01_00",
+        "retail5_task049_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI Service Agent to inquire about the prices of the dark wine with a copper cap on the left of the",
+        "Ask the AI service agent to check whether the wine with the copper cap on the left  of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0150",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "copper",
+            "content_hint": "wine with copper-colored cap on left of the",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "left_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        12,
+        20,
+        32
+      ],
+      "source_problem_ids": [
+        "retail5_task012_visual_01_00",
+        "retail5_task020_visual_01_00",
+        "retail5_task032_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI Service Agent to check the discount information for the wine with the copper-colored cap on the left  of the",
+        "Ask the AI Service Agent to retrieve the taste characteristics of the wine with the copper-colored cap on the left of the",
+        "Please ask the AI Service Agent to query the nutritional information of the wine with the copper-colored cap on the left of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0151",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "dark",
+            "content_hint": "wine with dark body above the",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        17,
+        20,
+        32
+      ],
+      "source_problem_ids": [
+        "retail5_task017_visual_01_00",
+        "retail5_task020_visual_02_00",
+        "retail5_task032_visual_06_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to confirm whether the wine with a dark body above the",
+        "wine you picked up, and the wine with the dark body above the",
+        "the sugar content is not low, ask the AI Service Agent to check the sugar content of the wine with the dark body above the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0157",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__visible_text__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "white",
+            "content_hint": "wine with white label and dark body above the",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        10
+      ],
+      "source_problem_ids": [
+        "retail5_task010_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check whether the wine with a white label and dark body above the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0158",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottle above the",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        26
+      ],
+      "source_problem_ids": [
+        "retail5_task026_visual_05_00"
+      ],
+      "source_instruction_snippets": [
+        "there is no discount, ask the AI Service Agent to check whether the bottle above the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0159",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottle to left of the",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "left_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        4,
+        26
+      ],
+      "source_problem_ids": [
+        "retail5_task004_visual_05_00",
+        "retail5_task026_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "the price is above 300 yuan, ask the AI Service Agent to check whether the bottle to the left of the",
+        "Ask the AI Service Agent to check whether the bottle to the left of the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0162",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine above the",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        9,
+        13,
+        29,
+        34,
+        41,
+        45
+      ],
+      "source_problem_ids": [
+        "retail5_task009_visual_06_00",
+        "retail5_task013_visual_01_00",
+        "retail5_task029_visual_01_00",
+        "retail5_task034_visual_01_00",
+        "retail5_task041_visual_01_00",
+        "retail5_task045_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "not, ask the AI Service Agent to check the taste of the dark-bodied wine above the",
+        "Please ask the AI Service Agent to confirm whether the dark-bodied wine above the",
+        "Ask the AI Service Agent to check whether the dark-bodied wine above the",
+        "Ask the AI Service Agent to query the country of origin for the dark-bodied wine above the",
+        "Please ask the AI Service Agent to confirm whether the white-labeled, dark-bodied wine above the",
+        "Ask the AI Service Agent to check the discount of the dark-bodied wine above the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0163",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine collector (user id: olivia_white_1010)",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        25
+      ],
+      "source_problem_ids": [
+        "retail5_task025_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine collector (User ID: olivia_white_1010)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0164",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine critic (user id: olivia_white_1010)",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        6
+      ],
+      "source_problem_ids": [
+        "retail5_task006_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine critic (User ID: olivia_white_1010)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0165",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_user_identity_or_role_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "wine purchaser (user id: sarah_green_888)",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        31
+      ],
+      "source_problem_ids": [
+        "retail5_task031_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine purchaser (User ID: sarah_green_888)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0187",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "box of cookies with rooster logo both have \"high \" attribute",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        11
+      ],
+      "source_problem_ids": [
+        "retail7_task011_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "and the box of cookies with the rooster logo both have the \"high calorie\" attribute"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0189",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "product database for other cookies that share same flavor profile and are explicitly labeled \"contains gluten\"",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        40
+      ],
+      "source_problem_ids": [
+        "retail7_task040_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to search the current product database for other cookies that share the same flavor profile and are explicitly labeled \"contains gluten\""
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0190",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "box of cookies that was picked up and",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        28
+      ],
+      "source_problem_ids": [
+        "retail7_task028_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "box of cookies that was picked up and"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0192",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "box of purple cookies to right of red festive plaid cookies and box of cookies that was picked up and put down for the",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        16
+      ],
+      "source_problem_ids": [
+        "retail7_task016_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "box of purple cookies to the right of the red festive plaid cookies and the box of cookies that was picked up and put down for the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0195",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "box of red festive plaid cookies and orange cookies with square wavy edge patterns that were picked up and put down for the",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        34
+      ],
+      "source_problem_ids": [
+        "retail7_task034_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to query the fat content of the box of red festive plaid cookies and the orange cookies with square wavy edge patterns that were picked up and put down for the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0201",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": null,
+            "content_hint": "box of cookies that was picked up and put down for second time",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        4,
+        26
+      ],
+      "source_problem_ids": [
+        "retail7_task004_visual_03_00",
+        "retail7_task026_visual_02_01"
+      ],
+      "source_instruction_snippets": [
+        "not, ask the AI Service Agent to check the box of cookies that was picked up and put down for the second time",
+        "box of purple cookies to the right of the red holiday plaid cookies, and compare it with the box of cookies that was picked up and put down for the second time"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0202",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": null,
+            "content_hint": "box of cookies that was picked up and put down for the",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        10,
+        20
+      ],
+      "source_problem_ids": [
+        "retail7_task010_visual_01_00",
+        "retail7_task020_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check the discount status of the box of cookies that was picked up and put down for the",
+        "Ask the AI Service Agent to check the price of the box of cookies that was picked up and put down for the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0218",
+      "scenario": "retail",
+      "video_id": "retail8.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "brown",
+            "content_hint": "third box of brown cookies directly below the",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "third",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "bottom"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "below"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail8.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        3
+      ],
+      "source_problem_ids": [
+        "retail8_task003_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI service agent to check whether the third box of brown cookies directly below the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0231",
+      "scenario": "retail",
+      "video_id": "retail8.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "brown",
+            "content_hint": "product database for other products that share same country of origin as that dark brown box",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail8.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        1
+      ],
+      "source_problem_ids": [
+        "retail8_task001_visual_06_00"
+      ],
+      "source_instruction_snippets": [
+        "this condition is not met, ask the AI Service Agent to search the current product database for other products that share the same country of origin as that dark brown box, have a \"sweet taste\", and have a discount factor better than 0.9 (discount factor < 0.9)"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0232",
+      "scenario": "retail",
+      "video_id": "retail8.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "brown",
+            "content_hint": "products produced in same country as dark brown box",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail8.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        6
+      ],
+      "source_problem_ids": [
+        "retail8_task006_visual_04_00"
+      ],
+      "source_instruction_snippets": [
+        "have the AI Service Agent search the current inventory for all products produced in the same country as the dark brown box, with a \"sweet\" flavor, and priced below 30"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0077",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "bottle of wine you are pointing at and wine containing red liquid are \"sweet\"",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        41
+      ],
+      "source_problem_ids": [
+        "retail4_task041_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "bottle of wine you are pointing at and the wine containing red liquid are \"sweet\""
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0078",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "bottle with white label and bottle containing red liquid among wines you are pointing at",
+            "shape": "bottle",
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        2
+      ],
+      "source_problem_ids": [
+        "retail4_task002_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to confirm the taste of the bottle with a white label and the bottle containing red liquid among the wines you are pointing at"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0079",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "bottle you are pointing at and bottle containing red liquid",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        27
+      ],
+      "source_problem_ids": [
+        "retail4_task027_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "bottle you are pointing at and the bottle containing red liquid"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0081",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "wine you are pointing at with gold foil cap and wine containing red liquid",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        4
+      ],
+      "source_problem_ids": [
+        "retail4_task004_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI service agent to query the country of origin for the wine you are pointing at with a gold foil cap and the wine containing red liquid"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0089",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__pointing_sequence",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": null,
+            "content_hint": "second bottle of wine you are pointing at and wine with thickest bottle body",
+            "shape": "bottle",
+            "size": "large",
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "pointing_sequence"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        20
+      ],
+      "source_problem_ids": [
+        "retail4_task020_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to confirm the country of origin for the second bottle of wine you are pointing at and the wine with the thickest bottle body"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0101",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "pink",
+            "content_hint": "wine with thickest bottle and wine with pink label",
+            "shape": "bottle",
+            "size": "large",
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        1,
+        44
+      ],
+      "source_problem_ids": [
+        "retail4_task001_visual_01_00",
+        "retail4_task044_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI Service Agent to query the discount information for the wine with the thickest bottle and the wine with the pink label",
+        "Ask the AI Service Agent to confirm the country of origin for the wine with the thickest bottle and the wine with the pink label"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0102",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "pink",
+            "content_hint": "wine with thickest bottle body and wine with pink label",
+            "shape": "bottle",
+            "size": "large",
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        5
+      ],
+      "source_problem_ids": [
+        "retail4_task005_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Please ask the AI Service Agent to query the prices of the wine with the thickest bottle body and the wine with a pink label"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0104",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "red",
+            "content_hint": "wine with golden liquid and wine with red liquid",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        39,
+        47
+      ],
+      "source_problem_ids": [
+        "retail4_task039_visual_01_00",
+        "retail4_task047_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to calculate the discounted prices of the wine with golden liquid and the wine with red liquid",
+        "Ask the AI Service Agent to check the sugar content of the wine with golden liquid and the wine with red liquid"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0108",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__visible_text__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "red",
+            "content_hint": "wine with white label and wine containing red liquid are from france",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        29
+      ],
+      "source_problem_ids": [
+        "retail4_task029_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Among the wines you pointed to, ask the AI Service Agent to check whether the wine with a white label and the wine containing red liquid are from France"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0109",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__visible_text__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "red",
+            "content_hint": "wine with white label and wine containing red liquid",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        33
+      ],
+      "source_problem_ids": [
+        "retail4_task033_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Among the wines you pointed to, please ask the AI Service Agent to query the country of origin for the wine with a white label and the wine containing red liquid"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0110",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "red",
+            "content_hint": "wine with yellow liquid and wine with red liquid are \"sweet\"",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        22
+      ],
+      "source_problem_ids": [
+        "retail4_task022_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI service agent to confirm whether the wine with yellow liquid and the wine with red liquid are \"sweet\""
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0111",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__visible_text__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "wine containing golden-yellow liquid and wine with pink label",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        23
+      ],
+      "source_problem_ids": [
+        "retail4_task023_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check the calories of the wine containing golden-yellow liquid and the wine with a pink label"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0115",
+      "scenario": "retail",
+      "video_id": "retail4.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__visible_text__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "wine with yellow body and wine with pink label are \"sweet\"",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail4.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        34
+      ],
+      "source_problem_ids": [
+        "retail4_task034_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check whether the wine with a yellow body and the wine with a pink label are \"sweet\""
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0129",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__visible_text__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": "white",
+            "content_hint": "wine you picked up and copper-cap white-label wine on left",
+            "shape": null,
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "visible_text",
+          "selection_unit": "shelf_label"
+        }
+      },
+      "source_task_ids": [
+        47
+      ],
+      "source_problem_ids": [
+        "retail5_task047_visual_04_00"
+      ],
+      "source_instruction_snippets": [
+        "wine you picked up and the copper-cap white-label wine on the left"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0139",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": "dark",
+            "content_hint": "bottle of wine put back and bottle of dark-bodied wine above it",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        48
+      ],
+      "source_problem_ids": [
+        "retail5_task048_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "bottle of wine put back and the bottle of dark-bodied wine above it"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0142",
+      "scenario": "retail",
+      "video_id": "retail5.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": null,
+            "content_hint": "second wine picked up and put back are \"bitter\"",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail5.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        39
+      ],
+      "source_problem_ids": [
+        "retail5_task039_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "wine picked up and put back and the second wine picked up and put back are \"bitter\""
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0170",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "red",
+            "content_hint": "box of orange cookies on shelf above red cookies and second box of blue cookies to right of red holiday plaid cookies",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        17
+      ],
+      "source_problem_ids": [
+        "retail7_task017_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to confirm the country of origin for the box of orange cookies on the shelf above the red cookies and the second box of blue cookies to the right of the red holiday plaid cookies"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0183",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "red",
+            "content_hint": "third box of brown cookies to right of red festive plaid cookies and orange cookies with square wavy edge pattern",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "third",
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        9
+      ],
+      "source_problem_ids": [
+        "retail7_task009_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to query the country of origin of the third box of brown cookies to the right of the red festive plaid cookies and the orange cookies with a square wavy edge pattern"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0196",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "box of red plaid cookies and orange cookies featuring square wavy-edge cookie pattern located directly beneath cookies that were picked up and put down for second time",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        15
+      ],
+      "source_problem_ids": [
+        "retail7_task015_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to examine the box of red plaid cookies and the orange cookies featuring a square wavy-edge cookie pattern located directly beneath the cookies that were picked up and put down for the second time"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0199",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "placing",
+          "appearance": {
+            "color": "red",
+            "content_hint": "second box of blue cookies to right of red holiday plaid cookies and box of cookies that was picked up and put down",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "second",
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        12
+      ],
+      "source_problem_ids": [
+        "retail7_task012_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to determine whether the second box of blue cookies to the right of the red holiday plaid cookies and the box of cookies that was picked up and put down"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0046",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "third bottle immediately to its left is sweet",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "third",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        33
+      ],
+      "source_problem_ids": [
+        "retail2_task033_visual_05_00"
+      ],
+      "source_instruction_snippets": [
+        "the third bottle immediately to its left is sweet"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0047",
+      "scenario": "retail",
+      "video_id": "retail2.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "third bottle to right of its location on shelf",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "third",
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail2.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        35
+      ],
+      "source_problem_ids": [
+        "retail2_task035_visual_06_00"
+      ],
+      "source_instruction_snippets": [
+        "the third bottle to the right of its location on the shelf has a discount"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0070",
+      "scenario": "retail",
+      "video_id": "retail3.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottle is from france and has \"bitter taste\"",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail3.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        43
+      ],
+      "source_problem_ids": [
+        "retail3_task043_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "the bottle is from France and has a \"bitter taste\", ask the AI service agent to search for wines that are from France, have a unit price below 350 yuan, and feature \"low sugar\", and"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0012",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": null,
+            "content_hint": "bottles of wine on middle shelf that you have pointed at",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "center",
+            "vertical": "middle"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        27
+      ],
+      "source_problem_ids": [
+        "retail1_task027_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "You are currently examining the bottles of wine on the middle shelf that you have pointed at"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0013",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__selected_pointing_event",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": null,
+            "content_hint": "bottles one after another with your finger",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "selected_pointing_event"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        24
+      ],
+      "source_problem_ids": [
+        "retail1_task024_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "You pointed at the three bottles one after another with your finger"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0023",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "blue",
+            "content_hint": "third bottle from right on same shelf—it should have blue label",
+            "shape": "bottle",
+            "size": null,
+            "style": "label"
+          },
+          "ordinal": "third",
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        28
+      ],
+      "source_problem_ids": [
+        "retail1_task028_visual_04_00"
+      ],
+      "source_instruction_snippets": [
+        "not, ask the AI Service Agent to check the third bottle from the right on the same shelf—it should have a blue label"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0025",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottle has \"bitter\" taste characteristic and is from spain",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        28
+      ],
+      "source_problem_ids": [
+        "retail1_task028_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "You need to ask the AI Service Agent to confirm whether this bottle has a \"bitter\" taste characteristic and is from Spain"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0026",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_truncated_or_under_specified_visual_query",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottle immediately to its right meets same conditions",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        20
+      ],
+      "source_problem_ids": [
+        "retail1_task020_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "the bottle immediately to its right meets the same conditions"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0027",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottles of wine in center of middle shelf",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "center",
+            "vertical": "middle"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        29
+      ],
+      "source_problem_ids": [
+        "retail1_task029_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "You are pointing at three bottles of wine placed in the center of the middle shelf, specifically the"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0028",
+      "scenario": "retail",
+      "video_id": "retail1.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "bottles of wine on middle shelf",
+            "shape": "bottle",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": "center",
+            "vertical": "middle"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail1.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        24
+      ],
+      "source_problem_ids": [
+        "retail1_task024_visual_00_00"
+      ],
+      "source_instruction_snippets": [
+        "You are a wine expert (User ID: lisa_taylor_321), currently examining three bottles of wine on the middle shelf"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0172",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "red",
+            "content_hint": "box of orange cookies on shelf above shelf where red cookies are located",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        33
+      ],
+      "source_problem_ids": [
+        "retail7_task033_visual_02_01"
+      ],
+      "source_instruction_snippets": [
+        "box of purple cookies to the right of the red holiday plaid cookies, and the box of orange cookies on the shelf above the shelf where the red cookies are located"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0174",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "red",
+            "content_hint": "box of orange cookies on shelf layer above red cookie",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "above"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        38
+      ],
+      "source_problem_ids": [
+        "retail7_task038_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to check whether the red cookie that was initially picked up and put down, and the box of orange cookies on the shelf layer above the red cookie, contain the \"nuts\" allergen"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0175",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_multi_object_comparison_or_business_comparison",
+      "problem_type": "shelf__product_name__object_action_state",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "red",
+            "content_hint": "box of purple cookies to right of red holiday plaid cookies with of third box of brown cookies to right of red holiday plaid cookies",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": "third",
+          "region": {
+            "container": "shelf",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        37
+      ],
+      "source_problem_ids": [
+        "retail7_task037_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "box of purple cookies to the right of the red holiday plaid cookies with the price of the third box of brown cookies to the right of the red holiday plaid cookies"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0211",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__relative_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "box contains gluten and is priced below 40 yuan",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": "bottom"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "below"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        24
+      ],
+      "source_problem_ids": [
+        "retail7_task024_visual_05_00"
+      ],
+      "source_instruction_snippets": [
+        "that box contains gluten and is priced below 40 yuan, add 1 box"
+      ]
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0212",
+      "scenario": "retail",
+      "video_id": "retail7.mp4",
+      "reason": "excluded_business_goal_or_database_query_extracted_as_visual_referent",
+      "problem_type": "shelf__product_name__static_region",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "box contains gluten",
+            "shape": "box",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "shelf",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "containing"
+          },
+          "type": "static_region"
+        },
+        "scenario": "retail",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "retail7.mp4"
+        },
+        "surface": "shelf",
+        "target": {
+          "cardinality": "single",
+          "kind": "product_name",
+          "selection_unit": "product_package"
+        }
+      },
+      "source_task_ids": [
+        24
+      ],
+      "source_problem_ids": [
+        "retail7_task024_visual_06_00"
+      ],
+      "source_instruction_snippets": [
+        "neither box contains gluten, ask the AI Service Agent to search the current product database for all cookies that share the same origin as the"
+      ]
+    }
+  ]
+}

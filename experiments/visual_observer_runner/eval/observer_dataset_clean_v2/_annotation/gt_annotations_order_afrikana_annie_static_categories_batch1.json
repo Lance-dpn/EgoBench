@@ -1,0 +1,784 @@
+{
+  "annotations": [
+    {
+      "case_id": "order_clean_v2_problem_0006",
+      "event_gt": {
+        "primary_content_range": [
+          0,
+          1
+        ],
+        "expected_time_range": [
+          0,
+          1
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 0,
+        "expected_region": {
+          "description": "Afrikana top white section directly above the dark Sharing Platters block",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SPECIALS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0007",
+      "event_gt": {
+        "primary_content_range": [
+          0,
+          1
+        ],
+        "expected_time_range": [
+          0,
+          1
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 0,
+        "expected_region": {
+          "description": "Afrikana dark gray section on the right/middle of the menu",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SHARING PLATTERS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0008",
+      "event_gt": {
+        "primary_content_range": [
+          0,
+          1
+        ],
+        "expected_time_range": [
+          0,
+          1
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 0,
+        "expected_region": {
+          "description": "Afrikana dark gray section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SHARING PLATTERS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0009",
+      "event_gt": {
+        "primary_content_range": [
+          0,
+          1
+        ],
+        "expected_time_range": [
+          0,
+          1
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 0,
+        "expected_region": {
+          "description": "Afrikana dark gray section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SHARING PLATTERS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0011",
+      "event_gt": {
+        "primary_content_range": [
+          0,
+          1
+        ],
+        "expected_time_range": [
+          0,
+          1
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 0,
+        "expected_region": {
+          "description": "Afrikana dark red lower section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "KIDS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0012",
+      "event_gt": {
+        "primary_content_range": [
+          0,
+          1
+        ],
+        "expected_time_range": [
+          0,
+          1
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 0,
+        "expected_region": {
+          "description": "Afrikana dark red lower section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "KIDS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=0 shows the Afrikana menu with SPECIALS above the dark SHARING PLATTERS section and KIDS in the dark red lower section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0010",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie left fold, second white rounded box on dark green background",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, second white rounded box on dark green background."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, second white rounded box on dark green background."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0013",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie left fold, top white rounded box",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, top white rounded box."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, top white rounded box."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0014",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie left fold, middle white rounded box",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, middle white rounded box."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, middle white rounded box."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0015",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie left fold, bottom section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, bottom section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANNIE'S TOP DISHES",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, bottom section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0016",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie middle fold, top section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, top section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANTIPASTI & SNACKS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, top section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0017",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie middle fold, top section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, top section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANTIPASTI & SNACKS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, top section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0018",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie left fold, top section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, top section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie left fold, top section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0019",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie right fold, section directly below PIZZA",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, section directly below PIZZA."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, section directly below PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0020",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie right fold, section immediately above HANDMADE BREAD",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, section immediately above HANDMADE BREAD."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, section immediately above HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0021",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie right fold, topmost section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, topmost section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, topmost section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0022",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie right fold, section with hand illustration on left border",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, section with hand illustration on left border."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, section with hand illustration on left border."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0023",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie right fold, topmost section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, topmost section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, topmost section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0024",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie middle fold, title with small hand illustration on left side",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, title with small hand illustration on left side."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, title with small hand illustration on left side."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0025",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie middle fold, section with small hand illustration on right border",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, section with small hand illustration on right border."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, section with small hand illustration on right border."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0028",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie middle fold, title with small hand illustration on left side",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, title with small hand illustration on left side."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, title with small hand illustration on left side."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0030",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie middle fold, section indicated by small hand illustration left of the title",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, section indicated by small hand illustration left of the title."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, section indicated by small hand illustration left of the title."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0032",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie right fold, small bottom supplementary section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, small bottom supplementary section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right fold, small bottom supplementary section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0033",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie bottom-right section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie bottom-right section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie bottom-right section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0034",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie middle fold, central boxed section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, central boxed section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie middle fold, central boxed section."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0035",
+      "event_gt": {
+        "primary_content_range": [
+          5,
+          7
+        ],
+        "expected_time_range": [
+          5,
+          7
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 5,
+        "expected_region": {
+          "description": "Annie right flap, top section",
+          "coarse_region": "full_menu",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right flap, top section."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "afrikana_annie_1 t=5-8 shows the Annie menu clearly enough to read the requested menu section label. Annie right flap, top section."
+      }
+    }
+  ]
+}

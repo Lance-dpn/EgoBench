@@ -1,0 +1,3359 @@
+{
+  "schema_version": "observer_visual_problem_summary_v1",
+  "scenario_key": "order1",
+  "definition": "One visual problem is the same normalized visual referent within the same video and menu. Cross-video cases are intentionally kept separate.",
+  "eval_case_count": 160,
+  "visual_problem_count": 159,
+  "by_problem_type": {
+    "category_containing_pointed_dish": 4,
+    "dish_by_position_in_menu_region": 1,
+    "menu_category_by_absolute_region": 50,
+    "menu_category_by_relative_anchor": 27,
+    "menu_category_by_visual_style": 58,
+    "pointed_dish_by_ordinal": 19
+  },
+  "duplicate_visual_problems": [
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"right_fold_dark_background_white_text\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background section on the right fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: dark-background section on the right fold",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 2,
+      "case_ids": [
+        "order1_problem_0126",
+        "order1_problem_0132"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        35,
+        71,
+        74,
+        77,
+        98
+      ]
+    }
+  ],
+  "visual_problems": [
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"category_containing_second_pointed_dish\",\"anchor_text\":\"menu category containing the second pointed dish\",\"relation\":\"contains_pointed_dish\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"category_containing_pointed_dish\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category containing the second pointed dish",
+      "problem_type": "category_containing_pointed_dish",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0001"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_pointing_second"
+      ],
+      "source_task_ids": [
+        80
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"category_containing_last_pointed_dish\",\"anchor_text\":\"menu category containing the last pointed dish\",\"relation\":\"contains_pointed_dish\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"category_containing_pointed_dish\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category containing the last pointed dish",
+      "problem_type": "category_containing_pointed_dish",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0002"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_pointing_last"
+      ],
+      "source_task_ids": [
+        24
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"category_containing_first_pointed_dish\",\"anchor_text\":\"menu category containing the first pointed dish\",\"relation\":\"contains_pointed_dish\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"category_containing_pointed_dish\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category containing the first pointed dish",
+      "problem_type": "category_containing_pointed_dish",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0003"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_pointing_first"
+      ],
+      "source_task_ids": [
+        70,
+        74
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"category_containing_third_pointed_dish\",\"anchor_text\":\"menu category containing the third pointed dish\",\"relation\":\"contains_pointed_dish\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"category_containing_pointed_dish\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category containing the third pointed dish",
+      "problem_type": "category_containing_pointed_dish",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0004"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_pointing_third"
+      ],
+      "source_task_ids": [
+        72
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_left_fold_category\",\"anchor_text\":\"middle category on the left fold/page\",\"position\":\"last\",\"region_scope\":\"items inside the specified menu region\",\"target_region_constraints\":{\"target_role\":\"dish_name\"}},\"target_kind\":\"dish_name\",\"task_type\":\"dish_by_position_in_menu_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: middle category on the left fold/page",
+      "problem_type": "dish_by_position_in_menu_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0005"
+      ],
+      "expected_values": [
+        "Kalamata olives"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        75
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_middle_fold_category\",\"anchor_text\":\"bottom category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: bottom category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0007"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        19
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_left_category\",\"anchor_text\":\"bottom-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: bottom-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0006"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        53
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right menu category\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: bottom-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0008"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        19
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_right_small_supplementary_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right small supplementary menu section\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: bottom-right small supplementary menu section",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0009"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        54
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"center\"},\"anchor_text\":\"center category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: center category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0011"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        18
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_right_fold_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"center\"},\"anchor_text\":\"center category on the right fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: center category on the right fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0012"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        17
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_left_fold_category\",\"anchor_text\":\"middle category on the left fold/page\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: middle category on the left fold/page",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0010"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        55
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: top category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0014"
+      ],
+      "expected_values": [
+        "Antipasti & Snacks"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_antipasti_snacks"
+      ],
+      "source_task_ids": [
+        17,
+        51
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_left_category\",\"anchor_text\":\"top-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: top-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0013"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        52
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top-right menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: top-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0015"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_pizza"
+      ],
+      "source_task_ids": [
+        20,
+        55,
+        87
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_left_category\",\"anchor_text\":\"bottom-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: bottom-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0016"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        6
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right menu category\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: bottom-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0017"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        49
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_right_small_supplementary_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right small supplementary menu section\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: bottom-right small supplementary menu section",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0018"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        10,
+        43,
+        82
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"center\"},\"anchor_text\":\"center category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: center category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0020"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        43,
+        84
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_left_fold_category\",\"anchor_text\":\"middle category on the left fold/page\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: middle category on the left fold/page",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0019"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        7,
+        83
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: top category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0022"
+      ],
+      "expected_values": [
+        "Antipasti & Snacks"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_antipasti_snacks"
+      ],
+      "source_task_ids": [
+        48
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_category\",\"anchor_text\":\"top-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: top-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0021"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        48
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top-right menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: top-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0023"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_pizza"
+      ],
+      "source_task_ids": [
+        7,
+        8,
+        44
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_middle_fold_category\",\"anchor_text\":\"bottom category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: bottom category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0025"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        58
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_left_category\",\"anchor_text\":\"bottom-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: bottom-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0024"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        25,
+        57
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right menu category\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: bottom-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0026"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        21,
+        60,
+        89
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_right_small_supplementary_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right small supplementary menu section\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: bottom-right small supplementary menu section",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0027"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        92
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_left_fold_category\",\"anchor_text\":\"middle category on the left fold/page\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: middle category on the left fold/page",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0028"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        23,
+        62
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: top category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0030"
+      ],
+      "expected_values": [
+        "Antipasti & Snacks"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_antipasti_snacks"
+      ],
+      "source_task_ids": [
+        23,
+        60,
+        90
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_category\",\"anchor_text\":\"top-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: top-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0029"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        59
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top-right menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: top-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0031"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_pizza"
+      ],
+      "source_task_ids": [
+        58,
+        61
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_middle_fold_category\",\"anchor_text\":\"bottom category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: bottom category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0033"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        68
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_left_category\",\"anchor_text\":\"bottom-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: bottom-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0032"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        29
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right menu category\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: bottom-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0034"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        28,
+        95
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_right_small_supplementary_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right small supplementary menu section\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: bottom-right small supplementary menu section",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0035"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        32,
+        66
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_left_fold_category\",\"anchor_text\":\"middle category on the left fold/page\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: middle category on the left fold/page",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0036"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        67,
+        93
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: top category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0038"
+      ],
+      "expected_values": [
+        "Antipasti & Snacks"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_antipasti_snacks"
+      ],
+      "source_task_ids": [
+        28,
+        67,
+        94
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_category\",\"anchor_text\":\"top-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: top-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0037"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        93
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top-right menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: top-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0039"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_pizza"
+      ],
+      "source_task_ids": [
+        95
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_middle_fold_category\",\"anchor_text\":\"bottom category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: bottom category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0041"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        77
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_left_category\",\"anchor_text\":\"bottom-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: bottom-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0040"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        76
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right menu category\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: bottom-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0042"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        40,
+        69,
+        72,
+        75,
+        78
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_right_small_supplementary_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right small supplementary menu section\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: bottom-right small supplementary menu section",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0043"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        98
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"center\"},\"anchor_text\":\"center category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: center category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0045"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        5,
+        37
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_right_fold_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"center\"},\"anchor_text\":\"center category on the right fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: center category on the right fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0046"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        35
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_left_fold_category\",\"anchor_text\":\"middle category on the left fold/page\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: middle category on the left fold/page",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0044"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        39,
+        69,
+        72,
+        78,
+        79,
+        99
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: top category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0048"
+      ],
+      "expected_values": [
+        "Antipasti & Snacks"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_antipasti_snacks"
+      ],
+      "source_task_ids": [
+        2,
+        33,
+        41,
+        69,
+        71,
+        74,
+        78,
+        98
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_left_category\",\"anchor_text\":\"top-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: top-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0047"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        36,
+        77
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top-right menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: top-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0049"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_pizza"
+      ],
+      "source_task_ids": [
+        33,
+        39,
+        79,
+        100
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_middle_fold_category\",\"anchor_text\":\"bottom category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: bottom category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0050"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        14
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_right_small_supplementary_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"bottom-right small supplementary menu section\",\"target_region_constraints\":{\"avoid_region_role\":\"main_category\",\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"target_role\":\"menu_category\",\"vertical_position\":\"bottom\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: bottom-right small supplementary menu section",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0051"
+      ],
+      "expected_values": [
+        "Handmade Bread"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_handmade_bread"
+      ],
+      "source_task_ids": [
+        12
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_left_fold_category\",\"anchor_text\":\"middle category on the left fold/page\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: middle category on the left fold/page",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0052"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        15
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_middle_fold_category\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top category on the middle fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: top category on the middle fold",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0054"
+      ],
+      "expected_values": [
+        "Antipasti & Snacks"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_antipasti_snacks"
+      ],
+      "source_task_ids": [
+        11,
+        86
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_left_category\",\"anchor_text\":\"top-left menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: top-left menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0053"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        50
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_right_category\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"top-right menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_absolute_region\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: top-right menu category",
+      "problem_type": "menu_category_by_absolute_region",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0055"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_pizza"
+      ],
+      "source_task_ids": [
+        14,
+        50,
+        86
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"below_dark_background_section\",\"anchor_text\":\"menu category below the dark-background section\",\"relation\":\"below\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"below\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: menu category below the dark-background section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0058"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        53
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"below_visible_anchor\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"menu category below the specified visible anchor\",\"relation\":\"below\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"below\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: menu category below the specified visible anchor",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0059"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_pizza"
+      ],
+      "source_task_ids": [
+        87
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"above_bottom_right_small_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"menu category directly above the bottom-right small supplementary section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: menu category directly above the bottom-right small supplementary section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0056"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        16
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"above_dark_background_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"menu category directly above the dark-background section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: menu category directly above the dark-background section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0057"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_salads"
+      ],
+      "source_task_ids": [
+        18
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"left_of_small_hand_illustration_section\",\"anchor_text\":\"menu category to the left of the small-hand-illustration section\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: menu category to the left of the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0060"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        54
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"above_dark_background_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"menu category directly above the dark-background section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category directly above the dark-background section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0061"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        45,
+        82
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"below_small_hand_illustration_section\",\"anchor_text\":\"menu category directly below the small-hand-illustration section\",\"relation\":\"below\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"below\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category directly below the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0062"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        9
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_of_salad_small_hand_section\",\"anchor_text\":\"menu category to the left of the salad section with a small hand icon\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category to the left of the salad section with a small hand icon",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0063"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        10
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_of_small_hand_illustration_section\",\"anchor_text\":\"menu category to the left of the small-hand-illustration section\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category to the left of the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0064"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        44,
+        45,
+        85
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_of_visible_anchor\",\"anchor_text\":\"menu category to the left of the specified visible anchor\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category to the left of the specified visible anchor",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0065"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        85
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_of_top_middle_section\",\"anchor_text\":\"menu category to the right of the top-middle section\",\"relation\":\"right_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"right_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category to the right of the top-middle section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0066"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_pizza"
+      ],
+      "source_task_ids": [
+        6
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"above_bottom_right_small_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"menu category directly above the bottom-right small supplementary section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category directly above the bottom-right small supplementary section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0067"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        25
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"above_dark_background_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"menu category directly above the dark-background section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category directly above the dark-background section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0068"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        24
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"below_appetizers_and_snacks\",\"anchor_region\":{\"fold\":\"middle\",\"region_role\":\"menu_category\",\"vertical_position\":\"top\"},\"anchor_text\":\"menu category directly below the Appetizers and Snacks category\",\"relation\":\"below\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"below\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category directly below the Appetizers and Snacks category",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0069"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        27
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_of_salad_small_hand_section\",\"anchor_text\":\"menu category to the left of the salad section with a small hand icon\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category to the left of the salad section with a small hand icon",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0070"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        23
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_of_small_hand_illustration_section\",\"anchor_text\":\"menu category to the left of the small-hand-illustration section\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category to the left of the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0071"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        27,
+        61
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"above_dark_background_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"menu category directly above the dark-background section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: menu category directly above the dark-background section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0072"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        68,
+        95
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"above_small_hand_illustration_section\",\"anchor_text\":\"menu category directly above the small-hand-illustration section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: menu category directly above the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0073"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_pizza"
+      ],
+      "source_task_ids": [
+        31
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"below_small_hand_illustration_section\",\"anchor_text\":\"menu category directly below the small-hand-illustration section\",\"relation\":\"below\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"below\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: menu category directly below the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0074"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        29
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_of_small_hand_illustration_section\",\"anchor_text\":\"menu category to the left of the small-hand-illustration section\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: menu category to the left of the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0075"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        66
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"above_bottom_right_small_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"small_supplementary_title\",\"region_size\":\"small_supplementary\",\"vertical_position\":\"bottom\"},\"anchor_text\":\"menu category directly above the bottom-right small supplementary section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category directly above the bottom-right small supplementary section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0076"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        5,
+        37
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"above_dark_background_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"menu category directly above the dark-background section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category directly above the dark-background section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0077"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_salads"
+      ],
+      "source_task_ids": [
+        37,
+        99
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"above_small_hand_illustration_section\",\"anchor_text\":\"menu category directly above the small-hand-illustration section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category directly above the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0078"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_pizza"
+      ],
+      "source_task_ids": [
+        38
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"above_visible_anchor\",\"anchor_text\":\"menu category directly above the specified visible anchor\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category directly above the specified visible anchor",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0079"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_salads"
+      ],
+      "source_task_ids": [
+        38
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"below_small_hand_illustration_section\",\"anchor_text\":\"menu category directly below the small-hand-illustration section\",\"relation\":\"below\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"below\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category directly below the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0080"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        35,
+        41
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"left_of_small_hand_illustration_section\",\"anchor_text\":\"menu category to the left of the small-hand-illustration section\",\"relation\":\"left_of\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"left_of\",\"relation_axis\":\"horizontal\",\"same_column\":false,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category to the left of the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0081"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        34,
+        36,
+        70,
+        75,
+        79,
+        100
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"above_small_hand_illustration_section\",\"anchor_text\":\"menu category directly above the small-hand-illustration section\",\"relation\":\"above\",\"target_region_constraints\":{\"adjacency\":\"direct\",\"do_not_return_anchor\":true,\"relation\":\"above\",\"relation_axis\":\"vertical\",\"same_column\":true,\"same_fold\":true,\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_relative_anchor\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: menu category directly above the small-hand-illustration section",
+      "problem_type": "menu_category_by_relative_anchor",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0082"
+      ],
+      "expected_values": [
+        "Pizza"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_pizza"
+      ],
+      "source_task_ids": [
+        14,
+        15
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"right_fold_left_border_small_hand\",\"anchor_text\":\"category on the left border of the right fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: category on the left border of the right fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0087"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_salads"
+      ],
+      "source_task_ids": [
+        51
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_fold_right_border_small_hand\",\"anchor_text\":\"category on the right border of the middle fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: category on the right border of the middle fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0084"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        52
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_fold_title_left_small_hand\",\"anchor_text\":\"category with a small hand illustration to the left of the middle-fold title\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: category with a small hand illustration to the left of the middle-fold title",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0085"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        16,
+        88
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"left_dark_green_background_white_box\",\"anchor_text\":\"left-side dark-green-background section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: left-side dark-green-background section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0083"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        20
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"right_border_small_hand\",\"anchor_text\":\"menu category with a small hand illustration on the right border\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: menu category with a small hand illustration on the right border",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0086"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        20
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_left_independent_small_card\",\"anchor_text\":\"top-left independent small-card category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: top-left independent small-card category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0088"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        18
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_left_white_rounded_box\",\"anchor_text\":\"top-left white rounded-box category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: top-left white rounded-box category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0089"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        88
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"white_rounded_box\",\"anchor_text\":\"white rounded-box menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: white rounded-box menu category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0090"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        16
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_left_white_rounded_box\",\"anchor_text\":\"bottom-left white rounded-box menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: bottom-left white rounded-box menu category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0091"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        46
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_fold_left_border_small_hand\",\"anchor_text\":\"category on the left border of the right fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: category on the left border of the right fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0098"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        80,
+        84
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_fold_right_border_small_hand\",\"anchor_text\":\"category on the right border of the middle fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: category on the right border of the middle fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0095"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        47,
+        81
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_fold_title_left_small_hand\",\"anchor_text\":\"category with a small hand illustration to the left of the middle-fold title\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: category with a small hand illustration to the left of the middle-fold title",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0096"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        49
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"dark_background_white_text_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background menu section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: dark-background menu section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0092"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        42,
+        45
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_fold_dark_background_white_text\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background section on the right fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: dark-background section on the right fold",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0097"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        47,
+        81
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"small_hand_illustration_section\",\"anchor_text\":\"menu category with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0099"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        8
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_border_small_hand\",\"anchor_text\":\"menu category with a small hand illustration on the left border\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: menu category with a small hand illustration on the left border",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0094"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        46
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"dark_green_background_small_card\",\"anchor_text\":\"small-card category inside the dark-green background section\",\"target_region_constraints\":{\"avoid_region_role\":\"large_section_header\",\"region_role\":\"small_card_category\",\"region_size\":\"small_card\",\"target_role\":\"menu_category\",\"visual_style\":\"dark_green_background\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: small-card category inside the dark-green background section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0093"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        9
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_independent_small_card\",\"anchor_text\":\"top-left independent small-card category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: top-left independent small-card category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0100"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        43
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_white_rounded_box\",\"anchor_text\":\"top-left white rounded-box category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: top-left white rounded-box category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0101"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        80,
+        83
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_left_white_rounded_box\",\"anchor_text\":\"bottom-left white rounded-box menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: bottom-left white rounded-box menu category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0102"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        21,
+        89
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_fold_left_border_small_hand\",\"anchor_text\":\"category on the left border of the right fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: category on the left border of the right fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0109"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        57,
+        89
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_fold_right_border_small_hand\",\"anchor_text\":\"category on the right border of the middle fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: category on the right border of the middle fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0105"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        25,
+        56,
+        91
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_fold_title_left_small_hand\",\"anchor_text\":\"category with a small hand illustration to the left of the middle-fold title\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: category with a small hand illustration to the left of the middle-fold title",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0106"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        91
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"dark_background_white_text_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background menu section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: dark-background menu section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0103"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        26
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_fold_dark_background_white_text\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background section on the right fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: dark-background section on the right fold",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0108"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        22,
+        56,
+        59,
+        62,
+        90,
+        92
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_dark_green_background_white_box\",\"anchor_text\":\"left-side dark-green-background section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: left-side dark-green-background section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0104"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        27
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"small_hand_illustration_section\",\"anchor_text\":\"menu category with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0110"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        24
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_border_small_hand\",\"anchor_text\":\"menu category with a small hand illustration on the right border\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: menu category with a small hand illustration on the right border",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0107"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        21
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_independent_small_card\",\"anchor_text\":\"top-left independent small-card category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: top-left independent small-card category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0111"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        22,
+        26
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"bottom_left_white_rounded_box\",\"anchor_text\":\"bottom-left white rounded-box menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: bottom-left white rounded-box menu category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0112"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        64,
+        68
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_fold_left_border_small_hand\",\"anchor_text\":\"category on the left border of the right fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: category on the left border of the right fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0120"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        65,
+        96
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_fold_right_border_small_hand\",\"anchor_text\":\"category on the right border of the middle fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: category on the right border of the middle fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0117"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        63,
+        65
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"middle_fold_title_left_small_hand\",\"anchor_text\":\"category with a small hand illustration to the left of the middle-fold title\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: category with a small hand illustration to the left of the middle-fold title",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0118"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        29,
+        31,
+        94
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"dark_background_white_text_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background menu section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: dark-background menu section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0113"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        30
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"right_fold_dark_background_white_text\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background section on the right fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: dark-background section on the right fold",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0119"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        64
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"first_top_left_white_rounded_box\",\"anchor_text\":\"first top-left white rounded-box category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: first top-left white rounded-box category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0115"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        96
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"left_border_small_hand\",\"anchor_text\":\"menu category with a small hand illustration on the left border\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: menu category with a small hand illustration on the left border",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0116"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_salads"
+      ],
+      "source_task_ids": [
+        63
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"dark_green_background_small_card\",\"anchor_text\":\"small-card category inside the dark-green background section\",\"target_region_constraints\":{\"avoid_region_role\":\"large_section_header\",\"ordinal_within_region\":\"second\",\"region_role\":\"small_card_category\",\"region_size\":\"small_card\",\"target_role\":\"menu_category\",\"vertical_position\":\"middle\",\"visual_style\":\"dark_green_background\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: small-card category inside the dark-green background section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0114"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        30,
+        32
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_independent_small_card\",\"anchor_text\":\"top-left independent small-card category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: top-left independent small-card category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0121"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        65
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"anchor_id\":\"top_left_white_rounded_box\",\"anchor_text\":\"top-left white rounded-box category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: top-left white rounded-box category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0122"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        31
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_left_white_rounded_box\",\"anchor_text\":\"bottom-left white rounded-box menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: bottom-left white rounded-box menu category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0123"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        71
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"bottom_right_dark_background_white_text\",\"anchor_text\":\"bottom-right dark-background menu category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: bottom-right dark-background menu category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0124"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        3
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"right_fold_left_border_small_hand\",\"anchor_text\":\"category on the left border of the right fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: category on the left border of the right fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0133"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_salads"
+      ],
+      "source_task_ids": [
+        3,
+        70,
+        73,
+        76
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_fold_right_border_small_hand\",\"anchor_text\":\"category on the right border of the middle fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: category on the right border of the middle fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0129"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        73,
+        97
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_fold_title_left_small_hand\",\"anchor_text\":\"category with a small hand illustration to the left of the middle-fold title\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: category with a small hand illustration to the left of the middle-fold title",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0130"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        1,
+        97
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"dark_background_white_text_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background menu section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: dark-background menu section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0125"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        2,
+        33
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"right_fold_dark_background_white_text\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background section on the right fold\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: dark-background section on the right fold",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 2,
+      "case_ids": [
+        "order1_problem_0126",
+        "order1_problem_0132"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        35,
+        71,
+        74,
+        77,
+        98
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"left_dark_green_background_white_box\",\"anchor_text\":\"left-side dark-green-background section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: left-side dark-green-background section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0128"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        40
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"small_hand_illustration_section\",\"anchor_text\":\"menu category with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0135"
+      ],
+      "expected_values": [
+        "Italian Pasta"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_italian_pasta"
+      ],
+      "source_task_ids": [
+        39
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"left_border_small_hand\",\"anchor_text\":\"menu category with a small hand illustration on the left border\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category with a small hand illustration on the left border",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0127"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_salads"
+      ],
+      "source_task_ids": [
+        41
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"right_border_small_hand\",\"anchor_text\":\"menu category with a small hand illustration on the right border\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: menu category with a small hand illustration on the right border",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0131"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        4
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"second_top_left_white_rounded_box\",\"anchor_text\":\"second top-left white rounded-box category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: second top-left white rounded-box category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0134"
+      ],
+      "expected_values": [
+        "Cheese & Olives"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_cheese_olives"
+      ],
+      "source_task_ids": [
+        4
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"top_left_independent_small_card\",\"anchor_text\":\"top-left independent small-card category\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: top-left independent small-card category",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0136"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        1,
+        73
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"middle_fold_right_border_small_hand\",\"anchor_text\":\"category on the right border of the middle fold with a small hand illustration\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: category on the right border of the middle fold with a small hand illustration",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0140"
+      ],
+      "expected_values": [
+        "Sandwiches & Panini"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_sandwiches_panini"
+      ],
+      "source_task_ids": [
+        12
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"dark_background_white_text_section\",\"anchor_region\":{\"fold\":\"right\",\"region_role\":\"dark_background_category\",\"vertical_position\":\"bottom\",\"visual_style\":\"dark_background\"},\"anchor_text\":\"dark-background menu section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: dark-background menu section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0137"
+      ],
+      "expected_values": [
+        "Selected Steaks"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_selected_steaks"
+      ],
+      "source_task_ids": [
+        13
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"left_dark_green_background_white_box\",\"anchor_text\":\"left-side dark-green-background section\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: left-side dark-green-background section",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0139"
+      ],
+      "expected_values": [
+        "Cold Cuts"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_cold_cuts"
+      ],
+      "source_task_ids": [
+        12
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"left_border_small_hand\",\"anchor_text\":\"menu category with a small hand illustration on the left border\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: menu category with a small hand illustration on the left border",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0138"
+      ],
+      "expected_values": [
+        "Salads"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_salads"
+      ],
+      "source_task_ids": [
+        11
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"anchor_id\":\"third_top_left_white_rounded_box\",\"anchor_text\":\"third top left white rounded box\",\"target_region_constraints\":{\"target_role\":\"menu_category\"}},\"target_kind\":\"menu_catalog_or_category\",\"task_type\":\"menu_category_by_visual_style\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: third top left white rounded box",
+      "problem_type": "menu_category_by_visual_style",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0141"
+      ],
+      "expected_values": [
+        "Annie's top dishes"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_static_annie_s_top_dishes"
+      ],
+      "source_task_ids": [
+        13
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"first\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: first pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0142"
+      ],
+      "expected_values": [
+        "Lasagne"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_pointing_first"
+      ],
+      "source_task_ids": [
+        17,
+        53,
+        55,
+        87
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"second\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: second pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0143"
+      ],
+      "expected_values": [
+        "Ham & melon"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_pointing_second"
+      ],
+      "source_task_ids": [
+        51,
+        88
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"third\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"afrikana_annie_1.mp4\"}",
+      "visual_problem_label": "afrikana_annie_1.mp4 / menu_2: third pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "afrikana_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0144"
+      ],
+      "expected_values": [
+        "Margherita"
+      ],
+      "event_gt_ids": [
+        "afrikana_annie_1_menu_2_pointing_third"
+      ],
+      "source_task_ids": [
+        19,
+        54
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"first\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: first pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0145"
+      ],
+      "expected_values": [
+        "Lasagne"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_pointing_first"
+      ],
+      "source_task_ids": [
+        7,
+        9,
+        44,
+        46,
+        49,
+        81,
+        84
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"last\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: last pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0146"
+      ],
+      "expected_values": [
+        "Margherita"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_pointing_last"
+      ],
+      "source_task_ids": [
+        6,
+        10,
+        48
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"second\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: second pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0147"
+      ],
+      "expected_values": [
+        "Ham & melon"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_pointing_second"
+      ],
+      "source_task_ids": [
+        8,
+        47,
+        82,
+        85
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"third\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_butcher_1.mp4\"}",
+      "visual_problem_label": "annie_butcher_1.mp4 / menu_1: third pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_butcher_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0148"
+      ],
+      "expected_values": [
+        "Margherita"
+      ],
+      "event_gt_ids": [
+        "annie_butcher_1_menu_1_pointing_third"
+      ],
+      "source_task_ids": [
+        42,
+        83
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"first\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: first pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0149"
+      ],
+      "expected_values": [
+        "Lasagne"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_pointing_first"
+      ],
+      "source_task_ids": [
+        26,
+        59,
+        62,
+        90
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"second\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: second pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0150"
+      ],
+      "expected_values": [
+        "Ham & melon"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_pointing_second"
+      ],
+      "source_task_ids": [
+        22,
+        61,
+        91
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"third\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_meraki_1.mp4\"}",
+      "visual_problem_label": "annie_meraki_1.mp4 / menu_1: third pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_meraki_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0151"
+      ],
+      "expected_values": [
+        "Margherita"
+      ],
+      "event_gt_ids": [
+        "annie_meraki_1_menu_1_pointing_third"
+      ],
+      "source_task_ids": [
+        89,
+        92
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"first\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: first pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0152"
+      ],
+      "expected_values": [
+        "Lasagne"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_pointing_first"
+      ],
+      "source_task_ids": [
+        30,
+        32,
+        66,
+        93
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"second\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: second pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0153"
+      ],
+      "expected_values": [
+        "Ham & melon"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_pointing_second"
+      ],
+      "source_task_ids": [
+        28,
+        64
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_1\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"third\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"annie_pauhana_1.mp4\"}",
+      "visual_problem_label": "annie_pauhana_1.mp4 / menu_1: third pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "annie_pauhana_1.mp4",
+      "menu_label": "menu_1",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0154"
+      ],
+      "expected_values": [
+        "Margherita"
+      ],
+      "event_gt_ids": [
+        "annie_pauhana_1_menu_1_pointing_third"
+      ],
+      "source_task_ids": [
+        63,
+        67
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"first\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: first pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0155"
+      ],
+      "expected_values": [
+        "Lasagne"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_pointing_first"
+      ],
+      "source_task_ids": [
+        1,
+        4,
+        40,
+        99
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"second\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: second pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0156"
+      ],
+      "expected_values": [
+        "Ham & melon"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_pointing_second"
+      ],
+      "source_task_ids": [
+        2,
+        5,
+        34,
+        36,
+        38,
+        97,
+        100
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"third\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"greek_annie_1.mp4\"}",
+      "visual_problem_label": "greek_annie_1.mp4 / menu_2: third pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "greek_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0157"
+      ],
+      "expected_values": [
+        "Margherita"
+      ],
+      "event_gt_ids": [
+        "greek_annie_1_menu_2_pointing_third"
+      ],
+      "source_task_ids": [
+        3,
+        76,
+        98
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"first\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: first pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0158"
+      ],
+      "expected_values": [
+        "Lasagne"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_pointing_first"
+      ],
+      "source_task_ids": [
+        11,
+        50
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"second\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: second pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0159"
+      ],
+      "expected_values": [
+        "Ham & melon"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_pointing_second"
+      ],
+      "source_task_ids": [
+        15
+      ]
+    },
+    {
+      "visual_problem_key": "{\"menu_label\":\"menu_2\",\"slots\":{\"action\":\"pointing\",\"ordinal\":\"third\",\"pointing_resolution\":{\"do_not_use\":[\"hand_body_overlap\",\"most_salient_text\",\"row_count_guess\"],\"primary_cue\":\"fingertip_or_contact_point\",\"selection_unit\":\"nearest_menu_text_row\"},\"sequence_scope\":\"stable pointing events on the specified menu, ordered by time\"},\"target_kind\":\"dish_name\",\"task_type\":\"pointed_dish_by_ordinal\",\"video_path\":\"sunny_annie_1.mp4\"}",
+      "visual_problem_label": "sunny_annie_1.mp4 / menu_2: third pointed dish",
+      "problem_type": "pointed_dish_by_ordinal",
+      "video_path": "sunny_annie_1.mp4",
+      "menu_label": "menu_2",
+      "case_count": 1,
+      "case_ids": [
+        "order1_problem_0160"
+      ],
+      "expected_values": [
+        "Margherita"
+      ],
+      "event_gt_ids": [
+        "sunny_annie_1_menu_2_pointing_third"
+      ],
+      "source_task_ids": [
+        13,
+        86
+      ]
+    }
+  ]
+}

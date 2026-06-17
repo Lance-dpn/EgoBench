@@ -1,0 +1,304 @@
+{
+  "annotations": [
+    {
+      "case_id": "retail_clean_v2_problem_0032",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "left hand, gold cap bottle",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Mouton Cadet",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0033",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "held bottle selected from higher shelf, gold cap/yellow body",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Mouton Cadet",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0034",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "yellowish bottle held in hand",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Mouton Cadet",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0041",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "selected bottle with gold cap",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Mouton Cadet",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0042",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "wine with yellow body",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Mouton Cadet",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0044",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "left-hand held bottle",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Mouton Cadet",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the left-hand/gold-cap yellow wine bottle label clearly reading Mouton Cadet."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0035",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "right hand, blue-cap bottle picked from lower shelf",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Riunite Moscato",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0039",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "bottle with blue cap",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Riunite Moscato",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0040",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "wine with blue tin cap",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Riunite Moscato",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0045",
+      "event_gt": {
+        "primary_content_range": [
+          9,
+          11
+        ],
+        "expected_time_range": [
+          9,
+          11
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 10,
+        "expected_region": {
+          "description": "greener-body held bottle",
+          "coarse_region": "hands_and_shelf",
+          "notes": null
+        },
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Riunite Moscato",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "high",
+        "evidence": "retail2 t=9-10 shows the right-hand blue-cap green bottle label clearly reading Riunite Moscato."
+      }
+    }
+  ]
+}

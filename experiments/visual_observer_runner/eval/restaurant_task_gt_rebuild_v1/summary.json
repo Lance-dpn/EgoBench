@@ -1,0 +1,38 @@
+{
+  "schema_version": "restaurant_gt_rebuild_summary_v1",
+  "total_tasks": 169,
+  "manual_reviewed": 73,
+  "same_as_official_after_review": 57,
+  "review_required": 16,
+  "pending_manual_rebuild": 96,
+  "by_scenario": {
+    "restaurant1": {
+      "tasks": 40,
+      "manual_reviewed": 3,
+      "same_as_official_after_review": 0,
+      "review_required": 3,
+      "pending_manual_rebuild": 37
+    },
+    "restaurant2": {
+      "tasks": 30,
+      "manual_reviewed": 29,
+      "same_as_official_after_review": 23,
+      "review_required": 6,
+      "pending_manual_rebuild": 1
+    },
+    "restaurant3": {
+      "tasks": 59,
+      "manual_reviewed": 1,
+      "same_as_official_after_review": 0,
+      "review_required": 1,
+      "pending_manual_rebuild": 58
+    },
+    "restaurant4": {
+      "tasks": 40,
+      "manual_reviewed": 40,
+      "same_as_official_after_review": 34,
+      "review_required": 6,
+      "pending_manual_rebuild": 0
+    }
+  }
+}

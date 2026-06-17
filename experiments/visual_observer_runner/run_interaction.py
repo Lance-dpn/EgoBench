@@ -107,6 +107,43 @@ VISUAL_RESOLUTION_TOOL = {
                         "'the one on the left', or 'it'."
                     ),
                 },
+                "menu_label": {
+                    "type": "string",
+                    "description": "Optional visible menu/surface label such as 'menu_1' or 'menu_2'.",
+                },
+                "task_type": {
+                    "type": "string",
+                    "description": (
+                        "Optional normalized visual task type, e.g. pointed_dish_by_ordinal, "
+                        "menu_category_by_absolute_region, menu_category_by_relative_anchor, "
+                        "menu_category_by_visual_style, category_containing_pointed_dish, or "
+                        "dish_by_position_in_menu_region."
+                    ),
+                },
+                "target_kind": {
+                    "type": "string",
+                    "description": "Optional target kind, normally dish_name or menu_catalog_or_category.",
+                },
+                "normalized_slots": {
+                    "type": "object",
+                    "description": (
+                        "Optional fill-in style visual slots. Include fields such as action, ordinal, "
+                        "anchor_id, anchor_text, anchor_region, target_region_constraints, relation, "
+                        "position, pointing_resolution, and sequence_scope. Do not include database "
+                        "values or final scenario answers."
+                    ),
+                    "additionalProperties": True,
+                },
+                "visual_query": {
+                    "type": "object",
+                    "description": (
+                        "Preferred structured visual_query_v1 object. Fill scenario, surface, target, "
+                        "referent, and scope to describe exactly one visible target. Use it only for "
+                        "visual localization/reading; do not include database facts, prices, nutrients, "
+                        "taxes, discounts, inventory, hidden final answers, or business actions."
+                    ),
+                    "additionalProperties": True,
+                },
             },
             "required": ["query"],
         },
@@ -222,6 +259,7 @@ def observation_turn_key(
     turn: int,
     current_user_message: str,
     referent_hint: str = "",
+    normalized_request: dict[str, Any] | None = None,
 ) -> str:
     payload = {
         "video_path": video_path,
@@ -230,8 +268,9 @@ def observation_turn_key(
         "turn": turn,
         "current_user_message": current_user_message,
         "referent_hint": referent_hint,
+        "normalized_request": normalized_request or {},
         "observer_url": visual_observer_url(args),
-        "version": "aura_observer_turn_grounded_v6_visual_query",
+        "version": "aura_observer_turn_grounded_v7_normalized_slots",
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
 
@@ -324,6 +363,7 @@ def get_aura_observation(
     turn: int,
     current_user_message: str,
     referent_hint: str = "",
+    normalized_request: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     cache_file = observation_trace_file(task, video_path, task_id, args)
     task_label = f"{args.scenario}{args.scenario_number}_task{task_id}"
@@ -335,6 +375,7 @@ def get_aura_observation(
         turn,
         current_user_message,
         referent_hint,
+        normalized_request,
     )
     trace = load_observation_trace(cache_file)
     if not args.refresh_observation:
@@ -354,6 +395,8 @@ def get_aura_observation(
         "current_user_message": current_user_message,
         "referent_hint": referent_hint,
     }
+    if normalized_request:
+        payload["observer_input"] = normalized_request
     request_start = time.time()
     response = requests.post(visual_observer_url(args), json=payload, timeout=args.aura_timeout)
     response.raise_for_status()
@@ -532,11 +575,45 @@ def compact_visual_observer_result(
     }
 
 
-def visual_request_cache_key(turn: int, query: str, referent_hint: str) -> str:
+def normalized_request_from_tool_params(params: dict[str, Any], video_path: str | None = None) -> dict[str, Any] | None:
+    visual_query = params.get("visual_query")
+    if isinstance(visual_query, dict):
+        normalized_request = dict(visual_query)
+        normalized_request.setdefault("schema_version", "visual_query_v1")
+        if video_path:
+            normalized_request.setdefault("scope", {})
+            if isinstance(normalized_request["scope"], dict):
+                normalized_request["scope"].setdefault("video_id", Path(video_path).name)
+            normalized_request["video_path"] = Path(video_path).name
+        return normalized_request
+
+    normalized_slots = params.get("normalized_slots")
+    has_top_level = any(params.get(key) for key in ("menu_label", "task_type", "target_kind"))
+    if not isinstance(normalized_slots, dict) and not has_top_level:
+        return None
+    normalized_request: dict[str, Any] = {
+        "schema_version": "observer_input_v1_service_tool",
+        "slots": normalized_slots if isinstance(normalized_slots, dict) else {},
+    }
+    for key in ("menu_label", "task_type", "target_kind"):
+        if params.get(key):
+            normalized_request[key] = params[key]
+    if video_path:
+        normalized_request["video_path"] = Path(video_path).name
+    return normalized_request
+
+
+def visual_request_cache_key(
+    turn: int,
+    query: str,
+    referent_hint: str,
+    normalized_request: dict[str, Any] | None = None,
+) -> str:
     payload = {
         "turn": turn,
         "query": query.strip(),
         "referent_hint": referent_hint.strip(),
+        "normalized_request": normalized_request or {},
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()[:16]
 
@@ -600,6 +677,11 @@ def normalize_model_text(value: Any, fallback: str = "") -> str:
 
 def contains_stop_signal(text: str) -> bool:
     return any(line.strip() == "STOP" for line in text.splitlines())
+
+
+def canonical_tool_call_text(tool_call_obj: Any) -> str:
+    calls = tool_call_obj if isinstance(tool_call_obj, list) else [tool_call_obj]
+    return json.dumps(calls, ensure_ascii=False)
 
 
 def parse_task_ids(value: str) -> list[int]:
@@ -761,6 +843,8 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
         tool_calls_count = 0
         accumulated_original_scores = {}
         accumulated_final_scores = {}
+        scenario_original_scores = {}
+        scenario_corrected_scores = {}
         valid_evaluation_count = 0
         last_agent_response_for_check = "Dear customer, how can I help you?"
         summarized_history_str = ""
@@ -804,12 +888,22 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                     final_scores = evaluation_info.get("corrected_scores", original_scores)
                     for key, value in original_scores.items():
                         try:
-                            accumulated_original_scores[key] = accumulated_original_scores.get(key, 0.0) + float(value)
+                            numeric_value = float(value)
+                            accumulated_original_scores[key] = accumulated_original_scores.get(key, 0.0) + numeric_value
+                            scenario_original_scores[key] = min(
+                                scenario_original_scores.get(key, numeric_value),
+                                numeric_value,
+                            )
                         except ValueError:
                             pass
                     for key, value in final_scores.items():
                         try:
-                            accumulated_final_scores[key] = accumulated_final_scores.get(key, 0.0) + float(value)
+                            numeric_value = float(value)
+                            accumulated_final_scores[key] = accumulated_final_scores.get(key, 0.0) + numeric_value
+                            scenario_corrected_scores[key] = min(
+                                scenario_corrected_scores.get(key, numeric_value),
+                                numeric_value,
+                            )
                         except ValueError:
                             pass
 
@@ -893,15 +987,17 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         params = tool_call_obj.get("parameters", tool_call_obj.get("arguments", {})) or {}
                         query = str(params.get("query") or current_user_reply)
                         referent_hint = str(params.get("referent_hint") or "")
+                        normalized_request = normalized_request_from_tool_params(params, video_path)
                         observation_start = time.time()
                         raw_observation = None
                         reused = False
-                        cache_key = visual_request_cache_key(turn, query, referent_hint)
+                        cache_key = visual_request_cache_key(turn, query, referent_hint, normalized_request)
                         observer_request_message = build_observer_request_message(query, referent_hint)
                         visual_call_log = {
                             "turn": turn,
                             "user_message": current_user_reply,
                             "tool_parameters": params,
+                            "normalized_request": normalized_request,
                             "observer_request_message": observer_request_message,
                             "source": visual_context_source,
                             "status": "started",
@@ -932,6 +1028,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                                         turn,
                                         observer_request_message,
                                         referent_hint,
+                                        normalized_request,
                                     )
                                     if args.observe_once:
                                         visual_observation_cache[cache_key] = raw_observation
@@ -1045,9 +1142,11 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                                 "calls": db_calls_for_log,
                                 "results": db_results_for_log,
                             }
-                        )
+                    )
                     combined_result = "; ".join(res.get("content", str(res)) for res in tool_results)
-                    local_service_history.append({"role": "assistant", "content": agent_reply})
+                    local_service_history.append(
+                        {"role": "assistant", "content": canonical_tool_call_text(tool_call_obj)}
+                    )
                     local_service_history.append({"role": "user", "content": f"Tool execution result: {combined_result}"})
                 else:
                     agent_final_reply = "[Interaction stopped: inner tool rounds exceeded limit]"
@@ -1118,7 +1217,12 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
         history_log["rounds_count"] = rounds_count
         history_log["input_tokens"] = input_tokens_total
         history_log["output_tokens"] = output_tokens_total
+        history_log["tokens_consumed"] = input_tokens_total + output_tokens_total
         history_log["tool_calls_count"] = tool_calls_count
+        if scenario_original_scores:
+            history_log["original_scores"] = scenario_original_scores
+        if scenario_corrected_scores:
+            history_log["corrected_scores"] = scenario_corrected_scores
         if valid_evaluation_count > 0:
             history_log["user_performance"] = {
                 **{

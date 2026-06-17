@@ -29,6 +29,39 @@ cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench
 
 The observer startup script loads `.env` automatically.
 
+## Quick Single-Task Run
+
+Use `--task_ids` to run specific 1-based tasks instead of the first
+`--num_tasks` tasks:
+
+```bash
+python -u experiments/visual_observer_runner/run_interaction.py \
+  --scenario order \
+  --scenario_number 1 \
+  --task_ids 5 \
+  --visual_context_source observer \
+  --visual_observer_url http://127.0.0.1:18082/observe \
+  --multi_agent_user \
+  --summary_user \
+  --output_model_name qwen36-online-url-observer-order1-task5
+```
+
+For standard experiments, keep `--multi_agent_user` and `--summary_user`
+enabled so the user simulator follows the official contradiction-check and
+dialogue-summary flow.
+
+Multiple ids and ranges are supported:
+
+```bash
+--task_ids 3,7,10-12
+```
+
+For oracle visual anchors without calling the observer, switch to:
+
+```bash
+--visual_context_source scenario_value
+```
+
 ## 2. Current Recommended Online Observer
 
 For online DashScope/Qwen video requests, use a public video URL. The current
@@ -126,13 +159,14 @@ The detail image request uses base64 `image_url` and sends
 `OBSERVER_DETAIL_HIGH_RESOLUTION_IMAGES=on`. This is the DashScope
 OpenAI-compatible high-resolution image mode.
 
-When the event localizer returns a `best_keyframes` timestamp, detail sampling
-uses that timestamp only as a sampling anchor. The anchor is not treated as the
+When the event localizer returns `keyframes`, detail sampling uses the first
+keyframe timestamp only as a sampling anchor. The keyframe is not treated as the
 answer frame and is not allowed to override stronger evidence in other sampled
-frames. The detail stage samples before and after the anchor across the event
-time range plus `OBSERVER_DETAIL_BOUNDARY_OFFSET` seconds on both sides. If no
-keyframe is returned, the observer falls back to uniform sampling across the
-event time range.
+frames. The detail stage samples before and after the keyframe within the event
+time range plus `OBSERVER_DETAIL_BOUNDARY_OFFSET` seconds on both sides. The
+maximum number of detail frames is controlled by `OBSERVER_SEQUENCE_FRAMES`,
+which defaults to 8. If no keyframe is returned, the observer falls back to
+sampling around the event time range midpoint.
 
 Both event localization and detail recognition receive an augmented scene
 description. It starts from the scenario task's `image_description`, then adds
@@ -678,16 +712,82 @@ moment, inspect:
 ```text
 effective_event_localizer_backend
 event_localizer.raw_text
-event_localizer.clean_plan.candidate_events
-event_localizer.clean_plan.referents
-detail_recognizer.sequence_timestamps
-detail_recognizer.raw_text
+event_localizer.clean_plan.selected_event
+event_localizer.clean_plan.candidates
+vision_details[].timestamps
+vision_details[].clean_detail
 ```
 
 For ordinal pointing tasks, the event prompt asks the model to enumerate
 candidate action events first, then select one by ordinal order. The detail
-stage receives one visual target only and should use the full sampled sequence
-around the event range. The keyframe is only a sampling anchor, not the answer.
+stage receives the selected event and samples a short sequence around its first
+keyframe inside the event range. The keyframe is only a sampling anchor, not the
+answer.
+
+### 8.6 Observer Grounding Evaluation Outputs
+
+Observer grounding GT and sampled evaluation runs are stored separately.
+
+Reusable GT/problem-set artifacts live under:
+
+```text
+experiments/visual_observer_runner/eval/
+```
+
+Current GT directories:
+
+```text
+eval/review_pre_gt_all/
+eval/review_pre_gt_order1/
+eval/observer_problem_set_order1/
+```
+
+`eval/observer_problem_set_order1/` contains:
+
+```text
+observer_problem_set_draft.json
+observer_problem_type_summary.json
+observer_grounding_order1_bootstrap.json
+summary.md
+skipped_visual_request_candidates.json
+```
+
+Evaluation run logs/results live under cache:
+
+```text
+experiments/visual_observer_runner/cache/visual_stage_eval/
+```
+
+For order1 observer grounding samples, new evaluation results are written to:
+
+```text
+cache/visual_stage_eval/observer_problem_set_order1/eval_runs/{experiment_id}.json
+cache/visual_stage_eval/observer_problem_set_order1/eval_runs/{experiment_id}.md
+```
+
+Run:
+
+```bash
+python experiments/visual_observer_runner/evaluate_observer_grounding_sample.py \
+  --seed 20260604 \
+  --sample_size 20 \
+  --experiment_id observer-grounding-order1-manual-$(date +%Y%m%d%H%M)
+```
+
+The result summary includes three separate observer-stage diagnostics:
+
+```text
+event_mean_coverage
+event_keyframe_pass
+detail_sample_mean_gt_coverage
+```
+
+`event_mean_coverage` evaluates whether the predicted event time range overlaps
+the GT primary content range. `event_keyframe_pass` evaluates whether
+`selected_event.keyframes[0].timestamp` falls inside the GT primary content
+range. `detail_sample_mean_gt_coverage` evaluates how much of the GT primary
+content range is covered by the actual frame timestamps sent to the detail
+stage.
 
 If the selected moment is consistently late or outside the intended screen
 region, you can run a targeted online `qwen_frames` comparison:
@@ -749,6 +849,7 @@ The service agent prompt enforces these rules:
    observer for the missing visual identity.
 5. Keep using scenario tools for prices, discounts, nutrition, tax, totals, and
    order/cart actions.
+6. Tool calls must be exactly one JSON array with no prose mixed in.
 ```
 
 Successful visual identities are stored in compact visual memory so later turns

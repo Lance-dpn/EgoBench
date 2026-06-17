@@ -1,0 +1,158 @@
+{
+  "annotations": [
+    {
+      "case_id": "order_clean_v2_problem_0001",
+      "event_gt": {
+        "primary_content_range": [
+          2.5,
+          3.5
+        ],
+        "expected_time_range": [
+          2.5,
+          3.5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 3.0,
+        "expected_region": {
+          "description": "second stable pointed item in Annie's Top Dishes",
+          "coarse_region": "menu_item",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 2.5-3.5s show the second stable pointing target on the Annie menu at the Grilled chicken item in the right column of Annie's Top Dishes."
+      },
+      "detail_gt": {
+        "target_kind": "dish_name",
+        "canonical_value": "Grilled chicken salad",
+        "acceptable_aliases": [
+          "Grilled chicken"
+        ],
+        "negative_neighbors": [],
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 2.5-3.5s show the second stable pointing target on the Annie menu at the Grilled chicken item in the right column of Annie's Top Dishes."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0002",
+      "event_gt": {
+        "primary_content_range": [
+          2.5,
+          3.5
+        ],
+        "expected_time_range": [
+          2.5,
+          3.5
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 3.0,
+        "expected_region": {
+          "description": "second stable pointed item in Annie's Top Dishes",
+          "coarse_region": "menu_item",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 2.5-3.5s show the second stable pointing target on the Annie menu at the Grilled chicken item in the right column of Annie's Top Dishes."
+      },
+      "detail_gt": {
+        "target_kind": "dish_name",
+        "canonical_value": "Grilled chicken salad",
+        "acceptable_aliases": [
+          "Grilled chicken"
+        ],
+        "negative_neighbors": [],
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 2.5-3.5s show the second stable pointing target on the Annie menu at the Grilled chicken item in the right column of Annie's Top Dishes."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0003",
+      "event_gt": {
+        "primary_content_range": [
+          5.5,
+          6.2
+        ],
+        "expected_time_range": [
+          5.5,
+          6.2
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "third stable pointed item in the top of the PIZZA section",
+          "coarse_region": "menu_item",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 5.5-6.0s show the next stable pointing target on the Annie menu in the top of the PIZZA section; the visible top pizza item is Margherita."
+      },
+      "detail_gt": {
+        "target_kind": "dish_name",
+        "canonical_value": "Margherita",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 5.5-6.0s show the next stable pointing target on the Annie menu in the top of the PIZZA section; the visible top pizza item is Margherita."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0004",
+      "event_gt": {
+        "primary_content_range": [
+          5.5,
+          6.2
+        ],
+        "expected_time_range": [
+          5.5,
+          6.2
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "third stable pointed item in the top of the PIZZA section",
+          "coarse_region": "menu_item",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 5.5-6.0s show the next stable pointing target on the Annie menu in the top of the PIZZA section; the visible top pizza item is Margherita."
+      },
+      "detail_gt": {
+        "target_kind": "dish_name",
+        "canonical_value": "Margherita",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 5.5-6.0s show the next stable pointing target on the Annie menu in the top of the PIZZA section; the visible top pizza item is Margherita."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0005",
+      "event_gt": {
+        "primary_content_range": [
+          5.5,
+          6.2
+        ],
+        "expected_time_range": [
+          5.5,
+          6.2
+        ],
+        "allowed_transition_range": null,
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "third stable pointed item in the top of the PIZZA section",
+          "coarse_region": "menu_item",
+          "notes": null
+        },
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 5.5-6.0s show the next stable pointing target on the Annie menu in the top of the PIZZA section; the visible top pizza item is Margherita."
+      },
+      "detail_gt": {
+        "target_kind": "dish_name",
+        "canonical_value": "Margherita",
+        "acceptable_aliases": [],
+        "negative_neighbors": [],
+        "confidence": "medium",
+        "evidence": "afrikana_annie_1 dense frames around 5.5-6.0s show the next stable pointing target on the Annie menu in the top of the PIZZA section; the visible top pizza item is Margherita."
+      }
+    }
+  ]
+}

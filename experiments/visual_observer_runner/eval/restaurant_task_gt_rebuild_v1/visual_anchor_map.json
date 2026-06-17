@@ -1,0 +1,120 @@
+{
+  "schema_version": "restaurant_visual_anchor_map_v1",
+  "policy": {
+    "source": "manual inspection of restaurant1-4 sampled frames",
+    "notes": "Use this as visual evidence only. DB/tool facts are still obtained from RestaurantDB."
+  },
+  "shared_annie_menu_layout": {
+    "applies_to": ["restaurant1.mp4", "restaurant2.mp4", "restaurant3.mp4"],
+    "orientation_notes": {
+      "restaurant1.mp4": "normal oblique menu view",
+      "restaurant2.mp4": "normal oblique menu view",
+      "restaurant3.mp4": "menu is rotated in the camera view; normalize by menu text reading orientation"
+    },
+    "static_sections": {
+      "left_fold_top": {
+        "category": "Cold Cuts",
+        "visual_description": "top white rounded box on the left fold/page"
+      },
+      "left_fold_middle": {
+        "category": "Cheese & Olives",
+        "visual_description": "middle white rounded box on the left fold/page"
+      },
+      "left_fold_bottom": {
+        "category": "Annie's top dishes",
+        "visual_description": "bottom white rounded box on the left fold/page"
+      },
+      "middle_fold_top": {
+        "category": "Antipasti & Snacks",
+        "visual_description": "top white section on the middle fold/page"
+      },
+      "middle_fold_right_border_hand": {
+        "category": "Sandwiches & Panini",
+        "visual_description": "middle fold section with a small hand illustration on the right border"
+      },
+      "middle_fold_lower_left_title_hand": {
+        "category": "Italian Pasta",
+        "visual_description": "lower-middle middle fold section whose title has a small hand illustration on the left"
+      },
+      "right_fold_top": {
+        "category": "Pizza",
+        "visual_description": "top white section on the right fold/page"
+      },
+      "right_fold_left_border_hand": {
+        "category": "Salads",
+        "visual_description": "right fold vertical/side section with a small hand illustration on the left border"
+      },
+      "right_fold_dark_background": {
+        "category": "Selected Steaks",
+        "visual_description": "right fold dark green background section with white title/text"
+      },
+      "bottom_right_supplement": {
+        "category": "Handmade Bread",
+        "visual_description": "small supplementary homemade bread section in the bottom-right corner"
+      }
+    }
+  },
+  "pointing_sequences": {
+    "restaurant1.mp4": {
+      "evidence_contact_sheet": "_frames/restaurant1_contact.jpg",
+      "sequence_notes": "Frames F004-F012 point within the left fold; F020-F024 point near the middle fold; later frames show the right fold more clearly. Exact pointed dish/category must be checked per task because several tasks refer to dish-level order."
+    },
+    "restaurant2.mp4": {
+      "evidence_contact_sheet": "_frames/restaurant2_contact.jpg",
+      "category_sequence": [
+        {
+          "ordinal": "first",
+          "category": "Cold Cuts",
+          "evidence_frames": ["F004", "F005", "F006"],
+          "notes": "Finger points at the top-left Cold Cuts card."
+        },
+        {
+          "ordinal": "second",
+          "category": "Pizza",
+          "evidence_frames": ["F012", "F014"],
+          "notes": "Finger points at the top-right Pizza card; nearby frame F014 is clearest."
+        },
+        {
+          "ordinal": "last",
+          "category": "Italian Pasta",
+          "evidence_frames": ["F016", "F017", "F018"],
+          "notes": "Finger is near the lower-middle Italian Pasta section."
+        }
+      ]
+    },
+    "restaurant3.mp4": {
+      "evidence_contact_sheet": "_frames/restaurant3_contact.jpg",
+      "sequence_notes": "Camera view is rotated. Frames F003-F013 point repeatedly in the left-column menu area. Use full-resolution frames and normalize menu orientation before deriving first/second/last pointed dish or category."
+    }
+  },
+  "restaurant4_table": {
+    "applies_to": ["restaurant4.mp4"],
+    "evidence_contact_sheet": "_frames/restaurant4_contact.jpg",
+    "visible_dishes": {
+      "raw_salmon": {
+        "canonical_visual_name": "Raw Salmon",
+        "likely_db_name": "Salmone affumicato",
+        "evidence_frames": ["F006", "F007", "F008", "F009", "F010"],
+        "visual_description": "center plate with orange salmon slices, onion garnish, and lemon wedge"
+      },
+      "panini": {
+        "canonical_visual_name": "Panini",
+        "likely_category": "Sandwiches & Panini",
+        "evidence_frames": ["F000", "F006", "F014"],
+        "visual_description": "right-side wooden plate with grilled panini/sandwich pieces"
+      },
+      "melon_and_ham": {
+        "canonical_visual_name": "Ham & melon",
+        "likely_db_name": "Ham & melon",
+        "evidence_frames": ["F000", "F003", "F006"],
+        "visual_description": "back-center plate with melon and ham/prosciutto-like slices beside greens"
+      },
+      "small_left_dessert": {
+        "canonical_visual_name": "uncertain dessert/cake-like item",
+        "likely_db_name": null,
+        "evidence_frames": ["F000", "F006"],
+        "visual_description": "small left plate with a cake or bread-like piece; not enough evidence for a unique DB name without instruction context"
+      }
+    }
+  }
+}

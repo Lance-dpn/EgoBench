@@ -1,0 +1,572 @@
+{
+  "schema_version": "gt_annotations_batch_v1",
+  "source_dataset": "observer_dataset_clean_v2",
+  "policy": {
+    "gt_source": "manual inspection of clean_v2 extracted video frames only",
+    "video_id": "Green Pepper Chicken.mp4",
+    "review_status": "batch_pending_user_review",
+    "notes": "Annotated only visual facts that are directly visible from the cooking video. Business/database-only requests remain pending."
+  },
+  "annotations": [
+    {
+      "case_id": "kitchen_clean_v2_problem_0046",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "green ingredient transferred from pot to plate",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Hand uses chopsticks to transfer green pepper pieces from the pot to the white plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "Frames t05-t07 clearly show the green pieces being plated."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The transferred ingredient is visibly green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0047",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "picked ingredient from green pepper chicken",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Hand picks green pepper pieces from the pot and places them on the side plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The plated pieces are visible by t06-t07."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The ingredient picked onto the plate is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0048",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "picked ingredient from stir-fried green pepper with chicken",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Hand transfers green pepper pieces out of the pot onto the white side plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The green ingredient is clear on the plate."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The picked-out ingredient is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0049",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "recipe currently being cooked in the pot",
+      "event_gt": {
+        "primary_content_range": [10.0, 12.0],
+        "expected_time_range": [9.0, 13.0],
+        "allowed_transition_range": [8.5, 13.5],
+        "key_frame_time": 11.0,
+        "expected_region": {
+          "description": "Pot contains a stir-fried dish with chicken pieces and green peppers.",
+          "coarse_region": "right-side pot",
+          "notes": "Frames t10-t12 show the dish contents clearly."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t10.jpg through t12.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Green Pepper Chicken",
+        "acceptable_aliases": ["green pepper chicken", "stir-fried chicken with green peppers", "green pepper stir-fried chicken"],
+        "negative_neighbors": ["Deep Fried Pork Chop", "Potato dish", "Tomato dish"],
+        "confidence": "high",
+        "evidence": "The pot shows chicken and green peppers being cooked together."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0050",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "recipe based on contents of the wok",
+      "event_gt": {
+        "primary_content_range": [10.0, 12.0],
+        "expected_time_range": [9.0, 13.0],
+        "allowed_transition_range": [8.5, 13.5],
+        "key_frame_time": 11.0,
+        "expected_region": {
+          "description": "Wok/pot contains green peppers and browned chicken pieces.",
+          "coarse_region": "right-side wok",
+          "notes": "The dish contents are stable and visible in this interval."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t10.jpg through t12.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Green Pepper Chicken",
+        "acceptable_aliases": ["green pepper chicken", "stir-fried chicken with green peppers", "green pepper stir-fried chicken"],
+        "negative_neighbors": ["Deep Fried Pork Chop", "Potato dish", "Tomato dish"],
+        "confidence": "high",
+        "evidence": "The visible dish is chicken cooked with green peppers."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0051",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "ingredient picked from pot onto plate",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Chopsticks move green pepper pieces from the pot to the plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The picked ingredient is visible on the plate."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The ingredient picked onto the plate is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0052",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "recipe and green ingredient left in the pot",
+      "event_gt": {
+        "primary_content_range": [13.0, 15.0],
+        "expected_time_range": [12.0, 16.0],
+        "allowed_transition_range": [11.5, 16.5],
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "Pot still contains stir-fried chicken and green pepper pieces after some green pepper is plated.",
+          "coarse_region": "right-side pot",
+          "notes": "Frames t13-t15 show the remaining pot contents."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t13.jpg through t15.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Green Pepper Chicken",
+        "acceptable_aliases": ["green pepper chicken", "stir-fried chicken with green peppers", "green pepper stir-fried chicken"],
+        "negative_neighbors": ["Deep Fried Pork Chop", "Potato dish", "Tomato dish"],
+        "confidence": "high",
+        "evidence": "The visible recipe scene is chicken with green peppers."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0053",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "ingredient being picked out",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Green pepper pieces are picked from the pot and placed onto the white plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The ingredient is identifiable from its green color and pepper shape."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The picked-out ingredient is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0054",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "ingredient being picked out",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Chopsticks select green pepper pieces from the pot and move them to the plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The green pieces are visible on the side plate."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The picked-out ingredient is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0055",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "ingredient being picked out from the wok",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Green pepper pieces are removed from the wok/pot onto the plate.",
+          "coarse_region": "right-side wok and lower-center plate",
+          "notes": "The case text also mentions remaining ingredients, but the singular visual target is the picked-out ingredient."
+        },
+        "confidence": "medium",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "medium",
+        "evidence": "The visually selected ingredient is green pepper; the source request has an additional remaining-ingredients clause."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0056",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "meat ingredient remaining in the pot",
+      "event_gt": {
+        "primary_content_range": [13.0, 15.0],
+        "expected_time_range": [12.0, 16.0],
+        "allowed_transition_range": [11.5, 16.5],
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "Pot contains browned meat pieces with green peppers after green pepper has been plated.",
+          "coarse_region": "right-side pot",
+          "notes": "The meat ingredient remains visible among the green peppers."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t13.jpg through t15.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Chicken",
+        "acceptable_aliases": ["chicken", "chicken pieces", "meat ingredient"],
+        "negative_neighbors": ["Green Pepper", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The remaining meat ingredient in the green pepper chicken dish is chicken."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0057",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "meat ingredient remaining in the pot",
+      "event_gt": {
+        "primary_content_range": [13.0, 15.0],
+        "expected_time_range": [12.0, 16.0],
+        "allowed_transition_range": [11.5, 16.5],
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "The pot still has browned chicken pieces while green pepper pieces are being separated.",
+          "coarse_region": "right-side pot",
+          "notes": "The visual target is the meat remaining in the pot."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t13.jpg through t15.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Chicken",
+        "acceptable_aliases": ["chicken", "chicken pieces", "meat ingredient"],
+        "negative_neighbors": ["Green Pepper", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The remaining meat ingredient is chicken."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0058",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "recipe corresponding to the current cooking scene",
+      "event_gt": {
+        "primary_content_range": [10.0, 12.0],
+        "expected_time_range": [9.0, 13.0],
+        "allowed_transition_range": [8.5, 13.5],
+        "key_frame_time": 11.0,
+        "expected_region": {
+          "description": "Pot shows a cooked mixture of chicken and green peppers.",
+          "coarse_region": "right-side pot",
+          "notes": "The scene also includes plating green pepper pieces."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t10.jpg through t12.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Green Pepper Chicken",
+        "acceptable_aliases": ["green pepper chicken", "stir-fried chicken with green peppers", "green pepper stir-fried chicken"],
+        "negative_neighbors": ["Deep Fried Pork Chop", "Potato dish", "Tomato dish"],
+        "confidence": "high",
+        "evidence": "The visible dish is green pepper chicken."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0059",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "specific ingredient picked from the green pepper chicken dish",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Green pepper pieces are picked from the pot and placed on the plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The selected ingredient is visible by t06-t07."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The picked-out ingredient is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0060",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "recipe based on green peppers and chicken in the pot",
+      "event_gt": {
+        "primary_content_range": [10.0, 12.0],
+        "expected_time_range": [9.0, 13.0],
+        "allowed_transition_range": [8.5, 13.5],
+        "key_frame_time": 11.0,
+        "expected_region": {
+          "description": "Pot contains chicken and green peppers.",
+          "coarse_region": "right-side pot",
+          "notes": "The dish content is clear and stable."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t10.jpg through t12.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Green Pepper Chicken",
+        "acceptable_aliases": ["green pepper chicken", "stir-fried chicken with green peppers", "green pepper stir-fried chicken"],
+        "negative_neighbors": ["Deep Fried Pork Chop", "Potato dish", "Tomato dish"],
+        "confidence": "high",
+        "evidence": "The recipe scene is visually green pepper chicken."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0061",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "picked-out vegetable ingredient",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "The picked-out item is a green pepper piece moved from the pot to the plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The original task includes database filtering; the visual GT is only the picked-out ingredient."
+        },
+        "confidence": "medium",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "medium",
+        "evidence": "The visual referent is green pepper, but the source task also contains non-visual database reasoning."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0062",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "picked-out ingredient",
+      "event_gt": {
+        "primary_content_range": [5.0, 7.0],
+        "expected_time_range": [4.0, 8.0],
+        "allowed_transition_range": [3.5, 8.5],
+        "key_frame_time": 6.0,
+        "expected_region": {
+          "description": "Green pepper pieces are moved from the pot to the white plate.",
+          "coarse_region": "right-side pot and lower-center plate",
+          "notes": "The query asks for the ingredient and its category; the visual target is the ingredient."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t05.jpg through t07.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The picked-out ingredient is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0064",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "green vegetable ingredient remaining in the pot",
+      "event_gt": {
+        "primary_content_range": [13.0, 15.0],
+        "expected_time_range": [12.0, 16.0],
+        "allowed_transition_range": [11.5, 16.5],
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "Pot still contains visible green pepper pieces after some have been picked out.",
+          "coarse_region": "right-side pot",
+          "notes": "The remaining vegetable ingredient is visible alongside chicken."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t13.jpg through t15.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Green Pepper",
+        "acceptable_aliases": ["green pepper", "green pepper pieces", "bell pepper"],
+        "negative_neighbors": ["Chicken", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The remaining vegetable ingredient in the pot is green pepper."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0065",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "meat ingredient remaining in the pot",
+      "event_gt": {
+        "primary_content_range": [13.0, 15.0],
+        "expected_time_range": [12.0, 16.0],
+        "allowed_transition_range": [11.5, 16.5],
+        "key_frame_time": 14.0,
+        "expected_region": {
+          "description": "Chicken pieces remain in the pot with green pepper pieces.",
+          "coarse_region": "right-side pot",
+          "notes": "The source request has inventory reasoning; the visual GT is the meat identity."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t13.jpg through t15.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "ingredient_name",
+        "canonical_value": "Chicken",
+        "acceptable_aliases": ["chicken", "chicken pieces", "meat ingredient"],
+        "negative_neighbors": ["Green Pepper", "Potato", "Cornmeal"],
+        "confidence": "high",
+        "evidence": "The remaining meat ingredient is chicken."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0066",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "recipe scene with current green pepper chicken cooking",
+      "event_gt": {
+        "primary_content_range": [10.0, 12.0],
+        "expected_time_range": [9.0, 13.0],
+        "allowed_transition_range": [8.5, 13.5],
+        "key_frame_time": 11.0,
+        "expected_region": {
+          "description": "Pot shows the current dish with chicken and green peppers.",
+          "coarse_region": "right-side pot",
+          "notes": "This interval gives a clear view of the dish."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t10.jpg through t12.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Green Pepper Chicken",
+        "acceptable_aliases": ["green pepper chicken", "stir-fried chicken with green peppers", "green pepper stir-fried chicken"],
+        "negative_neighbors": ["Deep Fried Pork Chop", "Potato dish", "Tomato dish"],
+        "confidence": "high",
+        "evidence": "The visible dish is green pepper chicken."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0067",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_reference": "current green pepper chicken cooking scene",
+      "event_gt": {
+        "primary_content_range": [10.0, 12.0],
+        "expected_time_range": [9.0, 13.0],
+        "allowed_transition_range": [8.5, 13.5],
+        "key_frame_time": 11.0,
+        "expected_region": {
+          "description": "The cooking scene shows chicken pieces and green peppers in the pot.",
+          "coarse_region": "right-side pot",
+          "notes": "The source asks several downstream recipe facts; the visual target is the recipe identity."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/Green_Pepper_Chicken/t10.jpg through t12.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Green Pepper Chicken",
+        "acceptable_aliases": ["green pepper chicken", "stir-fried chicken with green peppers", "green pepper stir-fried chicken"],
+        "negative_neighbors": ["Deep Fried Pork Chop", "Potato dish", "Tomato dish"],
+        "confidence": "high",
+        "evidence": "The visible recipe scene is green pepper chicken."
+      }
+    }
+  ],
+  "left_pending_by_policy": [
+    {
+      "case_id": "kitchen_clean_v2_problem_0063",
+      "reason": "The task asks where most ingredients are stored at home; the visual scene alone does not identify a single visual ingredient target."
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0068",
+      "reason": "The task asks for the recipe using the greatest variety of vegetables from pantry ingredients; this is database/business reasoning, not a visual referent."
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0069",
+      "reason": "The task asks for the recipe with the most steps in the current menu; this is database/business reasoning, not a visual referent."
+    }
+  ]
+}

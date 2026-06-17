@@ -1,0 +1,1575 @@
+{
+  "schema_version": "observer_dataset_rebuild_v1",
+  "scenario": "retail",
+  "excluded_cases": [
+    {
+      "case_id": "retail1_rebuild_problem_0009",
+      "scenario": "retail",
+      "scenario_key": "retail1",
+      "video_id": "retail1.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "static_region",
+          "action": null,
+          "ordinal": "second",
+          "region": {
+            "side": null,
+            "vertical": "same_shelf",
+            "container": "shelf"
+          },
+          "relation": {
+            "type": null,
+            "anchor": {}
+          },
+          "appearance": {
+            "color": null,
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "product_by_absolute_position_on_shelf retail1.mp4: product_by_absolute_position_on_shelf / second bottle from the right on the same shelf Branch query based on shelf absolute posit"
+          }
+        },
+        "scope": {
+          "video_id": "retail1.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        31
+      ],
+      "source_instruction_snippets": [
+        "the second bottle from the right on the same shelf"
+      ],
+      "exclude_reason": [
+        "Absolute shelf-wide position \"second bottle from the right on the same shelf\" is not tied to the pointed three-bottle set; visible shelf contains many right-side bottles and no stable unique canonical DB product can be read.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail1_rebuild_problem_0009",
+        "problem_type": "product_by_absolute_position_on_shelf",
+        "video_path": "retail1.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail1_rebuild_problem_0009",
+          "video_path": "retail1.mp4",
+          "task_type": "product_by_absolute_position_on_shelf",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail1",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "second_from_right_same_shelf_bottle",
+              "anchor_kind": "position_on_shelf",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {
+              "shelf_level": "same_shelf",
+              "shelf_region": null,
+              "cap_color": null,
+              "capsule_color": null,
+              "label_color": null,
+              "label_mark": null,
+              "badge_color": null,
+              "hand": null,
+              "position_in_scope": "second_from_right",
+              "other": []
+            },
+            "relation": null,
+            "output_contract": {
+              "return_field": "product_name",
+              "return_format": "string"
+            }
+          }
+        },
+        "visual_problem_label": "retail1.mp4: product_by_absolute_position_on_shelf / second bottle from the right on the same shelf",
+        "source_task_ids": [
+          31
+        ],
+        "source_request_ids": [
+          "retail1_task31_second_from_right_same_shelf_bottle"
+        ],
+        "source_instruction_snippets": [
+          "the second bottle from the right on the same shelf"
+        ],
+        "scenario_final_values_seen": [
+          [
+            "Merlot Oyster Bay"
+          ]
+        ],
+        "dedupe_rationale": "Branch query based on shelf absolute position.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "notes": [
+          "Draft visual problem only. Do not use for strict evaluation until GT is filled and reviewed."
+        ],
+        "evaluation_modes": [],
+        "gt_confidence": "low",
+        "exclusion_reason": "Absolute shelf-wide position \"second bottle from the right on the same shelf\" is not tied to the pointed three-bottle set; visible shelf contains many right-side bottles and no stable unique canonical DB product can be read.",
+        "review_notes": [
+          "Absolute shelf-wide position \"second bottle from the right on the same shelf\" is not tied to the pointed three-bottle set; visible shelf contains many right-side bottles and no stable unique canonical DB product can be read.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail1_rebuild_problem_0010",
+      "scenario": "retail",
+      "scenario_key": "retail1",
+      "video_id": "retail1.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "static_region",
+          "action": null,
+          "ordinal": "third",
+          "region": {
+            "side": null,
+            "vertical": "same_shelf",
+            "container": "shelf"
+          },
+          "relation": {
+            "type": null,
+            "anchor": {}
+          },
+          "appearance": {
+            "color": "blue",
+            "style": "label",
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "product_by_absolute_position_on_shelf retail1.mp4: product_by_absolute_position_on_shelf / third bottle from the right on the same shelf with blue label Branch query based on shelf"
+          }
+        },
+        "scope": {
+          "video_id": "retail1.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        28
+      ],
+      "source_instruction_snippets": [
+        "the third bottle from the right on the same shelf—it should have a blue label"
+      ],
+      "exclude_reason": [
+        "Absolute shelf-wide position plus blue-label cue is under-specified; multiple shelf objects/caps/labels are visible and the intended DB product is not uniquely recoverable from the video.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail1_rebuild_problem_0010",
+        "problem_type": "product_by_absolute_position_on_shelf",
+        "video_path": "retail1.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail1_rebuild_problem_0010",
+          "video_path": "retail1.mp4",
+          "task_type": "product_by_absolute_position_on_shelf",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail1",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "third_from_right_same_shelf_blue_label_bottle",
+              "anchor_kind": "position_on_shelf",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {
+              "shelf_level": "same_shelf",
+              "shelf_region": null,
+              "cap_color": null,
+              "capsule_color": null,
+              "label_color": "blue",
+              "label_mark": null,
+              "badge_color": null,
+              "hand": null,
+              "position_in_scope": "third_from_right",
+              "other": []
+            },
+            "relation": null,
+            "output_contract": {
+              "return_field": "product_name",
+              "return_format": "string"
+            }
+          }
+        },
+        "visual_problem_label": "retail1.mp4: product_by_absolute_position_on_shelf / third bottle from the right on the same shelf with blue label",
+        "source_task_ids": [
+          28
+        ],
+        "source_request_ids": [
+          "retail1_task28_third_from_right_same_shelf_blue_label_bottle"
+        ],
+        "source_instruction_snippets": [
+          "the third bottle from the right on the same shelf—it should have a blue label"
+        ],
+        "scenario_final_values_seen": [
+          [
+            "Kim Crawford Sauvignon Blanc"
+          ]
+        ],
+        "dedupe_rationale": "Branch query based on shelf absolute position plus visible blue label.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "notes": [
+          "Draft visual problem only. Do not use for strict evaluation until GT is filled and reviewed."
+        ],
+        "evaluation_modes": [],
+        "gt_confidence": "low",
+        "exclusion_reason": "Absolute shelf-wide position plus blue-label cue is under-specified; multiple shelf objects/caps/labels are visible and the intended DB product is not uniquely recoverable from the video.",
+        "review_notes": [
+          "Absolute shelf-wide position plus blue-label cue is under-specified; multiple shelf objects/caps/labels are visible and the intended DB product is not uniquely recoverable from the video.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail1_rebuild_problem_0017",
+      "scenario": "retail",
+      "scenario_key": "retail1",
+      "video_id": "retail1.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": "pointing",
+          "ordinal": "first",
+          "region": {
+            "side": null,
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "left_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": null,
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "product_by_relative_position retail1.mp4: product_by_relative_position / bottle left of first pointed bottle Immediate/unspecified left-of-first-pointed variants are merged. produc"
+          }
+        },
+        "scope": {
+          "video_id": "retail1.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        23,
+        29
+      ],
+      "source_instruction_snippets": [
+        "the wine immediately to its left",
+        "the bottle to the left on the shelf"
+      ],
+      "exclude_reason": [
+        "Immediate/unspecified left of the first pointed bottle is ambiguous because several adjacent Oyster Bay/Bourgogne-like bottles appear around the first pointing area.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail1_rebuild_problem_0017",
+        "problem_type": "product_by_relative_position",
+        "video_path": "retail1.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail1_rebuild_problem_0017",
+          "video_path": "retail1.mp4",
+          "task_type": "product_by_relative_position",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail1",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "left_of_first_pointed_bottle",
+              "anchor_kind": "relative_to_anchor",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {
+              "shelf_level": null,
+              "shelf_region": null,
+              "cap_color": null,
+              "capsule_color": null,
+              "label_color": null,
+              "label_mark": null,
+              "badge_color": null,
+              "hand": null,
+              "position_in_scope": null,
+              "other": []
+            },
+            "relation": {
+              "type": "left_of",
+              "anchor_ref": "first_pointed_bottle",
+              "scope": "same_shelf",
+              "adjacency": "immediate_or_unspecified"
+            },
+            "output_contract": {
+              "return_field": "product_name",
+              "return_format": "string"
+            }
+          }
+        },
+        "visual_problem_label": "retail1.mp4: product_by_relative_position / bottle left of first pointed bottle",
+        "source_task_ids": [
+          23,
+          29
+        ],
+        "source_request_ids": [
+          "retail1_task29_immediate_left_of_first_indicated_bottle",
+          "retail1_task23_left_of_first_pointed_bottle"
+        ],
+        "source_instruction_snippets": [
+          "the wine immediately to its left",
+          "the bottle to the left on the shelf"
+        ],
+        "scenario_final_values_seen": [
+          [
+            "Merlot Oyster Bay"
+          ],
+          [
+            "Merlot Oyster Bay"
+          ]
+        ],
+        "dedupe_rationale": "Immediate/unspecified left-of-first-pointed variants are merged.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "notes": [
+          "Draft visual problem only. Do not use for strict evaluation until GT is filled and reviewed."
+        ],
+        "evaluation_modes": [],
+        "gt_confidence": "low",
+        "exclusion_reason": "Immediate/unspecified left of the first pointed bottle is ambiguous because several adjacent Oyster Bay/Bourgogne-like bottles appear around the first pointing area.",
+        "review_notes": [
+          "Immediate/unspecified left of the first pointed bottle is ambiguous because several adjacent Oyster Bay/Bourgogne-like bottles appear around the first pointing area.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail1_rebuild_problem_0020",
+      "scenario": "retail",
+      "scenario_key": "retail1",
+      "video_id": "retail1.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": "pointing",
+          "ordinal": "third",
+          "region": {
+            "side": null,
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "right_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": null,
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "product_by_relative_position retail1.mp4: product_by_relative_position / bottle immediately right of third pointed bottle Conditional neighboring bottle query; may be out of the th"
+          }
+        },
+        "scope": {
+          "video_id": "retail1.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        20
+      ],
+      "source_instruction_snippets": [
+        "the bottle immediately to its right"
+      ],
+      "exclude_reason": [
+        "Immediate right of the third pointed bottle points outside the stable three-bottle set; the adjacent visible label is not cleanly aligned with the official DB canonical product list.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail1_rebuild_problem_0020",
+        "problem_type": "product_by_relative_position",
+        "video_path": "retail1.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail1_rebuild_problem_0020",
+          "video_path": "retail1.mp4",
+          "task_type": "product_by_relative_position",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail1",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "immediate_right_of_third_pointed_bottle",
+              "anchor_kind": "relative_to_anchor",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {
+              "shelf_level": null,
+              "shelf_region": null,
+              "cap_color": null,
+              "capsule_color": null,
+              "label_color": null,
+              "label_mark": null,
+              "badge_color": null,
+              "hand": null,
+              "position_in_scope": null,
+              "other": []
+            },
+            "relation": {
+              "type": "right_of",
+              "anchor_ref": "third_pointed_bottle",
+              "scope": "same_shelf",
+              "adjacency": "immediate"
+            },
+            "output_contract": {
+              "return_field": "product_name",
+              "return_format": "string"
+            }
+          }
+        },
+        "visual_problem_label": "retail1.mp4: product_by_relative_position / bottle immediately right of third pointed bottle",
+        "source_task_ids": [
+          20
+        ],
+        "source_request_ids": [
+          "retail1_task20_immediate_right_of_third_pointed_bottle"
+        ],
+        "source_instruction_snippets": [
+          "the bottle immediately to its right"
+        ],
+        "scenario_final_values_seen": [
+          [
+            "Kim Crawford Sauvignon Blanc"
+          ]
+        ],
+        "dedupe_rationale": "Conditional neighboring bottle query; may be out of the three-bottle set.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "notes": [
+          "Draft visual problem only. Do not use for strict evaluation until GT is filled and reviewed."
+        ],
+        "evaluation_modes": [],
+        "gt_confidence": "low",
+        "exclusion_reason": "Immediate right of the third pointed bottle points outside the stable three-bottle set; the adjacent visible label is not cleanly aligned with the official DB canonical product list.",
+        "review_notes": [
+          "Immediate right of the third pointed bottle points outside the stable three-bottle set; the adjacent visible label is not cleanly aligned with the official DB canonical product list.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail1_rebuild_problem_0022",
+      "scenario": "retail",
+      "scenario_key": "retail1",
+      "video_id": "retail1.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": "pointing",
+          "ordinal": null,
+          "region": {
+            "side": null,
+            "vertical": "same_row",
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "right_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": "dark",
+            "style": "label",
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "product_set_by_relative_position retail1.mp4: product_set_by_relative_position / all bottles to the right of dark-label bottle in the same row Instruction asks for all wines to the"
+          }
+        },
+        "scope": {
+          "video_id": "retail1.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        3
+      ],
+      "source_instruction_snippets": [
+        "search among all wines to the right of this bottle in the same row"
+      ],
+      "exclude_reason": [
+        "All bottles to the right of the dark-label bottle requires a shelf inventory list; the video does not reliably expose every product name to the right in the same row.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail1_rebuild_problem_0022",
+        "problem_type": "product_set_by_relative_position",
+        "video_path": "retail1.mp4",
+        "target_kind": "product_list",
+        "target_key": "product_name_list",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail1_rebuild_problem_0022",
+          "video_path": "retail1.mp4",
+          "task_type": "product_set_by_relative_position",
+          "target_kind": "product_list",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail1",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name_list",
+              "kind": "product_list",
+              "cardinality": "list"
+            },
+            "anchor": {
+              "anchor_id": "all_bottles_right_of_dark_label_bottle_same_row",
+              "anchor_kind": "relative_to_anchor",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_row"
+            },
+            "visual_constraints": {
+              "shelf_level": "same_row",
+              "shelf_region": null,
+              "cap_color": null,
+              "capsule_color": null,
+              "label_color": null,
+              "label_mark": null,
+              "badge_color": null,
+              "hand": null,
+              "position_in_scope": null,
+              "other": []
+            },
+            "relation": {
+              "type": "right_of",
+              "anchor_ref": "dark_label_or_dark_green_cap_pointed_bottle",
+              "scope": "same_row",
+              "adjacency": "all_to_right"
+            },
+            "output_contract": {
+              "return_field": "product_name_list",
+              "return_format": "string_array"
+            }
+          }
+        },
+        "visual_problem_label": "retail1.mp4: product_set_by_relative_position / all bottles to the right of dark-label bottle in the same row",
+        "source_task_ids": [
+          3
+        ],
+        "source_request_ids": [
+          "retail1_task3_right_of_dark_label_bottle"
+        ],
+        "source_instruction_snippets": [
+          "search among all wines to the right of this bottle in the same row"
+        ],
+        "scenario_final_values_seen": [
+          [
+            "Kim Crawford Sauvignon Blanc"
+          ]
+        ],
+        "dedupe_rationale": "Instruction asks for all wines to the right, so output should be a list.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "notes": [
+          "Draft visual problem only. Do not use for strict evaluation until GT is filled and reviewed."
+        ],
+        "evaluation_modes": [],
+        "gt_confidence": "low",
+        "exclusion_reason": "All bottles to the right of the dark-label bottle requires a shelf inventory list; the video does not reliably expose every product name to the right in the same row.",
+        "review_notes": [
+          "All bottles to the right of the dark-label bottle requires a shelf inventory list; the video does not reliably expose every product name to the right in the same row.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail1_rebuild_problem_0023",
+      "scenario": "retail",
+      "scenario_key": "retail1",
+      "video_id": "retail1.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": null,
+          "ordinal": null,
+          "region": {
+            "side": null,
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "right_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": "purple",
+            "style": "label",
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "product_by_relative_position retail1.mp4: product_by_relative_position / wine to the right of the purple-label bottle Conditional relative-position query using a visible purple-lab"
+          }
+        },
+        "scope": {
+          "video_id": "retail1.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        30
+      ],
+      "source_instruction_snippets": [
+        "the wine located to the right of the purple label wine bottle"
+      ],
+      "exclude_reason": [
+        "Right of the purple-label bottle uses an anchor that is not reliably identifiable in the inspected frames and is not part of the stable pointed sequence.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail1_rebuild_problem_0023",
+        "problem_type": "product_by_relative_position",
+        "video_path": "retail1.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail1_rebuild_problem_0023",
+          "video_path": "retail1.mp4",
+          "task_type": "product_by_relative_position",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail1",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "right_of_purple_label_bottle",
+              "anchor_kind": "relative_to_anchor",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {
+              "shelf_level": null,
+              "shelf_region": null,
+              "cap_color": null,
+              "capsule_color": null,
+              "label_color": "purple",
+              "label_mark": null,
+              "badge_color": null,
+              "hand": null,
+              "position_in_scope": null,
+              "other": []
+            },
+            "relation": {
+              "type": "right_of",
+              "anchor_ref": "purple_label_bottle",
+              "scope": "same_shelf",
+              "adjacency": "unspecified"
+            },
+            "output_contract": {
+              "return_field": "product_name",
+              "return_format": "string"
+            }
+          }
+        },
+        "visual_problem_label": "retail1.mp4: product_by_relative_position / wine to the right of the purple-label bottle",
+        "source_task_ids": [
+          30
+        ],
+        "source_request_ids": [
+          "retail1_task30_right_of_purple_label_bottle"
+        ],
+        "source_instruction_snippets": [
+          "the wine located to the right of the purple label wine bottle"
+        ],
+        "scenario_final_values_seen": [
+          [
+            "Kim Crawford Sauvignon Blanc"
+          ]
+        ],
+        "dedupe_rationale": "Conditional relative-position query using a visible purple-label anchor.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "notes": [
+          "Draft visual problem only. Do not use for strict evaluation until GT is filled and reviewed."
+        ],
+        "evaluation_modes": [],
+        "gt_confidence": "low",
+        "exclusion_reason": "Right of the purple-label bottle uses an anchor that is not reliably identifiable in the inspected frames and is not part of the stable pointed sequence.",
+        "review_notes": [
+          "Right of the purple-label bottle uses an anchor that is not reliably identifiable in the inspected frames and is not part of the stable pointed sequence.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail1_rebuild_problem_0024",
+      "scenario": "retail",
+      "scenario_key": "retail1",
+      "video_id": "retail1.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": "pointing",
+          "ordinal": "first",
+          "region": {
+            "side": null,
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "right_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": null,
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "product_by_relative_position retail1.mp4: product_by_relative_position / right-side option relative to first pointed bottle Conditional branch says the wine on the right is the onl"
+          }
+        },
+        "scope": {
+          "video_id": "retail1.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        29
+      ],
+      "source_instruction_snippets": [
+        "the wine on the right ... the only other option you are considering"
+      ],
+      "exclude_reason": [
+        "\"Wine on the right\" within considered options is semantically ambiguous because more than one right-side option exists relative to the first pointed bottle.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail1_rebuild_problem_0024",
+        "problem_type": "product_by_relative_position",
+        "video_path": "retail1.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail1_rebuild_problem_0024",
+          "video_path": "retail1.mp4",
+          "task_type": "product_by_relative_position",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail1",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "right_option_of_first_pointed_bottle",
+              "anchor_kind": "relative_to_anchor",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "considered_options"
+            },
+            "visual_constraints": {
+              "shelf_level": null,
+              "shelf_region": null,
+              "cap_color": null,
+              "capsule_color": null,
+              "label_color": null,
+              "label_mark": null,
+              "badge_color": null,
+              "hand": null,
+              "position_in_scope": null,
+              "other": []
+            },
+            "relation": {
+              "type": "right_of",
+              "anchor_ref": "first_pointed_bottle",
+              "scope": "considered_options",
+              "adjacency": "unspecified"
+            },
+            "output_contract": {
+              "return_field": "product_name",
+              "return_format": "string"
+            }
+          }
+        },
+        "visual_problem_label": "retail1.mp4: product_by_relative_position / right-side option relative to first pointed bottle",
+        "source_task_ids": [
+          29
+        ],
+        "source_request_ids": [
+          "retail1_task29_right_option_of_first_indicated_bottle"
+        ],
+        "source_instruction_snippets": [
+          "the wine on the right ... the only other option you are considering"
+        ],
+        "scenario_final_values_seen": [
+          [
+            "Merlot Oyster Bay"
+          ]
+        ],
+        "dedupe_rationale": "Conditional branch says the wine on the right is the only other option considered.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "notes": [
+          "Draft visual problem only. Do not use for strict evaluation until GT is filled and reviewed."
+        ],
+        "evaluation_modes": [],
+        "gt_confidence": "low",
+        "exclusion_reason": "\"Wine on the right\" within considered options is semantically ambiguous because more than one right-side option exists relative to the first pointed bottle.",
+        "review_notes": [
+          "\"Wine on the right\" within considered options is semantically ambiguous because more than one right-side option exists relative to the first pointed bottle.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail2_rebuild_problem_0014",
+      "scenario": "retail",
+      "scenario_key": "retail2",
+      "video_id": "retail2.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": null,
+          "ordinal": "third",
+          "region": {
+            "side": "left",
+            "vertical": "bottom",
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "right_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": "gold",
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "the third bottle to the right of the gold/left/lower bottle location on the shelf"
+          }
+        },
+        "scope": {
+          "video_id": "retail2.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        14,
+        17,
+        35,
+        39
+      ],
+      "source_instruction_snippets": [
+        "If any of the above conditions are not met, ask the AI Service Agent to add the third bottle to the right of this bottle's location to the shopping cart.",
+        "If it is not on discount, ask the AI Service Agent to add one bottle of the third wine to the right of this wine's location to your cart.",
+        "Subsequently, ask the AI Service Agent to check if the third bottle to the right of its location on the shelf has a discount; if so, add one bottle to your cart.",
+        "If this wine is not low-sugar, instruct the AI Service Agent to add one bottle of the third bottle to the right on the shelf where this bottle is located to your cart."
+      ],
+      "exclude_reason": [
+        "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail2_rebuild_problem_0014",
+        "problem_type": "product_by_relative_position_on_shelf",
+        "video_path": "retail2.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail2_rebuild_problem_0014",
+          "video_path": "retail2.mp4",
+          "task_type": "product_by_relative_position_on_shelf",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail2",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "third_bottle_right_of_gold_or_left_bottle_location",
+              "anchor_kind": "product_by_relative_position_on_shelf",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {},
+            "relation": {
+              "type": "right_of",
+              "anchor_ref": "gold_or_yellow_cap_or_body_bottle",
+              "scope": "same_shelf",
+              "offset": "third"
+            },
+            "visual_referent": "the third bottle to the right of the gold/left/lower bottle location on the shelf"
+          }
+        },
+        "source_task_ids": [
+          14,
+          17,
+          35,
+          39
+        ],
+        "source_request_ids": [
+          "retail2_task14_third_right_of_gold_or_left_location",
+          "retail2_task17_third_right_of_gold_or_left_location",
+          "retail2_task35_third_right_of_gold_or_left_location",
+          "retail2_task39_third_right_of_gold_or_left_location"
+        ],
+        "source_instruction_snippets": [
+          "If any of the above conditions are not met, ask the AI Service Agent to add the third bottle to the right of this bottle's location to the shopping cart.",
+          "If it is not on discount, ask the AI Service Agent to add one bottle of the third wine to the right of this wine's location to your cart.",
+          "Subsequently, ask the AI Service Agent to check if the third bottle to the right of its location on the shelf has a discount; if so, add one bottle to your cart.",
+          "If this wine is not low-sugar, instruct the AI Service Agent to add one bottle of the third bottle to the right on the shelf where this bottle is located to your cart."
+        ],
+        "dedupe_rationale": "Merged retail2 requests that refer to the third bottle to the right of the gold/left/lower bottle location on the shelf.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "evaluation_modes": [],
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "gt_confidence": "low",
+        "exclusion_reason": "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+        "review_notes": [
+          "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail2_rebuild_problem_0015",
+      "scenario": "retail",
+      "scenario_key": "retail2",
+      "video_id": "retail2.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": null,
+          "ordinal": "third",
+          "region": {
+            "side": "right",
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "left_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": "blue",
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "the third bottle to the left of the blue/right/high-shelf bottle location"
+          }
+        },
+        "scope": {
+          "video_id": "retail2.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        22,
+        33
+      ],
+      "source_instruction_snippets": [
+        "If neither is bitter, ask the AI service agent to add one bottle of the third wine to the right of the wine in your left hand and one bottle of the third wine to the left of the wine in your right hand.",
+        "At the same time, ask the AI Service Agent to check if the third bottle immediately to its left is sweet."
+      ],
+      "exclude_reason": [
+        "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail2_rebuild_problem_0015",
+        "problem_type": "product_by_relative_position_on_shelf",
+        "video_path": "retail2.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail2_rebuild_problem_0015",
+          "video_path": "retail2.mp4",
+          "task_type": "product_by_relative_position_on_shelf",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail2",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "third_bottle_left_of_blue_or_right_bottle_location",
+              "anchor_kind": "product_by_relative_position_on_shelf",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {},
+            "relation": {
+              "type": "left_of",
+              "anchor_ref": "blue_cap_green_body_high_shelf_bottle",
+              "scope": "same_shelf",
+              "offset": "third"
+            },
+            "visual_referent": "the third bottle to the left of the blue/right/high-shelf bottle location"
+          }
+        },
+        "source_task_ids": [
+          22,
+          33
+        ],
+        "source_request_ids": [
+          "retail2_task22_third_left_of_right_or_high_location",
+          "retail2_task33_third_left_of_right_or_high_location"
+        ],
+        "source_instruction_snippets": [
+          "If neither is bitter, ask the AI service agent to add one bottle of the third wine to the right of the wine in your left hand and one bottle of the third wine to the left of the wine in your right hand.",
+          "At the same time, ask the AI Service Agent to check if the third bottle immediately to its left is sweet."
+        ],
+        "dedupe_rationale": "Merged retail2 requests that refer to the third bottle to the left of the blue/right/high-shelf bottle location.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "evaluation_modes": [],
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "gt_confidence": "low",
+        "exclusion_reason": "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+        "review_notes": [
+          "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail2_rebuild_problem_0016",
+      "scenario": "retail",
+      "scenario_key": "retail2",
+      "video_id": "retail2.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": null,
+          "ordinal": null,
+          "region": {
+            "side": null,
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "left_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": "blue",
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "the bottle immediately left of the blue-cap bottle on the shelf"
+          }
+        },
+        "scope": {
+          "video_id": "retail2.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        29
+      ],
+      "source_instruction_snippets": [
+        "If it does not, ask the AI Service Agent to check the nutrition information of the bottle immediately to its left. | If the bottle on the left has lower calories, add it to the cart."
+      ],
+      "exclude_reason": [
+        "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+        "Moved out of eval_cases because it has no resolved event/detail GT."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail2_rebuild_problem_0016",
+        "problem_type": "product_by_relative_position_on_shelf",
+        "video_path": "retail2.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail2_rebuild_problem_0016",
+          "video_path": "retail2.mp4",
+          "task_type": "product_by_relative_position_on_shelf",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail2",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "immediate_left_of_blue_cap_bottle",
+              "anchor_kind": "product_by_relative_position_on_shelf",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {},
+            "relation": {
+              "type": "left_of",
+              "anchor_ref": "blue_cap_green_body_high_shelf_bottle",
+              "scope": "same_shelf",
+              "adjacency": "immediate"
+            },
+            "visual_referent": "the bottle immediately left of the blue-cap bottle on the shelf"
+          }
+        },
+        "source_task_ids": [
+          29
+        ],
+        "source_request_ids": [
+          "retail2_task29_immediate_left_of_blue_cap"
+        ],
+        "source_instruction_snippets": [
+          "If it does not, ask the AI Service Agent to check the nutrition information of the bottle immediately to its left. | If the bottle on the left has lower calories, add it to the cart."
+        ],
+        "dedupe_rationale": "Merged retail2 requests that refer to the bottle immediately left of the blue-cap bottle on the shelf.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "evaluation_modes": [],
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "gt_confidence": "low",
+        "exclusion_reason": "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+        "review_notes": [
+          "Shelf-neighbor request is not stable enough from 1fps frames/contact sheet: the anchor location and counted neighbor are ambiguous and the DB canonical product cannot be read reliably.",
+          "Moved out of eval_cases because it has no resolved event/detail GT."
+        ]
+      }
+    },
+    {
+      "case_id": "retail3_rebuild_problem_0005",
+      "scenario": "retail",
+      "scenario_key": "retail3",
+      "video_id": "retail3.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": null,
+          "ordinal": null,
+          "region": {
+            "side": null,
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "right_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": "blue",
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "the shelf bottle to the right of a current/blue-oval anchor"
+          }
+        },
+        "scope": {
+          "video_id": "retail3.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        25,
+        28
+      ],
+      "source_instruction_snippets": [
+        "If it is not, ask the AI Service Agent to find wines in the database with a tax rate between 0.05 and 0.1 and the same origin as the bottle to its right, and add the one with the lowest price to your cart.",
+        "If the price is not higher than 300 yuan, ask the AI Service Agent to find wines that share the same origin as the bottle to the right of this wine and possess the \"low sugar\" characteristic, and add the qualifying wine with the highest unit price to your shopping cart."
+      ],
+      "exclude_reason": [
+        "Relative shelf-neighbor branch is under-specified for automated GT: the anchor bottle and counted shelf neighbor are not reliably readable in the contact sheet/1fps frames.",
+        "Excluded from strict evaluator because event/detail GT is intentionally not resolved."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail3_rebuild_problem_0005",
+        "problem_type": "product_by_relative_position_on_shelf",
+        "video_path": "retail3.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail3_rebuild_problem_0005",
+          "video_path": "retail3.mp4",
+          "task_type": "product_by_relative_position_on_shelf",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail3",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "right_neighbor_of_blue_or_current_bottle",
+              "anchor_kind": "product_by_relative_position_on_shelf",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {},
+            "relation": {
+              "type": "right_of",
+              "anchor_ref": "current_or_blue_oval_bottle",
+              "scope": "same_shelf",
+              "adjacency": "unspecified"
+            },
+            "visual_referent": "the shelf bottle to the right of a current/blue-oval anchor"
+          }
+        },
+        "source_task_ids": [
+          25,
+          28
+        ],
+        "source_request_ids": [
+          "retail3_task25_right_neighbor",
+          "retail3_task28_right_neighbor"
+        ],
+        "source_instruction_snippets": [
+          "If it is not, ask the AI Service Agent to find wines in the database with a tax rate between 0.05 and 0.1 and the same origin as the bottle to its right, and add the one with the lowest price to your cart.",
+          "If the price is not higher than 300 yuan, ask the AI Service Agent to find wines that share the same origin as the bottle to the right of this wine and possess the \"low sugar\" characteristic, and add the qualifying wine with the highest unit price to your shopping cart."
+        ],
+        "dedupe_rationale": "Merged retail3 requests that refer to the shelf bottle to the right of a current/blue-oval anchor.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "evaluation_modes": [],
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "gt_confidence": "low",
+        "exclusion_reason": "Relative shelf-neighbor branch is under-specified for automated GT: the anchor bottle and counted shelf neighbor are not reliably readable in the contact sheet/1fps frames.",
+        "review_notes": [
+          "Relative shelf-neighbor branch is under-specified for automated GT: the anchor bottle and counted shelf neighbor are not reliably readable in the contact sheet/1fps frames.",
+          "Excluded from strict evaluator because event/detail GT is intentionally not resolved."
+        ]
+      }
+    },
+    {
+      "case_id": "retail3_rebuild_problem_0006",
+      "scenario": "retail",
+      "scenario_key": "retail3",
+      "video_id": "retail3.mp4",
+      "visual_query_v1": {
+        "schema_version": "visual_query_v1",
+        "scenario": "retail",
+        "surface": "shelf",
+        "target": {
+          "kind": "product_name",
+          "selection_unit": "product_package",
+          "cardinality": "single"
+        },
+        "referent": {
+          "type": "relative_region",
+          "action": null,
+          "ordinal": null,
+          "region": {
+            "side": null,
+            "vertical": null,
+            "container": "shelf"
+          },
+          "relation": {
+            "type": "left_of",
+            "anchor": {}
+          },
+          "appearance": {
+            "color": null,
+            "style": null,
+            "size": null,
+            "shape": "bottle",
+            "content_hint": "the shelf bottle to the left of a current/friend-right anchor"
+          }
+        },
+        "scope": {
+          "video_id": "retail3.mp4",
+          "menu_label": null,
+          "time_hint": null
+        }
+      },
+      "source_task_ids": [
+        26,
+        31
+      ],
+      "source_instruction_snippets": [
+        "If it is not bitter, have the AI Service Agent search for wines with \"low sugar\" characteristics, a tax rate below 0.13, and the same origin as the bottle to its left.",
+        "If it is not, ask the AI service agent to find all \"low sugar\" wines that share the same origin as the bottle to its left, and add the one with the lowest fat content to your cart."
+      ],
+      "exclude_reason": [
+        "Relative shelf-neighbor branch is under-specified for automated GT: the anchor bottle and counted shelf neighbor are not reliably readable in the contact sheet/1fps frames.",
+        "Excluded from strict evaluator because event/detail GT is intentionally not resolved."
+      ],
+      "source_bootstrap_case": {
+        "case_id": "retail3_rebuild_problem_0006",
+        "problem_type": "product_by_relative_position_on_shelf",
+        "video_path": "retail3.mp4",
+        "target_kind": "product",
+        "target_key": "product_name",
+        "branch": "conditional",
+        "observer_input": {
+          "schema_version": "retail_observer_input_slots_v1",
+          "problem_id": "retail3_rebuild_problem_0006",
+          "video_path": "retail3.mp4",
+          "task_type": "product_by_relative_position_on_shelf",
+          "target_kind": "product",
+          "slots": {
+            "scene_context": {
+              "scenario": "retail",
+              "surface": "wine_shelf",
+              "video_scene": "retail3",
+              "object_type": "wine_bottle"
+            },
+            "target": {
+              "field": "product_name",
+              "kind": "product",
+              "cardinality": "single"
+            },
+            "anchor": {
+              "anchor_id": "left_neighbor_of_friend_right_or_current_bottle",
+              "anchor_kind": "product_by_relative_position_on_shelf",
+              "action": null,
+              "ordinal": null,
+              "selection_scope": "same_shelf"
+            },
+            "visual_constraints": {},
+            "relation": {
+              "type": "left_of",
+              "anchor_ref": "current_or_friend_right_bottle",
+              "scope": "same_shelf",
+              "adjacency": "unspecified"
+            },
+            "visual_referent": "the shelf bottle to the left of a current/friend-right anchor"
+          }
+        },
+        "source_task_ids": [
+          26,
+          31
+        ],
+        "source_request_ids": [
+          "retail3_task26_left_neighbor",
+          "retail3_task31_left_neighbor"
+        ],
+        "source_instruction_snippets": [
+          "If it is not bitter, have the AI Service Agent search for wines with \"low sugar\" characteristics, a tax rate below 0.13, and the same origin as the bottle to its left.",
+          "If it is not, ask the AI service agent to find all \"low sugar\" wines that share the same origin as the bottle to its left, and add the one with the lowest fat content to your cart."
+        ],
+        "dedupe_rationale": "Merged retail3 requests that refer to the shelf bottle to the left of a current/friend-right anchor.",
+        "event_gt_id": null,
+        "detail_gt_id": null,
+        "evaluation_modes": [],
+        "gt_status": "excluded_under_specified_pending_human_review",
+        "gt_confidence": "low",
+        "exclusion_reason": "Relative shelf-neighbor branch is under-specified for automated GT: the anchor bottle and counted shelf neighbor are not reliably readable in the contact sheet/1fps frames.",
+        "review_notes": [
+          "Relative shelf-neighbor branch is under-specified for automated GT: the anchor bottle and counted shelf neighbor are not reliably readable in the contact sheet/1fps frames.",
+          "Excluded from strict evaluator because event/detail GT is intentionally not resolved."
+        ]
+      }
+    }
+  ]
+}

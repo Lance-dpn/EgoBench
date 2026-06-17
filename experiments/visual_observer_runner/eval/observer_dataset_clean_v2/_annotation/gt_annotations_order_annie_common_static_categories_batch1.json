@@ -1,0 +1,3414 @@
+{
+  "schema_version": "gt_annotations_batch_v1",
+  "source_dataset": "observer_dataset_clean_v2",
+  "policy": {
+    "gt_source": "manual inspection of clean_v2 extracted video frames only",
+    "video_id": "multiple order Annie videos",
+    "review_status": "batch_pending_user_review",
+    "notes": "Only static category regions on the Annie Italian Restaurant menu are annotated. Other restaurant menus and business/property checks remain pending."
+  },
+  "annotations": [
+    {
+      "case_id": "order_clean_v2_problem_0047",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0048",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0049",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0050",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: CHEESE & OLIVES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white rounded box on the left page",
+          "coarse_region": "left page middle section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [
+          "Cheese & Olives",
+          "cheese & olives"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads CHEESE & OLIVES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0051",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: ANNIE'S TOP DISHES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom white rounded box on the left page",
+          "coarse_region": "left page bottom section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANNIE'S TOP DISHES",
+        "acceptable_aliases": [
+          "Annie'S Top Dishes",
+          "annie's top dishes"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANNIE'S TOP DISHES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0052",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0053",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0054",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0058",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: CHEESE & OLIVES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white rounded box on the left page",
+          "coarse_region": "left page middle section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [
+          "Cheese & Olives",
+          "cheese & olives"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads CHEESE & OLIVES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0059",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0060",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0061",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0063",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0064",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SALADS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "vertical Salads section on the right fold with a hand illustration beside it",
+          "coarse_region": "right fold middle section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [
+          "Salads",
+          "salads"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SALADS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0065",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0071",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: ITALIAN PASTA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom section on the middle fold headed Italian Pasta",
+          "coarse_region": "middle fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [
+          "Italian Pasta",
+          "italian pasta"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ITALIAN PASTA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0072",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0075",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0076",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0077",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0078",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: ANTIPASTI & SNACKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the middle fold",
+          "coarse_region": "middle fold top section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANTIPASTI & SNACKS",
+        "acceptable_aliases": [
+          "Antipasti & Snacks",
+          "antipasti & snacks"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANTIPASTI & SNACKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0079",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SALADS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "vertical Salads section on the right fold with a hand illustration beside it",
+          "coarse_region": "right fold middle section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [
+          "Salads",
+          "salads"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SALADS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0080",
+      "video_id": "annie_butcher_1.mp4",
+      "visual_reference": "Annie menu category region: SALADS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "vertical Salads section on the right fold with a hand illustration beside it",
+          "coarse_region": "right fold middle section",
+          "notes": "The clearest Annie menu frame for annie_butcher_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_butcher_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [
+          "Salads",
+          "salads"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SALADS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0093",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0094",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0095",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0096",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0097",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0098",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0099",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0100",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: ANNIE'S TOP DISHES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom white rounded box on the left page",
+          "coarse_region": "left page bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANNIE'S TOP DISHES",
+        "acceptable_aliases": [
+          "Annie'S Top Dishes",
+          "annie's top dishes"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANNIE'S TOP DISHES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0101",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: ANNIE'S TOP DISHES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom white rounded box on the left page",
+          "coarse_region": "left page bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANNIE'S TOP DISHES",
+        "acceptable_aliases": [
+          "Annie'S Top Dishes",
+          "annie's top dishes"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANNIE'S TOP DISHES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0102",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: CHEESE & OLIVES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white rounded box on the left page",
+          "coarse_region": "left page middle section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [
+          "Cheese & Olives",
+          "cheese & olives"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads CHEESE & OLIVES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0103",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0104",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: ITALIAN PASTA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom section on the middle fold headed Italian Pasta",
+          "coarse_region": "middle fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [
+          "Italian Pasta",
+          "italian pasta"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ITALIAN PASTA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0105",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0106",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: ITALIAN PASTA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom section on the middle fold headed Italian Pasta",
+          "coarse_region": "middle fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [
+          "Italian Pasta",
+          "italian pasta"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ITALIAN PASTA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0107",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: ANTIPASTI & SNACKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the middle fold",
+          "coarse_region": "middle fold top section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANTIPASTI & SNACKS",
+        "acceptable_aliases": [
+          "Antipasti & Snacks",
+          "antipasti & snacks"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANTIPASTI & SNACKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0109",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0110",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: CHEESE & OLIVES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white rounded box on the left page",
+          "coarse_region": "left page middle section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [
+          "Cheese & Olives",
+          "cheese & olives"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads CHEESE & OLIVES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0111",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SALADS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "vertical Salads section on the right fold with a hand illustration beside it",
+          "coarse_region": "right fold middle section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [
+          "Salads",
+          "salads"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SALADS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0113",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: ITALIAN PASTA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom section on the middle fold headed Italian Pasta",
+          "coarse_region": "middle fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [
+          "Italian Pasta",
+          "italian pasta"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ITALIAN PASTA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0120",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0121",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0126",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0127",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0128",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0129",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0131",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0133",
+      "video_id": "annie_meraki_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_meraki_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_meraki_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0141",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0142",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: SELECTED STEAKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "right page dark green box with white heading",
+          "coarse_region": "right fold lower dark section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SELECTED STEAKS",
+        "acceptable_aliases": [
+          "Selected Steaks",
+          "selected steaks"
+        ],
+        "negative_neighbors": [
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SELECTED STEAKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0143",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: ANNIE'S TOP DISHES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom white rounded box on the left page",
+          "coarse_region": "left page bottom section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANNIE'S TOP DISHES",
+        "acceptable_aliases": [
+          "Annie'S Top Dishes",
+          "annie's top dishes"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANNIE'S TOP DISHES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0144",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0145",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: ANNIE'S TOP DISHES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom white rounded box on the left page",
+          "coarse_region": "left page bottom section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANNIE'S TOP DISHES",
+        "acceptable_aliases": [
+          "Annie'S Top Dishes",
+          "annie's top dishes"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANNIE'S TOP DISHES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0146",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0147",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: ITALIAN PASTA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom section on the middle fold headed Italian Pasta",
+          "coarse_region": "middle fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [
+          "Italian Pasta",
+          "italian pasta"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ITALIAN PASTA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0148",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: COLD CUTS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white rounded box on the left page",
+          "coarse_region": "left page top section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "COLD CUTS",
+        "acceptable_aliases": [
+          "Cold Cuts",
+          "cold cuts"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads COLD CUTS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0151",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0152",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: SALADS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "vertical Salads section on the right fold with a hand illustration beside it",
+          "coarse_region": "right fold middle section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [
+          "Salads",
+          "salads"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SALADS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0153",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: CHEESE & OLIVES",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white rounded box on the left page",
+          "coarse_region": "left page middle section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [
+          "Cheese & Olives",
+          "cheese & olives"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads CHEESE & OLIVES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0155",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: SANDWICHES & PANINI",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "middle white box on the middle fold with a hand illustration nearby",
+          "coarse_region": "middle fold center section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SANDWICHES & PANINI",
+        "acceptable_aliases": [
+          "Sandwiches & Panini",
+          "sandwiches & panini"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SANDWICHES & PANINI."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0158",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: ITALIAN PASTA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "bottom section on the middle fold headed Italian Pasta",
+          "coarse_region": "middle fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [
+          "Italian Pasta",
+          "italian pasta"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ITALIAN PASTA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0159",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0165",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0166",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0167",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0169",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: ANTIPASTI & SNACKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the middle fold",
+          "coarse_region": "middle fold top section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANTIPASTI & SNACKS",
+        "acceptable_aliases": [
+          "Antipasti & Snacks",
+          "antipasti & snacks"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANTIPASTI & SNACKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0170",
+      "video_id": "annie_pauhana_1.mp4",
+      "visual_reference": "Annie menu category region: ANTIPASTI & SNACKS",
+      "event_gt": {
+        "primary_content_range": [
+          6.0,
+          8.0
+        ],
+        "expected_time_range": [
+          5.0,
+          8.0
+        ],
+        "allowed_transition_range": [
+          4.5,
+          8.5
+        ],
+        "key_frame_time": 7.0,
+        "expected_region": {
+          "description": "top white box on the middle fold",
+          "coarse_region": "middle fold top section",
+          "notes": "The clearest Annie menu frame for annie_pauhana_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/annie_pauhana_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANTIPASTI & SNACKS",
+        "acceptable_aliases": [
+          "Antipasti & Snacks",
+          "antipasti & snacks"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANTIPASTI & SNACKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0247",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: ANNIE'S TOP DISHES",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "bottom white rounded box on the left page",
+          "coarse_region": "left page bottom section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANNIE'S TOP DISHES",
+        "acceptable_aliases": [
+          "Annie'S Top Dishes",
+          "annie's top dishes"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANNIE'S TOP DISHES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0249",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: CHEESE & OLIVES",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "middle white rounded box on the left page",
+          "coarse_region": "left page middle section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [
+          "Cheese & Olives",
+          "cheese & olives"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads CHEESE & OLIVES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0251",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: CHEESE & OLIVES",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "middle white rounded box on the left page",
+          "coarse_region": "left page middle section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "CHEESE & OLIVES",
+        "acceptable_aliases": [
+          "Cheese & Olives",
+          "cheese & olives"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "ANNIE'S TOP DISHES",
+          "ANTIPASTI & SNACKS"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads CHEESE & OLIVES."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0252",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0253",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: ITALIAN PASTA",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "bottom section on the middle fold headed Italian Pasta",
+          "coarse_region": "middle fold bottom section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ITALIAN PASTA",
+        "acceptable_aliases": [
+          "Italian Pasta",
+          "italian pasta"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ITALIAN PASTA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0254",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: ANTIPASTI & SNACKS",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "top white box on the middle fold",
+          "coarse_region": "middle fold top section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "ANTIPASTI & SNACKS",
+        "acceptable_aliases": [
+          "Antipasti & Snacks",
+          "antipasti & snacks"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads ANTIPASTI & SNACKS."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0255",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0256",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: PIZZA",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "top white box on the right fold headed Pizza",
+          "coarse_region": "right fold top section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "PIZZA",
+        "acceptable_aliases": [
+          "Pizza",
+          "pizza"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads PIZZA."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0258",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: HANDMADE BREAD",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "small bottom-right section headed Handmade Bread",
+          "coarse_region": "right fold bottom section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "HANDMADE BREAD",
+        "acceptable_aliases": [
+          "Handmade Bread",
+          "handmade bread"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads HANDMADE BREAD."
+      }
+    },
+    {
+      "case_id": "order_clean_v2_problem_0259",
+      "video_id": "sunny_annie_1.mp4",
+      "visual_reference": "Annie menu category region: SALADS",
+      "event_gt": {
+        "primary_content_range": [
+          7.0,
+          9.0
+        ],
+        "expected_time_range": [
+          6.0,
+          9.0
+        ],
+        "allowed_transition_range": [
+          5.5,
+          9.0
+        ],
+        "key_frame_time": 8.0,
+        "expected_region": {
+          "description": "vertical Salads section on the right fold with a hand illustration beside it",
+          "coarse_region": "right fold middle section",
+          "notes": "The clearest Annie menu frame for sunny_annie_1.mp4 is used; other restaurant menu frames are excluded."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/sunny_annie_1/contact_sheet_labeled.jpg and clear Annie menu frames."
+      },
+      "detail_gt": {
+        "target_kind": "category",
+        "canonical_value": "SALADS",
+        "acceptable_aliases": [
+          "Salads",
+          "salads"
+        ],
+        "negative_neighbors": [
+          "SELECTED STEAKS",
+          "COLD CUTS",
+          "CHEESE & OLIVES",
+          "ANNIE'S TOP DISHES"
+        ],
+        "confidence": "high",
+        "evidence": "The visible Annie menu heading for the referenced region reads SALADS."
+      }
+    }
+  ],
+  "left_pending_by_policy": [
+    {
+      "reason": "Skipped non-Annie secondary-menu cases, dish-name sequence cases, relative-region cases, and business-attribute cases."
+    }
+  ]
+}

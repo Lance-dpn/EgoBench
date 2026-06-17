@@ -1,0 +1,196 @@
+{
+  "annotations": [
+    {
+      "case_id": "kitchen_clean_v2_problem_0001",
+      "event_gt": {
+        "primary_content_range": [0.0, 2.0],
+        "expected_time_range": [0.0, 3.0],
+        "allowed_transition_range": [0.0, 3.5],
+        "key_frame_time": 2.0,
+        "expected_region": {
+          "description": "Blue cutting board with asparagus, lemon, and broccoli plus the nearby stovetop pot containing potato chunks.",
+          "coarse_region": "blue cutting board and left stovetop pot",
+          "notes": "Frame t02 best shows the cutting board ingredients while the pot is still visible."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/kitchen1/t00.jpg through t02.jpg; the visual scene contains potatoes in the pot and vegetables on the blue cutting board."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Potato & Greens Salad",
+        "acceptable_aliases": ["potato and greens salad", "potatoes and greens salad", "potato greens salad"],
+        "negative_neighbors": ["Roasted Chickpeas & Vegetables", "Shrimp & Asparagus Stir-fry", "Chicken & Broccoli Stir-fry"],
+        "confidence": "high",
+        "evidence": "The scene combines boiled potatoes with green vegetables on the cutting board, matching the visible recipe scene for Potato & Greens Salad."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0005",
+      "event_gt": {
+        "primary_content_range": [0.0, 2.0],
+        "expected_time_range": [0.0, 3.0],
+        "allowed_transition_range": [0.0, 3.5],
+        "key_frame_time": 2.0,
+        "expected_region": {
+          "description": "Blue cutting board with three visible vegetables and the pot containing chunky potatoes.",
+          "coarse_region": "blue cutting board and left stovetop pot",
+          "notes": "Frame t02 gives the clearest combined view of the board and the pot."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/kitchen1/t00.jpg through t02.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Potato & Greens Salad",
+        "acceptable_aliases": ["potato and greens salad", "potatoes and greens salad", "potato greens salad"],
+        "negative_neighbors": ["Roasted Chickpeas & Vegetables", "Shrimp & Asparagus Stir-fry", "Chicken & Broccoli Stir-fry"],
+        "confidence": "high",
+        "evidence": "The requested composite scene is the potatoes in the pot with the three vegetables on the blue cutting board."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0034",
+      "event_gt": {
+        "primary_content_range": [0.0, 2.0],
+        "expected_time_range": [0.0, 3.0],
+        "allowed_transition_range": [0.0, 3.5],
+        "key_frame_time": 2.0,
+        "expected_region": {
+          "description": "Potatoes in the stovetop pot and three vegetables on the blue cutting board are visible together.",
+          "coarse_region": "blue cutting board and left stovetop pot",
+          "notes": "Frame t02 is the strongest key frame for the common recipe query."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/kitchen1/t00.jpg through t02.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Potato & Greens Salad",
+        "acceptable_aliases": ["potato and greens salad", "potatoes and greens salad", "potato greens salad"],
+        "negative_neighbors": ["Roasted Chickpeas & Vegetables", "Shrimp & Asparagus Stir-fry", "Chicken & Broccoli Stir-fry"],
+        "confidence": "high",
+        "evidence": "The query asks for the common recipe represented by potatoes and greens; the visible recipe scene corresponds to Potato & Greens Salad."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0035",
+      "event_gt": {
+        "primary_content_range": [12.0, 14.0],
+        "expected_time_range": [10.0, 16.0],
+        "allowed_transition_range": [9.5, 16.5],
+        "key_frame_time": 13.0,
+        "expected_region": {
+          "description": "A deep-fried pork/meat cutlet is sliced on the cutting board.",
+          "coarse_region": "center cutting board",
+          "notes": "Frames t12-t14 show the cutting action and the fried meat clearly."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/deep_fried/t12.jpg through t14.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Deep-fried Meat Platter",
+        "acceptable_aliases": ["deep-fried meat platter", "fried pork cutlet dish", "sliced fried pork cutlet"],
+        "negative_neighbors": ["Pork & Red Bell Pepper Skillet", "Pork & Chive Dumplings", "Green Pepper Chicken"],
+        "confidence": "high",
+        "evidence": "The visible dish is a deep-fried pork/meat cutlet being cut into strips."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0036",
+      "event_gt": {
+        "primary_content_range": [12.0, 14.0],
+        "expected_time_range": [10.0, 16.0],
+        "allowed_transition_range": [9.5, 16.5],
+        "key_frame_time": 13.0,
+        "expected_region": {
+          "description": "A fried pork cutlet is being sliced into strips on the cutting board.",
+          "coarse_region": "center cutting board",
+          "notes": "Frame t13 is the clearest single frame."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/deep_fried/t12.jpg through t14.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Deep-fried Meat Platter",
+        "acceptable_aliases": ["deep-fried meat platter", "fried pork cutlet dish", "sliced fried pork cutlet"],
+        "negative_neighbors": ["Pork & Red Bell Pepper Skillet", "Pork & Chive Dumplings", "Green Pepper Chicken"],
+        "confidence": "high",
+        "evidence": "The image shows sliced fried pork/meat cutlets, corresponding to Deep-fried Meat Platter."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0040",
+      "event_gt": {
+        "primary_content_range": [12.0, 14.0],
+        "expected_time_range": [10.0, 16.0],
+        "allowed_transition_range": [9.5, 16.5],
+        "key_frame_time": 13.0,
+        "expected_region": {
+          "description": "Cutting pork chops/fried meat strips on the cutting board.",
+          "coarse_region": "center cutting board",
+          "notes": "The prepared dish is visually clear around t13."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/deep_fried/t12.jpg through t14.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Deep-fried Meat Platter",
+        "acceptable_aliases": ["deep-fried meat platter", "fried pork cutlet dish", "sliced fried pork cutlet"],
+        "negative_neighbors": ["Pork & Red Bell Pepper Skillet", "Pork & Chive Dumplings", "Green Pepper Chicken"],
+        "confidence": "high",
+        "evidence": "The visible dish being prepared is a platter of fried meat/pork cutlets."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0041",
+      "event_gt": {
+        "primary_content_range": [12.0, 14.0],
+        "expected_time_range": [10.0, 16.0],
+        "allowed_transition_range": [9.5, 16.5],
+        "key_frame_time": 13.0,
+        "expected_region": {
+          "description": "The current dish is represented by sliced fried pork/meat on the cutting board.",
+          "coarse_region": "center cutting board",
+          "notes": "Downstream countertop ingredient checks are service/tool logic; the visual GT is the current dish."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/deep_fried/t12.jpg through t14.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Deep-fried Meat Platter",
+        "acceptable_aliases": ["deep-fried meat platter", "fried pork cutlet dish", "sliced fried pork cutlet"],
+        "negative_neighbors": ["Pork & Red Bell Pepper Skillet", "Pork & Chive Dumplings", "Green Pepper Chicken"],
+        "confidence": "high",
+        "evidence": "The visual scene identifies the current dish as Deep-fried Meat Platter."
+      }
+    },
+    {
+      "case_id": "kitchen_clean_v2_problem_0042",
+      "event_gt": {
+        "primary_content_range": [12.0, 14.0],
+        "expected_time_range": [10.0, 16.0],
+        "allowed_transition_range": [9.5, 16.5],
+        "key_frame_time": 13.0,
+        "expected_region": {
+          "description": "The dish being prepared is visible as fried pork/meat being cut into strips.",
+          "coarse_region": "center cutting board",
+          "notes": "Ingredient-category checks are downstream service/tool logic; the observer target is the dish identity."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/deep_fried/t12.jpg through t14.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "recipe_name",
+        "canonical_value": "Deep-fried Meat Platter",
+        "acceptable_aliases": ["deep-fried meat platter", "fried pork cutlet dish", "sliced fried pork cutlet"],
+        "negative_neighbors": ["Pork & Red Bell Pepper Skillet", "Pork & Chive Dumplings", "Green Pepper Chicken"],
+        "confidence": "high",
+        "evidence": "The visual scene identifies the current dish as Deep-fried Meat Platter."
+      }
+    }
+  ]
+}

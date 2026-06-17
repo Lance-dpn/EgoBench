@@ -1,0 +1,291 @@
+{
+  "annotations": [
+    {
+      "case_id": "retail_clean_v2_problem_0132",
+      "event_gt": {
+        "primary_content_range": [
+          3.0,
+          5.0
+        ],
+        "expected_time_range": [
+          2.0,
+          6.0
+        ],
+        "allowed_transition_range": [
+          1.5,
+          6.5
+        ],
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "First picked-up green wine bottle with Sangre de Toro label.",
+          "coarse_region": "center shelf and hand-held bottle",
+          "notes": "Frame t04 is the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail5/t03.jpg through t05.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "green Sangre de Toro",
+          "first picked-up green wine"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature",
+          "Mouton Cadet"
+        ],
+        "confidence": "high",
+        "evidence": "The first bottle picked up and put back is the green Sangre de Toro bottle."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0133",
+      "event_gt": {
+        "primary_content_range": [
+          3.0,
+          5.0
+        ],
+        "expected_time_range": [
+          2.0,
+          6.0
+        ],
+        "allowed_transition_range": [
+          1.5,
+          6.5
+        ],
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "First picked-up green wine bottle with Sangre de Toro label.",
+          "coarse_region": "center shelf and hand-held bottle",
+          "notes": "Frame t04 is the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail5/t03.jpg through t05.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "green Sangre de Toro",
+          "first picked-up green wine"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature",
+          "Mouton Cadet"
+        ],
+        "confidence": "high",
+        "evidence": "The first bottle picked up and put back is the green Sangre de Toro bottle."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0137",
+      "event_gt": {
+        "primary_content_range": [
+          3.0,
+          5.0
+        ],
+        "expected_time_range": [
+          2.0,
+          6.0
+        ],
+        "allowed_transition_range": [
+          1.5,
+          6.5
+        ],
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "First picked-up green wine bottle with Sangre de Toro label.",
+          "coarse_region": "center shelf and hand-held bottle",
+          "notes": "Frame t04 is the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail5/t03.jpg through t05.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "green Sangre de Toro",
+          "first picked-up green wine"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature",
+          "Mouton Cadet"
+        ],
+        "confidence": "high",
+        "evidence": "The first bottle picked up and put back is the green Sangre de Toro bottle."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0138",
+      "event_gt": {
+        "primary_content_range": [
+          3.0,
+          5.0
+        ],
+        "expected_time_range": [
+          2.0,
+          6.0
+        ],
+        "allowed_transition_range": [
+          1.5,
+          6.5
+        ],
+        "key_frame_time": 4.0,
+        "expected_region": {
+          "description": "First picked-up green wine bottle with Sangre de Toro label.",
+          "coarse_region": "center shelf and hand-held bottle",
+          "notes": "Frame t04 is the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail5/t03.jpg through t05.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "green Sangre de Toro",
+          "first picked-up green wine"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature",
+          "Mouton Cadet"
+        ],
+        "confidence": "high",
+        "evidence": "The first bottle picked up and put back is the green Sangre de Toro bottle."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0140",
+      "event_gt": {
+        "primary_content_range": [
+          8.0,
+          10.0
+        ],
+        "expected_time_range": [
+          7.0,
+          11.0
+        ],
+        "allowed_transition_range": [
+          6.5,
+          11.5
+        ],
+        "key_frame_time": 9.0,
+        "expected_region": {
+          "description": "The first green Sangre de Toro bottle is placed back on the shelf.",
+          "coarse_region": "center shelf",
+          "notes": "Frame t09 is the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail5/t08.jpg through t10.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "green Sangre de Toro",
+          "first picked-up green wine"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature",
+          "Mouton Cadet"
+        ],
+        "confidence": "high",
+        "evidence": "The first bottle picked up and put back is the green Sangre de Toro bottle."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0147",
+      "event_gt": {
+        "primary_content_range": [
+          8.0,
+          10.0
+        ],
+        "expected_time_range": [
+          7.0,
+          11.0
+        ],
+        "allowed_transition_range": [
+          6.5,
+          11.5
+        ],
+        "key_frame_time": 9.0,
+        "expected_region": {
+          "description": "The first green Sangre de Toro bottle is placed back on the shelf.",
+          "coarse_region": "center shelf",
+          "notes": "Frame t09 is the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail5/t08.jpg through t10.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "Sangre de Toro(Green)",
+        "acceptable_aliases": [
+          "Sangre de Toro Green",
+          "green Sangre de Toro",
+          "first picked-up green wine"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Orange)",
+          "MICHEL Lynch nature",
+          "Mouton Cadet"
+        ],
+        "confidence": "high",
+        "evidence": "The first bottle picked up and put back is the green Sangre de Toro bottle."
+      }
+    },
+    {
+      "case_id": "retail_clean_v2_problem_0152",
+      "event_gt": {
+        "primary_content_range": [
+          8.0,
+          10.0
+        ],
+        "expected_time_range": [
+          7.0,
+          11.0
+        ],
+        "allowed_transition_range": [
+          6.5,
+          11.5
+        ],
+        "key_frame_time": 9.0,
+        "expected_region": {
+          "description": "Dark-bodied wine bottle directly above the first green Sangre de Toro position on the shelf.",
+          "coarse_region": "upper shelf above green bottle",
+          "notes": "Frame t09 is the clearest view."
+        },
+        "confidence": "high",
+        "evidence": "Inspected _annotation/frames/retail5/t08.jpg through t10.jpg."
+      },
+      "detail_gt": {
+        "target_kind": "product_name",
+        "canonical_value": "MICHEL Lynch nature",
+        "acceptable_aliases": [
+          "Michel Lynch Nature",
+          "dark bottle above Sangre de Toro Green",
+          "Lynch wine above the green bottle"
+        ],
+        "negative_neighbors": [
+          "Sangre de Toro(Green)",
+          "Sangre de Toro(Orange)",
+          "Mouton Cadet"
+        ],
+        "confidence": "medium",
+        "evidence": "The dark-bodied bottle directly above the green Sangre de Toro position shows MICHEL Lynch labeling in the upper shelf area."
+      }
+    }
+  ]
+}

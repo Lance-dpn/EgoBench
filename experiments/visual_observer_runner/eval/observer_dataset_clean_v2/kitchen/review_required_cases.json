@@ -1,0 +1,21 @@
+{
+  "schema_version": "observer_dataset_clean_v2",
+  "scenario": "kitchen",
+  "status": "visual_problem_clusters_ready_gt_pending",
+  "generated_at_utc": "2026-06-06T10:15:09.734786+00:00",
+  "source_policy": {
+    "allowed_inputs": [
+      "scenarios/final/*.json instruction fields"
+    ],
+    "disallowed_inputs": [
+      "observer_problem_set_*",
+      "observer_dataset_rebuild_v1",
+      "old bootstrap files",
+      "eval_result",
+      "DB/tool data",
+      "scenario final key/value for extraction, clustering, or GT"
+    ]
+  },
+  "process_doc": "experiments/visual_observer_runner/eval/eval-process.md",
+  "review_required_cases": []
+}

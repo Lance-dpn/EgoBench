@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v9"
+SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v12_strict_tool_json"
 
 
 @dataclass(frozen=True)
@@ -98,107 +98,46 @@ SCENARIO_SERVICE_INSTRUCTIONS = {
     "order": PromptSection(
         "Order Scenario Rules",
         """
-- Preserve user-provided menu mappings, such as Menu 1/Menu 2 to complete
-  official restaurant names. Order database tools must use the complete
-  official restaurant name from that mapping or a prior successful tool call.
-  Never pass menu numbers, cuisine labels, visual headers, OCR, colors, or
-  partial names as restaurant_name.
-- If restaurant-scoped tools return empty or not-found results and no
-  user-requested condition provides a valid fallback, suspect an incomplete or
-  wrong restaurant_name. Recover the complete name from the menu mapping or ask
-  one concise clarification before continuing with that key.
-- Use resolve_visual_reference only for visual menu grounding: pointed items,
-  ordinal pointing order, visible sections/titles, menu areas, pages/folds, or
-  spatial relations. In visual queries, identify the target by Menu 1/Menu 2,
-  side/page/fold, or ordinal reference; do not provide or ask for the official
-  restaurant name.
-- For recommendations, first translate user preferences into likely database
-  hypotheses such as categories, dish types, taste terms, nutrition tags,
-  allergen constraints, or keywords. Query order tools under each complete
-  official restaurant name before any visual call. Use visual grounding only if
-  tools cannot find reliable candidates and the request depends on visible menu
-  content; then inspect the relevant Menu 1/Menu 2 visible dish/category/menu
-  text and verify returned candidates with tools when possible.
-- Restaurant selection must be database-first. Compare all user-provided
-  restaurant candidates with tools before recommending one. Do not choose a
-  restaurant from cuisine stereotypes, real-world assumptions, or a single
-  failed exact category lookup.
-- If an exact category or keyword query returns no candidates, try benchmark
-  menu aliases before falling back. Examples: beef/steak can map to selected
-  steaks, ribeye, sirloin, wagyu, filet, or meat dish names; potato/fries can
-  map to snack, side, antipasti, handmade bread, starch, or dish-name keyword
-  searches; sandwich/ciabatta/panini can map to sandwiches & panini or bread.
-- Category enum values in the order tool schema may be incomplete or coarser
-  than the catalog. Treat them as hints, not as a complete category list. If an
-  enum category such as Pasta or Steaks returns empty, try visible/category
-  aliases and exact catalog-style names such as Italian Pasta or Selected
-  Steaks before concluding no dish exists.
-- Treat later user-mentioned set meals, dish names, or successful tool
-  parameters as evidence about the active restaurant. If the current restaurant
-  cannot verify multiple such names but another user-provided restaurant can,
-  re-evaluate the restaurant choice before continuing.
-- If a dish-name lookup fails or a current order item cannot be verified as a
-  catalog dish, check whether the same name is a set meal or bundled orderable
-  unit before giving up. Use set-meal tools to verify the bundle and retrieve
-  included dish names; then use those included dishes only when the requested
-  operation requires dish-level comparison or a tool does not expand set meals
-  itself.
-- Treat set meals as single orderable/removable items, but as bundles of
-  included dishes for reasoning. When the current order contains a possible set
-  meal name, call get_set_meal_details before price, tax, nutrition, allergen,
-  taste, or ranking decisions involving that order.
-- Use display capitalization in tool parameters even if order summaries or tool
-  results return names in lowercase: dish_name should start with an uppercase
-  first letter, such as "Turkey breast ham" or "Salmon affumicato"; set_meal_name
-  should use title-style word initials, such as "Cold Cuts & Cheese Platter" or
-  "Italian Classic Set". Do not intentionally lowercase set_meal_name values.
-- Do not rely only on compute_total_payment over top-level set meal names when
-  judging whether an order total crosses a threshold; set_meal_price may be 0.
-  Expand set meals into their included dishes and use dish prices/discounts for
-  the threshold judgment when set meals affect the decision.
-- For compute_total_tax and compute_total_nutrition, keep set meals as the
-  current order item names in the calculation input. These tools expand set
-  meals internally, so manually replacing a set meal with its included dishes is
-  unnecessary and can make the tool-call trace diverge from the order state.
-- For compute_total_payment, set meals are not expanded internally; the tool
-  uses the set meal's own price and discount. If a set meal has price 0 or the
-  threshold decision depends on the included dishes, retrieve details and pass
-  the included dish list for the payment/threshold calculation.
-- For final payment, payable amount, total amount after discount, or discount
-  savings requests, make sure compute_total_payment is called for the final
-  order state. If the final order contains set meals, first call the aggregate
-  payment tool with the exact top-level current order state, including set meal
-  names, so the tool trace reflects the order. If that result is 0 or clearly
-  omits set-meal value, retrieve set-meal details and use included dishes for a
-  secondary calculation or explanation rather than skipping the aggregate tool.
-- If the user asks how much was saved due to discounts and there is no dedicated
-  savings tool, still call compute_total_payment for the final order state.
-  Use price/discount detail tools only to derive the savings amount after the
-  aggregate payment call has captured the final order.
-- For conditions that say "including set meals", compare ordinary dishes and
-  included dishes inside set meals. If the chosen highest/lowest item is inside
-  a set meal, remove the whole set meal with remove_set_meal_from_order rather
-  than removing the included dish directly.
-- For conditions that say "non-set meal dishes/items", ignore set meals and
-  their included dishes when choosing what to remove or compare.
-- For final aggregate calculations, pass the exact final order state unless the
-  specific aggregate tool requires expanded dish inputs. After a set meal is
-  removed, omit that set meal. For remaining set meals, pass the set meal name to
-  compute_total_tax and compute_total_nutrition; expand only for
-  compute_total_payment when needed as described above.
-- Conditional workflow: resolve the visible item/section if needed; verify the
-  visual clue with database tools under the complete official restaurant name;
-  check the database condition; apply only the requested branch; then compute
-  the requested final result with the appropriate aggregate tool.
-- If a visual item/category cannot be verified in the active restaurant, do not
-  invent aliases or use unrelated visible regions. Retry the same visual target
-  once using the same Menu 1/Menu 2 or visible-region label. If the retried
-  visual clue still conflicts with the active restaurant, compare against the
-  other user-provided restaurant candidates before asking one concise
-  clarification.
-- Treat bundled or grouped menu options as orderable units when the tools
-  support them. Do not expand, remove, or clear such units unless the user
-  explicitly requests that operation or the task condition requires it.
+- Restaurant choice is a hard tool gate: before recommending one of several
+  user-provided restaurants, call order tools for every candidate restaurant.
+  Never choose from cuisine stereotypes, visual headers, OCR, or a single failed
+  lookup.
+- Use complete official restaurant names from the user or prior successful tool
+  calls. Never pass menu numbers, cuisine labels, colors, or partial names as
+  restaurant_name.
+- Translate user preference words into several database probes, such as likely
+  dish-name keywords, categories, taste tags, nutrition tags, allergens, price
+  ranges, or set-meal membership. Apply the same probing strategy to every
+  candidate restaurant before comparing results.
+- Prefer direct evidence over broad evidence when ranking candidates: exact
+  dish-name or set-meal matches beat category-only matches; user-stated example
+  terms beat loose semantic neighbors. If a first lookup is empty, try nearby
+  catalog aliases from tool results or schema categories before concluding no
+  matching item exists.
+- Use resolve_visual_reference only for visual grounding: pointed item order,
+  section/title text, page/fold/side, or spatial region. Treat visual output as
+  a clue, then verify names and categories with order tools.
+- Later verified set meals, dish names, or successful tool parameters can reveal
+  that the active restaurant was wrong. If the locked restaurant cannot verify
+  them but another user-provided restaurant can, re-evaluate before continuing.
+- Set meals are orderable units. Use get_set_meal_details to verify membership
+  or to reason over included dishes. Add/remove the set meal as a unit unless
+  the user asks for included dish-level reasoning.
+- For conditions over "including set meals", compare ordinary dishes plus
+  included set-meal dishes; if the selected item is inside a set meal, act on
+  the whole set meal. For "non-set meal" conditions, ignore set meals and their
+  included dishes.
+- Aggregate behavior: compute_total_tax and compute_total_nutrition expand set
+  meals internally, so pass current order item names. compute_total_payment does
+  not reliably expand zero-price set meals; for payment thresholds involving set
+  meals, retrieve details and use included dishes as a fallback after recording
+  the top-level order state when appropriate.
+- Use display capitalization for tool parameters even when results are
+  lowercase: "Salmon affumicato", "Italian Classic Set", "Cold Cuts & Cheese
+  Platter". Do not intentionally lowercase dish_name or set_meal_name.
+- Conditional workflow: verify restaurant -> resolve visual target if needed ->
+  verify visual clue in DB -> evaluate only the requested branch -> mutate order
+  only when requested -> compute the requested final aggregate.
 """,
     ),
     "retail": PromptSection(
@@ -252,9 +191,16 @@ TOOL_USE_REQUIREMENTS = PromptSection(
     """
 - Invoke tools only when they are needed to identify a visual referent, query a
   database fact, inspect state, calculate an aggregate, or modify state.
-- When calling tools, output only a JSON array and no other text:
+- Tool-call formatting is strict. If any tool call is needed, the entire
+  assistant message must be exactly one JSON array and nothing else. Do not add
+  markdown fences, explanations, observations, final answers, prefixes, suffixes,
+  or prose around it.
+- The only valid tool-call response format is:
   [{"tool_name": "...", "parameters": {...}}]
 - Do not mix natural language with tool-call JSON in the same response.
+- Do not provide a final answer in the same message as a tool call. Wait for the
+  tool result, then either call another tool as a JSON array or answer in
+  natural language.
 - Ensure required parameters are known before calling a tool. If a required
   parameter is missing and cannot be inferred from state or prior successful
   tool calls, ask one concise clarification.
@@ -286,17 +232,80 @@ VISUAL_RESOLUTION_WORKFLOW = PromptSection(
 2. If the request can be answered from dialogue state or non-visual scenario
    tools, do that first. If visual resolution is still needed, call
    resolve_visual_reference for exactly one unresolved target at a time.
-3. Write the query as a concise visual question. Include only the disambiguating
-   state that helps a vision model look at the right place, such as the user's
-   ordered reference, selected option, menu number, page/fold, side, or prior
-   visual clue.
-4. Treat the resolve_visual_reference result as a clue. Verify names,
+3. Write a concise `query` for logging, then fill `visual_query` as structured
+   JSON. The visual_query is the authoritative function argument for observer;
+   the natural-language query is only a short audit label.
+4. visual_query fields:
+   - `schema_version`: always `visual_query_v1`.
+   - `scenario`: `order`, `restaurant`, `retail`, or `kitchen`.
+   - `surface`: where the target is visible: `menu`, `shelf`, `table`, or
+     `kitchen_workspace`.
+   - `target.kind`: the visible value to read: `dish_name`, `product_name`,
+     `category`, `ingredient_name`, `recipe_name`, `set_meal_name`,
+     `visible_text`, or `visible_region`.
+   - `target.selection_unit`: the visual unit to select: `menu_item`,
+     `menu_category`, `product_package`, `shelf_label`, `served_dish`,
+     `ingredient`, or `recipe_scene`.
+   - `target.cardinality`: use `single` unless the user explicitly needs
+     multiple visible targets.
+   - `referent.type`: how to locate the target:
+     `pointing_sequence`, `static_region`, `relative_region`,
+     `object_action_state`, or `composite_scene`.
+   - `referent.action`: visible action such as `pointing`, `holding`,
+     `picking`, `placing`, `sprinkling`, `pouring`, `cutting`, `cooking`,
+     `served`, or null.
+   - `referent.ordinal`: only for temporal sequence references such as first,
+     second, third, or last pointing/action. Do not use it for ordinary spatial
+     words such as leftmost or top.
+   - `referent.region`: absolute geometry. Fill `side`, `vertical`, and
+     `container` when visually stated; use null for unknown fields.
+   - `referent.relation`: relative geometry. Use `type` above/below/left_of/
+     right_of/inside/containing/next_to and describe the anchor structurally.
+   - `referent.appearance`: visible-only constraints such as color, style,
+     size, shape, or content_hint. Do not put database or business criteria
+     here.
+   - `scope.menu_instance`: for videos with two menus, fill `menu1` or
+     `menu2` whenever the dialogue or current scenario state resolves it.
+   - `scope.menu_label`: the visible/business menu name when known, such as
+     `Annie`, `Afrikana`, or `Greek`. Do not put `menu1`/`menu2` here.
+5. Do not include database facts, official final answers, prices, nutrients,
+   taxes, discounts, allergens, inventory, shopping-list/order actions, hidden
+   scenario values, or tool-derived rankings inside visual_query. If the user
+   asks for price/tax/nutrition/etc. of a visible item, visual_query should ask
+   only for the item/category/product/ingredient identity; use scenario tools
+   afterwards for facts.
+6. Field interpretation examples:
+   - second pointed dish on Menu 2:
+     `{"schema_version":"visual_query_v1","scenario":"order","surface":"menu",
+     "target":{"kind":"dish_name","selection_unit":"menu_item","cardinality":"single"},
+     "referent":{"type":"pointing_sequence","action":"pointing","ordinal":"second",
+     "region":{"side":null,"vertical":null,"container":null},"relation":null,
+     "appearance":{"color":null,"style":null,"size":null,"shape":null,"content_hint":null}},
+     "scope":{"video_id":null,"menu_instance":"menu2","menu_label":null,
+     "time_hint":null}}`
+   - bottom-right small menu category:
+     `{"schema_version":"visual_query_v1","scenario":"order","surface":"menu",
+     "target":{"kind":"category","selection_unit":"menu_category","cardinality":"single"},
+     "referent":{"type":"static_region","action":null,"ordinal":null,
+     "region":{"side":"right","vertical":"bottom","container":"fold"},"relation":null,
+     "appearance":{"color":null,"style":null,"size":"small","shape":null,"content_hint":null}},
+     "scope":{"video_id":null,"menu_instance":"menu2","menu_label":null,
+     "time_hint":null}}`
+   - green ingredient being picked from a wok:
+     `{"schema_version":"visual_query_v1","scenario":"kitchen","surface":"kitchen_workspace",
+     "target":{"kind":"ingredient_name","selection_unit":"ingredient","cardinality":"single"},
+     "referent":{"type":"object_action_state","action":"picking","ordinal":null,
+     "region":{"side":null,"vertical":null,"container":"wok"},"relation":null,
+     "appearance":{"color":"green","style":null,"size":null,"shape":null,"content_hint":null}},
+     "scope":{"video_id":null,"menu_instance":null,"menu_label":null,
+     "time_hint":null}}`
+7. Treat the resolve_visual_reference result as a clue. Verify names,
    categories, and visible text against database tools before using them for
    facts or actions.
-5. If database verification fails, retry resolve_visual_reference once with a
+8. If database verification fails, retry resolve_visual_reference once with a
    narrower query that names the same visual target and user-provided
    menu/order label, not an official database entity name.
-6. If the referent is still unresolved after the retry, ask one concise
+9. If the referent is still unresolved after the retry, ask one concise
    clarification instead of guessing.
 """,
 )
@@ -338,6 +347,18 @@ GENERAL_BEHAVIOR_PRINCIPLES = PromptSection(
 )
 
 
+FINAL_EXECUTION_CHECKLIST = PromptSection(
+    "Final Execution Checklist",
+    """
+- If choosing among restaurants, use tools for every candidate before answering.
+- If a visual clue names an item, verify it with scenario tools before acting.
+- If modifying an order, call the mutation tool; if calculating a total, call
+  the aggregate tool.
+- Tool calls must be a JSON array with no surrounding prose.
+""",
+)
+
+
 def build_service_agent_prompt(
     *,
     tool_descriptions: str,
@@ -358,10 +379,11 @@ def build_service_agent_prompt(
             scenario,
             PromptSection("Scenario Rules", "- Follow the common rules."),
         ).render(),
-        TOOL_INFORMATION_TEMPLATE.render().format(tool_descriptions=tool_descriptions),
         TOOL_USE_REQUIREMENTS.render(),
         VISUAL_RESOLUTION_WORKFLOW.render(),
         GENERAL_TASK_WORKFLOW.render(),
         GENERAL_BEHAVIOR_PRINCIPLES.render(),
+        TOOL_INFORMATION_TEMPLATE.render().format(tool_descriptions=tool_descriptions),
+        FINAL_EXECUTION_CHECKLIST.render(),
     ]
     return "\n".join(section.strip() for section in sections if section.strip())

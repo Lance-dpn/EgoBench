@@ -13,6 +13,7 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+node_modules/
 
 # Virtual environments
 .venv/
@@ -30,6 +31,11 @@ vocab_debug.log
 experiments/**/cache/
 experiments/**/runs/
 experiments/**/outputs/
+experiments/visual_observer_runner/eval/**/_annotation/frames/
+experiments/visual_observer_runner/eval/**/_work/**/keyframes/
+experiments/visual_observer_runner/eval/**/_frames/
+experiments/visual_observer_runner/eval/**/review_backups/
+experiments/visual_observer_runner/eval/**/_work/
 
 # Do not commit benchmark videos in this repository.
 videos/

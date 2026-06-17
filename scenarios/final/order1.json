@@ -21,7 +21,7 @@
         "parameters": {
           "restaurant_name": "Annie Italian Restaurant",
           "user_id": "customer_009",
-          "set_meal_name": "Cold Cuts & Cheese Platte",
+          "set_meal_name": "Cold Cuts & Cheese Platter",
           "quantity": 1
         }
       },
@@ -129,10 +129,10 @@
         "tool_name": "add_dish_to_order",
         "parameters": {
           "restaurant_name": "Annie Italian Restaurant",
-          "user_id": "customer_005\n",
+          "user_id": "customer_005",
           "dish_name": "Australian imported M9+ grain-fed Ribeye",
           "quantity": 1,
-          "category": "Selected Steaks\n",
+          "category": "Selected Steaks",
           "price": 659,
           "tax_rate": 0.07,
           "discount": 0.8
@@ -192,7 +192,7 @@
           "user_id": "customer_010",
           "dish_name": "Camembert",
           "quantity": 1,
-          "category": "Cheese & Olives\n",
+          "category": "Cheese & Olives",
           "price": 32,
           "tax_rate": 0.07,
           "discount": 0.9
@@ -248,7 +248,7 @@
           "user_id": "customer_004",
           "dish_name": "Piadina",
           "quantity": 1,
-          "category": "Sandwiches & Panini\n",
+          "category": "Sandwiches & Panini",
           "price": 88,
           "tax_rate": 0.13,
           "discount": 0.9
@@ -331,19 +331,19 @@
           "user_id": "customer_009",
           "dishes": [
             {
-              "product_name": "Lasagne",
+              "dish_name": "Lasagne",
               "quantity": 1
             },
             {
-              "product_name": "Salmone affumicato",
+              "dish_name": "Salmone affumicato",
               "quantity": 1
             },
             {
-              "product_name": "Italian Classic Set",
+              "dish_name": "Italian Classic Set",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             }
           ]
@@ -383,19 +383,19 @@
           "user_id": "customer_007",
           "dishes": [
             {
-              "product_name": "Homemade pappardelle with bolognese sauce",
+              "dish_name": "Homemade pappardelle with bolognese sauce",
               "quantity": 1
             },
             {
-              "product_name": "Piadina",
+              "dish_name": "Piadina",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             },
             {
-              "product_name": "Salmon",
+              "dish_name": "Salmon",
               "quantity": 1
             }
           ]
@@ -448,31 +448,31 @@
           "user_id": "customer_005",
           "dishes": [
             {
-              "product_name": "Annie's pizza",
+              "dish_name": "Annie's pizza",
               "quantity": 1
             },
             {
-              "product_name": "Annie's salad",
+              "dish_name": "Annie's salad",
               "quantity": 2
             },
             {
-              "product_name": "Cheesecake",
+              "dish_name": "Cheesecake",
               "quantity": 1
             },
             {
-              "product_name": "Steak Lovers Set",
+              "dish_name": "Steak Lovers Set",
               "quantity": 2
             },
             {
-              "product_name": "Seafood Delight Set",
+              "dish_name": "Seafood Delight Set",
               "quantity": 1
             },
             {
-              "product_name": "Aglio, olio & peperoncino",
+              "dish_name": "Aglio, olio & peperoncino",
               "quantity": 1
             },
             {
-              "product_name": "Bolognese",
+              "dish_name": "Bolognese",
               "quantity": 1
             }
           ]
@@ -565,8 +565,8 @@
       {
         "tool_name": "remove_dish_from_order",
         "parameters": {
-          "restaurant_name": "customer_010",
-          "user_id": "Annie Italian Restaurant",
+          "restaurant_name": "Annie Italian Restaurant",
+          "user_id": "customer_010",
           "dish_name": "Black truffle",
           "quantity": 2
         }
@@ -596,11 +596,11 @@
           "user_id": "customer_010",
           "dishes": [
             {
-              "product_name": "Sesame & nuts",
+              "dish_name": "Sesame & nuts",
               "quantity": 1
             },
             {
-              "product_name": "Cooked ham baguette",
+              "dish_name": "Cooked ham baguette",
               "quantity": 1
             }
           ]
@@ -1016,23 +1016,23 @@
           "user_id": "customer_005",
           "dishes": [
             {
-              "product_name": "Annie's salad",
+              "dish_name": "Annie's salad",
               "quantity": 2
             },
             {
-              "product_name": "Cheesecake",
+              "dish_name": "Cheesecake",
               "quantity": 1
             },
             {
-              "product_name": "Steak Lovers Set",
+              "dish_name": "Steak Lovers Set",
               "quantity": 2
             },
             {
-              "product_name": "Seafood Delight Set",
+              "dish_name": "Seafood Delight Set",
               "quantity": 1
             },
             {
-              "product_name": "Mushroom soup",
+              "dish_name": "Mushroom soup",
               "quantity": 2
             }
           ]
@@ -1072,23 +1072,23 @@
           "user_id": "customer_004",
           "dishes": [
             {
-              "product_name": "Mixed cold cuts plank",
+              "dish_name": "Mixed cold cuts plank",
               "quantity": 1
             },
             {
-              "product_name": "Cold cuts & cheese plate",
+              "dish_name": "Cold cuts & cheese plate",
               "quantity": 1
             },
             {
-              "product_name": "Comte",
+              "dish_name": "Comte",
               "quantity": 1
             },
             {
-              "product_name": "Annie's Special Set",
+              "dish_name": "Annie's Special Set",
               "quantity": 1
             },
             {
-              "product_name": "Mixed cold cuts plank",
+              "dish_name": "Mixed cold cuts plank",
               "quantity": 1
             }
           ]
@@ -1146,15 +1146,15 @@
           "user_id": "customer_003",
           "dishes": [
             {
-              "product_name": "Grilled salmon",
+              "dish_name": "Grilled salmon",
               "quantity": 1
             },
             {
-              "product_name": "Tuna salad",
+              "dish_name": "Tuna salad",
               "quantity": 1
             },
             {
-              "product_name": "Cooked ham baguette",
+              "dish_name": "Cooked ham baguette",
               "quantity": 1
             }
           ]
@@ -1210,7 +1210,7 @@
           "user_id": "customer_002",
           "dishes": [
             {
-              "product_name": "Annie's Special Set",
+              "dish_name": "Annie's Special Set",
               "quantity": 1
             }
           ]
@@ -1250,27 +1250,27 @@
           "user_id": "customer_001",
           "dishes": [
             {
-              "product_name": "Margherita",
+              "dish_name": "Margherita",
               "quantity": 1
             },
             {
-              "product_name": "Rigatoni all'arrabbiata",
+              "dish_name": "Rigatoni all'arrabbiata",
               "quantity": 1
             },
             {
-              "product_name": "Tiramisu'",
+              "dish_name": "Tiramisu'",
               "quantity": 1
             },
             {
-              "product_name": "Seafood Delight Set",
+              "dish_name": "Seafood Delight Set",
               "quantity": 1
             },
             {
-              "product_name": "Annie's Special Set",
+              "dish_name": "Annie's Special Set",
               "quantity": 1
             },
             {
-              "product_name": "Piadina",
+              "dish_name": "Piadina",
               "quantity": 1
             }
           ]
@@ -1583,6 +1583,7 @@
       {
         "tool_name": "add_dish_to_order",
         "parameters": {
+          "restaurant_name": "Annie Italian Restaurant",
           "user_id": "customer_006",
           "dish_name": "Serrano ham",
           "quantity": 2,
@@ -1595,7 +1596,7 @@
       {
         "tool_name": "compute_total_nutrition",
         "parameters": {
-          "restaurant_name": "Annie Italian Restaurant_items",
+          "restaurant_name": "Annie Italian Restaurant",
           "user_id": "customer_006",
           "dishes": [
             {
@@ -1634,6 +1635,7 @@
       {
         "tool_name": "add_dish_to_order",
         "parameters": {
+          "restaurant_name": "Annie Italian Restaurant",
           "user_id": "customer_007",
           "dish_name": "Mozzarella di bufala",
           "quantity": 1,
@@ -1689,6 +1691,7 @@
       {
         "tool_name": "add_dish_to_order",
         "parameters": {
+          "restaurant_name": "Annie Italian Restaurant",
           "user_id": "customer_009",
           "dish_name": "Buratta & Parma ham",
           "quantity": 1,
@@ -1809,6 +1812,7 @@
       {
         "tool_name": "add_dish_to_order",
         "parameters": {
+          "restaurant_name": "Annie Italian Restaurant",
           "user_id": "customer_008",
           "dish_name": "Australian imported M9+ grain-fed Ribeye",
           "quantity": 1,
@@ -1890,15 +1894,15 @@
           "user_id": "customer_007",
           "dishes": [
             {
-              "product_name": "Cheese plate",
+              "dish_name": "Cheese plate",
               "quantity": 2
             },
             {
-              "product_name": "Piadina",
+              "dish_name": "Piadina",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             }
           ]
@@ -3341,19 +3345,19 @@
           "user_id": "customer_008",
           "dishes": [
             {
-              "product_name": "Focaccia",
+              "dish_name": "Focaccia",
               "quantity": 1
             },
             {
-              "product_name": "Buratta salad",
+              "dish_name": "Buratta salad",
               "quantity": 2
             },
             {
-              "product_name": "Walnut bread",
+              "dish_name": "Walnut bread",
               "quantity": 1
             },
             {
-              "product_name": "Steak Lovers Set",
+              "dish_name": "Steak Lovers Set",
               "quantity": 1
             }
           ]
@@ -3393,23 +3397,23 @@
           "user_id": "customer_009",
           "dishes": [
             {
-              "product_name": "Grana Padano",
+              "dish_name": "Grana Padano",
               "quantity": 3
             },
             {
-              "product_name": "Lasagne",
+              "dish_name": "Lasagne",
               "quantity": 1
             },
             {
-              "product_name": "Salmone affumicato",
+              "dish_name": "Salmone affumicato",
               "quantity": 1
             },
             {
-              "product_name": "Italian Classic Set",
+              "dish_name": "Italian Classic Set",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             }
           ]
@@ -3422,23 +3426,23 @@
           "user_id": "customer_009",
           "dishes": [
             {
-              "product_name": "Grana Padano",
+              "dish_name": "Grana Padano",
               "quantity": 3
             },
             {
-              "product_name": "Lasagne",
+              "dish_name": "Lasagne",
               "quantity": 1
             },
             {
-              "product_name": "Salmone affumicato",
+              "dish_name": "Salmone affumicato",
               "quantity": 1
             },
             {
-              "product_name": "Italian Classic Set",
+              "dish_name": "Italian Classic Set",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             }
           ]
@@ -3478,19 +3482,19 @@
           "user_id": "customer_007",
           "dishes": [
             {
-              "product_name": "Cooked ham baguette",
+              "dish_name": "Cooked ham baguette",
               "quantity": 1
             },
             {
-              "product_name": "Homemade pappardelle with bolognese sauce",
+              "dish_name": "Homemade pappardelle with bolognese sauce",
               "quantity": 1
             },
             {
-              "product_name": "Piadina",
+              "dish_name": "Piadina",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             }
           ]
@@ -3503,19 +3507,19 @@
           "user_id": "customer_007",
           "dishes": [
             {
-              "product_name": "Cooked ham baguette",
+              "dish_name": "Cooked ham baguette",
               "quantity": 1
             },
             {
-              "product_name": "Homemade pappardelle with bolognese sauce",
+              "dish_name": "Homemade pappardelle with bolognese sauce",
               "quantity": 1
             },
             {
-              "product_name": "Piadina",
+              "dish_name": "Piadina",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             }
           ]
@@ -5140,11 +5144,11 @@
           "user_id": "customer_002",
           "dishes": [
             {
-              "product_name": "Grilled chicken salad",
+              "dish_name": "Grilled chicken salad",
               "quantity": 2
             },
             {
-              "product_name": "Focaccia",
+              "dish_name": "Focaccia",
               "quantity": 1
             }
           ]
@@ -5202,23 +5206,23 @@
           "user_id": "customer_004",
           "dishes": [
             {
-              "product_name": "Mixed cold cuts plank",
+              "dish_name": "Mixed cold cuts plank",
               "quantity": 1
             },
             {
-              "product_name": "Comte",
+              "dish_name": "Comte",
               "quantity": 1
             },
             {
-              "product_name": "Annie's Special Set",
+              "dish_name": "Annie's Special Set",
               "quantity": 1
             },
             {
-              "product_name": "Veggie salad",
+              "dish_name": "Veggie salad",
               "quantity": 1
             },
             {
-              "product_name": "Seafood Delight Set",
+              "dish_name": "Seafood Delight Set",
               "quantity": 1
             }
           ]
@@ -5293,31 +5297,31 @@
           "user_id": "customer_006",
           "dishes": [
             {
-              "product_name": "Tuna panini",
+              "dish_name": "Tuna panini",
               "quantity": 2
             },
             {
-              "product_name": "Veggie salad",
+              "dish_name": "Veggie salad",
               "quantity": 1
             },
             {
-              "product_name": "Annie's Special Set",
+              "dish_name": "Annie's Special Set",
               "quantity": 1
             },
             {
-              "product_name": "Brie",
+              "dish_name": "Brie",
               "quantity": 1
             },
             {
-              "product_name": "Buratta",
+              "dish_name": "Buratta",
               "quantity": 1
             },
             {
-              "product_name": "Gorgonzola",
+              "dish_name": "Gorgonzola",
               "quantity": 1
             },
             {
-              "product_name": "Italian Classic Set",
+              "dish_name": "Italian Classic Set",
               "quantity": 1
             }
           ]
@@ -5366,23 +5370,23 @@
           "user_id": "customer_007",
           "dishes": [
             {
-              "product_name": "Homemade pappardelle with bolognese sauce",
+              "dish_name": "Homemade pappardelle with bolognese sauce",
               "quantity": 1
             },
             {
-              "product_name": "Piadina",
+              "dish_name": "Piadina",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             },
             {
-              "product_name": "Veggie salad",
+              "dish_name": "Veggie salad",
               "quantity": 1
             },
             {
-              "product_name": "Cold Cuts & Cheese Platter",
+              "dish_name": "Cold Cuts & Cheese Platter",
               "quantity": 1
             }
           ]
@@ -5431,27 +5435,27 @@
           "user_id": "customer_010",
           "dishes": [
             {
-              "product_name": "Black truffle",
+              "dish_name": "Black truffle",
               "quantity": 2
             },
             {
-              "product_name": "Salmon & cream",
+              "dish_name": "Salmon & cream",
               "quantity": 1
             },
             {
-              "product_name": "Sesame & nuts",
+              "dish_name": "Sesame & nuts",
               "quantity": 1
             },
             {
-              "product_name": "Italian Classic Set",
+              "dish_name": "Italian Classic Set",
               "quantity": 1
             },
             {
-              "product_name": "Orecchiette with Italian sausage, burrata cheese",
+              "dish_name": "Orecchiette with Italian sausage, burrata cheese",
               "quantity": 1
             },
             {
-              "product_name": "Annie's Special Set",
+              "dish_name": "Annie's Special Set",
               "quantity": 1
             }
           ]
@@ -5524,7 +5528,7 @@
               "quantity": 1
             },
             {
-              "dish_name": "Seafood Delight Set'",
+              "dish_name": "Seafood Delight Set",
               "quantity": 1
             }
           ]
@@ -6020,7 +6024,7 @@
               "quantity": 1
             },
             {
-              "dish_name": "Seafood Delight Set'",
+              "dish_name": "Seafood Delight Set",
               "quantity": 1
             },
             {

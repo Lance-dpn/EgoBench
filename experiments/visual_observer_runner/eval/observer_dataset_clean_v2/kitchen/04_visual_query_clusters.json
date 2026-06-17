@@ -1,0 +1,3796 @@
+{
+  "schema_version": "observer_dataset_clean_v2",
+  "scenario": "kitchen",
+  "status": "visual_problem_clusters_ready_gt_pending",
+  "generated_at_utc": "2026-06-06T10:15:09.734786+00:00",
+  "source_policy": {
+    "allowed_inputs": [
+      "scenarios/final/*.json instruction fields"
+    ],
+    "disallowed_inputs": [
+      "observer_problem_set_*",
+      "observer_dataset_rebuild_v1",
+      "old bootstrap files",
+      "eval_result",
+      "DB/tool data",
+      "scenario final key/value for extraction, clustering, or GT"
+    ]
+  },
+  "process_doc": "experiments/visual_observer_runner/eval/eval-process.md",
+  "cluster_count": 69,
+  "clusters": [
+    {
+      "problem_id": "kitchen_clean_v2_problem_0001",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "recipe scene: pot ingredients and vegetables on blue cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": "left",
+            "vertical": "bottom"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        46
+      ],
+      "source_problem_ids": [
+        "kitchen1_task046_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify the recipe that includes both the yellow vegetable located at the bottom left of the blue cutting board and the chunky ingredients cooking in the pot"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0002",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient boiling in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        31
+      ],
+      "source_problem_ids": [
+        "kitchen1_task031_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to check the chunky ingredient currently boiling in the pot"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0003",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient in boiling water in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "inside"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        41
+      ],
+      "source_problem_ids": [
+        "kitchen1_task041_visual_08_00"
+      ],
+      "source_instruction_snippets": [
+        "have the AI Service Agent check the chunk-shaped ingredient in the boiling water inside the pot"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0004",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient in boiling water in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        17
+      ],
+      "source_problem_ids": [
+        "kitchen1_task017_visual_08_00"
+      ],
+      "source_instruction_snippets": [
+        "have the AI Service Agent check the chunk ingredient in the boiling water in the pot"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0005",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: pot ingredients and vegetables on blue cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        5,
+        15,
+        19,
+        25,
+        37,
+        40
+      ],
+      "source_problem_ids": [
+        "kitchen1_task005_visual_01_00",
+        "kitchen1_task015_visual_01_00",
+        "kitchen1_task019_visual_01_00",
+        "kitchen1_task025_visual_01_00",
+        "kitchen1_task037_visual_01_00",
+        "kitchen1_task040_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which recipe corresponds to the dish composed of the chunky ingredients boiling in the pot and the three vegetables on the blue cutting board",
+        "ask the AI Service Agent to identify the recipe that corresponds to both the chunky ingredients currently cooking in the pot and the three vegetables on the blue cutting board, and determine which step of this recipe remains unfinished",
+        "ask the AI Service Agent to determine which recipe corresponds to the dish composed of the ingredients currently cooking in the pot and the three ingredients on the blue cutting board, and to identify which step of this recipe has not yet been completed",
+        "ask the AI Service Agent to identify which recipe corresponds to the dish composed of the chunked ingredients currently in boiling water in the pot and the three vegetables on the blue cutting board, and to determine which steps of this recipe have not yet been completed",
+        "ask the AI Service Agent to determine which recipe corresponds to the dish composed of the ingredients currently cooking in the pot and the three ingredients on the blue cutting board",
+        "ask the AI Service Agent to identify which recipe corresponds to the dish composed of the chunky ingredients boiling in the pot and the three vegetables on the blue cutting board"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0006",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pointing",
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        32
+      ],
+      "source_problem_ids": [
+        "kitchen1_task032_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify which recipe consists of the two ingredients on the baking tray, including roasted tomatoes and yellow powder, and indicate which step the current powder sprinkling is at"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0007",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pouring",
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        42
+      ],
+      "source_problem_ids": [
+        "kitchen1_task042_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI service agent to identify which recipe is composed of the yellow powdery staple food you are pouring onto the right half of the baking tray and the other ingredient on the tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0008",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "pouring",
+          "appearance": {
+            "color": null,
+            "content_hint": "powder on right side of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        10,
+        29
+      ],
+      "source_problem_ids": [
+        "kitchen1_task010_visual_01_00",
+        "kitchen1_task029_visual_08_00"
+      ],
+      "source_instruction_snippets": [
+        "have the AI Service Agent identify which staple or dry goods ingredient the powder is that you are pouring onto the right side of the baking tray",
+        "ask the AI Service Agent to check whether the staple powder you are pouring onto the right side of the baking tray is in stock in the storage cabinet"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0009",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "sprinkling",
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "powder on right side of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": "right_of"
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        26
+      ],
+      "source_problem_ids": [
+        "kitchen1_task026_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify the ingredient corresponding to the yellow staple powder you are sprinkling onto the right side of the baking tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0010",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "sprinkling",
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "powder on right side of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        36,
+        45
+      ],
+      "source_problem_ids": [
+        "kitchen1_task036_visual_01_00",
+        "kitchen1_task045_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify which ingredient the yellow powder is that you are sprinkling on the right half of the baking tray",
+        "ask the AI service agent to identify what ingredient the yellow staple powder you are sprinkling on the right side of the baking tray belongs to"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0011",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "sprinkling",
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        28
+      ],
+      "source_problem_ids": [
+        "kitchen1_task028_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which recipe corresponds to the two ingredients on the baking tray, and which step of this recipe involves sprinkling yellow powder"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0012",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "sprinkling",
+          "appearance": {
+            "color": null,
+            "content_hint": "powder on right side of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        1,
+        18
+      ],
+      "source_problem_ids": [
+        "kitchen1_task001_visual_01_00",
+        "kitchen1_task018_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify what ingredient the staple powder you are sprinkling on the right side of the baking tray belongs to",
+        "have the AI Service Agent identify the yellow powder you are sprinkling on the right side of the baking tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0013",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "sprinkling",
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        21
+      ],
+      "source_problem_ids": [
+        "kitchen1_task021_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which recipe corresponds to the dish composed of the two ingredients on the baking tray, and identify which step of the recipe corresponds to your action of sprinkling powder on the right half of the baking tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0014",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "green",
+            "content_hint": "ingredient at top left of cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "left",
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        3
+      ],
+      "source_problem_ids": [
+        "kitchen1_task003_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify what kind of ingredient the green ingredient at the top left of the blue cutting board is"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0015",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "green",
+            "content_hint": "ingredient on right side of cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        20,
+        30,
+        34
+      ],
+      "source_problem_ids": [
+        "kitchen1_task020_visual_01_00",
+        "kitchen1_task030_visual_01_00",
+        "kitchen1_task034_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify what ingredient the green vegetable on the right side of the blue cutting board is",
+        "have the AI Service Agent identify specifically what ingredient the green vegetable located on the right side of the blue cutting board is",
+        "ask the AI service agent to identify specifically what ingredient the green vegetable placed on the right side of the blue cutting board is"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0016",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "green",
+            "content_hint": "recipe corresponds to dish prepared with green vegetables located on right side of blue cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        38
+      ],
+      "source_problem_ids": [
+        "kitchen1_task038_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify which recipe corresponds to the dish prepared with the green vegetables located on the right side of the blue cutting board"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0017",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "red",
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        43
+      ],
+      "source_problem_ids": [
+        "kitchen1_task043_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify which recipe on the baking tray consists of roasted red ingredients on the left and yellow powder on the right"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0018",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "ingredient at bottom left of cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "left",
+            "vertical": "bottom"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        13
+      ],
+      "source_problem_ids": [
+        "kitchen1_task013_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify the specific ingredient of the yellow vegetable placed in the bottom-left corner of the blue cutting board"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0019",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "yellow",
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        6
+      ],
+      "source_problem_ids": [
+        "kitchen1_task006_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify which recipe consists of the two ingredients on the baking tray, namely roasted tomatoes and yellow powder"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0020",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "category potato being boiled in pot belongs to",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        14
+      ],
+      "source_problem_ids": [
+        "kitchen1_task014_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which specific category the potato being boiled in the pot belongs to"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0021",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient at bottom left of cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "left",
+            "vertical": "bottom"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        10,
+        23,
+        33,
+        39
+      ],
+      "source_problem_ids": [
+        "kitchen1_task010_visual_09_00",
+        "kitchen1_task023_visual_01_00",
+        "kitchen1_task033_visual_01_00",
+        "kitchen1_task039_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "the yellow ingredient at the bottom-left corner of the blue cutting board is in stock",
+        "ask the AI Service Agent to identify the specific type of the yellow ingredient located at the bottom-left corner of the blue cutting board",
+        "ask the AI service agent to identify the specific yellow ingredient placed in the bottom-left corner of the blue cutting board",
+        "ask the AI Service Agent to identify the specific type of the yellow ingredient located at the bottom left corner of the blue cutting board"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0022",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient at top left of cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "left",
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": "left_of"
+          },
+          "type": "relative_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__relative_region",
+      "source_task_ids": [
+        24,
+        43
+      ],
+      "source_problem_ids": [
+        "kitchen1_task024_visual_01_00",
+        "kitchen1_task043_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify the specific green ingredient located at the top-left of the blue cutting board",
+        "ask the AI Service Agent to inspect the green vegetable at the top-left of the blue cutting board"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0023",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient at top left of cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "left",
+            "vertical": "top"
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        4,
+        9,
+        19,
+        31,
+        44
+      ],
+      "source_problem_ids": [
+        "kitchen1_task004_visual_08_00",
+        "kitchen1_task009_visual_01_00",
+        "kitchen1_task019_visual_07_00",
+        "kitchen1_task031_visual_01_00",
+        "kitchen1_task044_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to check whether the green ingredient on the top left of the blue cutting board has expired",
+        "ask the AI service agent to identify the green ingredient located in the top-left corner of the blue cutting board",
+        "ask the AI Service Agent to check whether the green vegetable in the top-left corner of the blue cutting board has expired",
+        "ask the AI Service Agent to identify the specific type of the green ingredient located at the top left of the blue cutting board",
+        "ask the AI Service Agent to identify the specific type of green leafy ingredient located at the top-left corner of the blue cutting board"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0024",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient currently being boiled in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        27
+      ],
+      "source_problem_ids": [
+        "kitchen1_task027_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify the specific ingredient currently being boiled in the pot"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0025",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient on left side of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        4,
+        8,
+        36
+      ],
+      "source_problem_ids": [
+        "kitchen1_task004_visual_01_00",
+        "kitchen1_task008_visual_08_00",
+        "kitchen1_task036_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify the cooked ingredient placed on the left side of the baking tray",
+        "ask the AI Service Agent to check the baked ingredient on the left side of the baking tray",
+        "ask the AI Service Agent to check whether the ingredient placed on the left side of the baking tray has expired"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0026",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient on right side of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        38
+      ],
+      "source_problem_ids": [
+        "kitchen1_task038_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to check the powdered ingredient on the right side of the baking tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0027",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient on right side of cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "cutting_board",
+            "side": "right",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        27
+      ],
+      "source_problem_ids": [
+        "kitchen1_task027_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to check the green vegetables placed on the right side of the blue cutting board"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0028",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient that has already been baked and is on left half of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        18
+      ],
+      "source_problem_ids": [
+        "kitchen1_task018_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "have the AI Service Agent identify the ingredient that has already been baked and is placed on the left half of the baking tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0029",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient that has been roasted and on left half of baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        11
+      ],
+      "source_problem_ids": [
+        "kitchen1_task011_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI service agent to identify the specific ingredient that has been roasted and placed on the left half of the baking tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0030",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        13
+      ],
+      "source_problem_ids": [
+        "kitchen1_task013_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "the calorie count of this ingredient is below 50 kcal"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0031",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient's calories",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        20
+      ],
+      "source_problem_ids": [
+        "kitchen1_task020_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "this ingredient's calories are below 20, ask the AI Service Agent to find the recipes with an umami flavor that require the highest weight of meat among all recipes requiring this ingredient, and add them to your menu"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0032",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": "left",
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        22
+      ],
+      "source_problem_ids": [
+        "kitchen1_task022_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which recipe corresponds to the roasted ingredient placed on the left side of the baking tray, and which step of that recipe is currently being executed"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0033",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: ingredients on baking tray",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "tray",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        2,
+        9,
+        12,
+        17,
+        35
+      ],
+      "source_problem_ids": [
+        "kitchen1_task002_visual_01_00",
+        "kitchen1_task009_visual_07_00",
+        "kitchen1_task012_visual_01_00",
+        "kitchen1_task017_visual_01_00",
+        "kitchen1_task035_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which recipe corresponds to the two ingredients placed on the baking tray",
+        "ask the AI service agent to identify the recipe that consists of all the ingredients currently on the baking tray",
+        "ask the AI Service Agent to identify which recipe corresponds to the two ingredients on the baking tray and determine which step of this recipe has not yet been completed",
+        "ask the AI Service Agent to identify which recipe corresponds to the two ingredients currently on the baking tray",
+        "ask the AI service agent to determine which recipe corresponds to the dish composed of the two ingredients on the baking tray"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0034",
+      "scenario": "kitchen",
+      "video_id": "kitchen1.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: pot ingredients and vegetables on blue cutting board",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "kitchen1.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        7,
+        8,
+        16,
+        29
+      ],
+      "source_problem_ids": [
+        "kitchen1_task007_visual_01_00",
+        "kitchen1_task008_visual_01_00",
+        "kitchen1_task016_visual_01_00",
+        "kitchen1_task029_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify the common recipe for the potatoes in the pot and the three vegetables on the blue cutting board",
+        "ask the AI Service Agent to determine which recipe the dish composed of all three ingredients placed on the blue cutting board and the chunky ingredients simmering in the pot belongs to",
+        "ask the AI Service Agent to identify which recipe corresponds to the dish represented by all three ingredients on the blue cutting board and the ingredients in the pot",
+        "ask the AI Service Agent to identify which recipe the potatoes in the pot and the three vegetables on the blue cutting board jointly belong to, and determine which step of this recipe has not yet been completed"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0035",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cutting",
+          "appearance": {
+            "color": null,
+            "content_hint": "dish being prepared using visual scene of you cutting pork chops",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        10
+      ],
+      "source_problem_ids": [
+        "kitchen2_task010_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "You ask the AI service agent to identify the dish being prepared using the visual scene of you cutting pork chops, and to find the names of all ingredients used in this dish that belong to the seasoning category"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0036",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cutting",
+          "appearance": {
+            "color": null,
+            "content_hint": "dish you are cooking based on image of slicing fried pork cutlets into strips",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        1
+      ],
+      "source_problem_ids": [
+        "kitchen2_task001_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine what dish you are currently cooking based on the image of slicing fried pork cutlets into strips, and identify which ingredients belonging to the seasoning category were used in the two steps prior to the current step"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0037",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cutting",
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: slicing fried pork cutlet",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        3,
+        5,
+        13,
+        19,
+        20,
+        36,
+        40
+      ],
+      "source_problem_ids": [
+        "kitchen2_task003_visual_01_00",
+        "kitchen2_task005_visual_01_00",
+        "kitchen2_task013_visual_01_00",
+        "kitchen2_task019_visual_01_00",
+        "kitchen2_task020_visual_01_00",
+        "kitchen2_task036_visual_01_00",
+        "kitchen2_task040_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Instruct the AI Service Agent to identify the name of the recipe based on the action of cutting fried pork cutlet in the scene, and recall all tools and ingredients used in the second-to-last step of that recipe",
+        "You ask the AI Service Agent to identify which dish in the recipe database corresponds to the visual scene of you slicing fried pork cutlets into strips",
+        "Ask the AI Service Agent to identify which recipe corresponds to the visual scene of cutting pork chops in the kitchen",
+        "You instruct the AI Service Agent to identify which recipe is currently being cooked based on the scene of cutting fried pork chops",
+        "You ask the AI Service Agent to determine the exact name of the recipe based on the action of cutting a fried pork cutlet with a knife in the scene",
+        "You ask the AI Service Agent to identify which recipe the visual scene of cutting pork chops in the kitchen belongs to, and have it analyze how many of the ingredients for this dish come from the refrigerated layer",
+        "Ask the AI Service Agent to identify the recipe being cooked by recognizing the action of slicing fried pork cutlets from the"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0038",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "category ingredients at home",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        24
+      ],
+      "source_problem_ids": [
+        "kitchen2_task024_visual_07_00"
+      ],
+      "source_instruction_snippets": [
+        "After completing this step, ask the AI Service Agent to check all drink-category ingredients at home"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0039",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "dish are stored on countertop",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        5
+      ],
+      "source_problem_ids": [
+        "kitchen2_task005_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "any of the ingredients used in this dish are stored on the countertop, the AI Service Agent should find the recipe(s) among all recipes containing dairy allergens that require the least total weight of ingredients from the egg, milk, or soy product categories, and add them to your menu"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0040",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "dish is currently being prepared",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        32
+      ],
+      "source_problem_ids": [
+        "kitchen2_task032_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to observe the action of cutting pork chops in the kitchen, identify which dish is currently being prepared, and find the ingredient with the highest fat content in that recipe"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0041",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "dish requires ingredients on countertop",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        11
+      ],
+      "source_problem_ids": [
+        "kitchen2_task011_visual_04_00"
+      ],
+      "source_instruction_snippets": [
+        "step of this dish requires ingredients on the countertop"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0042",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient list for this dish includes any ingredients belonging to fruit category",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        9
+      ],
+      "source_problem_ids": [
+        "kitchen2_task009_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "the ingredient list for this dish includes any ingredients belonging to the fruit category"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0043",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "product ingredients required for this recipe",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        38
+      ],
+      "source_problem_ids": [
+        "kitchen2_task038_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Show the AI Service Agent the current action of cutting fried pork chops, and ask it to infer which recipe from the recipe database this is, and to extract all egg, dairy, and soy product ingredients required for this recipe"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0044",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe from recipe database this corresponds to",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        27
+      ],
+      "source_problem_ids": [
+        "kitchen2_task027_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "You show the AI Service Agent the current operation of cutting fried pork chops and ask it to infer which recipe from the recipe database this corresponds to"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0045",
+      "scenario": "kitchen",
+      "video_id": "deep_fried.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe is being prepared by analyzing the",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "deep_fried.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        22
+      ],
+      "source_problem_ids": [
+        "kitchen2_task022_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI service agent to identify which recipe is being prepared by analyzing the"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0046",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "green",
+            "content_hint": "dish cooking in pot is stir-fried chicken with green peppers, and you have transferred some ingredient from pot to plate",
+            "shape": "plate",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        32
+      ],
+      "source_problem_ids": [
+        "kitchen3_task032_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "The dish currently cooking in the pot is stir-fried chicken with green peppers, and you have transferred some ingredient from the pot to a plate"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0047",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "green",
+            "content_hint": "dish of green pepper stir-fried chicken in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        29
+      ],
+      "source_problem_ids": [
+        "kitchen3_task029_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "The screen shows a finished dish of green pepper stir-fried chicken in a pot, and you are picking one of the ingredients into a side plate"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0048",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": "green",
+            "content_hint": "dish of stir-fried green pepper with chicken in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        11
+      ],
+      "source_problem_ids": [
+        "kitchen3_task011_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "The screen shows a finished dish of stir-fried green pepper with chicken in the pot, and you are picking one of the ingredients onto the side plate"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0049",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe currently being cooked in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        36
+      ],
+      "source_problem_ids": [
+        "kitchen3_task036_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "query the nutritional characteristics of the recipe currently being cooked in the pot, and identify the current inventory quantity of the ingredient being picked out"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0050",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "cooking",
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe you are cooking based on contents of wok",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "wok",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        1
+      ],
+      "source_problem_ids": [
+        "kitchen3_task001_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which step of which recipe you are cooking based on the contents of the wok, and identify what the green ingredient being picked out is"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0051",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": "green",
+            "content_hint": "dish being cooked in pot is green pepper stir-fried chicken, and you have picked certain ingredient from pot onto plate",
+            "shape": "plate",
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        22
+      ],
+      "source_problem_ids": [
+        "kitchen3_task022_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "The dish being cooked in the pot is green pepper stir-fried chicken, and you have picked a certain ingredient from the pot onto a plate"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0052",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": "green",
+            "content_hint": "recipe and what green ingredient currently left in pot (not picked out) is",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        11
+      ],
+      "source_problem_ids": [
+        "kitchen3_task011_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "identify the name of this recipe and what the green ingredient currently left in the pot (not picked out) is"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0053",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "category of ingredient being picked out based on this visual information",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        6
+      ],
+      "source_problem_ids": [
+        "kitchen3_task006_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine the category of the ingredient being picked out based on this visual information"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0054",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient being picked out",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        31
+      ],
+      "source_problem_ids": [
+        "kitchen3_task031_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "identify the ingredient being picked out and determine whether, in the corresponding recipe, this ingredient is processed or added to the pot in the"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0055",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient is being picked out and what ingredients remain in wok",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "wok",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        2
+      ],
+      "source_problem_ids": [
+        "kitchen3_task002_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "Ask the AI Service Agent to identify what ingredient is being picked out and what ingredients remain in the wok"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0056",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient remaining in pot (that has not been picked out) and",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        18
+      ],
+      "source_problem_ids": [
+        "kitchen3_task018_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "identify the meat ingredient remaining in the pot (that has not been picked out) and check its current inventory status"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0057",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient remains in pot without being picked out",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "object_action_state"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__object_action_state",
+      "source_task_ids": [
+        5
+      ],
+      "source_problem_ids": [
+        "kitchen3_task005_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI service agent to identify what meat ingredient remains in the pot without being picked out"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0058",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": "picking",
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe dish you are cooking corresponds to and to identify ingredient being picked out",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        7
+      ],
+      "source_problem_ids": [
+        "kitchen3_task007_visual_02_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to determine which recipe the dish you are cooking corresponds to and to identify the ingredient being picked out"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0059",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "green",
+            "content_hint": "dish of green peppers and chicken in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        20,
+        35
+      ],
+      "source_problem_ids": [
+        "kitchen3_task020_visual_01_00",
+        "kitchen3_task035_visual_01_00"
+      ],
+      "source_instruction_snippets": [
+        "There is a stir-fried dish of green peppers and chicken in the pot, and you are picking out a specific ingredient from it to plate"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0060",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": "green",
+            "content_hint": "recipe in database corresponds to this based on green peppers and chicken in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        9
+      ],
+      "source_problem_ids": [
+        "kitchen3_task009_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "identify which recipe in the database corresponds to this based on the green peppers and chicken in the pot"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0061",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "category in database",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        4
+      ],
+      "source_problem_ids": [
+        "kitchen3_task004_visual_05_00"
+      ],
+      "source_instruction_snippets": [
+        "the picked-out ingredient defaults to the vegetable category in the database, ask the AI Service Agent to select the dish that uses the fewest types of ingredients from the recipe library with the nutritional feature \"low_fat\" and add it to your menu"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0062",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "category it belongs to",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        22
+      ],
+      "source_problem_ids": [
+        "kitchen3_task022_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "identify the picked-out ingredient and which ingredient category it belongs to"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0063",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "dish are stored in home",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        24
+      ],
+      "source_problem_ids": [
+        "kitchen3_task024_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "determine where most of the ingredients used in this dish are stored in the home"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0064",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient remaining in pot belongs to vegetable category",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        20
+      ],
+      "source_problem_ids": [
+        "kitchen3_task020_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "identify what the picked-out ingredient is, and whether the ingredient remaining in the pot belongs to the vegetable category"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0065",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "ingredient remaining in pot",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "static_region"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "ingredient_name",
+          "selection_unit": "ingredient"
+        }
+      },
+      "problem_type": "kitchen_workspace__ingredient_name__static_region",
+      "source_task_ids": [
+        23
+      ],
+      "source_problem_ids": [
+        "kitchen3_task023_visual_05_00"
+      ],
+      "source_instruction_snippets": [
+        "the current stock of the meat ingredient remaining in the pot is greater than zero"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0066",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: current green pepper chicken cooking",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "pot",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        23
+      ],
+      "source_problem_ids": [
+        "kitchen3_task023_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "determine the recipe name of this dish and identify what meat ingredient remains in the pot"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0067",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe scene: current green pepper chicken cooking",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        3,
+        13,
+        15,
+        16,
+        17,
+        34
+      ],
+      "source_problem_ids": [
+        "kitchen3_task003_visual_03_00",
+        "kitchen3_task013_visual_02_00",
+        "kitchen3_task015_visual_02_00",
+        "kitchen3_task016_visual_03_00",
+        "kitchen3_task017_visual_03_00",
+        "kitchen3_task034_visual_03_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to identify which recipe this dish belongs to and which step of the recipe you are currently at",
+        "Ask the AI Service Agent to identify which recipe this belongs to and what nutritional feature tags it possesses",
+        "ask the AI Service Agent to identify which recipe this is and determine at which step the picked-out ingredient is added to the pot according to the recipe",
+        "determine which step of the recipe your current action corresponds to and the total number of steps in the recipe",
+        "determine which step in the recipe your current operation corresponds to, and identify which storage location the picked-out ingredient belongs to",
+        "determine which step of the recipe your current action corresponds to"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0068",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe that uses greatest variety of vegetables from all recipes using pantry ingredients",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": "table",
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        21
+      ],
+      "source_problem_ids": [
+        "kitchen3_task021_visual_08_00"
+      ],
+      "source_instruction_snippets": [
+        "ask the AI Service Agent to select the recipe that uses the greatest variety of vegetables from all recipes using pantry ingredients and add it to your menu"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    },
+    {
+      "problem_id": "kitchen_clean_v2_problem_0069",
+      "scenario": "kitchen",
+      "video_id": "Green Pepper Chicken.mp4",
+      "visual_query_v1": {
+        "referent": {
+          "action": null,
+          "appearance": {
+            "color": null,
+            "content_hint": "recipe with most steps in current menu",
+            "shape": null,
+            "size": null,
+            "style": null
+          },
+          "ordinal": null,
+          "region": {
+            "container": null,
+            "side": null,
+            "vertical": null
+          },
+          "relation": {
+            "anchor": {},
+            "type": null
+          },
+          "type": "composite_scene"
+        },
+        "scenario": "kitchen",
+        "schema_version": "visual_query_v1",
+        "scope": {
+          "menu_label": null,
+          "time_hint": null,
+          "video_id": "Green Pepper Chicken.mp4"
+        },
+        "surface": "kitchen_workspace",
+        "target": {
+          "cardinality": "single",
+          "kind": "recipe_name",
+          "selection_unit": "recipe_scene"
+        }
+      },
+      "problem_type": "kitchen_workspace__recipe_name__composite_scene",
+      "source_task_ids": [
+        19
+      ],
+      "source_problem_ids": [
+        "kitchen3_task019_visual_09_00"
+      ],
+      "source_instruction_snippets": [
+        "find the recipe with the most steps in the current menu, and add all seasonings used in its"
+      ],
+      "dedupe_rationale": "Same scenario, video_id, surface, target, referent, and scope under visual_query_v1.",
+      "review_notes": []
+    }
+  ]
+}

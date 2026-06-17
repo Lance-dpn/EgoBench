@@ -1,0 +1,154 @@
+# GT Annotation Review
+
+This worklist is generated from clean v2 only. GT must be filled by inspecting video frames.
+
+## Summary
+
+- total_cases: 931
+- annotation_ready: 656
+- review_required: 157
+- exclude_suggested: 118
+- reason_counts: {'business_fact_leak_in_visual_hint': 106, 'underspecified_identity_without_visual_anchor': 83, 'unresolved_pronoun_reference': 55, 'incomplete_reference_tail': 41, 'generic_visual_reference': 12, 'db_or_textual_category_not_visual_region': 10, 'context_not_visual_referent': 10, 'content_hint_too_short': 6, 'source_clause_may_be_business_order_state': 3}
+
+## Videos
+- `Green Pepper Chicken.mp4`: total=24, ready=15, review=4, exclude_suggested=5, sheet=`None`
+- `afrikana_annie_1.mp4`: total=35, ready=25, review=7, exclude_suggested=3, sheet=`None`
+- `annie_butcher_1.mp4`: total=45, ready=37, review=8, exclude_suggested=0, sheet=`None`
+- `annie_meraki_1.mp4`: total=55, ready=42, review=12, exclude_suggested=1, sheet=`None`
+- `annie_pauhana_1.mp4`: total=36, ready=27, review=7, exclude_suggested=2, sheet=`None`
+- `deep_fried.mp4`: total=11, ready=4, review=4, exclude_suggested=3, sheet=`None`
+- `greek_annie_1.mp4`: total=72, ready=58, review=11, exclude_suggested=3, sheet=`None`
+- `kitchen1.mp4`: total=34, ready=30, review=3, exclude_suggested=1, sheet=`None`
+- `restaurant1.mp4`: total=83, ready=56, review=23, exclude_suggested=4, sheet=`None`
+- `restaurant2.mp4`: total=98, ready=72, review=15, exclude_suggested=11, sheet=`None`
+- `restaurant3.mp4`: total=137, ready=101, review=26, exclude_suggested=10, sheet=`None`
+- `restaurant4.mp4`: total=30, ready=6, review=12, exclude_suggested=12, sheet=`None`
+- `retail1.mp4`: total=31, ready=26, review=3, exclude_suggested=2, sheet=`None`
+- `retail2.mp4`: total=22, ready=10, review=3, exclude_suggested=9, sheet=`None`
+- `retail3.mp4`: total=22, ready=18, review=2, exclude_suggested=2, sheet=`None`
+- `retail4.mp4`: total=47, ready=41, review=1, exclude_suggested=5, sheet=`None`
+- `retail5.mp4`: total=43, ready=22, review=0, exclude_suggested=21, sheet=`None`
+- `retail7.mp4`: total=49, ready=25, review=6, exclude_suggested=18, sheet=`None`
+- `retail8.mp4`: total=22, ready=11, review=5, exclude_suggested=6, sheet=`None`
+- `retail9.mp4`: total=18, ready=18, review=0, exclude_suggested=0, sheet=`None`
+- `sunny_annie_1.mp4`: total=17, ready=12, review=5, exclude_suggested=0, sheet=`None`
+
+## Suggested Exclusions
+- `order_clean_v2_problem_0026` `afrikana_annie_1.mp4` reasons=['generic_visual_reference', 'incomplete_reference_tail', 'underspecified_identity_without_visual_anchor'] hint='dish does not'
+- `order_clean_v2_problem_0031` `afrikana_annie_1.mp4` reasons=['generic_visual_reference', 'business_fact_leak_in_visual_hint', 'underspecified_identity_without_visual_anchor'] hint='dishes you ordered'
+- `order_clean_v2_problem_0034` `afrikana_annie_1.mp4` reasons=['unresolved_pronoun_reference'] hint='section exactly in middle of middle fold that are marked [low ] and have [ ]'
+- `order_clean_v2_problem_0114` `annie_meraki_1.mp4` reasons=['content_hint_too_short', 'generic_visual_reference'] hint='category'
+- `order_clean_v2_problem_0163` `annie_pauhana_1.mp4` reasons=['generic_visual_reference', 'business_fact_leak_in_visual_hint', 'underspecified_identity_without_visual_anchor'] hint='dishes you ordered'
+- `order_clean_v2_problem_0164` `annie_pauhana_1.mp4` reasons=['incomplete_reference_tail'] hint='items with [high carb] label that'
+- `order_clean_v2_problem_0172` `greek_annie_1.mp4` reasons=['db_or_textual_category_not_visual_region'] hint='category as third dish you pointed at'
+- `order_clean_v2_problem_0183` `greek_annie_1.mp4` reasons=['unresolved_pronoun_reference'] hint='section with dark background and white font for item that has [mouthfeel of "buttery"] and [ content]'
+- `order_clean_v2_problem_0225` `greek_annie_1.mp4` reasons=['incomplete_reference_tail'] hint='last dish in category of the'
+- `retail_clean_v2_problem_0004` `retail1.mp4` reasons=['incomplete_reference_tail'] hint='focus on wine bottle with dark label on middle shelf that you are pointing at with your left hand'
+- `retail_clean_v2_problem_0030` `retail1.mp4` reasons=['incomplete_reference_tail', 'underspecified_identity_without_visual_anchor'] hint='wine has "sour" taste, and'
+- `retail_clean_v2_problem_0032` `retail2.mp4` reasons=['incomplete_reference_tail'] hint='focus on bottle with gold cap in your hand'
+- `retail_clean_v2_problem_0033` `retail2.mp4` reasons=['unresolved_pronoun_reference'] hint='focus on bottle of wine from high shelf that you are holding'
+- `retail_clean_v2_problem_0034` `retail2.mp4` reasons=['incomplete_reference_tail'] hint='regarding yellowish bottle of wine you are holding in your hand'
+- `retail_clean_v2_problem_0036` `retail2.mp4` reasons=['context_not_visual_referent'] hint='wine enthusiast (user id: grace_liu_999) who has just picked up two bottles of wine'
+- `retail_clean_v2_problem_0043` `retail2.mp4` reasons=['incomplete_reference_tail'] hint='bottle of third wine to right of wine in your left hand and one bottle of third wine to left of wine in your right hand'
+- `retail_clean_v2_problem_0048` `retail2.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wine enthusiast (user id: grace_liu_999) who has just selected two wines'
+- `retail_clean_v2_problem_0049` `retail2.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wine enthusiast who prefers italian wines (user id: david_brown_777)'
+- `retail_clean_v2_problem_0050` `retail2.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wine suitable for pairing with desserts'
+- `retail_clean_v2_problem_0053` `retail2.mp4` reasons=['generic_visual_reference', 'incomplete_reference_tail', 'underspecified_identity_without_visual_anchor', 'unresolved_pronoun_reference'] hint='wines that'
+- `retail_clean_v2_problem_0057` `retail3.mp4` reasons=['incomplete_reference_tail'] hint='bottle of wine with gold foil seal in your hand'
+- `retail_clean_v2_problem_0075` `retail3.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wines (user id: charlie_brown_789)'
+- `retail_clean_v2_problem_0082` `retail4.mp4` reasons=['incomplete_reference_tail'] hint='wine with white label among wines you are pointing at and bottle to right of the'
+- `retail_clean_v2_problem_0116` `retail4.mp4` reasons=['incomplete_reference_tail'] hint='bottle to right of the'
+- `retail_clean_v2_problem_0118` `retail4.mp4` reasons=['incomplete_reference_tail'] hint='category and of bottle to right of the'
+- `retail_clean_v2_problem_0120` `retail4.mp4` reasons=['context_not_visual_referent'] hint='wine lover (user id: emma_brown_123)'
+- `retail_clean_v2_problem_0121` `retail4.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wine novice (user id: charlie_brown_789)'
+- `retail_clean_v2_problem_0123` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine you picked up and wine with copper capsule on left of the'
+- `retail_clean_v2_problem_0126` `retail5.mp4` reasons=['unresolved_pronoun_reference'] hint='wine you picked up and wine with green liquid that was picked up'
+- `retail_clean_v2_problem_0130` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine you picked up and dark wine with white label above the'
+- `retail_clean_v2_problem_0131` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine you picked up and white-label dark-bodied wine above the'
+- `retail_clean_v2_problem_0133` `retail5.mp4` reasons=['unresolved_pronoun_reference'] hint='bottle that was picked up'
+- `retail_clean_v2_problem_0139` `retail5.mp4` reasons=['unresolved_pronoun_reference'] hint='bottle of wine put back and bottle of dark-bodied wine above it'
+- `retail_clean_v2_problem_0141` `retail5.mp4` reasons=['unresolved_pronoun_reference'] hint='second bottle of wine that was put back'
+- `retail_clean_v2_problem_0144` `retail5.mp4` reasons=['unresolved_pronoun_reference'] hint='second wine that was put back'
+- `retail_clean_v2_problem_0145` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='second wine you put back is from spain and'
+- `retail_clean_v2_problem_0148` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='bottle with copper-colored capsule on left of the'
+- `retail_clean_v2_problem_0149` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine with copper cap on left of the'
+- `retail_clean_v2_problem_0150` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine with copper-colored cap on left of the'
+- `retail_clean_v2_problem_0151` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine with dark body above the'
+- `retail_clean_v2_problem_0152` `retail5.mp4` reasons=['unresolved_pronoun_reference'] hint='wine with dark body directly above it have "bitter" taste'
+- `retail_clean_v2_problem_0157` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine with white label and dark body above the'
+- `retail_clean_v2_problem_0158` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='bottle above the'
+- `retail_clean_v2_problem_0159` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='bottle to left of the'
+- `retail_clean_v2_problem_0162` `retail5.mp4` reasons=['incomplete_reference_tail'] hint='wine above the'
+- `retail_clean_v2_problem_0163` `retail5.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wine collector (user id: olivia_white_1010)'
+- `retail_clean_v2_problem_0164` `retail5.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wine critic (user id: olivia_white_1010)'
+- `retail_clean_v2_problem_0165` `retail5.mp4` reasons=['context_not_visual_referent', 'underspecified_identity_without_visual_anchor'] hint='wine purchaser (user id: sarah_green_888)'
+- `retail_clean_v2_problem_0166` `retail7.mp4` reasons=['incomplete_reference_tail'] hint='box (orange cookies) and'
+- `retail_clean_v2_problem_0177` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of red festive plaid cookies that was'
+- `retail_clean_v2_problem_0190` `retail7.mp4` reasons=['incomplete_reference_tail', 'unresolved_pronoun_reference'] hint='box of cookies that was picked up and'
+- `retail_clean_v2_problem_0191` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of brown cookies directly below cookies that were picked up and put down for second time'
+- `retail_clean_v2_problem_0192` `retail7.mp4` reasons=['incomplete_reference_tail'] hint='box of purple cookies to right of red festive plaid cookies and box of cookies that was picked up and put down for the'
+- `retail_clean_v2_problem_0193` `retail7.mp4` reasons=['incomplete_reference_tail', 'unresolved_pronoun_reference'] hint='box of red cookies that was picked up and put down for the'
+- `retail_clean_v2_problem_0194` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of red cookies that was picked up and put down'
+- `retail_clean_v2_problem_0195` `retail7.mp4` reasons=['incomplete_reference_tail', 'unresolved_pronoun_reference'] hint='box of red festive plaid cookies and orange cookies with square wavy edge patterns that were picked up and put down for the'
+- `retail_clean_v2_problem_0196` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of red plaid cookies and orange cookies featuring square wavy-edge cookie pattern located directly beneath cookies that were picked up and put down for second time'
+- `retail_clean_v2_problem_0197` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of red plaid cookies that was picked up and put down'
+- `retail_clean_v2_problem_0198` `retail7.mp4` reasons=['incomplete_reference_tail', 'unresolved_pronoun_reference'] hint='box of red plaid cookies that were picked up and put down for the'
+- `retail_clean_v2_problem_0200` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of cookies that was picked up and put down contains gluten'
+- `retail_clean_v2_problem_0201` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of cookies that was picked up and put down for second time'
+- `retail_clean_v2_problem_0202` `retail7.mp4` reasons=['incomplete_reference_tail', 'unresolved_pronoun_reference'] hint='box of cookies that was picked up and put down for the'
+- `retail_clean_v2_problem_0203` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='box of cookies that was picked up and put down'
+- `retail_clean_v2_problem_0206` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='cookies with rooster logo that were picked up and put down for second time'
+- `retail_clean_v2_problem_0207` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='cookies with rooster logo that were picked up and put down second'
+- `retail_clean_v2_problem_0208` `retail7.mp4` reasons=['unresolved_pronoun_reference'] hint='cookies with wavy edge pattern that was picked up and put down second'
+- `retail_clean_v2_problem_0215` `retail8.mp4` reasons=['unresolved_pronoun_reference'] hint='box of blue cookies in middle directly below them'
+- `retail_clean_v2_problem_0216` `retail8.mp4` reasons=['unresolved_pronoun_reference'] hint='cookies with yellow lemon pattern on third shelf is lower than that of blue package'
+- `retail_clean_v2_problem_0228` `retail8.mp4` reasons=['unresolved_pronoun_reference'] hint='cookies with yellow lemon pattern on third shelf is lower than that of orange box'
+- `retail_clean_v2_problem_0231` `retail8.mp4` reasons=['business_fact_leak_in_visual_hint', 'unresolved_pronoun_reference'] hint='product database for other products that share same country of origin as that dark brown box'
+- `retail_clean_v2_problem_0233` `retail8.mp4` reasons=['unresolved_pronoun_reference'] hint='box of purple biscuits directly below them'
+- `retail_clean_v2_problem_0236` `retail8.mp4` reasons=['content_hint_too_short', 'underspecified_identity_without_visual_anchor'] hint="box's"
+- `restaurant_clean_v2_problem_0043` `restaurant1.mp4` reasons=['underspecified_identity_without_visual_anchor', 'unresolved_pronoun_reference'] hint='dish among those that contains fresh fruit ingredients'
+- `restaurant_clean_v2_problem_0051` `restaurant1.mp4` reasons=['incomplete_reference_tail', 'underspecified_identity_without_visual_anchor'] hint='dish has savory flavor'
+- `restaurant_clean_v2_problem_0053` `restaurant1.mp4` reasons=['underspecified_identity_without_visual_anchor', 'unresolved_pronoun_reference'] hint='dish that contains fresh fruit ingredients'
+- `restaurant_clean_v2_problem_0065` `restaurant1.mp4` reasons=['unresolved_pronoun_reference'] hint='section directly below category this dish belongs to'
+- `restaurant_clean_v2_problem_0108` `restaurant2.mp4` reasons=['unresolved_pronoun_reference'] hint='section with dark background that are smoked/umami and have'
+- `restaurant_clean_v2_problem_0142` `restaurant2.mp4` reasons=['incomplete_reference_tail', 'underspecified_identity_without_visual_anchor'] hint='dish with smoked flavor'
+- `restaurant_clean_v2_problem_0143` `restaurant2.mp4` reasons=['content_hint_too_short', 'underspecified_identity_without_visual_anchor'] hint='dish(es)'
+- `restaurant_clean_v2_problem_0144` `restaurant2.mp4` reasons=['business_fact_leak_in_visual_hint', 'unresolved_pronoun_reference'] hint='dishes containing egg allergens in that section'
+- `restaurant_clean_v2_problem_0145` `restaurant2.mp4` reasons=['unresolved_pronoun_reference'] hint='dishes in this category'
+- `restaurant_clean_v2_problem_0146` `restaurant2.mp4` reasons=['unresolved_pronoun_reference'] hint='dishes in this section'
+- `restaurant_clean_v2_problem_0148` `restaurant2.mp4` reasons=['business_fact_leak_in_visual_hint', 'unresolved_pronoun_reference'] hint='dishes without discounts in this section'
+- `restaurant_clean_v2_problem_0151` `restaurant2.mp4` reasons=['unresolved_pronoun_reference'] hint='items in this section'
+- `restaurant_clean_v2_problem_0163` `restaurant2.mp4` reasons=['unresolved_pronoun_reference'] hint='section in lower-middle part of middle fold that has title with small hand illustration'
+- `restaurant_clean_v2_problem_0166` `restaurant2.mp4` reasons=['unresolved_pronoun_reference'] hint='section in middle-lower part of middle foldout that has title with small hand illustration'
+- `restaurant_clean_v2_problem_0172` `restaurant2.mp4` reasons=['unresolved_pronoun_reference'] hint='section of middle fold that is low- and has carbohydrate content'
+- `restaurant_clean_v2_problem_0192` `restaurant3.mp4` reasons=['incomplete_reference_tail'] hint='last dish you pointed at has butter flavor'
+- `restaurant_clean_v2_problem_0224` `restaurant3.mp4` reasons=['incomplete_reference_tail'] hint='box below left foldout and have tapped two food items in succession with your hand'
+- `restaurant_clean_v2_problem_0244` `restaurant3.mp4` reasons=['unresolved_pronoun_reference'] hint='category in middle-lower section of center panel that has fresh flavor and content to replace it'
+- `restaurant_clean_v2_problem_0265` `restaurant3.mp4` reasons=['content_hint_too_short', 'generic_visual_reference'] hint='category'
+- `restaurant_clean_v2_problem_0267` `restaurant3.mp4` reasons=['incomplete_reference_tail', 'underspecified_identity_without_visual_anchor'] hint='dish has rich flavor'
+- `restaurant_clean_v2_problem_0272` `restaurant3.mp4` reasons=['business_fact_leak_in_visual_hint', 'unresolved_pronoun_reference'] hint='dishes containing fish allergens in this section'
+- `restaurant_clean_v2_problem_0274` `restaurant3.mp4` reasons=['incomplete_reference_tail', 'underspecified_identity_without_visual_anchor'] hint='dishes in succession with your hand'
+- `restaurant_clean_v2_problem_0280` `restaurant3.mp4` reasons=['content_hint_too_short'] hint='last dish'
+- `restaurant_clean_v2_problem_0314` `restaurant3.mp4` reasons=['unresolved_pronoun_reference'] hint='section that features high calcium and has content'
+- `restaurant_clean_v2_problem_0315` `restaurant3.mp4` reasons=['unresolved_pronoun_reference'] hint='section that has rich flavor and is most expensive'
+- `restaurant_clean_v2_problem_0319` `restaurant4.mp4` reasons=['db_or_textual_category_not_visual_region'] hint='category as panini for items'
+- `restaurant_clean_v2_problem_0320` `restaurant4.mp4` reasons=['db_or_textual_category_not_visual_region'] hint='category as smoked salmon'
+- `restaurant_clean_v2_problem_0324` `restaurant4.mp4` reasons=['business_fact_leak_in_visual_hint', 'db_or_textual_category_not_visual_region'] hint='category for [gluten-free] item with [largest ]'
+- `restaurant_clean_v2_problem_0325` `restaurant4.mp4` reasons=['generic_visual_reference', 'db_or_textual_category_not_visual_region'] hint='category for dishes'
+- `restaurant_clean_v2_problem_0326` `restaurant4.mp4` reasons=['unresolved_pronoun_reference', 'db_or_textual_category_not_visual_region'] hint='category for item that is mild'
+- `restaurant_clean_v2_problem_0327` `restaurant4.mp4` reasons=['db_or_textual_category_not_visual_region'] hint='category for item with [spicy flavor] and [ ]'
+- `restaurant_clean_v2_problem_0328` `restaurant4.mp4` reasons=['db_or_textual_category_not_visual_region'] hint='category for item with "sweet" flavor and [ ]'
+- `restaurant_clean_v2_problem_0329` `restaurant4.mp4` reasons=['generic_visual_reference', 'db_or_textual_category_not_visual_region'] hint='category for item'
+- `restaurant_clean_v2_problem_0330` `restaurant4.mp4` reasons=['generic_visual_reference', 'db_or_textual_category_not_visual_region'] hint='category for items'
+- `restaurant_clean_v2_problem_0332` `restaurant4.mp4` reasons=['content_hint_too_short', 'generic_visual_reference'] hint='category'
+- `restaurant_clean_v2_problem_0335` `restaurant4.mp4` reasons=['incomplete_reference_tail', 'underspecified_identity_without_visual_anchor'] hint='dish contains smoked flavor'
+- `restaurant_clean_v2_problem_0339` `restaurant4.mp4` reasons=['generic_visual_reference', 'underspecified_identity_without_visual_anchor', 'unresolved_pronoun_reference'] hint='dish with them'
+- `kitchen_clean_v2_problem_0030` `kitchen1.mp4` reasons=['generic_visual_reference', 'underspecified_identity_without_visual_anchor'] hint='ingredient'
+- `kitchen_clean_v2_problem_0042` `deep_fried.mp4` reasons=['underspecified_identity_without_visual_anchor', 'unresolved_pronoun_reference'] hint='ingredient list for this dish includes any ingredients belonging to fruit category'
+- `kitchen_clean_v2_problem_0043` `deep_fried.mp4` reasons=['unresolved_pronoun_reference'] hint='product ingredients required for this recipe'
+- `kitchen_clean_v2_problem_0044` `deep_fried.mp4` reasons=['unresolved_pronoun_reference'] hint='recipe from recipe database this corresponds to'
+- `kitchen_clean_v2_problem_0052` `Green Pepper Chicken.mp4` reasons=['incomplete_reference_tail'] hint='recipe and what green ingredient currently left in pot (not picked out) is'
+- `kitchen_clean_v2_problem_0053` `Green Pepper Chicken.mp4` reasons=['unresolved_pronoun_reference'] hint='category of ingredient being picked out based on this visual information'
+- `kitchen_clean_v2_problem_0056` `Green Pepper Chicken.mp4` reasons=['incomplete_reference_tail'] hint='ingredient remaining in pot (that has not been picked out) and'
+- `kitchen_clean_v2_problem_0062` `Green Pepper Chicken.mp4` reasons=['underspecified_identity_without_visual_anchor', 'unresolved_pronoun_reference'] hint='category it belongs to'
+- `kitchen_clean_v2_problem_0068` `Green Pepper Chicken.mp4` reasons=['unresolved_pronoun_reference'] hint='recipe that uses greatest variety of vegetables from all recipes using pantry ingredients'
