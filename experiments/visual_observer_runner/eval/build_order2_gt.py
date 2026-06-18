@@ -435,8 +435,18 @@ def build_task(task_id: int) -> Builder | None:
             b.remove_non_set_by_metric("fat_g", True, "calories > 600")
         b.compute(["tax", "nutrition"])
     elif task_id == 12:
-        b.add(metric_max(GREEK, lambda x: dish(GREEK, x)["category"].lower() == "desserts", "sugar_g"), reason="children enjoy desserts; choose sweet dessert")
-        b.compute(["payment", "nutrition"])
+        anchor = VISUAL["grilled vegetable skewer on wooden cutting board"]
+        if has_taste(GREEK, anchor, "umami"):
+            b.add(metric_min(GREEK, lambda x: has_tag(GREEK, x, "high_protein"), "sodium_mg"), 2, "grilled fish is umami; high-protein lowest sodium")
+        else:
+            b.add(metric_max(GREEK, lambda x: has_taste(GREEK, x, "sweet"), "calories_kcal"), reason="fallback sweet highest calories")
+        tax_included = sum(
+            dish(GREEK, item)["price"] * (1 + dish(GREEK, item)["tax_rate"]) * qty
+            for item, qty in b.cart.items()
+        )
+        if tax_included > 200:
+            b.remove_non_set_by_price(True, "tax-included total > 200")
+        b.compute(["nutrition"])
     elif task_id == 13:
         b.add([VISUAL["right list second item on fifth page"]], 1, "family requires pasta/noodles with cephalopod")
         b.compute(["payment", "nutrition"])

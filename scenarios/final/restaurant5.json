@@ -7,6 +7,10 @@
     "value": [
       "H"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 1,
     "ground_truth": [
@@ -47,6 +51,10 @@
     "key": "dish_name",
     "value": [
       "F"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 2,
@@ -89,6 +97,10 @@
     "value": [
       "U"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "F"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 3,
     "ground_truth": [
@@ -125,6 +137,10 @@
     "key": "dish_name",
     "value": [
       "T"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 4,
@@ -167,6 +183,10 @@
     "value": [
       "E"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 5,
     "ground_truth": [
@@ -207,6 +227,10 @@
     "key": "dish_name",
     "value": [
       "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 6,
@@ -260,6 +284,10 @@
     "key": "dish_name",
     "value": [
       "T"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "F"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 7,
@@ -374,6 +402,10 @@
     "value": [
       "E"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 8,
     "ground_truth": [
@@ -414,6 +446,10 @@
     "key": "dish_name",
     "value": [
       "F"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "U"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 9,
@@ -468,6 +504,10 @@
     "value": [
       "R"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 10,
     "ground_truth": [
@@ -509,6 +549,10 @@
     "value": [
       "H"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 11,
     "ground_truth": [
@@ -529,6 +573,10 @@
     "key": "dish_name",
     "value": [
       "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 12,
@@ -586,6 +634,10 @@
     "key": "dish_name",
     "value": [
       "T"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "F"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 13,
@@ -688,6 +740,10 @@
     "value": [
       "R"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 14,
     "ground_truth": [
@@ -724,6 +780,10 @@
     "key": "dish_name",
     "value": [
       "F"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 15,
@@ -766,6 +826,10 @@
     "value": [
       "H"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 16,
     "ground_truth": [
@@ -807,6 +871,10 @@
     "value": [
       "F"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 17,
     "ground_truth": [
@@ -847,6 +915,10 @@
     "key": "dish_name",
     "value": [
       "E"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 18,
@@ -925,6 +997,10 @@
     "value": [
       "T"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "U"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 19,
     "ground_truth": [
@@ -945,6 +1021,10 @@
     "key": "dish_name",
     "value": [
       "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 20,
@@ -999,6 +1079,10 @@
     "value": [
       "T"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 21,
     "ground_truth": [
@@ -1051,6 +1135,10 @@
     "key": "dish_name",
     "value": [
       "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 22,
@@ -1213,6 +1301,10 @@
     "value": [
       "F"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 23,
     "ground_truth": [
@@ -1254,6 +1346,10 @@
     "value": [
       "H"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "U"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 24,
     "ground_truth": [
@@ -1294,6 +1390,10 @@
     "key": "dish_name",
     "value": [
       "E"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "F"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 25,
@@ -1340,6 +1440,10 @@
     "value": [
       "R"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "F"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 26,
     "ground_truth": [
@@ -1380,6 +1484,10 @@
     "key": "dish_name",
     "value": [
       "E"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 27,
@@ -1442,6 +1550,10 @@
     "value": [
       "T"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "U"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 28,
     "ground_truth": [
@@ -1503,6 +1615,10 @@
     "value": [
       "U"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 29,
     "ground_truth": [
@@ -1556,6 +1672,10 @@
     "value": [
       "F"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 30,
     "ground_truth": [
@@ -1605,6 +1725,10 @@
     "value": [
       "E"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "F"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 31,
     "ground_truth": [
@@ -1653,6 +1777,10 @@
     "key": "dish_name",
     "value": [
       "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 32,
@@ -1707,6 +1835,10 @@
     "value": [
       "F"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 33,
     "ground_truth": [
@@ -1759,6 +1891,10 @@
     "key": "dish_name",
     "value": [
       "R"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 34,
@@ -1813,6 +1949,10 @@
     "value": [
       "T"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 35,
     "ground_truth": [
@@ -1852,6 +1992,10 @@
     "image_path": "restaurant5.mp4",
     "key": "dish_name",
     "value": [
+      "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
       "U"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
@@ -1907,6 +2051,10 @@
     "value": [
       "H"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 37,
     "ground_truth": [
@@ -1959,6 +2107,10 @@
     "key": "dish_name",
     "value": [
       "F"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 38,
@@ -2024,6 +2176,10 @@
     "key": "dish_name",
     "value": [
       "T"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 39,
@@ -2102,6 +2258,10 @@
     "value": [
       "R"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 40,
     "ground_truth": [
@@ -2142,6 +2302,10 @@
     "key": "dish_name",
     "value": [
       "E"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 41,
@@ -2228,6 +2392,10 @@
     "value": [
       "F"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "E"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 42,
     "ground_truth": [
@@ -2268,6 +2436,10 @@
     "key": "dish_name",
     "value": [
       "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 43,
@@ -2370,6 +2542,10 @@
     "value": [
       "F"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "F"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 44,
     "ground_truth": [
@@ -2447,6 +2623,10 @@
     "value": [
       "U"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "U"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 45,
     "ground_truth": [
@@ -2487,6 +2667,10 @@
     "key": "dish_name",
     "value": [
       "U"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 46,
@@ -2541,6 +2725,10 @@
     "value": [
       "E"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 47,
     "ground_truth": [
@@ -2593,6 +2781,10 @@
     "key": "dish_name",
     "value": [
       "F"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "T"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 48,
@@ -2663,6 +2855,10 @@
     "value": [
       "E"
     ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "H"
+    ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 49,
     "ground_truth": [
@@ -2715,6 +2911,10 @@
     "key": "dish_name",
     "value": [
       "T"
+    ],
+    "secondary_key": "dish_name",
+    "secondary_value": [
+      "R"
     ],
     "image_description": "You stand outside a café, facing a menu board. To the left, six drinks are arranged in two rows: the top row, from left to right, features a drink with a cinnamon stick, a drink with a rosemary sprig, and a glass of orange liquid; the bottom row, from left to right, features a tea with a biscuit on top, a drink in a ceramic cup with apple pulp, and a glass of alcohol with black foam on top. To the right, the menu board neatly lists coffee, wine, and tea, with names and prices clearly visible.",
     "task_id": 50,

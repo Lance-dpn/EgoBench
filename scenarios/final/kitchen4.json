@@ -7,6 +7,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 1,
     "ground_truth": [
@@ -40,6 +42,8 @@
     "value": [
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 2,
     "ground_truth": [
@@ -91,6 +95,8 @@
     "value": [
       "Garlic Chives"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 3,
     "ground_truth": [
@@ -144,6 +150,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 4,
     "ground_truth": [
@@ -280,6 +288,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 5,
     "ground_truth": [
@@ -312,6 +322,8 @@
     "value": [
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 6,
     "ground_truth": [
@@ -386,6 +398,8 @@
       "Garlic Chives",
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 7,
     "ground_truth": [
@@ -437,6 +451,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 8,
     "ground_truth": [
@@ -492,6 +508,10 @@
     "key": "recipe_name",
     "value": [
       "Pork & Chive Dumplings"
+    ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 9,
@@ -637,6 +657,8 @@
       "Garlic Chives",
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 10,
     "ground_truth": [
@@ -677,6 +699,8 @@
     "value": [
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 11,
     "ground_truth": [
@@ -781,6 +805,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 12,
     "ground_truth": [
@@ -819,6 +845,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 13,
     "ground_truth": [
@@ -888,6 +916,8 @@
       "Pork",
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 14,
     "ground_truth": [
@@ -936,6 +966,8 @@
     "value": [
       "Garlic Chives"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 15,
     "ground_truth": [
@@ -988,6 +1020,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 16,
     "ground_truth": [
@@ -1041,6 +1075,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 17,
     "ground_truth": [
@@ -1111,6 +1147,8 @@
     "value": [
       "Garlic Chives"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 18,
     "ground_truth": [
@@ -1159,6 +1197,8 @@
     "value": [
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 19,
     "ground_truth": [
@@ -1211,6 +1251,10 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
+    ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 20,
     "ground_truth": [
@@ -1251,6 +1295,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 21,
     "ground_truth": [
@@ -1323,6 +1369,8 @@
     "value": [
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 22,
     "ground_truth": [
@@ -1398,6 +1446,8 @@
     "value": [
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 23,
     "ground_truth": [
@@ -1437,6 +1487,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 24,
     "ground_truth": [
@@ -1477,6 +1529,8 @@
       "Garlic Chives",
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 25,
     "ground_truth": [
@@ -1533,6 +1587,10 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
+    ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 26,
     "ground_truth": [
@@ -1580,6 +1638,10 @@
     "key": "ingredient_name",
     "value": [
       "Garlic Chives"
+    ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [
+      "Pork & Chive Dumplings"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 27,
@@ -1633,6 +1695,10 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
+    ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 28,
     "ground_truth": [
@@ -1681,6 +1747,10 @@
     "key": "recipe_name",
     "value": [
       "Pork & Chive Dumplings"
+    ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 29,
@@ -1738,6 +1808,8 @@
     "value": [
       "Garlic Chives"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 30,
     "ground_truth": [
@@ -1815,6 +1887,10 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
+    ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 31,
     "ground_truth": [
@@ -1876,6 +1952,8 @@
     "value": [
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 32,
     "ground_truth": [
@@ -1972,6 +2050,8 @@
       "Garlic Chives",
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 33,
     "ground_truth": [
@@ -2018,6 +2098,8 @@
     "value": [
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 34,
     "ground_truth": [
@@ -2088,6 +2170,8 @@
     "value": [
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 35,
     "ground_truth": [
@@ -2155,6 +2239,10 @@
     "key": "recipe_name",
     "value": [
       "Pork & Chive Dumplings"
+    ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 36,
@@ -2270,6 +2358,8 @@
     "value": [
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 37,
     "ground_truth": [
@@ -2314,6 +2404,8 @@
     "value": [
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 38,
     "ground_truth": [
@@ -2380,6 +2472,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 39,
     "ground_truth": [
@@ -2445,6 +2539,10 @@
     "key": "recipe_name",
     "value": [
       "Pork & Chive Dumplings"
+    ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 40,
@@ -2515,6 +2613,8 @@
     "value": [
       "Garlic Chives"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 41,
     "ground_truth": [
@@ -2562,6 +2662,10 @@
     "key": "recipe_name",
     "value": [
       "Pork & Chive Dumplings"
+    ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 42,
@@ -2628,6 +2732,10 @@
     "key": "recipe_name",
     "value": [
       "Pork & Chive Dumplings"
+    ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 43,
@@ -2696,6 +2804,8 @@
       "Garlic Chives",
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 44,
     "ground_truth": [
@@ -2741,6 +2851,8 @@
     "value": [
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 45,
     "ground_truth": [
@@ -2820,6 +2932,8 @@
       "Garlic Chives",
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 46,
     "ground_truth": [
@@ -2882,6 +2996,8 @@
     "value": [
       "Pork & Chive Dumplings"
     ],
+    "secondary_key": "recipe_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 47,
     "ground_truth": [
@@ -2974,6 +3090,8 @@
       "Garlic Chives",
       "Pork"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 48,
     "ground_truth": [
@@ -3046,6 +3164,10 @@
     "key": "recipe_name",
     "value": [
       "Pork & Chive Dumplings"
+    ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [
+      "Pork"
     ],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 49,
@@ -3141,6 +3263,8 @@
     "value": [
       "Flour"
     ],
+    "secondary_key": "ingredient_name",
+    "secondary_value": [],
     "image_description": "You are making a dish and are currently wrapping dumplings.",
     "task_id": 50,
     "ground_truth": [

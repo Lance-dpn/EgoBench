@@ -94,6 +94,69 @@ def secondary_values_from_sequence(sequence: list[str], primary_values: list[str
     return sequence[idx : idx + 1]
 
 
+def secondary_anchor_from_typed_sequence(
+    sequence: list[tuple[str, list[str]]],
+    primary_key: str,
+    primary_values: list[str],
+) -> tuple[str, list[str]] | tuple[None, list[str]]:
+    primary_remaining = [value.lower() for value in primary_values]
+    idx = 0
+    for key, values in sequence:
+        lowered_values = [value.lower() for value in values]
+        if key != primary_key:
+            idx += 1
+            continue
+
+        if lowered_values == [v.lower() for v in primary_values]:
+            idx += 1
+            break
+
+        if all(value.lower() in set(lowered_values) for value in primary_values):
+            idx += 1
+            break
+
+        if primary_remaining and primary_remaining[0] in set(lowered_values):
+            primary_remaining.pop(0)
+            idx += 1
+            if not primary_remaining:
+                break
+            continue
+
+        idx += 1
+    else:
+        idx = 0
+
+    if idx < len(sequence):
+        return sequence[idx]
+    return None, []
+
+
+def typed_visual_sequence(
+    instruction: str,
+    patterns: dict[str, tuple[str, list[str], list[str]]],
+) -> list[tuple[str, list[str]]]:
+    text = clean(instruction)
+    candidates: list[tuple[int, int, str, list[str]]] = []
+    for _, (key, values, phrases) in patterns.items():
+        for phrase in phrases:
+            for match in re.finditer(re.escape(clean(phrase)), text):
+                candidates.append((match.start(), match.end(), key, values))
+    candidates.sort(key=lambda item: (item[0], -(item[1] - item[0])))
+
+    chosen: list[tuple[int, int, str, list[str]]] = []
+    for start, end, key, values in candidates:
+        overlaps = any(not (end <= old_start or start >= old_end) for old_start, old_end, _, _ in chosen)
+        if not overlaps:
+            chosen.append((start, end, key, values))
+    chosen.sort(key=lambda item: item[0])
+
+    sequence: list[tuple[str, list[str]]] = []
+    for _, _, key, values in chosen:
+        if not sequence or sequence[-1] != (key, values):
+            sequence.append((key, values))
+    return sequence
+
+
 RETAIL6 = {
     "heart": "St Michel Le Palmier Crispy Caramel",
     "second": "Bahlsen",
@@ -320,7 +383,139 @@ RESTAURANT5_PATTERNS = [
     ("whole dark citrus slice", ["R"]),
 ]
 
+RESTAURANT5_SECONDARY_BY_TASK = {
+    1: ["T"],
+    2: ["E"],
+    3: ["F"],
+    4: ["H"],
+    5: ["R"],
+    6: ["H"],
+    7: ["F"],
+    8: ["R"],
+    9: ["U"],
+    10: ["H"],
+    11: ["R"],
+    12: ["E"],
+    13: ["F"],
+    14: ["H"],
+    15: ["T"],
+    16: ["R"],
+    17: ["R"],
+    18: ["H"],
+    19: ["U"],
+    20: ["T"],
+    21: ["E"],
+    22: ["E"],
+    23: ["H"],
+    24: ["U"],
+    25: ["F"],
+    26: ["F"],
+    27: ["H"],
+    28: ["U"],
+    29: ["H"],
+    30: ["H"],
+    31: ["F"],
+    32: ["E"],
+    33: ["R"],
+    34: ["E"],
+    35: ["E"],
+    36: ["U"],
+    37: ["R"],
+    38: ["T"],
+    39: ["H"],
+    40: ["T"],
+    41: ["R"],
+    42: ["E"],
+    43: ["H"],
+    44: ["F"],
+    45: ["U"],
+    46: ["T"],
+    47: ["T"],
+    48: ["T"],
+    49: ["H"],
+    50: ["R"],
+}
+
+KITCHEN4_SEQUENCE_PATTERNS = {
+    "recipe": (
+        "recipe_name",
+        ["Pork & Chive Dumplings"],
+        [
+            "which recipe corresponds to the dish",
+            "dish you are currently cooking",
+            "dish you are currently preparing",
+            "current recipe",
+            "current dish",
+            "dumpling recipe",
+            "dumplings",
+        ],
+    ),
+    "flour": (
+        "ingredient_name",
+        ["Flour"],
+        [
+            "white wrapper in your hand",
+            "white wrapper",
+            "white item",
+            "item you are holding",
+            "item in your hand",
+            "flour wrapper",
+            "wrapper",
+        ],
+    ),
+    "garlic_chives": (
+        "ingredient_name",
+        ["Garlic Chives"],
+        [
+            "green vegetable in the basin",
+            "green vegetable in the bowl",
+            "green vegetables",
+            "green vegetable",
+            "green ingredient",
+            "garlic chives",
+        ],
+    ),
+    "pork": (
+        "ingredient_name",
+        ["Pork"],
+        [
+            "meat in the basin",
+            "meat in the bowl",
+            "meat ingredient",
+            "meat",
+            "pork",
+        ],
+    ),
+    "garlic_and_pork": (
+        "ingredient_name",
+        ["Garlic Chives", "Pork"],
+        [
+            "green vegetable in the basin and the meat in the basin",
+            "green vegetable and meat in the basin",
+            "green vegetables and meat in the bowl",
+        ],
+    ),
+    "garlic_and_flour": (
+        "ingredient_name",
+        ["Garlic Chives", "Flour"],
+        [
+            "green vegetable and the white item",
+            "green vegetable in the basin and the white item",
+        ],
+    ),
+    "pork_and_flour": (
+        "ingredient_name",
+        ["Pork", "Flour"],
+        [
+            "meat and the white wrapper",
+            "meat in the basin and the white wrapper",
+        ],
+    ),
+}
+
 ORDER2_PATTERNS = [
+    ("dish located at the top right of the first expanded page", ["Greek Village Roast Chicken Leg"]),
+    ("dish in the top right corner of the first expanded page", ["Greek Village Roast Chicken Leg"]),
     ("top right of the first expanded page", ["Greek Village Roast Chicken Leg"]),
     ("top-right of the first expanded page", ["Greek Village Roast Chicken Leg"]),
     ("top right first expanded page", ["Greek Village Roast Chicken Leg"]),
@@ -333,10 +528,19 @@ ORDER2_PATTERNS = [
     ("bottom-right sixth-page white plate", ["Vanilla pudding"]),
     ("first dish in the right text list", ["Feta & Tomato Spaghetti"]),
     ("first item in the right text list", ["Feta & Tomato Spaghetti"]),
+    ("first item in the text list on the right side of the 5th expanded page", ["Feta & Tomato Spaghetti"]),
+    ("first item in the text list on the right page of the 5th expanded page", ["Feta & Tomato Spaghetti"]),
     ("first item in the right list", ["Feta & Tomato Spaghetti"]),
+    ("second dish in the right text list", ["Octopus Spaghetti"]),
     ("second item in the right text list", ["Octopus Spaghetti"]),
+    ("second item in the text list on the right side of the 5th expanded page", ["Octopus Spaghetti"]),
+    ("second item in the text list on the right page of the 5th expanded page", ["Octopus Spaghetti"]),
     ("second item in the right list", ["Octopus Spaghetti"]),
+    ("third dish in the right text list", ["Spaghetti Bolognese"]),
     ("third item in the right text list", ["Spaghetti Bolognese"]),
+    ("third item in the text list on the right side of the 5th expanded page", ["Spaghetti Bolognese"]),
+    ("third item in the text list on the right page of the 5th expanded page", ["Spaghetti Bolognese"]),
+    ("last item in the text list on the right side of the 5th expanded page", ["Spaghetti Bolognese"]),
     ("third item in the right list", ["Spaghetti Bolognese"]),
     ("bright blue plate", ["Fried calamari"]),
     ("fried calamari", ["Fried calamari"]),
@@ -346,6 +550,9 @@ ORDER2_PATTERNS = [
     ("red seafood in a copper", ["Grilled Octopus"]),
     ("red seafood in copper", ["Grilled Octopus"]),
     ("copper-colored double-handled pot", ["Grilled Octopus"]),
+    ("dish with a roasted vegetable skewer on that wooden cutting board", ["Grilled Fish"]),
+    ("roasted vegetable skewer on that wooden cutting board", ["Grilled Fish"]),
+    ("dish featuring a grilled vegetable skewer on that wooden cutting board", ["Grilled Fish"]),
     ("grilled vegetable skewer", ["Grilled Fish"]),
     ("wooden cutting board", ["Grilled Fish"]),
     ("dark grey plate", ["Greek Lamb Chops"]),
@@ -368,11 +575,159 @@ ORDER2_LABEL_TO_VALUE = {
     "right list third item on fifth page": ["Spaghetti Bolognese"],
 }
 
-ORDER2_NO_VISUAL_SPECIALS = {
-    12: ["Baklava"],
-    89: ["Grilled Fish"],
-    93: ["Santarini Seafood Rice", "Feta & Tomato Spaghetti", "Moussaka"],
+ORDER2_SEQUENCE_PATTERNS = {
+    "top_right": (
+        "dish_name",
+        ["Greek Village Roast Chicken Leg"],
+        [
+            "dish located at the top right of the first expanded page",
+            "dish in the top right corner of the first expanded page",
+            "top right of the first expanded page",
+            "top-right of the first expanded page",
+            "top right first expanded page",
+            "top-right first expanded page",
+            "chicken and potatoes casserole",
+            "top-right dish",
+            "top right dish",
+        ],
+    ),
+    "fried_calamari": (
+        "dish_name",
+        ["Fried calamari"],
+        [
+            "bright blue plate with fried items and lemon",
+            "bright blue plate",
+            "fried calamari",
+        ],
+    ),
+    "lamb_chops": (
+        "dish_name",
+        ["Greek Lamb Chops"],
+        [
+            "dark grey plate with white sauce dish",
+            "dark gray plate with white sauce dish",
+            "dish served on a dark grey plate with a white sauce dish",
+            "dish served on a dark gray plate with a white sauce dish",
+            "dark grey plate",
+            "dark gray plate",
+            "greek lamb chops",
+        ],
+    ),
+    "seafood_rice": (
+        "dish_name",
+        ["Santarini Seafood Rice"],
+        [
+            "dark blue casserole containing seafood",
+            "deep blue casserole containing seafood",
+            "deep blue casserole",
+            "dark blue casserole",
+            "seafood paella",
+            "seafood rice",
+            "seafood risotto",
+        ],
+    ),
+    "octopus": (
+        "dish_name",
+        ["Grilled Octopus"],
+        [
+            "red seafood in a copper",
+            "red seafood in copper",
+            "copper-colored double-handled pot",
+            "copper double-handled pot",
+            "grilled octopus",
+        ],
+    ),
+    "fish": (
+        "dish_name",
+        ["Grilled Fish"],
+        [
+            "dish with a roasted vegetable skewer on that wooden cutting board",
+            "roasted vegetable skewer on that wooden cutting board",
+            "grilled vegetable skewer on wooden cutting board",
+            "dish featuring a grilled vegetable skewer on that wooden cutting board",
+            "grilled vegetable skewer",
+            "wooden cutting board",
+            "grilled fish",
+        ],
+    ),
+    "yogurt": (
+        "dish_name",
+        ["Greek Yogurt with Honey & Nuts"],
+        [
+            "dairy product served in a wooden bowl",
+            "dish with dairy products served in a wooden bowl",
+            "dairy product in a wooden bowl",
+            "dairy product in wooden bowl",
+            "wooden bowl",
+            "greek yogurt",
+            "circled dessert",
+        ],
+    ),
+    "pudding": (
+        "dish_name",
+        ["Vanilla pudding"],
+        [
+            "white plate dessert at bottom right of sixth page",
+            "dish served on a white plate located at the bottom right of the 6th expanded page",
+            "dish in the white plate located at the bottom right of the 6th expanded page",
+            "white plate located at the bottom right of the 6th expanded page",
+            "bottom-right sixth-page white plate",
+            "white plate dessert",
+            "bottom right of the sixth page",
+            "bottom-right of the sixth page",
+            "vanilla pudding",
+        ],
+    ),
+    "right_first": (
+        "dish_name",
+        ["Feta & Tomato Spaghetti"],
+        [
+            "first dish in the right text list",
+            "first item in the right text list",
+            "first item in right text list",
+            "first item in the text list on the right side of the 5th expanded page",
+            "first item in the text list on the right page of the 5th expanded page",
+            "first item in the right list",
+            "first item in right list",
+            "previous item in the text list",
+            "right text list first item",
+            "feta & tomato spaghetti",
+        ],
+    ),
+    "right_second": (
+        "dish_name",
+        ["Octopus Spaghetti"],
+        [
+            "second dish in the right text list",
+            "second item in the right text list",
+            "second item in right text list",
+            "second item in the text list on the right side of the 5th expanded page",
+            "second item in the text list on the right page of the 5th expanded page",
+            "second item in the right list",
+            "second item in right list",
+            "right text list second item",
+            "octopus spaghetti",
+        ],
+    ),
+    "right_third": (
+        "dish_name",
+        ["Spaghetti Bolognese"],
+        [
+            "third dish in the right text list",
+            "third item in the right text list",
+            "third item in right text list",
+            "third item in the text list on the right side of the 5th expanded page",
+            "third item in the text list on the right page of the 5th expanded page",
+            "last item in the text list on the right side of the 5th expanded page",
+            "third item in the right list",
+            "third item in right list",
+            "right text list third item",
+            "spaghetti bolognese",
+        ],
+    ),
 }
+
+ORDER2_NO_VISUAL_SPECIALS: dict[int, list[str]] = {}
 
 
 def retail6_values(instruction: str, task_id: int) -> list[str]:
@@ -444,8 +799,22 @@ def kitchen4_anchor(instruction: str, task_id: int) -> tuple[str, list[str]]:
     raise ValueError(f"kitchen4 task {task_id}: no visual anchor pattern matched")
 
 
+def kitchen4_secondary_anchor(
+    instruction: str,
+    primary_key: str,
+    primary_values: list[str],
+) -> tuple[str | None, list[str]]:
+    sequence = typed_visual_sequence(instruction, KITCHEN4_SEQUENCE_PATTERNS)
+    key, values = secondary_anchor_from_typed_sequence(sequence, primary_key, primary_values)
+    return key, values
+
+
 def restaurant5_values(instruction: str, task_id: int) -> list[str]:
     return first_match(clean(instruction), RESTAURANT5_PATTERNS, "restaurant5", task_id)
+
+
+def restaurant5_secondary_values(task_id: int) -> list[str]:
+    return RESTAURANT5_SECONDARY_BY_TASK.get(task_id, [])
 
 
 def order2_values(instruction: str, task_id: int) -> list[str]:
@@ -470,6 +839,15 @@ def order2_values(instruction: str, task_id: int) -> list[str]:
     return first_match(clean(instruction), ORDER2_PATTERNS, "order2", task_id)
 
 
+def order2_secondary_anchor(
+    instruction: str,
+    primary_values: list[str],
+) -> tuple[str | None, list[str]]:
+    sequence = typed_visual_sequence(instruction, ORDER2_SEQUENCE_PATTERNS)
+    key, values = secondary_anchor_from_typed_sequence(sequence, "dish_name", primary_values)
+    return key, values
+
+
 def patch_file(name: str) -> tuple[int, dict[str, int]]:
     path = SCENARIO_DIR / f"{name}.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -488,12 +866,19 @@ def patch_file(name: str) -> tuple[int, dict[str, int]]:
             secondary_values = retail10_secondary_values(task["Instruction"], values)
         elif name == "kitchen4":
             key, values = kitchen4_anchor(task["Instruction"], idx)
+            secondary_key, secondary_values = kitchen4_secondary_anchor(task["Instruction"], key, values)
         elif name == "restaurant5":
             key, values = "dish_name", restaurant5_values(task["Instruction"], idx)
+            secondary_key = "dish_name"
+            secondary_values = restaurant5_secondary_values(idx)
         elif name == "order2":
             key, values = "dish_name", order2_values(task["Instruction"], idx)
+            secondary_key, secondary_values = order2_secondary_anchor(task["Instruction"], values)
         else:
             raise ValueError(name)
+        if secondary_key is None:
+            secondary_key = key
+            secondary_values = []
         counts[key] = counts.get(key, 0) + 1
         patched.append(
             with_anchor(
