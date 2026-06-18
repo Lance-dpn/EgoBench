@@ -448,7 +448,13 @@ def build_task(task_id: int) -> Builder | None:
             b.remove_non_set_by_price(True, "tax-included total > 200")
         b.compute(["nutrition"])
     elif task_id == 13:
-        b.add([VISUAL["right list second item on fifth page"]], 1, "family requires pasta/noodles with cephalopod")
+        anchor = VISUAL["white plate dessert at bottom right of sixth page"]
+        if has_allergen(GREEK, anchor, "nuts"):
+            b.add(metric_max(GREEK, lambda x: has_tag(GREEK, x, "vegan"), "protein_g"), reason="white-plate dessert contains nuts")
+        else:
+            b.add(price_min(GREEK, lambda x: has_tag(GREEK, x, "high_calories")), 2, "white-plate dessert has no nut allergen; high-calorie lowest price")
+        if not any(dish(GREEK, item)["discount"] < 1.0 for item in b.cart):
+            b.add(metric_min(GREEK, lambda x: True, "sugar_g"), reason="no discounted dish; lowest sugar")
         b.compute(["payment", "nutrition"])
     elif task_id == 14:
         b.add([VISUAL["dark blue casserole containing seafood / seafood paella"]], 1, "rainy takeout wants seafood risotto")
@@ -700,7 +706,7 @@ def build_task(task_id: int) -> Builder | None:
             b.remove_non_set_by_metric("calories_kcal", True, "calories > 650")
         b.compute(["nutrition", "tax"])
     elif task_id == 42:
-        anchor = VISUAL["dairy product in wooden bowl"]
+        anchor = VISUAL["white plate dessert at bottom right of sixth page"]
         if has_allergen(GREEK, anchor, "nuts"):
             b.add(metric_max(GREEK, lambda x: has_taste(GREEK, x, "sweet"), "calories_kcal"), 2, "nut allergen branch")
         else:
@@ -853,7 +859,7 @@ def build_task(task_id: int) -> Builder | None:
             b.add(price_min(GREEK, lambda x: has_taste(GREEK, x, "salty") and has_taste(GREEK, x, "savory")), reason="salty savory lowest price")
         b.compute(["tax", "nutrition"])
     elif task_id == 58:
-        anchor = VISUAL["dairy product in wooden bowl"]
+        anchor = VISUAL["white plate dessert at bottom right of sixth page"]
         if has_allergen(GREEK, anchor, "dairy") and has_allergen(GREEK, anchor, "nuts"):
             b.add(price_min(GREEK, lambda x: has_taste(GREEK, x, "sour") and not dish(GREEK, x).get("allergens")), 2, "dairy and nut allergen branch")
         else:
@@ -944,7 +950,7 @@ def build_task(task_id: int) -> Builder | None:
             b.remove_non_set_by_price(True, "price > 750")
         b.compute(["payment", "nutrition"])
     elif task_id == 68:
-        anchor = VISUAL["dairy product in wooden bowl"]
+        anchor = VISUAL["white plate dessert at bottom right of sixth page"]
         if n(GREEK, anchor, "carbs_g") < 10:
             b.add(metric_max(GREEK, lambda x: has_tag(GREEK, x, "high_calories"), "fat_g"), 2, "carbs < 10")
         else:
@@ -1213,7 +1219,7 @@ def build_task(task_id: int) -> Builder | None:
             b.add(price_min(GREEK, lambda x: has_allergen(GREEK, x, "seafood")), reason="no Classic Set component; add cheapest seafood-allergen dish")
         b.compute(["tax", "nutrition"])
     elif task_id == 96:
-        anchor = VISUAL["dairy product in wooden bowl"]
+        anchor = VISUAL["white plate dessert at bottom right of sixth page"]
         if has_taste(GREEK, anchor, "sweet"):
             b.add(price_min(GREEK, lambda x: n(GREEK, x, "sugar_g") > 20), 2, "sweet branch; lowest price with sugar > 20")
         else:

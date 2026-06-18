@@ -828,7 +828,7 @@
     "image_path": "afrikana_greek.mp4",
     "key": "dish_name",
     "value": [
-      "Octopus Spaghetti"
+      "Vanilla pudding"
     ],
     "secondary_key": "dish_name",
     "secondary_value": [],
@@ -840,11 +840,24 @@
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_003",
-          "dish_name": "Octopus Spaghetti",
-          "quantity": 1,
-          "category": "Pasta",
-          "price": 88,
-          "tax_rate": 0.11,
+          "dish_name": "Vanilla pudding",
+          "quantity": 2,
+          "category": "Desserts",
+          "price": 58,
+          "tax_rate": 0.13,
+          "discount": 0.9
+        }
+      },
+      {
+        "tool_name": "add_dish_to_order",
+        "parameters": {
+          "restaurant_name": "Mediterranean Greek Restaurant",
+          "user_id": "customer_003",
+          "dish_name": "Loukoumades",
+          "quantity": 2,
+          "category": "Desserts",
+          "price": 58,
+          "tax_rate": 0.13,
           "discount": 0.9
         }
       },
@@ -855,8 +868,12 @@
           "user_id": "customer_003",
           "dishes": [
             {
-              "dish_name": "Octopus Spaghetti",
-              "quantity": 1
+              "dish_name": "Vanilla pudding",
+              "quantity": 2
+            },
+            {
+              "dish_name": "Loukoumades",
+              "quantity": 2
             }
           ]
         }
@@ -868,8 +885,12 @@
           "user_id": "customer_003",
           "dishes": [
             {
-              "dish_name": "Octopus Spaghetti",
-              "quantity": 1
+              "dish_name": "Vanilla pudding",
+              "quantity": 2
+            },
+            {
+              "dish_name": "Loukoumades",
+              "quantity": 2
             }
           ]
         }
@@ -2588,12 +2609,10 @@
     "image_path": "pauhana_greek.mp4",
     "key": "dish_name",
     "value": [
-      "Greek Yogurt with Honey & Nuts"
+      "Vanilla pudding"
     ],
     "secondary_key": "dish_name",
-    "secondary_value": [
-      "Santarini Seafood Rice"
-    ],
+    "secondary_value": [],
     "image_description": "You and your friend are in a order. You look at the menu. You can see different dishes on each pages. Please refer to the different dishes according to the page number.",
     "task_id": 42,
     "ground_truth": [
@@ -2602,12 +2621,12 @@
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_003",
-          "dish_name": "Baklava",
-          "quantity": 2,
-          "category": "Desserts",
-          "price": 68,
-          "tax_rate": 0.13,
-          "discount": 0.9
+          "dish_name": "Mediterranean Seafood Stew",
+          "quantity": 1,
+          "category": "Seafood",
+          "price": 168,
+          "tax_rate": 0.14,
+          "discount": 0.8
         }
       },
       {
@@ -2626,8 +2645,8 @@
           "user_id": "customer_003",
           "dishes": [
             {
-              "dish_name": "Baklava",
-              "quantity": 2
+              "dish_name": "Mediterranean Seafood Stew",
+              "quantity": 1
             },
             {
               "dish_name": "Dessert Pairing Set",
@@ -2643,8 +2662,8 @@
           "user_id": "customer_003",
           "dishes": [
             {
-              "dish_name": "Baklava",
-              "quantity": 2
+              "dish_name": "Mediterranean Seafood Stew",
+              "quantity": 1
             },
             {
               "dish_name": "Dessert Pairing Set",
@@ -3583,7 +3602,7 @@
     "image_path": "butcher_greek.mp4",
     "key": "dish_name",
     "value": [
-      "Greek Yogurt with Honey & Nuts"
+      "Vanilla pudding"
     ],
     "secondary_key": "dish_name",
     "secondary_value": [],
@@ -3595,12 +3614,12 @@
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_010",
-          "dish_name": "Greek Lemon Potatoes",
-          "quantity": 2,
-          "category": "Sides",
-          "price": 48,
-          "tax_rate": 0.08,
-          "discount": 0.9
+          "dish_name": "Pork Gyro Plate",
+          "quantity": 1,
+          "category": "Main Courses",
+          "price": 128,
+          "tax_rate": 0.11,
+          "discount": 0.7
         }
       },
       {
@@ -3610,8 +3629,8 @@
           "user_id": "customer_010",
           "dishes": [
             {
-              "dish_name": "Greek Lemon Potatoes",
-              "quantity": 2
+              "dish_name": "Pork Gyro Plate",
+              "quantity": 1
             }
           ]
         }
@@ -3623,8 +3642,8 @@
           "user_id": "customer_010",
           "dishes": [
             {
-              "dish_name": "Greek Lemon Potatoes",
-              "quantity": 2
+              "dish_name": "Pork Gyro Plate",
+              "quantity": 1
             }
           ]
         }
@@ -4246,7 +4265,7 @@
     "image_path": "meraki_greek.mp4",
     "key": "dish_name",
     "value": [
-      "Greek Yogurt with Honey & Nuts"
+      "Vanilla pudding"
     ],
     "secondary_key": "dish_name",
     "secondary_value": [],
@@ -6178,7 +6197,7 @@
     "image_path": "butcher_greek.mp4",
     "key": "dish_name",
     "value": [
-      "Greek Yogurt with Honey & Nuts"
+      "Vanilla pudding"
     ],
     "secondary_key": "dish_name",
     "secondary_value": [],
