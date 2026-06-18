@@ -7,6 +7,10 @@
     "value": [
       "St Michel Le Palmier Crispy Caramel"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Nutella Biscuits"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 1,
     "ground_truth": [
@@ -104,6 +108,10 @@
     "value": [
       "Bahlsen"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 2,
     "ground_truth": [
@@ -161,6 +169,10 @@
     "value": [
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "St Michel Le Palmier Crispy Caramel"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 3,
     "ground_truth": [
@@ -209,6 +221,10 @@
     "key": "product_name",
     "value": [
       "Nutella Biscuits"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 4,
@@ -259,6 +275,10 @@
     "value": [
       "Leibniz Keks"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 5,
     "ground_truth": [
@@ -307,6 +327,10 @@
     "key": "product_name",
     "value": [
       "St Michel Le Palmier Crispy Caramel"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 6,
@@ -365,6 +389,10 @@
     "value": [
       "Nutella Biscuits"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 7,
     "ground_truth": [
@@ -418,6 +446,10 @@
     "value": [
       "Leibniz Keks"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 8,
     "ground_truth": [
@@ -470,6 +502,10 @@
     "key": "product_name",
     "value": [
       "St Michel Le Palmier Crispy Caramel"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 9,
@@ -548,6 +584,10 @@
     "value": [
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Nutella Biscuits"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 10,
     "ground_truth": [
@@ -588,6 +628,10 @@
     "key": "product_name",
     "value": [
       "Bahlsen"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 11,
@@ -686,6 +730,10 @@
     "value": [
       "Nutella Biscuits"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "St Michel Le Palmier Crispy Caramel"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 12,
     "ground_truth": [
@@ -743,6 +791,10 @@
     "value": [
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 13,
     "ground_truth": [
@@ -796,6 +848,10 @@
     "value": [
       "Leibniz Keks"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Nutella Biscuits"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 14,
     "ground_truth": [
@@ -836,6 +892,10 @@
     "key": "product_name",
     "value": [
       "Bahlsen"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "St Michel Le Palmier Crispy Caramel"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 15,
@@ -881,6 +941,10 @@
     "key": "product_name",
     "value": [
       "Nutella Biscuits"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 16,
@@ -943,6 +1007,10 @@
     "value": [
       "St Michel Le Palmier Crispy Caramel"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 17,
     "ground_truth": [
@@ -975,6 +1043,10 @@
     "key": "product_name",
     "value": [
       "Bahlsen"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 18,
@@ -1029,6 +1101,10 @@
     "value": [
       "Nutella Biscuits"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 19,
     "ground_truth": [
@@ -1078,6 +1154,10 @@
     "value": [
       "St Michel Le Palmier Crispy Caramel"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 20,
     "ground_truth": [
@@ -1126,6 +1206,10 @@
     "key": "product_name",
     "value": [
       "Desobry Speculoos"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 21,
@@ -1196,6 +1280,10 @@
     "value": [
       "Nutella Biscuits"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "St Michel Le Palmier Crispy Caramel"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 22,
     "ground_truth": [
@@ -1261,6 +1349,10 @@
     "value": [
       "Bahlsen"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 23,
     "ground_truth": [
@@ -1306,6 +1398,10 @@
     "value": [
       "Leibniz Keks"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Nutella Biscuits"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 24,
     "ground_truth": [
@@ -1350,6 +1446,10 @@
     "key": "product_name",
     "value": [
       "St Michel Le Palmier Crispy Caramel"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 25,
@@ -1399,6 +1499,10 @@
     "key": "product_name",
     "value": [
       "Bahlsen"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 26,
@@ -1452,6 +1556,10 @@
     "key": "product_name",
     "value": [
       "Nutella Biscuits"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "St Michel Le Palmier Crispy Caramel"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 27,
@@ -1518,6 +1626,10 @@
     "value": [
       "Leibniz Keks"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 28,
     "ground_truth": [
@@ -1567,6 +1679,10 @@
     "value": [
       "Bahlsen"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Nutella Biscuits"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 29,
     "ground_truth": [
@@ -1608,6 +1724,10 @@
     "value": [
       "St Michel Le Palmier Crispy Caramel"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 30,
     "ground_truth": [
@@ -1644,6 +1764,10 @@
     "key": "product_name",
     "value": [
       "St Michel Le Palmier Crispy Caramel"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 31,
@@ -1763,6 +1887,10 @@
       "St Michel Le Palmier Crispy Caramel",
       "Bahlsen"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 32,
     "ground_truth": [
@@ -1820,6 +1948,10 @@
     "value": [
       "St Michel Le Palmier Crispy Caramel",
       "Bahlsen"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 33,
@@ -1879,6 +2011,10 @@
     "key": "product_name",
     "value": [
       "Leibniz Keks"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Nutella Biscuits"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 34,
@@ -1956,6 +2092,10 @@
     "key": "product_name",
     "value": [
       "St Michel Le Palmier Crispy Caramel"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 35,
@@ -2082,6 +2222,10 @@
     "value": [
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Leibniz Keks"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 36,
     "ground_truth": [
@@ -2159,6 +2303,10 @@
     "value": [
       "Bahlsen"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 37,
     "ground_truth": [
@@ -2227,6 +2375,10 @@
     "key": "product_name",
     "value": [
       "Nutella Biscuits"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "St Michel Le Palmier Crispy Caramel"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 38,
@@ -2316,6 +2468,10 @@
     "key": "product_name",
     "value": [
       "Leibniz Keks"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 39,
@@ -2430,6 +2586,10 @@
     "value": [
       "St Michel Le Palmier Crispy Caramel"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 40,
     "ground_truth": [
@@ -2526,6 +2686,10 @@
     "key": "product_name",
     "value": [
       "St Michel Le Palmier Crispy Caramel"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Nutella Biscuits"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 41,
@@ -2710,6 +2874,8 @@
       "Bahlsen",
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 42,
     "ground_truth": [
@@ -2783,6 +2949,10 @@
     "value": [
       "Leibniz Keks"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Desobry Speculoos"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 43,
     "ground_truth": [
@@ -2814,6 +2984,8 @@
       "Bahlsen",
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 44,
     "ground_truth": [
@@ -2866,6 +3038,10 @@
     "key": "product_name",
     "value": [
       "Nutella Biscuits"
+    ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
     ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 45,
@@ -2926,6 +3102,8 @@
       "Bahlsen",
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 46,
     "ground_truth": [
@@ -3007,6 +3185,10 @@
     "value": [
       "Leibniz Keks"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [
+      "Bahlsen"
+    ],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 47,
     "ground_truth": [
@@ -3078,6 +3260,8 @@
       "Bahlsen",
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 48,
     "ground_truth": [
@@ -3140,6 +3324,8 @@
       "Nutella Biscuits",
       "Desobry Speculoos"
     ],
+    "secondary_key": "product_name",
+    "secondary_value": [],
     "image_description": "You are in a supermarket, standing in front of shelves full of food. You first pick up a box of orange-packaged cookies, then after walking a few steps, you choose a box of blue-packaged cookies and put it in your hand. Finally, you choose a box of white-packaged cookies and put it in your hand.",
     "task_id": 49,
     "ground_truth": [

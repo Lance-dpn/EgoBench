@@ -8,6 +8,7 @@
 - front square cheese: `Switzerland Swiss Cheese`; price=19.8, origin=Switzerland, tax=0.08, discount=1.0, nutrition={'basis': 'PER_100G', 'serving_size_g': 100, 'calories_kcal': 380, 'protein_g': 23, 'fat_g': 30, 'carbs_g': 0.5, 'sugar_g': 0.5, 'sodium_mg': 550, 'fiber_g': 0}
 - directly below back rectangular cheese: `Basiron Gouda Cheese`; price=12.8, origin=Netherlands, tax=0.05, discount=0.9, nutrition={'basis': 'PER_100G', 'serving_size_g': 100, 'calories_kcal': 356, 'protein_g': 25, 'fat_g': 27, 'carbs_g': 2.2, 'sugar_g': 0.6, 'sodium_mg': 720, 'fiber_g': 0}
 - directly below lowest-tag cheese: `Mystic Valley Cheese`; price=25.8, origin=Switzerland, tax=0.08, discount=1.0, nutrition={'basis': 'PER_100G', 'serving_size_g': 100, 'calories_kcal': 390, 'protein_g': 24, 'fat_g': 31, 'carbs_g': 0.5, 'sugar_g': 0.5, 'sodium_mg': 580, 'fiber_g': 0}
+- Scenario JSON now keeps the initial visual anchor in `value` and the next distinct visual anchor, when present, in `secondary_value`. Empty `secondary_value` means no second explicit cheese referent appears after the initial visual anchor.
 
 Generated 63 tasks with 204 ground-truth calls.
 
