@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v12_strict_tool_json"
+SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v13_restaurant_drink_name_labels"
 
 
 @dataclass(frozen=True)
@@ -158,6 +158,9 @@ SCENARIO_SERVICE_INSTRUCTIONS = {
         """
 - Use resolve_visual_reference only for visible menu/table/scene references such
   as a pointed item, visible section, sign, table item, or spatial location.
+- For coffee, cocktail, and other drink menu boards/cards, when a beverage image
+  has text above it, treat the text above that image as that beverage's visible
+  menu name.
 - Restaurant database fields, availability, reservation state, menu attributes,
   recommendations, and other non-visual facts must come from tools.
 """,

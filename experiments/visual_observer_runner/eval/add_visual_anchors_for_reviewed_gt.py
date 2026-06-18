@@ -15,20 +15,33 @@ def clean(text: str) -> str:
     return re.sub(r"\s+", " ", text.lower()).strip()
 
 
-def with_anchor(task: dict[str, Any], key: str, values: list[str]) -> dict[str, Any]:
+def with_anchor(
+    task: dict[str, Any],
+    key: str,
+    values: list[str],
+    *,
+    secondary_key: str | None = None,
+    secondary_values: list[str] | None = None,
+) -> dict[str, Any]:
     updated: OrderedDict[str, Any] = OrderedDict()
     inserted = False
     for k, v in task.items():
-        if k in {"key", "value"}:
+        if k in {"key", "value", "secondary_key", "secondary_value"}:
             continue
         updated[k] = v
         if k == "image_path":
             updated["key"] = key
             updated["value"] = values
+            if secondary_key is not None and secondary_values is not None:
+                updated["secondary_key"] = secondary_key
+                updated["secondary_value"] = secondary_values
             inserted = True
     if not inserted:
         updated["key"] = key
         updated["value"] = values
+        if secondary_key is not None and secondary_values is not None:
+            updated["secondary_key"] = secondary_key
+            updated["secondary_value"] = secondary_values
     return dict(updated)
 
 
@@ -40,12 +53,146 @@ def first_match(text: str, patterns: list[tuple[str, list[str]]], scenario: str,
     return min(matches, key=lambda item: item[0])[1]
 
 
+def visual_sequence(
+    instruction: str,
+    patterns: dict[str, list[str]],
+    value_map: dict[str, str] | None = None,
+) -> list[str]:
+    text = clean(instruction)
+    candidates: list[tuple[int, int, str]] = []
+    for label, phrases in patterns.items():
+        value = value_map[label] if value_map else label
+        for phrase in phrases:
+            for match in re.finditer(re.escape(clean(phrase)), text):
+                candidates.append((match.start(), match.end(), value))
+    candidates.sort(key=lambda item: (item[0], -(item[1] - item[0])))
+
+    chosen: list[tuple[int, int, str]] = []
+    for start, end, value in candidates:
+        overlaps = any(not (end <= old_start or start >= old_end) for old_start, old_end, _ in chosen)
+        if not overlaps:
+            chosen.append((start, end, value))
+    chosen.sort(key=lambda item: item[0])
+
+    values: list[str] = []
+    for _, _, value in chosen:
+        if not values or values[-1] != value:
+            values.append(value)
+    return values
+
+
+def secondary_values_from_sequence(sequence: list[str], primary_values: list[str]) -> list[str]:
+    idx = 0
+    for primary in primary_values:
+        if idx < len(sequence) and sequence[idx] == primary:
+            idx += 1
+            continue
+        try:
+            idx = sequence.index(primary, idx) + 1
+        except ValueError:
+            continue
+    return sequence[idx : idx + 1]
+
+
 RETAIL6 = {
     "heart": "St Michel Le Palmier Crispy Caramel",
     "second": "Bahlsen",
-    "third": "Leibniz Keks",
+    "third": "Desobry Speculoos",
     "red": "Nutella Biscuits",
-    "yellow": "Pallets Biscuits",
+    "yellow": "Leibniz Keks",
+}
+
+RETAIL6_SEQUENCE_PATTERNS = {
+    "red": [
+        "cylindrical cookie box with a red lid located directly above the third box",
+        "cylindrical cookie box with a red lid directly above the third box",
+        "cylindrical cookie with a red lid located directly above the third box",
+        "cylindrical cookie with a red lid directly above the third box",
+        "cylindrical cookies with a red lid directly above the third box",
+        "red lid situated directly above the third box",
+        "red lid located directly above the third box",
+        "red lid directly above the third box",
+        "cylindrical cookie box with a red lid",
+        "cylindrical cookie with a red lid",
+        "cylindrical cookies with a red lid",
+        "cylindrical cookie box",
+        "cylindrical cookie",
+    ],
+    "yellow": [
+        "box of yellow-packaged cookies directly beneath the third box",
+        "box of yellow-packaged cookies directly below the third box",
+        "yellow-packaged cookie box located directly below the third box",
+        "yellow-packaged cookie box directly below the third box",
+        "yellow-packaged cookie box directly beneath the third box",
+        "yellow packaged cookie box located directly below the third box",
+        "yellow packaged cookie box directly below the third box",
+        "yellow packaged cookie box directly beneath the third box",
+        "yellow-packaged box of cookies directly beneath the third box",
+        "yellow-packaged box of cookies directly below the third box",
+        "yellow-packaged cookie box",
+        "yellow packaged cookie box",
+        "yellow-packaged box",
+        "yellow packaged box",
+        "yellow-packaged",
+        "yellow packaged",
+    ],
+    "third": [
+        "third box of white-packaged cookies",
+        "third box of white packaged cookies",
+        "third white-packaged cookie box",
+        "third white packaged cookie box",
+        "third item you picked (a box of white-packaged cookies)",
+        "third item you picked (a box of white packaged cookies)",
+        "third picked item (a box of white-packaged cookies)",
+        "third picked item (a box of white packaged cookies)",
+        "third box of cookies being picked up",
+        "third box of cookies picked up",
+        "third picked-up box of white-packaged cookies",
+        "third picked-up box",
+        "third picked box",
+        "third picked-up white-packaged cookie",
+        "third picked white-packaged cookie",
+        "third box of white",
+        "third box",
+    ],
+    "second": [
+        "second picked-up chocolate biscuit",
+        "second picked-up chocolate cookie",
+        "second picked chocolate biscuit",
+        "second picked chocolate cookie",
+        "second chocolate biscuit picked up",
+        "second chocolate cookie picked up",
+        "second item you picked (a chocolate cookie)",
+        "second item picked (a chocolate cookie)",
+        "second chocolate biscuit",
+        "second chocolate cookie",
+        "second cookie you pick up",
+        "second cookie you picked up",
+        "second picked-up item",
+        "second picked item",
+        "second item you picked",
+        "second item picked",
+        "second picked",
+    ],
+    "heart": [
+        "first picked-up item, which is a heart-shaped cookie",
+        "first picked item, which is a heart-shaped cookie",
+        "first item picked up, which is a heart-shaped cookie",
+        "first item picked, which is a heart-shaped cookie",
+        "first picked single item that is heart-shaped",
+        "first item you picked up, a heart-shaped cookie",
+        "first picked item, a heart-shaped cookie",
+        "first item picked (a heart-shaped cookie)",
+        "first item picked up (a heart-shaped cookie)",
+        "first picked item",
+        "first picked-up item",
+        "first item picked up",
+        "first item picked",
+        "first heart-shaped cookie",
+        "heart-shaped cookie",
+        "heart-shaped biscuit",
+        "heart-shaped",
+    ],
 }
 
 RETAIL10_PATTERNS = [
@@ -71,10 +218,73 @@ RETAIL10_PATTERNS = [
     ("square cheese that is closest to you", ["Switzerland Swiss Cheese"]),
     ("square cheese piece that is closest to you", ["Switzerland Swiss Cheese"]),
     ("square cheese closest to you", ["Switzerland Swiss Cheese"]),
-    ("wedge-shaped cheese closest to you", ["Beaujolais Cheese"]),
-    ("wedge-shaped cheese that is closest to you", ["Beaujolais Cheese"]),
-    ("wedge of cheese closest to you", ["Beaujolais Cheese"]),
+    ("wedge-shaped cheese closest to you", ["Appenzeller Cheese"]),
+    ("wedge-shaped cheese that is closest to you", ["Appenzeller Cheese"]),
+    ("wedge of cheese closest to you", ["Appenzeller Cheese"]),
 ]
+
+RETAIL10_SEQUENCE_PATTERNS = {
+    "Mystic Valley Cheese": [
+        "cheese directly below the cheese with the lowest tag price",
+        "cheese directly below the cheese with the lowest label price",
+        "directly below the cheese with the lowest tag price",
+        "directly below the cheese with the lowest label price",
+        "directly below the lowest-tag cheese",
+        "directly below the lowest label cheese",
+    ],
+    "Basiron Gouda Cheese": [
+        "item directly below the rectangular cheese at the very back",
+        "item directly below the rectangular cheese located at the very back",
+        "directly below the rectangular cheese at the very back",
+        "directly below the rectangular cheese located at the very back",
+        "directly below back rectangular cheese",
+        "cheese with the lowest label price",
+        "cheese with the lowest labeled price",
+        "cheese with the lowest tag price",
+        "cheese with the lowest price on its tag",
+        "cheese with the lowest labelled price",
+        "cheese with the lowest label",
+        "lowest labeled price",
+    ],
+    "Gruyere AOP Cheese": [
+        "cheese whose label is furthest to the right",
+        "cheese with the label furthest to the right",
+        "cheese with the rightmost label",
+        "cheese block with the rightmost label",
+        "cheese furthest to the right",
+        "cheese with the rightmost labelled price",
+        "rightmost label",
+    ],
+    "Emmi Gruyere Cheese": [
+        "rectangular cheese located at the innermost",
+        "rectangular cheese located at the very back",
+        "rectangular cheese located furthest inside",
+        "rectangular cheese farthest inside",
+        "rectangular cheese piece at the very back",
+        "rectangular cheese piece located at the very back",
+        "rectangular cheese piece located furthest inside",
+        "rectangular cheese block at the innermost",
+        "rectangular cheese furthest inside",
+        "innermost rectangular cheese",
+        "innermost rectangular piece of cheese",
+        "rectangular cheese at the very back",
+        "rectangular cheese located at the back",
+    ],
+    "Switzerland Swiss Cheese": [
+        "square cheese that is closest to you",
+        "square cheese piece that is closest to you",
+        "square cheese closest to you",
+        "front square cheese",
+    ],
+    "Appenzeller Cheese": [
+        "wedge-shaped cheese closest to you",
+        "wedge-shaped cheese that is closest to you",
+        "wedge of cheese closest to you",
+        "wedge-shaped cheese piece that is closest to you",
+        "front wedge-shaped cheese",
+        "front wedge cheese",
+    ],
+}
 
 RESTAURANT5_PATTERNS = [
     ("red strip horizontally across the rim", ["H"]),
@@ -98,6 +308,8 @@ RESTAURANT5_PATTERNS = [
     ("dark horizontal middle band", ["T"]),
     ("top right corner", ["E"]),
     ("top-right corner", ["E"]),
+    ("cocktail in a stemmed glass", ["E"]),
+    ("orange on the bottom and white on the top", ["E"]),
     ("stemmed cocktail", ["E"]),
     ("only beverage served in a stemmed cocktail glass", ["E"]),
     ("only drink served in a cocktail glass", ["E"]),
@@ -197,8 +409,18 @@ def retail6_values(instruction: str, task_id: int) -> list[str]:
     return first_match(text, patterns, "retail6", task_id)
 
 
+def retail6_secondary_values(instruction: str, primary_values: list[str]) -> list[str]:
+    sequence = visual_sequence(instruction, RETAIL6_SEQUENCE_PATTERNS, RETAIL6)
+    return secondary_values_from_sequence(sequence, primary_values)
+
+
 def retail10_values(instruction: str, task_id: int) -> list[str]:
     return first_match(clean(instruction), RETAIL10_PATTERNS, "retail10", task_id)
+
+
+def retail10_secondary_values(instruction: str, primary_values: list[str]) -> list[str]:
+    sequence = visual_sequence(instruction, RETAIL10_SEQUENCE_PATTERNS)
+    return secondary_values_from_sequence(sequence, primary_values)
 
 
 def kitchen4_anchor(instruction: str, task_id: int) -> tuple[str, list[str]]:
@@ -254,10 +476,16 @@ def patch_file(name: str) -> tuple[int, dict[str, int]]:
     counts: dict[str, int] = {}
     patched = []
     for idx, task in enumerate(data, 1):
+        secondary_key = None
+        secondary_values = None
         if name == "retail6":
             key, values = "product_name", retail6_values(task["Instruction"], idx)
+            secondary_key = "product_name"
+            secondary_values = retail6_secondary_values(task["Instruction"], values)
         elif name == "retail10":
             key, values = "product_name", retail10_values(task["Instruction"], idx)
+            secondary_key = "product_name"
+            secondary_values = retail10_secondary_values(task["Instruction"], values)
         elif name == "kitchen4":
             key, values = kitchen4_anchor(task["Instruction"], idx)
         elif name == "restaurant5":
@@ -267,7 +495,15 @@ def patch_file(name: str) -> tuple[int, dict[str, int]]:
         else:
             raise ValueError(name)
         counts[key] = counts.get(key, 0) + 1
-        patched.append(with_anchor(task, key, values))
+        patched.append(
+            with_anchor(
+                task,
+                key,
+                values,
+                secondary_key=secondary_key,
+                secondary_values=secondary_values,
+            )
+        )
     path.write_text(json.dumps(patched, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return len(patched), counts
 

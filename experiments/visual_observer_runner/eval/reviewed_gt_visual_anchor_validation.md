@@ -12,6 +12,7 @@ Changes:
 - Kept existing `ground_truth` tool chains unchanged.
 - Added `add_visual_anchors_for_reviewed_gt.py` so the visual anchors can be regenerated.
 - Added `verify_reviewed_gt_with_anchors.py` to validate anchors and replay GT execution.
+- Added `verify_gt_exact_db_fields.py` to reject GT fields that only pass by fuzzy/inclusion matching.
 
 Anchor coverage:
 
@@ -42,7 +43,23 @@ Validation result:
 Additional check:
 
 ```bash
-python -m py_compile experiments/visual_observer_runner/eval/add_visual_anchors_for_reviewed_gt.py experiments/visual_observer_runner/eval/verify_reviewed_gt_with_anchors.py
+python experiments/visual_observer_runner/eval/verify_gt_exact_db_fields.py
+```
+
+Exact DB field result:
+
+| Scenario | Exact field errors |
+| --- | ---: |
+| retail6 | 0 |
+| retail10 | 0 |
+| kitchen4 | 0 |
+| restaurant5 | 0 |
+| order2 | 0 |
+
+Compile check:
+
+```bash
+python -m py_compile experiments/visual_observer_runner/eval/add_visual_anchors_for_reviewed_gt.py experiments/visual_observer_runner/eval/verify_reviewed_gt_with_anchors.py experiments/visual_observer_runner/eval/verify_gt_exact_db_fields.py
 ```
 
 Result: passed.

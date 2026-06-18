@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-SERVICE_PROMPT_VERSION = "gpt55_frame_service_prompt_v35_branch_gated_batching"
+SERVICE_PROMPT_VERSION = "gpt55_frame_service_prompt_v36_restaurant_drink_name_labels"
 
 
 SCENARIO_RULES = {
@@ -26,6 +26,7 @@ SCENARIO_RULES = {
     "restaurant": [
         "- Before judging top/bottom/left/right or nearby text, decide whether the menu view is rotated; if so, use the menu text's normal reading orientation as the coordinate frame.",
         "- Use frames for: menu/table references, served dishes, pointed items, regions, section text, and spatial relations.",
+        "- For coffee, cocktail, and other drink menu boards/cards, when a beverage image has text above it, treat the text above that image as that beverage's visible menu name before querying tools.",
         "- Use tools for: dish facts, allergens, nutrition, recommendations, orders, menu state, and calculations.",
         "- First classify the user's visual referent as one mode: DISH_POINTING, CATEGORY_LOCALIZATION, or DISH_WITHIN_CATEGORY.",
         "- Use DISH_POINTING only when the user asks for a specific pointed dish/item name or a dish among pointed dishes.",

@@ -456,14 +456,6 @@
         }
       },
       {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_010",
-          "ingredient_name": "Chili Flakes",
-          "quantity": 0.01
-        }
-      },
-      {
         "tool_name": "compute_total_nutritions",
         "parameters": {
           "user_id": "cook_010",
@@ -487,10 +479,6 @@
             {
               "ingredient_name": "Shrimp",
               "quantity": 2
-            },
-            {
-              "ingredient_name": "Chili Flakes",
-              "quantity": 0.01
             }
           ]
         }

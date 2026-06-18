@@ -32,11 +32,13 @@ VISUAL = {
     "innermost rectangular / rectangular at very back": "emmi gruyere cheese",
     "lowest label/tag price": "basiron gouda cheese",
     "rightmost / furthest-right label": "gruyere aop cheese",
-    "front wedge-shaped cheese": "beaujolais cheese",
+    "front wedge-shaped cheese": "appenzeller cheese",
     "front square cheese": "switzerland swiss cheese",
     "directly below back rectangular cheese": "basiron gouda cheese",
     "directly below lowest-tag cheese": "mystic valley cheese",
 }
+
+WEDGE_TASK_IDS = {4, 9, 13, 18, 22, 28, 32, 38, 41, 45, 49, 56, 60}
 
 
 def n(name: str, field: str) -> float:
@@ -111,7 +113,11 @@ class TaskBuilder:
         for row in retail_init_data10["user_carts"]:
             if row["user_id"] == user_id:
                 for item in row.get("items", []):
-                    self.cart[item["product_name"].lower()] = float(item["quantity"])
+                    name = item["product_name"].lower()
+                    if name in PRODUCTS:
+                        self.cart[name] = float(item["quantity"])
+                    else:
+                        self.notes.append(f"skip uncatalogued initial cart item: {item['product_name']}")
 
     def add(self, names: list[str], qty: int | float = 1, reason: str = "") -> None:
         for name in names:
@@ -198,7 +204,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add_list_missing(lambda p: p["tax_rate"] == 0, "shopping-list tax-free item")
         b.compute("payment")
     elif task_id == 4:
-        b.add(sel(lambda p: has_taste(p, "mild") and n(p["name"].lower(), "carbs_g") < 1, "calories_kcal"), reason="front wedge fat is not > 30")
+        b.add(sel(lambda p: is_origin(p, "Switzerland") and p["price"] > 30, "protein_g", True), reason="front wedge fat > 30")
         b.add_list_missing(lambda p: p["tax_rate"] > 0.06, "shopping-list item missing and tax > 0.06")
         b.compute("nutrition")
     elif task_id == 5:
@@ -236,7 +242,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add_list_missing(lambda p: not is_origin(p, "France"), "shopping-list item not from France")
         b.compute("nutrition")
     elif task_id == 13:
-        b.add(sel(lambda p: 30 <= p["price"] <= 60 and has_taste(p, "savory"), "protein_g", True), reason="front wedge is not nutty")
+        b.add(price_min(lambda p: is_origin(p, "Netherlands") and 0.05 <= p["tax_rate"] <= 0.12), reason="front wedge flavor includes nutty")
         b.remove_if(lambda p: has_taste(p, "salty"), "salty flavor")
         b.add_list_missing(lambda p: n(p["name"].lower(), "calories_kcal") < 350, "shopping-list item not fully purchased and calories < 350", full=True)
         b.compute("nutrition")
@@ -397,7 +403,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add_list_missing(lambda p: n(p["name"].lower(), "sugar_g") == 0, "shopping-list item sugar = 0")
         b.compute("nutrition")
     elif task_id == 49:
-        b.add(sel(lambda p: is_origin(p, "France") and p["price"] > 40, "carbs_g"), reason="front wedge discount is not lower than 0.9")
+        b.add(sel(lambda p: is_origin(p, "Italy") and has_taste(p, "mild"), "fat_g", True), reason="front wedge discount < 0.9")
         b.add_list_missing(lambda p: n(p["name"].lower(), "calories_kcal") < 350, "shopping-list item calories < 350")
         b.compute("nutrition")
     elif task_id == 50:
@@ -425,7 +431,7 @@ def build_task(task_id: int, user_id: str) -> TaskBuilder:
         b.add_list_missing(lambda p: not is_origin(p, "UK"), "shopping-list item not from UK")
         b.compute("tax")
     elif task_id == 56:
-        b.add(price_min(lambda p: is_origin(p, "Netherlands") and has_taste(p, "nutty")), reason="front wedge tax > 0.1")
+        b.add(sel(lambda p: is_origin(p, "Switzerland") and p["discount"] < 0.9, "protein_g", True), reason="front wedge tax is not > 0.1")
         b.add_list_missing(lambda p: n(p["name"].lower(), "sugar_g") < 0.5, "shopping-list item sugar < 0.5")
         b.compute("nutrition")
     elif task_id == 57:
@@ -486,6 +492,8 @@ def main() -> None:
     for task in data:
         task_id = int(task["task_id"])
         builder = build_task(task_id, USER_BY_TASK[task_id])
+        if task_id in WEDGE_TASK_IDS:
+            task["value"] = [DISPLAY[VISUAL["front wedge-shaped cheese"]]]
         task["ground_truth"] = builder.calls
         total_calls += len(builder.calls)
         final = builder.calls[-1]
