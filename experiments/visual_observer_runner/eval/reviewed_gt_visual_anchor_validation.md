@@ -9,12 +9,17 @@ Scope:
 
 Changes:
 - Added top-level `key` and `value` visual-anchor fields to every task in the five reviewed GT scenario files.
-- Kept existing `ground_truth` tool chains unchanged.
+- Added `secondary_key` and `secondary_value` fields for the next DB-mappable visual anchor in each reviewed task.
+- Rechecked `restaurant5`, `kitchen4`, and `order2` task-by-task against the visual anchor sequence and the instruction branch logic.
+- Rechecked `order2` against the actual per-task `image_path` videos in `scenarios/final/order2.json`: `butcher_greek.mp4`, `greek_annie_1.mp4`, `meraki_greek.mp4`, `sunny_greek.mp4`, `pauhana_greek.mp4`, and `afrikana_greek.mp4`.
+- Corrected `order2` task 12 GT after visual review: the wooden-board roasted vegetable skewer is `Grilled Fish`, which enters the umami branch and adds `Greek Yogurt with Honey & Nuts` x2.
+- Corrected stored primary visual anchors for `order2` task 89 and task 93; their reviewed GT branch results remain valid.
+- Corrected `order2` white-plate dessert anchors in task 13, task 42, task 58, task 68, and task 96 from the wooden-bowl `Greek Yogurt with Honey & Nuts` interpretation to the actual white-plate `Vanilla pudding`; task 13, task 42, and task 58 GT were recomputed from the corrected branch.
 - Added `add_visual_anchors_for_reviewed_gt.py` so the visual anchors can be regenerated.
 - Added `verify_reviewed_gt_with_anchors.py` to validate anchors and replay GT execution.
 - Added `verify_gt_exact_db_fields.py` to reject GT fields that only pass by fuzzy/inclusion matching.
 
-Anchor coverage:
+Primary anchor coverage:
 
 | Scenario | Tasks | Key distribution | Anchor values | Missing |
 | --- | ---: | --- | ---: | ---: |
@@ -22,7 +27,17 @@ Anchor coverage:
 | retail10 | 63 | `product_name`: 63 | 63 | 0 |
 | kitchen4 | 50 | `recipe_name`: 23, `ingredient_name`: 27 | 58 | 0 |
 | restaurant5 | 50 | `dish_name`: 50 | 50 | 0 |
-| order2 | 97 | `dish_name`: 97 | 99 | 0 |
+| order2 | 97 | `dish_name`: 97 | 97 | 0 |
+
+Secondary anchor coverage:
+
+| Scenario | Tasks | Secondary key distribution | Secondary values | Empty secondary |
+| --- | ---: | --- | ---: | ---: |
+| retail6 | 49 | `product_name`: 49 | 44 | 5 |
+| retail10 | 63 | `product_name`: 63 | 25 | 38 |
+| kitchen4 | 50 | `recipe_name`: 13, `ingredient_name`: 37 | 12 | 38 |
+| restaurant5 | 50 | `dish_name`: 50 | 50 | 0 |
+| order2 | 97 | `dish_name`: 97 | 12 | 85 |
 
 Validation command:
 
@@ -56,10 +71,27 @@ Exact DB field result:
 | restaurant5 | 0 |
 | order2 | 0 |
 
+Secondary DB field result:
+
+| Scenario | Secondary exact field errors |
+| --- | ---: |
+| kitchen4 | 0 |
+| restaurant5 | 0 |
+| order2 | 0 |
+
+Builder/branch replay check:
+
+| Scenario | Recomputed GT mismatches |
+| --- | ---: |
+| kitchen4 | 0 |
+| order2 | 0 |
+
+`restaurant5` has no builder script; its branch replay is recorded in `restaurant5_gt_v1_audit.md`, and the official evaluator result remains 50/50.
+
 Compile check:
 
 ```bash
-python -m py_compile experiments/visual_observer_runner/eval/add_visual_anchors_for_reviewed_gt.py experiments/visual_observer_runner/eval/verify_reviewed_gt_with_anchors.py experiments/visual_observer_runner/eval/verify_gt_exact_db_fields.py
+python -m py_compile experiments/visual_observer_runner/eval/add_visual_anchors_for_reviewed_gt.py experiments/visual_observer_runner/eval/build_order2_gt.py experiments/visual_observer_runner/eval/verify_reviewed_gt_with_anchors.py experiments/visual_observer_runner/eval/verify_gt_exact_db_fields.py
 ```
 
 Result: passed.
