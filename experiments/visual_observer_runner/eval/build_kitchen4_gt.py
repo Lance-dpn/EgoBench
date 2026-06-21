@@ -588,7 +588,8 @@ def build_task(task_id: int) -> Builder | None:
             b.add_item(i, 5, "meat ingredient required by menu")
         b.tally_tastes()
     elif task_id == 50:
-        b.add_item(ties(ingredients(lambda i: location(i) == "countertop"), lambda i: nutrition_ing(i, "sodium_mg"))[0], 2, "flour stock is not below 100g")
+        for i in ties(ingredients(lambda i: location(i) == "countertop"), lambda i: nutrition_ing(i, "sodium_mg")):
+            b.add_item(i, 2, "flour stock is not below 100g")
         for r in list(b.menu):
             if has_tag(r, "high_fiber"):
                 b.remove_recipe(r, "delete high_fiber recipe")

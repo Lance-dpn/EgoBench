@@ -64,7 +64,8 @@ def normalize_for_hash(value):
     if isinstance(value, bool):
         return value
     if isinstance(value, float):
-        return int(value) if value.is_integer() else value
+        rounded_value = round(value, 10)
+        return int(rounded_value) if rounded_value.is_integer() else rounded_value
     return value
 
 
@@ -91,6 +92,7 @@ def calculate_db_hash(db_instance):
             'catalog': {k: {'name': v.name, 'category': v.category, 'price': v.price, 'tax_rate': v.tax_rate,
                            'discount': v.discount, 'nutritional_characteristics': v.nutritional_characteristics,
                            'taste': v.taste, 'country_of_origin': v.country_of_origin,
+                           'allergens': v.allergens,
                            'nutrition': vars(v.nutrition) if v.nutrition else None}
                      for k, v in db_instance.catalog.items()},
             'user_carts': {k: sorted([{'product_name': item.product_name, 'quantity': item.quantity,
@@ -401,6 +403,8 @@ def compare_tool_calls(ground_truth_calls, interaction_calls, db_instance=None, 
 
     def filter_params_by_method(tool_name, params, db):
         """Filter parameters based on database method signature"""
+        if not tool_name:
+            return params
         if db and hasattr(db, tool_name):
             try:
                 method = getattr(db, tool_name)
@@ -424,6 +428,8 @@ def compare_tool_calls(ground_truth_calls, interaction_calls, db_instance=None, 
                 if "calls" in entry and isinstance(entry["calls"], list):
                     for call in entry["calls"]:
                         call_info = extract_call_info(call)
+                        if not call_info.get("tool_name"):
+                            continue
                         call_info["parameters"] = filter_params_by_method(
                             call_info["tool_name"],
                             call_info["parameters"],
@@ -433,6 +439,8 @@ def compare_tool_calls(ground_truth_calls, interaction_calls, db_instance=None, 
                 # Old format: use "call" single object (backward compatible)
                 elif "call" in entry:
                     call_info = extract_call_info(entry["call"])
+                    if not call_info.get("tool_name"):
+                        continue
                     call_info["parameters"] = filter_params_by_method(
                         call_info["tool_name"],
                         call_info["parameters"],

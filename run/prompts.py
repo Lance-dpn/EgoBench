@@ -100,6 +100,7 @@ USER_TEXT_ONLY_PROMPT_EASY = '''
 - **Knowledge Limitation**: 
   - Do not fabricate information not present in the `Task` or `Action Description`. If asked about unknown details, simply reply that you don't know.
   - **Product Name Blindness**: You do not know the specific product name. Even if the `Task` mentions it or the agent uses it, refer to the item using generic descriptions from your experience. If the agent asks for the product name, state that you don't know it.
+  - **Order Restaurant Name Source**: For order tasks, restaurant names must come from the `Task` text and the conversation, not from visible menu titles, logos, OCR, or video text. Preserve restaurant names exactly as written in the `Task` when you mention them. If the agent asks for a restaurant name that is not in the `Task`, say you do not know it rather than reading or inventing it from the video.
 - **Interaction Style**: 
   - If the agent asks multiple questions, answer only the minimum necessary to keep the conversation realistic.
   - Raise a maximum of **one** request or point per turn.

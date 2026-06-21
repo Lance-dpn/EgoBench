@@ -261,6 +261,21 @@ region, ingredient, action, OCR text, or spatial relation was visually
 recognized correctly. Use `--no-correction_auto_approve_read_only` to force
 read-only batches through the correction model as well.
 
+Canonicalization policy: when a visual/OCR lookup returns no result, the service
+prompt tells the agent to retry a small number of distinctive tokens or stable
+substrings before giving up. Once a tool returns a clear canonical field such as
+`product_name`, `dish_name`, `category`, or `restaurant_name`, later calls and
+final replies should use that DB field rather than the preliminary visual
+spelling. In restaurant menu boards, a large uppercase label above a drink image
+is treated as that drink's menu name; in order scenes, an unsupported or
+incomplete restaurant name should be clarified with the user before dish/order
+mutations.
+
+For payment, tax, discount-adjusted price, and set-meal totals, the official
+`compute_*`/total tool output is the source of truth. These DB methods apply
+catalog discounts and set-meal discounts, so final replies should not hand-compute
+totals from undiscounted price facts.
+
 The default correction retry budget is `--max_correction_rounds 5`. Every
 correction decision is printed in the run log, including APPROVE decisions and
 their compact summaries, and is also written to the correction jsonl log. When a
@@ -272,9 +287,12 @@ shown to the user. Rejection feedback includes the exact rejected output plus
 tool/schema/evidence/state/calculation issues, not visual target correction.
 
 Correction jsonl records include `audit_context` stats for model-reviewed
-decisions, including context character count and whether the full audit context
-was truncated. Deterministic read-only approvals do not call the correction
-model, so their `audit_context` field is empty.
+decisions, including context character count. The correction audit context is no
+longer truncated: `--correction_max_tool_log_entries`,
+`--correction_max_tool_result_chars`, and `--correction_max_audit_context_chars`
+are deprecated no-ops kept for CLI compatibility. Deterministic read-only
+approvals do not call the correction model, so their `audit_context` field is
+empty.
 
 Example single-task replay:
 

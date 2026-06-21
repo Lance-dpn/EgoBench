@@ -149,10 +149,6 @@ def order_exact() -> list[str]:
             valid_sets = sets_by_rest.get(rest, set()) if rest else set()
             if "dish_name" in p:
                 require_exact(p["dish_name"], set(valid_dishes), f"{prefix}.dish_name", errors)
-                dish = valid_dishes.get(p["dish_name"])
-                if dish and call.get("tool_name") == "add_dish_to_order":
-                    for field in ["category", "price", "tax_rate", "discount"]:
-                        require_equal(p.get(field), dish[field], f"{prefix}.{field}", errors)
             if "set_meal_name" in p:
                 require_exact(p["set_meal_name"], valid_sets, f"{prefix}.set_meal_name", errors)
             for item_index, item in enumerate(p.get("dishes") or [], 1):

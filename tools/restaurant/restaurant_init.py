@@ -2848,7 +2848,7 @@ restaurant_init_data5 = {
       "tax_rate": 0.05,
       "discount": 0.8,
       "nutritional_characteristics": [
-        "low_calorie"
+        "low_calories"
       ],
       "taste": [
         "salty"

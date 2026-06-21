@@ -35,6 +35,11 @@ Manual review update:
 - Found and fixed one error in task 39: `White Tea` was tied with `Oolong Tea` and `Jasmine Tea` for the lowest calories among sweet, nut-free items, so it must be added with quantity 2 and included in the final nutrition calculation.
 - After the fix, the GT contains 169 calls across 50 tasks.
 - Follow-up: corrected task 8's stored visual anchor `value` from the later bottom-right drink `R` to the initial stemmed cocktail `E`; the reviewed GT operations already matched the `E, then R` branch logic below.
+- Follow-up after local DB normalization: `restaurant_init_data5` now uses
+  `low_calories` for `F`, so `low_calorie` is empty and `low_calories` contains
+  `F` plus the existing low-calorie tea/coffee items. Rechecked and updated
+  affected tasks 11, 22, 24, 27, 33, and 48. Current GT contains 168 calls
+  across 50 tasks.
 
 Per-task review summary:
 
@@ -50,7 +55,7 @@ Per-task review summary:
 | 8 | E, then R | E has high-protein tag; R discount !=0.8 | add `Cold Brew`; compute nutrition |
 | 9 | F, then U | F has no alcohol allergen; total tax is not <5 | add `Black Tea`, `Oolong Tea`; compute tax |
 | 10 | R, then H | R calories not <60; H is not in a set meal | add `Cheesecake`; compute nutrition |
-| 11 | H, then R | H price not >20; non-set payment is not <30 | add `Matcha` |
+| 11 | H, then R | H price not >20; among `low_calories`, `Matcha` has the highest protein; non-set payment is not <30 | add `Matcha` |
 | 12 | U, then E | U contains dairy; E carbs !=0 | add `F`, `Cold Brew`; compute nutrition |
 | 13 | T, then F | T calories >150; F is not in a combo | add six 2-kcal teas: `White Tea`, `Green Tea`, `Black Tea`, `Oolong Tea`, `Jasmine Tea`, `Earl Grey`; compute payment |
 | 14 | R, then H | R lacks high-sugar tag; sugar total >40; H has discount | add `H`, remove `H`, add `H` |
@@ -61,18 +66,18 @@ Per-task review summary:
 | 19 | T, then U | T discount !=1.0; U is not in a set meal | add `H`; no matching original-price aggregate tool exists |
 | 20 | U, then T | U calories not >200; T discount <0.85 | add `Cheesecake`, add `T` x2; compute nutrition |
 | 21 | T, then E | T lacks high-sugar tag; E discount <0.9 | add `Espresso`, add `E` x2; compute tax |
-| 22 | U, then E | U has no alcohol allergen; E is not in a set meal | add all tied low-calorie zero-fat drinks; compute payment |
+| 22 | U, then E | U has no alcohol allergen; all `low_calories` candidates tie at 0 fat; E is not in a set meal | add `F`, `Espresso`, `Americano`, `Cold Brew`, `White Tea`, `Green Tea`, `Black Tea`, `Oolong Tea`, `Jasmine Tea`, `Earl Grey`, `Matcha`; compute payment |
 | 23 | F, then H | F has no dairy allergen; H is not in a set meal | add `Cheesecake`; compute nutrition |
-| 24 | H, then U | H has no nut allergen; sodium total is not <100 | add `Espresso`; compute nutrition |
+| 24 | H, then U | H has no nut allergen; among `low_calories`, `Espresso` has the lowest sodium; sodium total is not <100 | add `Espresso`; compute nutrition |
 | 25 | E, then F | E lacks low-calorie tag; F is not in a set meal; highest carbs is `Tiramisu` | add `F`; remove `Tiramisu`; compute nutrition |
 | 26 | R, then F | R is not dairy-free; F is not in a combo | add `Espresso`; compute nutrition |
-| 27 | E, then H | E lacks high-calcium tag; non-set payment >50 | add `F`, `Cold Brew`, `White Tea`, `Green Tea`, `Matcha`, then `H` |
+| 27 | E, then H | E lacks high-calcium tag; largest discount among `low_calories` ties at discount 0.8; non-set payment >50 | add `F`, `Cold Brew`, `White Tea`, `Green Tea`, `Matcha`, then `H` |
 | 28 | T, then U | T sodium <50; tax total >15 | add `Cold Brew`, `White Tea`, `Green Tea`, `Matcha`, `U`; remove `Matcha` |
 | 29 | U, then H | U is not bitter; H discount <0.9 | add `Cheesecake`, `H`; compute nutrition |
 | 30 | F, then H | F is not in a combo; H discount <1.0 | add `Cheesecake`, `H`; compute tax |
 | 31 | E, then F | E has high-protein tag; F price <25 | add `F`, then another `F`; compute nutrition |
 | 32 | U, then E | U protein not >3; E has high-protein tag | add `Cheesecake`, `E`; compute nutrition |
-| 33 | F, then R | F discounted price <25; R is not in a combo | add `Matcha`, `R`; compute tax |
+| 33 | F, then R | F discounted price <25; among dairy-free `low_calories`, `Matcha` has the highest protein; R is not in a combo | add `Matcha`, `R`; compute tax |
 | 34 | R, then E | R has no nut allergen; E x3 discounted total <60 | add `T` x2, `E` x3; compute tax |
 | 35 | T, then E | T sugar not >30; E carbs-sugar difference is 10, not >10 | add `H`; compute payment |
 | 36 | U, then U | U lacks no-additives tag; half of U calories is not <50 | add `Americano`, `Cold Brew`; compute nutrition |
@@ -87,7 +92,7 @@ Per-task review summary:
 | 45 | U, then U | U calories !=0; U*0.85 is not below actual discounted price | add `Espresso`; compute nutrition |
 | 46 | U, then T | U calories >100; T has discount | add `Espresso`, `T`; compute payment |
 | 47 | E, then T | E has low-sugar tag; T price <30 | add `Matcha`, `T`; compute payment |
-| 48 | F, then T | F saved amount not >5; T is not in a set meal | add `Matcha` x5; compute tax and payment |
+| 48 | F, then T | F saved amount not >5; among `low_calories`, `Matcha` has the highest protein; T is not in a set meal | add `Matcha` x5; compute tax and payment |
 | 49 | E, then H | E price not >60; floor((max price-min price)/10)=7 | add `Tiramisu`, `H` x7; compute payment |
 | 50 | T, then R | T carbs not <5; abs(R protein-fat)=5.2, not <5 | add six 2-kcal teas; compute nutrition |
 

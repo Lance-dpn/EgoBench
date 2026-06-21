@@ -7,6 +7,7 @@ import argparse
 import concurrent.futures
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -40,7 +41,11 @@ DEFAULT_SERVICE_MODEL_NAME = (
     or "gpt-5.5"
 )
 DEFAULT_USER_MODEL_NAME = (
-    os.environ.get("USER_MODEL_NAME")
+    os.environ.get("LANCE_USER_MODEL_NAME")
+    or os.environ.get("LANCE_SERVICE_MODEL_NAME")
+    or os.environ.get("GPT_USER_MODEL_NAME")
+    or os.environ.get("GPT_SERVICE_MODEL_NAME")
+    or os.environ.get("USER_MODEL_NAME")
     or os.environ.get("QW_USER_MODEL_NAME")
     or "qwen3.5-397b-a17b"
 )
@@ -89,6 +94,7 @@ from experiments.gpt55_frame_service_runner.tool_call_correction import (  # noq
     env_default_model,
     env_chat_completions_model,
     failure_decision,
+    is_mutation_call,
     normalize_calls,
     review_with_agent,
     write_correction_log,
@@ -211,6 +217,54 @@ def is_visual_context_request(text: str) -> bool:
     return str(text or "").strip() == VISUAL_CONTEXT_REQUEST
 
 
+def is_stale_visual_context_rejection(decision: CorrectionDecision) -> bool:
+    """Detect correction rejections that contradict already-attached frames."""
+    if decision.approved:
+        return False
+    text = str(decision.reason or "").lower()
+    if not text:
+        return False
+    stale_markers = (
+        "no attached frames",
+        "no frames are attached",
+        "no current frames",
+        "no frames or tool results",
+        "fresh visual context",
+        "need_visual_context",
+        "key_frames",
+        "key frames",
+        "request visual context",
+        "visual context before",
+    )
+    return any(marker in text for marker in stale_markers)
+
+
+def sanitize_correction_revise(
+    decision: CorrectionDecision,
+    proposed_calls: list[dict[str, Any]],
+) -> CorrectionDecision:
+    """Do not let correction directly replace state-changing tool calls."""
+    if decision.decision != "REVISE" or not decision.calls:
+        return decision
+    if any(is_mutation_call(call) for call in proposed_calls + decision.calls):
+        return CorrectionDecision(
+            decision="REJECT",
+            reason=(
+                "decision: REJECT\n"
+                "error_type: state_change\n"
+                "visible_evidence: not audited\n"
+                "reason: Correction proposed replacement mutation; mutations must be replanned by the service agent, not auto-rewritten.\n"
+                "suggestion: Gather or cite official evidence, then let the service agent emit the correct mutation.\n"
+                "replan: Continue without executing replacement_calls."
+            ),
+            raw_text=decision.raw_text,
+            input_tokens=decision.input_tokens,
+            output_tokens=decision.output_tokens,
+            error=decision.error,
+        )
+    return decision
+
+
 def message_likely_needs_visual(text: str) -> bool:
     value = str(text or "")
     if VISUAL_REFERENCE_PATTERN.search(value):
@@ -319,6 +373,16 @@ def is_internal_service_history_message(message: dict[str, Any]) -> bool:
     if not content:
         return True
     if role == "user":
+        if content.startswith("Internal preflight review") and any(
+            marker in content.lower()
+            for marker in (
+                "unsupported order restaurant_name",
+                "unsupported restaurant_name",
+                "empty db namespace",
+                "namespace guard",
+            )
+        ):
+            return False
         return (
             content.startswith("Tool execution result:")
             or content.startswith("Internal preflight review")
@@ -444,6 +508,37 @@ def split_repeated_state_changes(
         else:
             safe_calls.append(call)
     return safe_calls, repeated_calls
+
+
+def unsupported_order_restaurant_calls(db: Any, proposed_calls: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if not isinstance(db, OrderDB):
+        return []
+    supported = {str(name).strip().lower() for name in getattr(db, "restaurants", {}).keys()}
+    unsupported: list[dict[str, Any]] = []
+    for call in proposed_calls:
+        if not isinstance(call, dict):
+            continue
+        params = call.get("parameters", {})
+        if not isinstance(params, dict) or "restaurant_name" not in params:
+            continue
+        restaurant_name = str(params.get("restaurant_name") or "").strip()
+        if restaurant_name.lower() not in supported:
+            unsupported.append(call)
+    return unsupported
+
+
+def restaurant_names_from_calls(calls: list[dict[str, Any]]) -> list[str]:
+    names: list[str] = []
+    seen: set[str] = set()
+    for call in calls:
+        params = call.get("parameters", {}) if isinstance(call, dict) else {}
+        if not isinstance(params, dict):
+            continue
+        name = str(params.get("restaurant_name") or "").strip()
+        if name and name.lower() not in seen:
+            names.append(name)
+            seen.add(name.lower())
+    return names
 
 
 def concise_text(value: Any, max_chars: int = 500) -> str:
@@ -1136,6 +1231,23 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                     )
 
                 def maybe_review_tool_batch(proposed_calls: list[dict[str, Any]]) -> CorrectionDecision:
+                    unsupported_restaurant_calls = unsupported_order_restaurant_calls(db, proposed_calls)
+                    if unsupported_restaurant_calls:
+                        unsupported_names = ", ".join(restaurant_names_from_calls(unsupported_restaurant_calls))
+                        return CorrectionDecision(
+                            decision="REJECT",
+                            reason=(
+                                "Unsupported order restaurant_name value(s) would create an empty DB namespace: "
+                                f"{unsupported_names}. This rejection applies only to these exact restaurant_name "
+                                "value(s), and does not make other restaurant names in the same proposed batch "
+                                "unsupported. User confirmation alone is not DB support for the rejected namespace. "
+                                "Do not retry the same rejected restaurant_name. First check whether the same user wording supplies a name part, "
+                                "nation/cuisine part, and Restaurant; if so, try that structured complete form once. "
+                                "Otherwise ask for a different exact full restaurant name in the <name> <nation> "
+                                "Restaurant pattern, or use another complete-pattern restaurant option already provided "
+                                "by the user. Do not invent missing name/nation parts or use visual/OCR text."
+                            ),
+                        )
                     if not args.enable_correction_agent or correction_client is None:
                         return CorrectionDecision(decision="APPROVE", reason="Correction agent disabled.")
                     if args.correction_auto_approve_read_only:
@@ -1156,7 +1268,9 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         service_prompt=service_agent_sys_prompt,
                         tool_catalog=tools_list,
                         key_frames=[],
+                        service_frames_attached=frames_sent_this_turn,
                         tool_logs=local_tool_logs,
+                        prior_tool_logs=history_log["tool_calls"],
                         proposed=proposed_calls,
                         proposed_kind="tool_calls",
                         max_tool_log_entries=args.correction_max_tool_log_entries,
@@ -1170,7 +1284,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                             audit_context=audit_context,
                         )
                         decision.audit_context_stats = audit_context_stats(audit_context)  # type: ignore[attr-defined]
-                        return decision
+                        return sanitize_correction_revise(decision, proposed_calls)
                     except Exception as exc:
                         return failure_decision(exc, failure_policy=args.correction_failure_policy)
 
@@ -1179,7 +1293,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         return CorrectionDecision(decision="APPROVE", reason="Correction agent disabled.")
                     deterministic_feedback = deterministic_reply_feedback(
                         proposed_reply,
-                        local_tool_logs,
+                        history_log["tool_calls"] + local_tool_logs,
                     )
                     if deterministic_feedback:
                         return CorrectionDecision(decision="REJECT", reason=deterministic_feedback)
@@ -1194,7 +1308,9 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         service_prompt=service_agent_sys_prompt,
                         tool_catalog=tools_list,
                         key_frames=[],
+                        service_frames_attached=frames_sent_this_turn,
                         tool_logs=local_tool_logs,
+                        prior_tool_logs=history_log["tool_calls"],
                         proposed=proposed_reply,
                         proposed_kind="final_reply",
                         max_tool_log_entries=args.correction_max_tool_log_entries,
@@ -1208,6 +1324,17 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                             audit_context=audit_context,
                         )
                         decision.audit_context_stats = audit_context_stats(audit_context)  # type: ignore[attr-defined]
+                        if frames_sent_this_turn and is_stale_visual_context_rejection(decision):
+                            return CorrectionDecision(
+                                decision="APPROVE",
+                                reason=(
+                                    "Correction rejection ignored: service already received frames this turn; "
+                                    "visual recognition/key-frame availability is outside correction scope."
+                                ),
+                                input_tokens=decision.input_tokens,
+                                output_tokens=decision.output_tokens,
+                                raw_text=decision.raw_text,
+                            )
                         return decision
                     except Exception as exc:
                         return failure_decision(exc, failure_policy=args.correction_failure_policy)
@@ -1529,6 +1656,44 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                             continue
                     latest_correction_frames = []
 
+                    unsupported_restaurant_calls = unsupported_order_restaurant_calls(db, approved_calls)
+                    if unsupported_restaurant_calls:
+                        unsupported_names = ", ".join(restaurant_names_from_calls(unsupported_restaurant_calls))
+                        namespace_feedback = (
+                            "Internal DB namespace guard: these order tool call(s) use unsupported "
+                            "restaurant_name values and were not executed:\n"
+                            f"{canonical_tool_call_text(unsupported_restaurant_calls)}\n"
+                            f"Unsupported restaurant_name value(s): {unsupported_names}. This guard applies only "
+                            "to these exact restaurant_name value(s), and does not make other restaurant names in "
+                            "the same proposed batch unsupported. User confirmation alone is not DB support for "
+                            "the rejected namespace. Do not retry the same rejected restaurant_name. First check "
+                            "whether the same user wording supplies a name part, "
+                            "nation/cuisine part, and Restaurant; if so, try that structured complete form once. "
+                            "Otherwise ask for a different exact full restaurant name before any order tool call, "
+                            "or use another complete-pattern restaurant option already provided by the user. "
+                            "Restaurant names usually follow the <name> <nation> Restaurant pattern. Do not invent "
+                            "missing name/nation parts or use visual/OCR text."
+                        )
+                        print(
+                            "🛡️ [Restaurant Namespace Guard] blocked unsupported order restaurant call(s): "
+                            f"{canonical_tool_call_text(unsupported_restaurant_calls)}"
+                        )
+                        if correction_rounds < args.max_correction_rounds:
+                            correction_rounds += 1
+                            local_service_history.append({"role": "assistant", "content": canonical_tool_call_text(approved_calls)})
+                            local_service_history.append({"role": "user", "content": namespace_feedback})
+                            force_attach_frames = False
+                            continue
+                        approved_calls = [
+                            call
+                            for call in approved_calls
+                            if call not in unsupported_restaurant_calls
+                        ]
+                        if not approved_calls:
+                            local_service_history.append({"role": "assistant", "content": canonical_tool_call_text(unsupported_restaurant_calls)})
+                            local_service_history.append({"role": "user", "content": namespace_feedback})
+                            continue
+
                     safe_calls, repeated_calls = split_repeated_state_changes(
                         approved_calls,
                         prior_tool_logs=history_log["tool_calls"],
@@ -1725,14 +1890,22 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--user_api_key",
         default=(
-            os.environ.get("QW_SERVICE_API_KEY")
+            os.environ.get("LANCE_API_KEY")
+            or os.environ.get("LANCE_SERVICE_API_KEY")
+            or os.environ.get("GPT_API_KEY")
+            or os.environ.get("GPT_SERVICE_API_KEY")
+            or os.environ.get("QW_SERVICE_API_KEY")
             or os.environ.get("API_KEY")
         ),
     )
     parser.add_argument(
         "--user_api_base_url",
         default=(
-            os.environ.get("QW_SERVICE_API_BASE_URL")
+            os.environ.get("LANCE_LLM_API_BASE_URL")
+            or os.environ.get("LANCE_SERVICE_API_BASE_URL")
+            or os.environ.get("GPT_LLM_API_BASE_URL")
+            or os.environ.get("GPT_SERVICE_API_BASE_URL")
+            or os.environ.get("QW_SERVICE_API_BASE_URL")
             or os.environ.get("LLM_API_BASE_URL")
         ),
     )

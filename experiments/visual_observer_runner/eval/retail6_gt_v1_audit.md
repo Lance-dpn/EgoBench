@@ -3,10 +3,9 @@
 ## Visual mapping
 - first heart-shaped cookie: St Michel Le Palmier Crispy Caramel | origin=France | price=26.8 | tax=0.1 | discount=0.9 | taste=['sweet'] | tags=['high_calories', 'high_fat', 'high_sugar'] | allergens=['gluten', 'milk']
 - second chocolate cookie: Bahlsen | origin=Germany | price=32.8 | tax=0.12 | discount=0.7 | taste=['sweet'] | tags=['high_calories', 'high_fat', 'high_sugar'] | allergens=['gluten', 'milk']
-- third white-packaged cookie box: Desobry Speculoos | origin=Danmark | price=33.8 | tax=0.06 | discount=0.9 | taste=['sweet', 'nutty'] | tags=['high_calories', 'high_fat', 'high_sugar'] | allergens=['gluten', 'milk', 'nuts']
+- third white-packaged cookie box: Desobry Speculoos | origin=Denmark | price=33.8 | tax=0.06 | discount=0.9 | taste=['sweet', 'nutty'] | tags=['high_calories', 'high_fat', 'high_sugar'] | allergens=['gluten', 'milk', 'nut']
 - red-lid cylindrical cookie above third box: Nutella Biscuits | origin=Italy | price=38.6 | tax=0.09 | discount=1.0 | taste=['sweet'] | tags=['high_calories', 'high_fat', 'high_sugar'] | allergens=['gluten', 'milk', 'nut', 'soy']
 - yellow-packaged cookie below third box: Leibniz Keks | origin=Germany | price=16.9 | tax=0.07 | discount=0.9 | taste=['sweet'] | tags=['high_calories', 'high_sugar'] | allergens=['gluten', 'milk', 'soy', 'egg']
-- Scenario JSON now keeps the initial visual anchor in `value` and the next distinct visual anchor, when present, in `secondary_value`. Empty `secondary_value` means the instruction compares the initial visual set or continues with database-only conditions without introducing a new visual referent.
 
 ## Task decisions
 - Task 1: 5 calls

@@ -296,6 +296,12 @@ class RetailDB:
         
         return {"products": results, "count": len(results)}
 
+    def find_products_by_allergen(self, allergen: str) -> Dict[str, Any]:
+        """Find all products that contain a specific allergen."""
+        allergen_lower = allergen.lower()
+        matching_products = [prod for prod in self.catalog.values() if allergen_lower in [a.lower() for a in prod.allergens]]
+        return {"product_names": [p.name for p in matching_products]}
+
     def list_discounted_products(self) -> Dict[str, Any]:
         """Return all product names where discount < 1.0."""
         discounted_products = [prod.name for prod in self.catalog.values() if prod.discount < 1.0]

@@ -120,7 +120,6 @@ def greek_discounted_price(name: str) -> float:
 
 
 def add_dish_call(rest: str, user_id: str, name: str, qty: float) -> dict:
-    d = dish(rest, name)
     return {
         "tool_name": "add_dish_to_order",
         "parameters": {
@@ -128,10 +127,6 @@ def add_dish_call(rest: str, user_id: str, name: str, qty: float) -> dict:
             "user_id": user_id,
             "dish_name": DISPLAY[rest][name],
             "quantity": qty,
-            "category": d.get("category"),
-            "price": d.get("price"),
-            "tax_rate": d.get("tax_rate"),
-            "discount": d.get("discount"),
         },
     }
 
@@ -184,9 +179,27 @@ class Builder:
         self.notes: list[str] = [f"restaurant={rest}"]
         self.cart: OrderedDict[str, float] = OrderedDict()
         self.sets: OrderedDict[str, float] = OrderedDict()
-        # The official order_init_data currently stores Greek starter orders under
-        # "Greek Village Roast Chicken Leg" rather than the catalog restaurant.
-        # The evaluator initializes an empty order for Mediterranean Greek Restaurant.
+        self._load_initial_order()
+
+    def _load_initial_order(self) -> None:
+        for order in order_init_data.get("user_orders", []):
+            if order.get("restaurant_name") != self.rest or order.get("user_id") != self.user_id:
+                continue
+            for item in order.get("items", []):
+                name = item.get("dish_name", "").lower()
+                qty = item.get("quantity", 1)
+                if name in SET_MEALS_BY_REST.get(self.rest, {}):
+                    self.sets[name] = self.sets.get(name, 0) + qty
+                else:
+                    self.cart[name] = self.cart.get(name, 0) + qty
+            break
+        if self.cart or self.sets:
+            initial = [
+                f"{DISPLAY[self.rest].get(item, item)} x{qty:g}" for item, qty in self.cart.items()
+            ] + [
+                f"{DISPLAY_SET[self.rest].get(item, item)} x{qty:g}" for item, qty in self.sets.items()
+            ]
+            self.notes.append("initial order: " + ", ".join(initial))
 
     def add(self, items: list[str], qty: float = 1, reason: str = "") -> None:
         for item in items:
@@ -229,6 +242,14 @@ class Builder:
         if reason:
             self.notes.append(f"clear order: {reason}")
 
+    def summary(self) -> None:
+        self.calls.append(
+            {
+                "tool_name": "get_user_order_summary",
+                "parameters": {"restaurant_name": self.rest, "user_id": self.user_id},
+            }
+        )
+
     def non_set_total_price(self, discounted: bool = False) -> float:
         total = 0.0
         for item, qty in self.cart.items():
@@ -245,6 +266,12 @@ class Builder:
                 total += n(self.rest, inc["dish_name"], metric) * inc.get("quantity", 1) * qty
         return total
 
+    def set_metric(self, meal: str, metric: str) -> float:
+        total = 0.0
+        for inc in SET_MEALS_BY_REST[self.rest][meal]["included_dishes"]:
+            total += n(self.rest, inc["dish_name"], metric) * inc.get("quantity", 1)
+        return total
+
     def contains_allergen(self, allergen: str) -> bool:
         return any(has_allergen(self.rest, item, allergen) for item in self.cart)
 
@@ -256,6 +283,21 @@ class Builder:
         for _, item in list(values):
             if n(self.rest, item, metric) == best:
                 self.remove(item, None, reason or f"{metric} {'max' if reverse else 'min'}")
+
+    def remove_item_by_metric_including_sets(self, metric: str, reverse: bool = True, reason: str = "") -> None:
+        values: list[tuple[float, str, str]] = []
+        values += [(n(self.rest, item, metric), "dish", item) for item in self.cart]
+        values += [(self.set_metric(item, metric), "set", item) for item in self.sets]
+        if not values:
+            return
+        best = max(v for v, _, _ in values) if reverse else min(v for v, _, _ in values)
+        for value, kind, item in list(values):
+            if value != best:
+                continue
+            if kind == "dish":
+                self.remove(item, None, reason or f"{metric} {'max' if reverse else 'min'}")
+            else:
+                self.remove_set(item, None, reason or f"{metric} {'max' if reverse else 'min'}")
 
     def remove_non_set_by_price(self, reverse: bool = True, reason: str = "") -> None:
         if not self.cart:
@@ -371,7 +413,7 @@ def build_task(task_id: int) -> Builder | None:
         else:
             b.add([VISUAL["white plate dessert at bottom right of sixth page"]], 2, "bottom-right sixth-page white plate")
         if b.non_set_total_price(False) > 150:
-            b.remove_non_set_by_metric("fat_g", True, "order price > 150; remove highest fat")
+            b.remove_item_by_metric_including_sets("fat_g", True, "order price > 150; remove highest fat including set meals")
         b.compute(["nutrition", "payment"])
     elif task_id == 5:
         anchor = VISUAL["red seafood in copper double-handled pot"]
@@ -409,7 +451,7 @@ def build_task(task_id: int) -> Builder | None:
             b.add(price_min(GREEK, lambda x: dish(GREEK, x)["category"].lower() == "seafood"), reason="protein < 30")
         b.compute(["tax", "nutrition"])
     elif task_id == 9:
-        anchor = VISUAL["dark blue casserole containing seafood / seafood paella"]
+        anchor = "mediterranean grilled prawns"
         if n(GREEK, anchor, "calories_kcal") < 250:
             b.add(metric_min(GREEK, lambda x: dish(GREEK, x)["category"].lower() == "soups" and has_taste(GREEK, x, "mild"), "fat_g"), reason="low calorie soup branch")
         else:
@@ -457,8 +499,14 @@ def build_task(task_id: int) -> Builder | None:
             b.add(metric_min(GREEK, lambda x: True, "sugar_g"), reason="no discounted dish; lowest sugar")
         b.compute(["payment", "nutrition"])
     elif task_id == 14:
-        b.add([VISUAL["dark blue casserole containing seafood / seafood paella"]], 1, "rainy takeout wants seafood risotto")
-        b.compute(["payment", "nutrition"])
+        anchor = VISUAL["top right first expanded page / chicken and potatoes casserole"]
+        if dish(GREEK, anchor)["price"] > 150:
+            b.add([VISUAL["dark blue casserole containing seafood / seafood paella"]], 1, "price above 150; seafood risotto")
+        else:
+            b.add(price_max(GREEK, lambda x: has_taste(GREEK, x, "savory") or has_taste(GREEK, x, "umami")), 2, "price at most 150; fresh/savory highest price")
+        if b.total_metric("protein_g") < 50:
+            b.remove_non_set_by_metric("protein_g", False, "protein below 50; remove lowest protein")
+        b.compute(["payment"])
     elif task_id == 15:
         anchor = VISUAL["bright blue plate with fried items and lemon"]
         if n(GREEK, anchor, "sodium_mg") > 500:
@@ -849,7 +897,7 @@ def build_task(task_id: int) -> Builder | None:
         b.maybe_convert_exact_set("set below threshold if exact")
         b.compute(["nutrition", "payment"])
     elif task_id == 57:
-        anchor = VISUAL["dark blue casserole containing seafood / seafood paella"]
+        anchor = "mediterranean grilled prawns"
         if dish(GREEK, anchor)["price"] < 88:
             b.add(metric_max(GREEK, lambda x: has_taste(GREEK, x, "sweet"), "sugar_g"), reason="price below 88")
         else:
@@ -1049,7 +1097,7 @@ def build_task(task_id: int) -> Builder | None:
             b.add(price_min(GREEK, lambda x: has_taste(GREEK, x, "sour")), 2, "fallback sour lowest price")
         if b.total_metric("carbs_g") > 20:
             b.remove_non_set_by_metric("carbs_g", True, "carbs still > 20")
-        b.compute(["nutrition", "tax"])
+        b.compute(["tax"])
     elif task_id == 79:
         anchor = VISUAL["bright blue plate with fried items and lemon"]
         if has_allergen(GREEK, anchor, "nuts"):
@@ -1062,11 +1110,11 @@ def build_task(task_id: int) -> Builder | None:
     elif task_id == 80:
         anchor = VISUAL["red seafood in copper double-handled pot"]
         if n(GREEK, anchor, "calories_kcal") > 250:
-            b.add(metric_min(GREEK, lambda x: has_taste(GREEK, x, "umami"), "calories_kcal"), 2, "calories > 250; fresh/umami lowest calories")
+            b.add(metric_min(GREEK, lambda x: has_taste(GREEK, x, "fresh"), "calories_kcal"), 2, "calories > 250; fresh lowest calories")
         else:
             b.add(price_max(GREEK, lambda x: has_tag(GREEK, x, "high_fiber")), reason="fallback high-fiber highest price")
-        if not any(has_taste(GREEK, item, "umami") for item in b.cart):
-            b.add(price_min(GREEK, lambda x: has_tag(GREEK, x, "vegan")), reason="no fresh/umami flavor; add cheapest vegan")
+        if not any(has_taste(GREEK, item, "fresh") for item in b.cart):
+            b.add(price_min(GREEK, lambda x: has_tag(GREEK, x, "vegan")), reason="no fresh flavor; add cheapest vegan")
         b.compute(["tax"])
     elif task_id == 81:
         anchor = VISUAL["grilled vegetable skewer on wooden cutting board"]
@@ -1079,7 +1127,7 @@ def build_task(task_id: int) -> Builder | None:
             b.add(metric_min(GREEK, lambda x: has_taste(GREEK, x, "sour"), "calories_kcal"), 2, "replace with sour lowest calories")
         b.compute(["payment", "nutrition"])
     elif task_id == 82:
-        anchor = VISUAL["dark blue casserole containing seafood / seafood paella"]
+        anchor = "mediterranean grilled prawns"
         if n(GREEK, anchor, "sugar_g") > 10:
             b.add(metric_max(GREEK, lambda x: has_taste(GREEK, x, "mild"), "fiber_g"), 2, "sugar > 10")
         else:
@@ -1226,10 +1274,11 @@ def build_task(task_id: int) -> Builder | None:
             b.add(metric_max(GREEK, lambda x: has_taste(GREEK, x, "mild"), "calories_kcal"), reason="fallback mild highest calories")
         if b.cart and max(dish(GREEK, item)["price"] for item in b.cart) > 150:
             b.remove_non_set_by_price(True, "most expensive original price > 150")
-        b.compute(["nutrition", "tax"])
+        b.summary()
+        b.compute(["tax"])
     elif task_id == 97:
         anchor = VISUAL["top right first expanded page / chicken and potatoes casserole"]
-        if dish(GREEK, anchor)["price"] * 4 < 400:
+        if discounted_price(GREEK, anchor) * 4 < 400:
             b.add(metric_max(GREEK, lambda x: has_taste(GREEK, x, "savory"), "carbs_g"), 4, "four anchor portions below 400")
         else:
             b.add(price_min(GREEK, lambda x: has_allergen(GREEK, x, "seafood")), 2, "fallback seafood-allergen lowest price")

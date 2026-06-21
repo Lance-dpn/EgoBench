@@ -60,14 +60,6 @@
     "task_id": 2,
     "ground_truth": [
       {
-        "tool_name": "add_dish_to_order",
-        "parameters": {
-          "user_id": "customer_008",
-          "dish_name": "F",
-          "quantity": 1
-        }
-      },
-      {
         "tool_name": "compute_total_nutrition",
         "parameters": {
           "user_id": "customer_008",
@@ -78,10 +70,6 @@
             },
             {
               "dish_name": "Cold Brew & Cheesecake Set",
-              "quantity": 1
-            },
-            {
-              "dish_name": "F",
               "quantity": 1
             }
           ]
