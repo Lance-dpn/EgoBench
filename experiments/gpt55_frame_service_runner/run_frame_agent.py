@@ -378,8 +378,6 @@ def is_internal_service_history_message(message: dict[str, Any]) -> bool:
             for marker in (
                 "unsupported order restaurant_name",
                 "unsupported restaurant_name",
-                "empty db namespace",
-                "namespace guard",
             )
         ):
             return False
@@ -508,37 +506,6 @@ def split_repeated_state_changes(
         else:
             safe_calls.append(call)
     return safe_calls, repeated_calls
-
-
-def unsupported_order_restaurant_calls(db: Any, proposed_calls: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    if not isinstance(db, OrderDB):
-        return []
-    supported = {str(name).strip().lower() for name in getattr(db, "restaurants", {}).keys()}
-    unsupported: list[dict[str, Any]] = []
-    for call in proposed_calls:
-        if not isinstance(call, dict):
-            continue
-        params = call.get("parameters", {})
-        if not isinstance(params, dict) or "restaurant_name" not in params:
-            continue
-        restaurant_name = str(params.get("restaurant_name") or "").strip()
-        if restaurant_name.lower() not in supported:
-            unsupported.append(call)
-    return unsupported
-
-
-def restaurant_names_from_calls(calls: list[dict[str, Any]]) -> list[str]:
-    names: list[str] = []
-    seen: set[str] = set()
-    for call in calls:
-        params = call.get("parameters", {}) if isinstance(call, dict) else {}
-        if not isinstance(params, dict):
-            continue
-        name = str(params.get("restaurant_name") or "").strip()
-        if name and name.lower() not in seen:
-            names.append(name)
-            seen.add(name.lower())
-    return names
 
 
 def concise_text(value: Any, max_chars: int = 500) -> str:
@@ -1231,23 +1198,6 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                     )
 
                 def maybe_review_tool_batch(proposed_calls: list[dict[str, Any]]) -> CorrectionDecision:
-                    unsupported_restaurant_calls = unsupported_order_restaurant_calls(db, proposed_calls)
-                    if unsupported_restaurant_calls:
-                        unsupported_names = ", ".join(restaurant_names_from_calls(unsupported_restaurant_calls))
-                        return CorrectionDecision(
-                            decision="REJECT",
-                            reason=(
-                                "Unsupported order restaurant_name value(s) would create an empty DB namespace: "
-                                f"{unsupported_names}. This rejection applies only to these exact restaurant_name "
-                                "value(s), and does not make other restaurant names in the same proposed batch "
-                                "unsupported. User confirmation alone is not DB support for the rejected namespace. "
-                                "Do not retry the same rejected restaurant_name. First check whether the same user wording supplies a name part, "
-                                "nation/cuisine part, and Restaurant; if so, try that structured complete form once. "
-                                "Otherwise ask for a different exact full restaurant name in the <name> <nation> "
-                                "Restaurant pattern, or use another complete-pattern restaurant option already provided "
-                                "by the user. Do not invent missing name/nation parts or use visual/OCR text."
-                            ),
-                        )
                     if not args.enable_correction_agent or correction_client is None:
                         return CorrectionDecision(decision="APPROVE", reason="Correction agent disabled.")
                     if args.correction_auto_approve_read_only:
@@ -1655,44 +1605,6 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                             force_attach_frames = False
                             continue
                     latest_correction_frames = []
-
-                    unsupported_restaurant_calls = unsupported_order_restaurant_calls(db, approved_calls)
-                    if unsupported_restaurant_calls:
-                        unsupported_names = ", ".join(restaurant_names_from_calls(unsupported_restaurant_calls))
-                        namespace_feedback = (
-                            "Internal DB namespace guard: these order tool call(s) use unsupported "
-                            "restaurant_name values and were not executed:\n"
-                            f"{canonical_tool_call_text(unsupported_restaurant_calls)}\n"
-                            f"Unsupported restaurant_name value(s): {unsupported_names}. This guard applies only "
-                            "to these exact restaurant_name value(s), and does not make other restaurant names in "
-                            "the same proposed batch unsupported. User confirmation alone is not DB support for "
-                            "the rejected namespace. Do not retry the same rejected restaurant_name. First check "
-                            "whether the same user wording supplies a name part, "
-                            "nation/cuisine part, and Restaurant; if so, try that structured complete form once. "
-                            "Otherwise ask for a different exact full restaurant name before any order tool call, "
-                            "or use another complete-pattern restaurant option already provided by the user. "
-                            "Restaurant names usually follow the <name> <nation> Restaurant pattern. Do not invent "
-                            "missing name/nation parts or use visual/OCR text."
-                        )
-                        print(
-                            "🛡️ [Restaurant Namespace Guard] blocked unsupported order restaurant call(s): "
-                            f"{canonical_tool_call_text(unsupported_restaurant_calls)}"
-                        )
-                        if correction_rounds < args.max_correction_rounds:
-                            correction_rounds += 1
-                            local_service_history.append({"role": "assistant", "content": canonical_tool_call_text(approved_calls)})
-                            local_service_history.append({"role": "user", "content": namespace_feedback})
-                            force_attach_frames = False
-                            continue
-                        approved_calls = [
-                            call
-                            for call in approved_calls
-                            if call not in unsupported_restaurant_calls
-                        ]
-                        if not approved_calls:
-                            local_service_history.append({"role": "assistant", "content": canonical_tool_call_text(unsupported_restaurant_calls)})
-                            local_service_history.append({"role": "user", "content": namespace_feedback})
-                            continue
 
                     safe_calls, repeated_calls = split_repeated_state_changes(
                         approved_calls,

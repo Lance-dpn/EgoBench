@@ -138,18 +138,13 @@ CORRECTION_SCENARIO_RULES = {
         "  restaurant_name must be one supplied by the user. A visual-only restaurant\n"
         "  label cannot become the DB restaurant_name unless the user independently\n"
         "  provides it as the exact restaurant name in dialogue.\n"
-        "- Reject tool calls using unsupported restaurant_name values because even\n"
-        "  read-only lookups can create empty DB namespaces and break result-based\n"
-        "  evaluation. Do not disclose a list of valid restaurant namespaces in the\n"
-        "  correction feedback; tell the service to ask the user to confirm the exact\n"
-        "  full restaurant name using the `<name> <nation> Restaurant` pattern.\n"
-        "- If a guard or tool result already showed that a user-confirmed restaurant\n"
-        "  name is unsupported, apply that unsupported status only to the exact\n"
-        "  restaurant_name value named in the guard/tool feedback. Do not generalize\n"
-        "  it to other user-supplied restaurant names from the same rejected batch.\n"
-        "  Do not suggest using that same rejected name again. Require either a\n"
-        "  different exact full restaurant name or a switch to another complete-pattern\n"
-        "  restaurant option already provided by the user.\n"
+        "- Do not use hidden or code-level restaurant namespace knowledge to reject\n"
+        "  order tool calls before execution. If an official tool result later shows\n"
+        "  that a user-confirmed restaurant name is unsupported, apply that status\n"
+        "  only to the exact restaurant_name value in that official result. Do not\n"
+        "  generalize it to other user-supplied restaurant names from the same batch.\n"
+        "  Require either a different exact full restaurant name or a switch to\n"
+        "  another complete-pattern restaurant option already provided by the user.\n"
         "- If a restaurant-name lookup failed or the ledger has no DB-supported full\n"
         "  restaurant_name, reject dish/order/set-meal mutations and final database\n"
         "  claims that guess a restaurant. Prefer a concise user clarification for the\n"
@@ -165,161 +160,100 @@ CORRECTION_SCENARIO_RULES = {
 
 
 CORRECTION_SYSTEM_PROMPT_TEMPLATE = """
-You are a correction agent that audits a service agent before its output is
-executed or shown to the user.
+You are a correction agent that performs a preflight audit of the service
+agent's next output before it is executed or shown to the user.
 
 Runtime scenario: {scenario}
 
-## Scope And Evidence
+## Scope
 
-You audit the service agent's next output; you do not solve the benchmark task.
-Use dialogue history to understand the user's request and commitments. Use the
-current turn's executed official tool ledger and previous-turn official tool
-ledger as database evidence. Treat previous-turn tool results as evidence only
-for facts/actions already established earlier in the same task; if the latest
-user request changes the target, boundary, quantity, or condition, require
-current-turn read-only evidence before approving new mutations or final claims.
-Runner or correction feedback included in dialogue history is valid process
-evidence about rejected outputs. In particular, if a namespace guard says an
-order restaurant_name is unsupported or was not executed, you may approve a
-reply that accurately says that name cannot be used for DB-backed tools and
-asks for a different exact full restaurant name. This does not authorize any
-dish, price, nutrition, order, or calculation fact without official tool
-ledger evidence.
+Audit only the proposed output in audit_context. Do not solve the benchmark
+task, infer a new answer, or replace the service agent's reasoning path.
 
-Do not audit visual recognition accuracy. Do not decide whether the service
-recognized the correct object, dish, product, region, ingredient, action, OCR
-text, pointing target, or spatial relation. Visual hypotheses may seed read-only
-tool calls; official tool results must support mutations, calculations, branch
-decisions, and DB-backed final replies.
+You do not audit visual recognition. Do not decide whether the service
+recognized the correct object, dish, product, region, ingredient, OCR text,
+pointing target, or spatial relation. Visual hypotheses may seed read-only DB
+lookups. Official tool results are the authority for DB facts, canonical names,
+branch decisions, mutations, and calculations.
 
-If audit_context says service_frames_attached_this_turn=true, never reject a
-reply or tool plan because frames, fresh visual context, key frames, or image
-evidence are unavailable to you. You still may reject unsupported DB facts,
-mutations, branch decisions, missed ties, wrong schemas, or calculations.
+Use the dialogue history, proposed output, official tool catalog, current-turn
+tool ledger, and previous-turn tool ledger. Previous-turn tool results support
+facts/actions already established earlier in the same task; if the latest user
+message changes the target, boundary, quantity, or condition, require current
+evidence for new mutations or final DB claims.
 
-## Scenario-Specific Correction Rules
+Scenario rules below are overrides for known recurring issues. Apply them only
+when directly relevant; do not treat them as an exhaustive checklist that the
+service must satisfy before every action.
+
+## Scenario Rules
 
 {scenario_rule}
 
-## Core Audit Rules
+## Decision Policy
 
-Expected evidence flow: visual/dialogue hypothesis -> read-only official tools
--> canonical target and active branch -> mutation and/or final reply.
+1. Read-only tool calls: approve lookup/list/get/tally/compute calls that gather
+   candidates, canonical names, enum values, branch evidence, state, or
+   calculations unless the schema is invalid or the call is clearly unrelated.
 
-For read-only tool calls, be permissive: approve plausible lookup, list, get,
-tally, or compute calls that gather candidates, enum options, fields, or branch
-evidence, unless schema/parameters are invalid or the batch clearly belongs to
-unrelated downstream work.
+2. Mutations: approve add/remove/clear/update/create calls only when the user
+   requested or conditionally activated that state change and the ledger supports
+   the active branch, canonical target, quantity, state target, filters, ranks,
+   and required ties. Do not use REVISE to replace mutations; reject or request
+   more evidence so the service can replan.
 
-For mutations and final replies, be strict: require official evidence for the
-canonical target, active branch, quantities, filters, ranks, ties, state target,
-and calculations. Reject unsupported winners, missed ties, inactive-branch
-mutations, wrong schemas, wrong identifiers, and unsupported DB claims.
+3. Final replies: be strict for DB facts, completed actions, branch decisions,
+   numeric values, and tool-derived totals. Be more permissive for advice,
+   comparison, or recommendation wording if it is clearly limited to the checked
+   evidence. Do not require exhaustive global proof unless the user explicitly
+   asks for a global/all-menu/all-category/best-overall answer.
 
-For ranked choices, audit the active candidate set first. A highest/lowest/most/
-least winner is supported only if the needed value was checked for all surviving
-candidates in that bounded set, with ties preserved.
+4. Calculations: for totals, tax, payment, nutrition, discounts, and set-meal
+   totals, require the relevant compute/tally/total output when such a tool
+   exists. If rejecting, state the specific missing scope: current state,
+   category/menu/list candidates, set-meal expansion, discount/payment handling,
+   or per-serving vs per-100g normalization.
 
-Canonical fields returned by tools override preliminary visual/OCR wording. A
-visual/OCR lookup may be partial or noisy; match by distinctive tokens, not exact
-full string. If a full visual/OCR lookup fails, prefer one to three read-only
-distinctive-token retries before user clarification, except unsupported order
-restaurant_name. If a clear canonical field is returned, later mutations,
-calculations, and final replies must use that canonical field.
+5. Empty or ambiguous lookups: an empty result may mean a field, spelling, enum,
+   or alias mismatch. Before accepting a final no-match claim or inactive branch
+   based on empty results, expect schema/enum checking and a small number of
+   distinctive-token, alias, singular/plural, or candidate-list retries when the
+   catalog supports them.
 
-Do not require exhaustive global enumeration once a visual/dialogue boundary or
-active candidate set is supported. Require global enumeration only when the user
-explicitly asks for a global list/extremum and no narrower boundary exists.
+## Boundary And Ranking
 
-Do not approve final-state-equivalent shortcuts that omit required intermediate
-mutations. The tool-call process is part of correctness.
+First identify the active candidate boundary from the user request and evidence:
+visual region, pointed/selected items, current cart/order/list, stated category,
+menu section, set meal, or previously established branch. Audit completeness
+inside that boundary. Require global enumeration only when the user explicitly
+asks globally or no narrower boundary exists.
 
-## Audit Inputs
+For highest/lowest/most/fewest/cheapest/largest/smallest choices, require the
+needed value for surviving candidates in the active boundary and preserve tied
+winners. Do not reject merely because unrelated global candidates were not
+checked.
 
-Audit whether the proposed tool-call batch or proposed reply is justified by:
-- the latest user request,
-- the filtered user/service dialogue history,
-- the prior dialogue summary, if provided,
-- the complete official tool catalog, including descriptions and parameters,
-- previous-turn official tool calls and their results from this task,
-- current turn executed official tool calls and their results,
-- the service agent's own prior statements.
-
-Audit the stage indicated by proposed_kind:
-- proposed_kind="tool_calls": validate tool names, parameters, batch order, and
-  whether any mutation in the proposed batch is already justified.
-- proposed_kind="final_reply": verify each claimed DB fact, completed action,
-  branch decision, and calculation against executed tool results. If evidence is
-  missing, use NEED_MORE_TOOL and suggest exact official call(s).
-- Do not suggest visual context. If more evidence is needed, suggest official
-  read-only tools or a concise user clarification only.
-
-## Tool-Call Audit
-
-For tool calls:
-- Keep the proposed batch order intact. Do not reorder calls.
-- Approve a batch only if every call is appropriate at this point.
-- Validate every tool name, parameter name, parameter value, enum, and intended
-  use against the official tool catalog.
-- Treat find_*, get_*, list_*, tally_*, and compute_* as read-only evidence or
-  calculation tools. They may be used to canonicalize visual/dialogue hypotheses
-  and discover candidates, but compute/tally calls must still have known inputs.
-- Reject mutations when the requested state change, canonical target, quantity,
-  active branch, ranking/tie handling, or removal/clear condition is not
-  supported by prior executed read-only evidence.
-- Reject mutation batches that miss required ties, aggregate process-distinct
-  changes, omit required intermediate mutations, or mix read-only and mutation
-  calls in an order that is not logically valid.
-- Do not use REVISE to replace add/remove/clear/update/create mutations. For
-  unsupported or wrong mutations, use REJECT or NEED_MORE_TOOL and explain the
-  missing evidence; the service agent must replan and emit any state change.
-- Use REVISE only for non-mutating schema/identifier corrections where the same
-  intended read-only evidence call is clearly preserved.
-
-## Final-Reply Audit
-
-For final replies:
-- Reject replies that claim DB facts, actions, branch decisions, calculations,
-  or final quantities without supporting executed tool results.
-- Require the final named item/entity to be a returned canonical name or an
-  unambiguous token-preserving shorthand. Do not reject capitalization-only
-  differences or canonical names that add words around a distinctive token.
-- If lookup results are multiple or generic, require narrowing, tied handling,
-  or another lookup before approving a definitive reply.
-- For numeric totals, taxes, payable amounts, discounts, set-meal totals, and
-  aggregate summaries, require the relevant compute/tally/total output when such
-  a tool exists.
-- For conditional, ranked, replacement, or multi-step mutation requests, verify
-  both the final state and the required tool-call path.
+Canonical fields returned by tools should be used for later parameters and DB
+claims. Do not reject a single clear canonical match only because it does not
+preserve every visual/OCR token. Reject only if the final reply uses an
+unverified visual/OCR name as if it were canonical, or if multiple/generic
+matches need narrowing before a definitive DB claim.
 
 ## Output Contract
 
-Return a compact text response using exactly this structure:
+Return exactly this structure:
 
 decision: APPROVE|REJECT|REVISE|NEED_MORE_TOOL
-error_type: none|visual_target|key_frames|tool_schema|tool_evidence|state_change|calculation|unsupported_reply|other
-visible_evidence: always "not audited"
-reason: one sentence, at most 25 words.
-suggestion: one sentence, at most 25 words; state the best next tool/action to check, or "none" for APPROVE.
-replan: one sentence, at most 25 words; use "none" for APPROVE.
+error_type: none|tool_schema|tool_evidence|state_change|calculation|unsupported_reply|other
+visible_evidence: not audited
+reason: one concise sentence.
+suggestion: one concise, actionable next step, or "none" for APPROVE.
+replan: one concise instruction to the service agent, or "none" for APPROVE.
 
-Never reject because of visual recognition, visual target identity, OCR quality,
-frame selection, or pointing/spatial interpretation. If rejecting, state the
-tool-schema, tool-evidence, state-change, branch, or calculation problem.
-Never tell the service to ask the user for product/dish names merely because a
-read-only lookup uses a visually inferred name. Let official tools canonicalize
-that hypothesis first.
-Do not reject a tool batch just because a different valid tool sequence might be
-more efficient. Reject only clear schema errors, unsupported mutations,
-unsupported replies, wrong calculations, missed ties, or clear inactive-branch
-use in a mutation/final reply.
-Never tell the service agent to output NEED_VISUAL_CONTEXT in suggestion or
-replan.
-
-Keep the whole response under 130 words unless including a JSON call. If and only
-if using REVISE or NEED_MORE_TOOL, include one JSON array of official tool calls
-after a line beginning with corrected_call: or suggested_call:.
+Never suggest visual context or NEED_VISUAL_CONTEXT. If more evidence is needed,
+suggest official read-only tools or a concise user clarification. If using
+REVISE or NEED_MORE_TOOL, include one JSON array of official tool calls after a
+line beginning with corrected_call: or suggested_call:.
 """.strip()
 
 
@@ -792,9 +726,6 @@ def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, 
             query_name = params.get("product_name") or params.get("dish_name") or params.get("name")
             if not query_name:
                 continue
-            query_distinctive = distinctive_tokens(str(query_name))
-            if not query_distinctive:
-                continue
             data = parse_tool_content(result.get("content"))
             if not isinstance(data, dict):
                 continue
@@ -806,26 +737,17 @@ def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, 
                 for product in products
                 if isinstance(product, dict)
             ]
-            returned_token_set = set(normalized_tokens(" ".join(returned_names)))
-            dropped = canonical_match_drops_too_much(query_distinctive, returned_token_set)
-            if not dropped:
-                continue
-            fact_strings = numeric_fact_strings(products)
-            reply_uses_returned_name = any(name and name.lower() in reply_lower for name in returned_names)
-            reply_uses_query_name = str(query_name).lower() in reply_lower
-            reply_uses_returned_fact = any(fact and re.search(rf"\b{re.escape(fact)}\b", reply_lower) for fact in fact_strings)
+            query_lower = str(query_name).lower()
+            reply_uses_query_name = query_lower in reply_lower
+            reply_without_query = reply_lower.replace(query_lower, " ")
+            reply_uses_returned_name = any(
+                name and name.lower() in reply_without_query for name in returned_names
+            )
             if reply_uses_query_name and not reply_uses_returned_name:
                 return (
                     "The proposed reply keeps the visual/OCR query name "
                     f"{query_name!r}, but the lookup returned canonical item(s) {returned_names}. "
                     "Use the returned canonical name or run another lookup before answering."
-                )
-            if reply_uses_returned_name or reply_uses_returned_fact:
-                return (
-                    "The proposed reply relies on a lookup whose returned canonical item drops distinctive "
-                    f"query token(s) {dropped} from {query_name!r}. The returned item(s) {returned_names} may be "
-                    "a generic fuzzy match. Re-query using the most representative distinctive token or shorter "
-                    "canonical substring before answering."
                 )
     return None
 
@@ -902,38 +824,22 @@ def build_audit_context(
         max_result_chars=max_tool_result_chars,
     )
     important_constraints = [
-        "Database facts may come from previous_turn_tool_ledger or current_turn_tool_ledger. Previous-turn results support only facts/actions already established earlier in this same task.",
-        "Do not audit visual recognition, OCR quality, frame selection, pointing target identity, or spatial interpretation.",
-        "If service_frames_attached_this_turn is true, do not reject because frames, fresh visual context, or key frames are missing.",
-        "Read-only calls may be seeded by dialogue or visual hypotheses; reject them only for schema errors or unrelated downstream work.",
-        "Mutations and final replies require executed official evidence for canonical target, active branch, quantity, state, ranks/ties, and calculations.",
-        "Canonical fields returned by tools override preliminary visual/OCR strings for later calls and replies.",
-        "If full visual/OCR lookup fails, prefer one to three distinctive-token read-only retries before user clarification, except unsupported order restaurant_name.",
-        "Do not require exhaustive global enumeration when a narrower visual/dialogue boundary or active branch candidate set is supported.",
-        "Compute/tally/total tools are required for final numeric totals when such tools exist.",
-        "Do not approve shortcuts that omit required intermediate mutations or miss tied state changes.",
-        "Validate tool names, parameter names, enum values, intended use, and proposed batch order against official_tool_catalog.",
-        "Preserve exact enum semantics; related values are fallback evidence only, not automatic unions for ranking or mutation.",
+        "This payload provides evidence for the preflight audit; the system prompt defines the policy.",
+        "Do not audit visual recognition; images and key frames are not included in correction context.",
+        "Use previous_turn_tool_ledger and current_turn_tool_ledger as official DB evidence.",
+        "Use official_tool_catalog for tool names, descriptions, parameters, and enum values.",
+        "Audit the proposed output only; do not solve the task or require global enumeration unless the user asked globally.",
     ]
     if scenario == "retail":
         important_constraints.extend(
             [
-                "For retail, find_products_by_allergen is the official allergen listing tool for allergen inclusion. Validate retail allergen calls against the official tool catalog.",
-                "For retail shopping-list comparisons, treat missing/not-yet-added/not-yet-bought/not-yet-purchased as absent from the current cart unless the user explicitly asks to restock, top up, or match the listed quantity.",
-                "For retail, complete list tools such as find_products_by_taste and find_products_by_nutritional_characteristic support negative classification when the canonical product is absent from the returned list.",
-                "For retail, natural-language high oil/High Oil is equivalent to official nutritional_characteristic high_fat; do not reject high_fat calls or approve refusals merely because high_oil is not an enum.",
-                "For retail, natural-language high calorie/low calorie/gluten-free wording may be normalized to official enums high_calories/low_calories/gluten_free.",
+                "Retail aliases from the scenario rules are allowed when directly relevant: high oil/high_fat, nut/nuts, high_calories/low_calories/gluten_free.",
             ]
         )
     elif scenario == "order":
         important_constraints.extend(
             [
-                "For order, restaurant_name must come from user dialogue, not visual menu titles, logos, OCR, or brand labels.",
-                "For order, complete restaurant_name often follows `<name> <nation> Restaurant`; when user wording provides those parts, prefer that composed complete name before treating the restaurant as unsupported. After an unsupported name, allow one structured retry only from user-supplied parts; do not invent missing nation/cuisine or use visual/OCR text.",
-                "For order restaurant-name clarification, reject wording that suggests a visual/menu-label guess or unsupported restaurant string as the answer; ask for the pattern only.",
-                "For order, user confirmation of an unsupported restaurant label is not DB evidence. If the namespace guard rejected it, apply the rejection only to the exact rejected restaurant_name value; do not generalize it to other user-supplied restaurant names from the same batch. Do not suggest retrying the rejected name; require a different exact full name or use another complete-pattern option from the user.",
-                "For order, if no DB-supported complete restaurant_name exists after lookup, require user confirmation before dish/order/set-meal mutations or DB-backed final claims.",
-                "For order, natural-language high calorie/low calorie/gluten-free wording may be normalized to official tag enums high_calories/low_calories/gluten_free.",
+                "Order restaurant_name must be sourced from user dialogue, not visual/OCR text; do not use hidden namespace knowledge before official tool execution.",
             ]
         )
     payload = {
