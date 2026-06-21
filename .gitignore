@@ -27,6 +27,16 @@ logs/
 *.log
 vocab_debug.log
 
+# LaTeX report local artifacts
+acmart-primary/samples/
+acmart-primary/*.aux
+acmart-primary/*.bbl
+acmart-primary/*.blg
+acmart-primary/*.fls
+acmart-primary/*.fdb_latexmk
+acmart-primary/*.out
+acmart-primary/*.synctex.gz
+
 # Experiment caches and generated media
 experiments/**/cache/
 experiments/**/runs/
