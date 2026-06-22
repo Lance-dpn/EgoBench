@@ -51,6 +51,20 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_004",
+          "recipe_name": "Potato & Greens Salad"
+        }
+      },
+      {
+        "tool_name": "add_recipe_to_menu",
+        "parameters": {
+          "user_id": "cook_004",
+          "recipe_name": "Green Pepper Chicken"
+        }
+      },
+      {
+        "tool_name": "add_recipe_to_menu",
+        "parameters": {
+          "user_id": "cook_004",
           "recipe_name": "Custom Seasoned Noodles"
         }
       },
@@ -159,42 +173,7 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_003",
-          "recipe_name": "Tofu Soup"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_003",
-          "recipe_name": "Potato & Greens Salad"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_003",
-          "recipe_name": "Roasted Tomato Salmon"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_003",
-          "recipe_name": "Pork & Chive Dumplings"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_003",
           "recipe_name": "Custom Seasoned Noodles"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_003",
-          "recipe_name": "Deep-fried Meat Platter"
         }
       },
       {
@@ -230,38 +209,6 @@
         }
       },
       {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_003",
-          "ingredient_name": "Spinach",
-          "quantity": 0.8
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_003",
-          "ingredient_name": "Spinach",
-          "quantity": 0.8
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_003",
-          "ingredient_name": "Salmon",
-          "quantity": 2.0
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_003",
-          "ingredient_name": "Chicken",
-          "quantity": 1.5
-        }
-      },
-      {
         "tool_name": "tally_total_nutritional_characteristics",
         "parameters": {
           "user_id": "cook_003",
@@ -269,12 +216,7 @@
             "Duck & Cherry Salad",
             "Beef & Black Bean Stew",
             "Egg & Spinach Frittata",
-            "Tofu Soup",
-            "Potato & Greens Salad",
-            "Roasted Tomato Salmon",
-            "Pork & Chive Dumplings",
-            "Custom Seasoned Noodles",
-            "Deep-fried Meat Platter"
+            "Custom Seasoned Noodles"
           ]
         }
       }
@@ -297,7 +239,7 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_005",
-          "recipe_name": "Tofu Soup"
+          "recipe_name": "Potato & Greens Salad"
         }
       },
       {
@@ -308,7 +250,7 @@
             "Shrimp & Asparagus Stir-fry",
             "Yogurt & Berry Parfait",
             "Lamb & Potato Stew",
-            "Tofu Soup"
+            "Potato & Greens Salad"
           ]
         }
       }
@@ -468,7 +410,7 @@
         "parameters": {
           "user_id": "cook_010",
           "ingredient_name": "Shrimp",
-          "quantity": 2.0
+          "quantity": 1.5
         }
       },
       {
@@ -494,7 +436,7 @@
             },
             {
               "ingredient_name": "Shrimp",
-              "quantity": 2
+              "quantity": 1.5
             }
           ]
         }
@@ -528,14 +470,6 @@
         "parameters": {
           "user_id": "cook_008",
           "recipe_name": "Oat & Banana Pancakes"
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_008",
-          "ingredient_name": "Spinach",
-          "quantity": 0.8
         }
       },
       {
@@ -620,12 +554,12 @@
               "quantity": 5
             },
             {
-              "ingredient_name": "Spinach",
-              "quantity": 1.8
-            },
-            {
               "ingredient_name": "Celery",
               "quantity": 0.3
+            },
+            {
+              "ingredient_name": "Spinach",
+              "quantity": 1
             },
             {
               "ingredient_name": "Milk",
@@ -716,7 +650,7 @@
         "parameters": {
           "user_id": "cook_007",
           "ingredient_name": "Eggs",
-          "quantity": 0.1
+          "quantity": 2.0
         }
       },
       {
@@ -779,8 +713,16 @@
         "tool_name": "add_to_shopping_list",
         "parameters": {
           "user_id": "cook_007",
-          "ingredient_name": "Spinach",
-          "quantity": 0.8
+          "ingredient_name": "Broccoli",
+          "quantity": 1.0
+        }
+      },
+      {
+        "tool_name": "add_to_shopping_list",
+        "parameters": {
+          "user_id": "cook_007",
+          "ingredient_name": "Asparagus",
+          "quantity": 1.0
         }
       },
       {
@@ -1084,20 +1026,6 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_010",
-          "recipe_name": "Turkey & Apple Soup"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_010",
-          "recipe_name": "Roasted Chickpeas & Vegetables"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_010",
           "recipe_name": "Potato & Greens Salad"
         }
       },
@@ -1164,7 +1092,7 @@
         "parameters": {
           "user_id": "cook_009",
           "ingredient_name": "Mushrooms",
-          "quantity": 1.5
+          "quantity": 1.2
         }
       },
       {
@@ -1172,7 +1100,7 @@
         "parameters": {
           "user_id": "cook_009",
           "ingredient_name": "Thyme",
-          "quantity": 0.02
+          "quantity": 0.05
         }
       },
       {
@@ -1496,7 +1424,7 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_008",
-          "recipe_name": "Tofu Soup"
+          "recipe_name": "Custom Seasoned Noodles"
         }
       },
       {
@@ -1514,7 +1442,8 @@
           "recipes": [
             "Tofu Soup",
             "Turkey & Apple Soup",
-            "Egg & Spinach Frittata"
+            "Egg & Spinach Frittata",
+            "Custom Seasoned Noodles"
           ]
         }
       }
@@ -1661,6 +1590,13 @@
         }
       },
       {
+        "tool_name": "add_recipe_to_menu",
+        "parameters": {
+          "user_id": "cook_002",
+          "recipe_name": "Roasted Tomato Salmon"
+        }
+      },
+      {
         "tool_name": "remove_from_shopping_list",
         "parameters": {
           "user_id": "cook_002",
@@ -1681,7 +1617,8 @@
           "recipes": [
             "Salmon & Quinoa Bowl",
             "Turkey & Apple Soup",
-            "Shrimp & Asparagus Stir-fry"
+            "Shrimp & Asparagus Stir-fry",
+            "Roasted Tomato Salmon"
           ]
         }
       }
@@ -1756,6 +1693,13 @@
     "task_id": 29,
     "ground_truth": [
       {
+        "tool_name": "add_recipe_to_menu",
+        "parameters": {
+          "user_id": "cook_008",
+          "recipe_name": "Potato & Greens Salad"
+        }
+      },
+      {
         "tool_name": "add_to_shopping_list",
         "parameters": {
           "user_id": "cook_008",
@@ -1817,27 +1761,6 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_001",
-          "recipe_name": "Yogurt & Berry Parfait"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_001",
-          "recipe_name": "Roasted Tomato Salmon"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_001",
-          "recipe_name": "Pork & Chive Dumplings"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_001",
           "recipe_name": "Green Pepper Chicken"
         }
       },
@@ -1849,21 +1772,6 @@
         }
       },
       {
-        "tool_name": "remove_recipe_from_menu",
-        "parameters": {
-          "user_id": "cook_001",
-          "recipe_name": "Yogurt & Berry Parfait"
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_001",
-          "ingredient_name": "Banana",
-          "quantity": 5
-        }
-      },
-      {
         "tool_name": "tally_total_tastes",
         "parameters": {
           "user_id": "cook_001",
@@ -1871,8 +1779,6 @@
             "Chicken & Broccoli Stir-fry",
             "Tofu Soup",
             "Mushroom & Thyme Roast Chicken",
-            "Roasted Tomato Salmon",
-            "Pork & Chive Dumplings",
             "Green Pepper Chicken"
           ]
         }
@@ -1906,13 +1812,6 @@
         "parameters": {
           "user_id": "cook_004",
           "recipe_name": "Roasted Chickpeas & Vegetables"
-        }
-      },
-      {
-        "tool_name": "remove_recipe_from_menu",
-        "parameters": {
-          "user_id": "cook_004",
-          "recipe_name": "Cod & Lemon Dill Bake"
         }
       },
       {
@@ -1961,34 +1860,6 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_005",
-          "recipe_name": "Yogurt & Berry Parfait"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_005",
-          "recipe_name": "Roasted Chickpeas & Vegetables"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_005",
-          "recipe_name": "Cod & Lemon Dill Bake"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_005",
-          "recipe_name": "Tofu Soup"
-        }
-      },
-      {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_005",
           "recipe_name": "Potato & Greens Salad"
         }
       },
@@ -1997,31 +1868,7 @@
         "parameters": {
           "user_id": "cook_005",
           "ingredient_name": "Shrimp",
-          "quantity": 2.0
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_005",
-          "ingredient_name": "Cod",
-          "quantity": 2.0
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_005",
-          "ingredient_name": "Dill",
-          "quantity": 0.02
-        }
-      },
-      {
-        "tool_name": "add_to_shopping_list",
-        "parameters": {
-          "user_id": "cook_005",
-          "ingredient_name": "Tofu",
-          "quantity": 2.0
+          "quantity": 1.5
         }
       },
       {
@@ -2032,9 +1879,6 @@
             "Shrimp & Asparagus Stir-fry",
             "Yogurt & Berry Parfait",
             "Lamb & Potato Stew",
-            "Roasted Chickpeas & Vegetables",
-            "Cod & Lemon Dill Bake",
-            "Tofu Soup",
             "Potato & Greens Salad"
           ]
         }
@@ -2492,13 +2336,6 @@
         }
       },
       {
-        "tool_name": "add_recipe_to_menu",
-        "parameters": {
-          "user_id": "cook_002",
-          "recipe_name": "Potato & Greens Salad"
-        }
-      },
-      {
         "tool_name": "add_to_shopping_list",
         "parameters": {
           "user_id": "cook_002",
@@ -2813,7 +2650,7 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_010",
-          "recipe_name": "Tofu Soup"
+          "recipe_name": "Custom Seasoned Noodles"
         }
       },
       {
@@ -2837,7 +2674,7 @@
           "user_id": "cook_010",
           "recipes": [
             "Shrimp & Asparagus Stir-fry",
-            "Tofu Soup"
+            "Custom Seasoned Noodles"
           ]
         }
       }
@@ -2972,7 +2809,7 @@
         "parameters": {
           "user_id": "cook_010",
           "ingredient_name": "Flour",
-          "quantity": 1.5
+          "quantity": 2.0
         }
       },
       {
@@ -3043,8 +2880,8 @@
         "tool_name": "add_to_shopping_list",
         "parameters": {
           "user_id": "cook_006",
-          "ingredient_name": "Spinach",
-          "quantity": 1.6
+          "ingredient_name": "Broccoli",
+          "quantity": 2.0
         }
       },
       {
@@ -3054,7 +2891,7 @@
           "ingredients": [
             {
               "ingredient_name": "Spinach",
-              "quantity": 5.800000000000001
+              "quantity": 4.2
             },
             {
               "ingredient_name": "Tomatoes",
@@ -3075,6 +2912,10 @@
             {
               "ingredient_name": "Salmon",
               "quantity": 3.6
+            },
+            {
+              "ingredient_name": "Broccoli",
+              "quantity": 2
             }
           ]
         }
@@ -3176,14 +3017,14 @@
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_009",
-          "recipe_name": "Tofu Soup"
+          "recipe_name": "Pork & Chive Dumplings"
         }
       },
       {
         "tool_name": "add_recipe_to_menu",
         "parameters": {
           "user_id": "cook_009",
-          "recipe_name": "Pork & Chive Dumplings"
+          "recipe_name": "Custom Seasoned Noodles"
         }
       },
       {
@@ -3248,8 +3089,8 @@
             "Beef & Black Bean Stew",
             "Mushroom & Thyme Roast Chicken",
             "Yogurt & Berry Parfait",
-            "Tofu Soup",
-            "Pork & Chive Dumplings"
+            "Pork & Chive Dumplings",
+            "Custom Seasoned Noodles"
           ]
         }
       }
@@ -3272,8 +3113,16 @@
         "tool_name": "add_to_shopping_list",
         "parameters": {
           "user_id": "cook_003",
-          "ingredient_name": "Rice",
-          "quantity": 10
+          "ingredient_name": "Apple",
+          "quantity": 2
+        }
+      },
+      {
+        "tool_name": "add_to_shopping_list",
+        "parameters": {
+          "user_id": "cook_003",
+          "ingredient_name": "Banana",
+          "quantity": 2
         }
       },
       {
@@ -3346,11 +3195,11 @@
             },
             {
               "ingredient_name": "Banana",
-              "quantity": 6
+              "quantity": 8
             },
             {
-              "ingredient_name": "Rice",
-              "quantity": 10
+              "ingredient_name": "Apple",
+              "quantity": 2
             },
             {
               "ingredient_name": "Broccoli",

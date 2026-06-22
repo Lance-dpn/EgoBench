@@ -1589,6 +1589,14 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         approved_calls = decision.calls
                     elif not decision.approved:
                         if correction_rounds >= args.max_correction_rounds:
+                            rejected_state_change = any(
+                                is_state_changing_tool(str(call.get("tool_name") or call.get("name") or ""))
+                                for call in proposed_calls
+                            )
+                            if rejected_state_change:
+                                agent_final_reply = "[Interaction stopped: correction rejected a state-changing tool batch]"
+                                print("🛑 [Correction] Rejected state-changing tool batch was not executed.")
+                                break
                             if args.correction_on_max_tool_rounds == "stop":
                                 agent_final_reply = "[Interaction stopped: correction rounds exceeded]"
                                 break

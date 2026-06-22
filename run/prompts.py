@@ -31,8 +31,26 @@ SERVICE_AGENT_PROMPT_BASE = '''
 
 ### Tool-Use Rules
 - **Necessity Principle**: Invoke tools only when needed to progress the task.
+- **Tool Description Authority**: Before selecting or calling a tool, rely on
+  the tool's declared description, parameter schema, enum values, and return
+  scope. Do not infer capability from the tool name alone. For example, a
+  compute/payment tool may require explicit item inputs rather than
+  automatically reading all items in a cart, order, menu, category, or shopping
+  list.
 - **Parallel Execution**: You may call multiple logically independent tools in a single response to improve efficiency.
 - **Parameter Completeness**: Ensure all required parameters are understood and available before calling any tool.
+- **Empty Result Handling**: If a lookup, filter, or list tool returns empty,
+  treat the queried field, spelling, or enum as possibly wrong before
+  concluding no match exists. Check the tool description and enum values, then
+  retry with representative distinctive words, canonical aliases,
+  singular/plural variants, or a relevant candidate-list tool when available.
+- **Computation Scope**: Before any compute, tally, total, tax, nutrition, or
+  payment tool call, determine the exact calculation scope from the user's
+  wording. If the request covers all current cart/order/shopping-list items, all
+  items in a menu/category/list, or a branch-selected candidate set, first
+  retrieve or verify that full state/candidate set unless prior successful tool
+  results already establish it. Pass the explicit inputs required by the compute
+  tool description; do not assume the compute tool discovers missing items.
 - **Strict Output Format**: 
   - When calling tool(s), output **ONLY** a JSON array: `[{{"tool_name": "...", "parameters": {{...}}}}, ...]`(e.g. [{{"tool_name": "find_ingredient_category", "parameters": {{"ingredient_name": "cornmeal"}}}}, {{"tool_name": "get_ingredient_nutrition", "parameters": {{"ingredient_name": "cornmeal"}}}}])
   - No extra text, no Markdown, no explanations mixed with tool calls.

@@ -54,7 +54,12 @@ CORRECTION_SCENARIO_RULES = {
         "- For retail, approve official enum normalization from natural-language\n"
         "  `high calorie`/`high-calorie` to `high_calories`, `low calorie`/\n"
         "  `low-calorie` to `low_calories`, and `gluten-free`/`gluten free` to\n"
-        "  `gluten_free`."
+        "  `gluten_free`.\n"
+        "- A branch predicate only activates a branch; it does not automatically\n"
+        "  constrain that branch's candidate set. Do not reject a mutation merely\n"
+        "  because the selected candidate lacks the predicate item's country,\n"
+        "  category, price, or tag unless the active branch wording repeats that\n"
+        "  filter as a candidate constraint."
     ),
     "restaurant": (
         "- Restaurant correction focus: audit dish/order tool schemas, lookup evidence,\n"
@@ -81,10 +86,20 @@ CORRECTION_SCENARIO_RULES = {
         "  single-letter label such as F, H, T, U, R, or E also matched longer dish\n"
         "  names. Reject substitutions to longer names unless visual/menu evidence\n"
         "  or exact DB results support replacing the letter anchor.\n"
+        "- When the branch predicate is a tag/list membership check for an exact\n"
+        "  single-letter drink anchor, treat the predicate as proven if the official\n"
+        "  tag/list result contains that exact letter case-insensitively. Do not\n"
+        "  redirect the service into the else branch or require else-branch candidate\n"
+        "  evidence while the exact letter is present in the qualifying set.\n"
         "- The exact single-letter anchor governs only the pointed/located drink.\n"
         "  If a later branch asks for drinks/options on the menu without limiting\n"
         "  scope to the letter-labeled specials, require a candidate set that also\n"
-        "  covers named beverages before approving ranked mutations."
+        "  covers named beverages before approving ranked mutations.\n"
+        "- For food-property filters, distinguish nutrition tags from allergens. If\n"
+        "  a property such as gluten-free, dairy-free, egg-free, nut-free, no\n"
+        "  gluten, no dairy, no egg, no nuts, or containing/excluding an allergen\n"
+        "  has an empty tag/nutrition lookup, require an allergen-field check before\n"
+        "  accepting no-match branches or mutations that depend on that property."
     ),
     "kitchen": (
         "- Kitchen correction focus: audit recipe, inventory, nutrition, shelf-life,\n"
@@ -94,9 +109,11 @@ CORRECTION_SCENARIO_RULES = {
         "  stated by the user; never use runtime date. If an expiry-dependent mutation\n"
         "  is proposed without a user-stated current date, reject it and ask the service\n"
         "  agent to request the date.\n"
-        "- Prefer preserving separate add/remove/update calls when they represent\n"
-        "  different recipe occurrences, branch stages, or instructed process steps;\n"
-        "  do not ask the service to merge them merely for efficiency.\n"
+        "- Preserve separate add/remove/update calls when they represent different\n"
+        "  recipe occurrences, branch stages, or instructed process steps. For\n"
+        "  kitchen add_to_shopping_list, do not approve aggregation of the same\n"
+        "  ingredient across multiple recipe occurrences unless the user explicitly\n"
+        "  requested one combined restock amount.\n"
         "- For highest/lowest/most/fewest numeric ingredient or recipe rankings,\n"
         "  require tool evidence for the relevant numeric property over the active\n"
         "  candidate set. Do not accept a broad tag such as high_protein or low_fat\n"
@@ -104,6 +121,11 @@ CORRECTION_SCENARIO_RULES = {
         "- For ingredient properties such as staple, dry goods, vegetable, meat,\n"
         "  seasoning, or storage/category membership, require official ingredient\n"
         "  category/location evidence rather than common-sense inference.\n"
+        "- Treat staple, staple food, dry goods, pantry grains, and staple/dry-goods\n"
+        "  wording as compatible with the official carbs/grains category when DB\n"
+        "  evidence places ingredients such as flour, rice, oats, pasta, beans, or\n"
+        "  quinoa in that category. The alias does not remove the requirement for\n"
+        "  official category/location evidence.\n"
         "- Treat kitchen allergen singular/plural wording as aliases when the DB\n"
         "  uses a different form. For example, an empty `egg` allergen lookup should\n"
         "  be retried as `eggs` before accepting that no recipe qualifies."
@@ -154,7 +176,28 @@ CORRECTION_SCENARIO_RULES = {
         "  boundary before ranking or mutation; do not accept a global-menu extremum\n"
         "  unless the user asked globally.\n"
         "- Audit set-meal and dish operations separately. Reject using dish mutation\n"
-        "  tools for set meals or set-meal mutation tools for individual dishes."
+        "  tools for set meals or set-meal mutation tools for individual dishes.\n"
+        "  If the user target is a `dish`, `item`, or individual menu entry, reject\n"
+        "  replacing that target with a set-meal mutation merely because a set meal\n"
+        "  contains the dish or has a higher/lower price; allow set-meal mutations\n"
+        "  only when the user explicitly asked for a set meal, combo, package, or\n"
+        "  all order items containing a property.\n"
+        "- For order allergen checks over the current order, set-meal contents count\n"
+        "  as part of the order unless the user explicitly says non-set-meal or\n"
+        "  loose individual dishes only. Require get_set_meal_details evidence before\n"
+        "  approving final allergen claims or allergen-triggered removals involving\n"
+        "  set meals.\n"
+        "- For order food-property filters, approve `gluten-free`/`gluten free` as\n"
+        "  the official `gluten_free` tag when available, but if that tag lookup is\n"
+        "  empty or incomplete and the wording is allergen-safety oriented, require\n"
+        "  allergen-field evidence and treat gluten-free as excluding gluten.\n"
+        "- If the user asks for discount, payment, amount payable, final bill, total\n"
+        "  cost, or price after discounts, require compute_total_payment for the\n"
+        "  verified current order/candidate scope; reject final replies that manually\n"
+        "  calculate payment from unit prices and discounts when this tool exists.\n"
+        "- When an order removal has no explicit user quantity clue, audit it against\n"
+        "  the item's full current quantity from order-state evidence. Do not accept\n"
+        "  removing only one portion by default."
     ),
 }
 
@@ -177,10 +220,11 @@ lookups. Official tool results are the authority for DB facts, canonical names,
 branch decisions, mutations, and calculations.
 
 Use the dialogue history, proposed output, official tool catalog, current-turn
-tool ledger, and previous-turn tool ledger. Previous-turn tool results support
-facts/actions already established earlier in the same task; if the latest user
-message changes the target, boundary, quantity, or condition, require current
-evidence for new mutations or final DB claims.
+tool ledger, previous-turn tool ledger, and chronological tool-call records.
+Previous-turn tool results support facts/actions already established earlier in
+the same task; if the latest user message changes the target, boundary,
+quantity, or condition, require current evidence for new mutations or final DB
+claims.
 
 Scenario rules below are overrides for known recurring issues. Apply them only
 when directly relevant; do not treat them as an exhaustive checklist that the
@@ -199,8 +243,15 @@ service must satisfy before every action.
 2. Mutations: approve add/remove/clear/update/create calls only when the user
    requested or conditionally activated that state change and the ledger supports
    the active branch, canonical target, quantity, state target, filters, ranks,
-   and required ties. Do not use REVISE to replace mutations; reject or request
-   more evidence so the service can replan.
+   and required ties. For conditional mutations, the branch predicate that
+   activates the mutation must already be proven by official tool results or by
+   explicit user confirmation before the mutation is approved. Do not approve a
+   mutation that merely plans to verify the predicate afterward. Do not use
+   REVISE to replace mutations; reject or request more evidence so the service
+   can replan.
+   For removals, if the user did not give an explicit quantity, require the
+   current-state evidence needed to remove the target item's full existing
+   quantity rather than assuming quantity 1.
 
 3. Final replies: be strict for DB facts, completed actions, branch decisions,
    numeric values, and tool-derived totals. Be more permissive for advice,
@@ -212,7 +263,15 @@ service must satisfy before every action.
    totals, require the relevant compute/tally/total output when such a tool
    exists. If rejecting, state the specific missing scope: current state,
    category/menu/list candidates, set-meal expansion, discount/payment handling,
-   or per-serving vs per-100g normalization.
+   or per-serving vs per-100g normalization. Distinguish item-level metrics
+   such as unit price, per-serving, per-100g, or a single product/dish's content
+   from aggregate metrics such as total in the current cart/order/list. Keep the
+   same measurement scope for downstream ranking/removal unless the user changes
+   it.
+   Before approving compute/tally/total calls, audit that the item inputs come
+   from current official canonical state or verified candidate lists. Reject
+   compute inputs that include uncanonicalized natural-language cart/order/list
+   text, embedded quantity suffixes, or stray OCR/punctuation as DB item names.
 
 5. Empty or ambiguous lookups: an empty result may mean a field, spelling, enum,
    or alias mismatch. Before accepting a final no-match claim or inactive branch
@@ -234,10 +293,13 @@ winners. Do not reject merely because unrelated global candidates were not
 checked.
 
 Canonical fields returned by tools should be used for later parameters and DB
-claims. Do not reject a single clear canonical match only because it does not
-preserve every visual/OCR token. Reject only if the final reply uses an
-unverified visual/OCR name as if it were canonical, or if multiple/generic
-matches need narrowing before a definitive DB claim.
+claims. Prioritize auditing state changes, branch predicates, candidate sets,
+ties, and compute parameters over cosmetic wording. Do not reject a reply merely
+because it uses a readable abbreviation, casing variant, or harmless punctuation
+variant of a canonical item when the executed tool calls used the canonical
+parameter and the item identity is unambiguous. Reject only if the final reply
+uses an unverified visual/OCR name as a different canonical item, or if
+multiple/generic matches need narrowing before a definitive DB claim.
 
 ## Output Contract
 
@@ -666,6 +728,10 @@ def normalized_tokens(text: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", str(text or "").lower())
 
 
+def canonically_same_text(left: str, right: str) -> bool:
+    return normalized_tokens(left) == normalized_tokens(right)
+
+
 def distinctive_tokens(text: str) -> list[str]:
     tokens = normalized_tokens(text)
     return [
@@ -717,6 +783,11 @@ def numeric_fact_strings(value: Any) -> set[str]:
 
 
 def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, Any]]) -> str | None:
+    # Canonical-name wording is intentionally not a deterministic blocker.
+    # The model-level correction prompt may still audit genuinely ambiguous or
+    # unsupported DB claims, but readable casing/abbreviation differences in a
+    # final reply should not override correctly canonicalized tool parameters.
+    return None
     reply_lower = str(proposed_reply or "").lower()
     for entry in tool_logs:
         for result in entry.get("results", []):
@@ -737,6 +808,8 @@ def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, 
                 for product in products
                 if isinstance(product, dict)
             ]
+            if any(name and canonically_same_text(str(query_name), name) for name in returned_names):
+                continue
             query_lower = str(query_name).lower()
             reply_uses_query_name = query_lower in reply_lower
             reply_without_query = reply_lower.replace(query_lower, " ")
@@ -776,6 +849,36 @@ def compact_tool_logs(tool_logs: list[dict[str, Any]], *, max_entries: int, max_
             )
         compacted.append({"turn": entry.get("turn"), "calls": calls, "results": results})
     return compacted
+
+
+def paired_tool_call_records(
+    tool_logs: list[dict[str, Any]],
+    *,
+    max_entries: int,
+    max_result_chars: int,
+) -> list[dict[str, Any]]:
+    _ = max_entries
+    _ = max_result_chars
+    records: list[dict[str, Any]] = []
+    for entry in tool_logs:
+        calls = normalize_calls(entry.get("calls", []))
+        raw_results = entry.get("results", [])
+        results = raw_results if isinstance(raw_results, list) else []
+        for idx, call in enumerate(calls):
+            result = results[idx] if idx < len(results) and isinstance(results[idx], dict) else {}
+            records.append(
+                {
+                    "turn": entry.get("turn"),
+                    "call_index": idx,
+                    "tool_call": call,
+                    "tool_result": {
+                        "tool_name": result.get("tool_name"),
+                        "parameters": result.get("parameters", {}),
+                        "content": str(result.get("content", "")),
+                    },
+                }
+            )
+    return records
 
 
 def build_audit_context(
@@ -823,10 +926,21 @@ def build_audit_context(
         max_entries=max_tool_log_entries,
         max_result_chars=max_tool_result_chars,
     )
+    current_tool_call_records = paired_tool_call_records(
+        tool_logs,
+        max_entries=max_tool_log_entries,
+        max_result_chars=max_tool_result_chars,
+    )
+    previous_tool_call_records = paired_tool_call_records(
+        prior_tool_logs or [],
+        max_entries=max_tool_log_entries,
+        max_result_chars=max_tool_result_chars,
+    )
     important_constraints = [
         "This payload provides evidence for the preflight audit; the system prompt defines the policy.",
         "Do not audit visual recognition; images and key frames are not included in correction context.",
         "Use previous_turn_tool_ledger and current_turn_tool_ledger as official DB evidence.",
+        "Use previous_turn_tool_call_records and current_turn_tool_call_records to inspect the exact tool names, parameters, order, and corresponding results.",
         "Use official_tool_catalog for tool names, descriptions, parameters, and enum values.",
         "Audit the proposed output only; do not solve the task or require global enumeration unless the user asked globally.",
     ]
@@ -840,6 +954,8 @@ def build_audit_context(
         important_constraints.extend(
             [
                 "Order restaurant_name must be sourced from user dialogue, not visual/OCR text; do not use hidden namespace knowledge before official tool execution.",
+                "Order dish/item operations and set-meal operations are distinct; set-meal contents count for allergen checks unless the user restricts to non-set-meal items.",
+                "For order discount/payment/amount-payable final answers, require compute_total_payment rather than manual arithmetic.",
             ]
         )
     payload = {
@@ -859,6 +975,8 @@ def build_audit_context(
         "key_frames": [],
         "previous_turn_tool_ledger": previous_tool_ledger,
         "current_turn_tool_ledger": executed_tool_ledger,
+        "previous_turn_tool_call_records": previous_tool_call_records,
+        "current_turn_tool_call_records": current_tool_call_records,
         "official_tool_catalog": tool_catalog,
         "important_constraints": important_constraints,
         "visual_grounding_policy": {
@@ -888,6 +1006,8 @@ def audit_context_stats(audit_context: str) -> dict[str, Any]:
         "has_dialogue_history": '"dialogue_history"' in text,
         "has_previous_turn_tool_ledger": '"previous_turn_tool_ledger"' in text,
         "has_current_turn_tool_ledger": '"current_turn_tool_ledger"' in text,
+        "has_previous_turn_tool_call_records": '"previous_turn_tool_call_records"' in text,
+        "has_current_turn_tool_call_records": '"current_turn_tool_call_records"' in text,
         "has_official_tool_catalog": '"official_tool_catalog"' in text,
         "has_proposed": '"proposed"' in text,
     }

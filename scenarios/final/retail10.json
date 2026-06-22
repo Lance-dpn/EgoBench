@@ -1242,6 +1242,14 @@
         }
       },
       {
+        "tool_name": "remove_from_cart",
+        "parameters": {
+          "user_id": "user_202",
+          "product_name": "Brie Cheese",
+          "qty": 1
+        }
+      },
+      {
         "tool_name": "add_to_cart",
         "parameters": {
           "user_id": "user_202",
@@ -1273,10 +1281,6 @@
             {
               "product_name": "Blue Cheese",
               "quantity": 2
-            },
-            {
-              "product_name": "Brie Cheese",
-              "quantity": 1
             },
             {
               "product_name": "Cheddar Cheese",
@@ -1314,12 +1318,12 @@
         "tool_name": "add_to_cart",
         "parameters": {
           "user_id": "user_456",
-          "product_name": "Garlic Flavored Cheese",
+          "product_name": "Emmental Cheese",
           "qty": 1,
           "category": "cheese",
-          "price": 62.8,
-          "tax_rate": 0.1,
-          "discount": 0.9
+          "price": 12.9,
+          "tax_rate": 0.11,
+          "discount": 0.8
         }
       },
       {
@@ -1372,7 +1376,7 @@
               "quantity": 1
             },
             {
-              "product_name": "Garlic Flavored Cheese",
+              "product_name": "Emmental Cheese",
               "quantity": 1
             },
             {
@@ -1949,18 +1953,6 @@
         "tool_name": "add_to_cart",
         "parameters": {
           "user_id": "user_789",
-          "product_name": "Roquefort Cheese",
-          "qty": 1,
-          "category": "cheese",
-          "price": 80.8,
-          "tax_rate": 0.07,
-          "discount": 0.9
-        }
-      },
-      {
-        "tool_name": "add_to_cart",
-        "parameters": {
-          "user_id": "user_789",
           "product_name": "Mystic Valley Cheese",
           "qty": 1,
           "category": "cheese",
@@ -1976,10 +1968,6 @@
           "products": [
             {
               "product_name": "Appenzeller Cheese",
-              "quantity": 1
-            },
-            {
-              "product_name": "Roquefort Cheese",
               "quantity": 1
             },
             {

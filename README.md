@@ -1,5 +1,19 @@
 ## Final Evaluation Phase
 
+### Important Notice（**12:00 UTC+8 on June 22**）: EgoLink Track 2 Test Set Database Update and Submission Deadline Extension
+After reviewing the submissions received so far, we have identified certain practices that may compromise the fairness of the evaluation. In particular, some submissions appear to incorporate information that should not be directly available to the service agent—such as database content—into the agent’s observations during training, thereby potentially gaining an unfair advantage.
+
+To preserve the integrity and fairness of the challenge, prevent such practices from affecting the evaluation results, and better assess the generalization capability of service agents, we have decided to update part of the data in the database associated with the **kitchen4** scenario of the test set. Please note that **only specific data entries will be modified; the overall data structure will remain unchanged**.
+
+The updated database file have been released at the following link (11:54 UTC+8 on June 22)：
+- https://github.com/ego-link/egolink2026/blob/main/code/track2/EgoBench/tools/kitchen/kitchen_init.py
+
+In light of this change, and to allow sufficient time for participants to rerun the 50 tasks in the **kitchen4** scenario using the updated database, the submission deadline has been extended to **12:00 UTC+8 on June 23**.
+
+All other submission requirements remain unchanged. Please ensure that **all kitchen4 submissions are generated based on the updated tasks and database**.
+
+——————————————————————————————————————————————————— (new notice separator)
+
 The final evaluation test set will be released on **June 16, 2026 at 20:00 (GMT+8)**. All participants are required to submit their result files and technical report by the deadline of **June 22, 2026 at 20:00 (GMT+8)**.
 
 > ⚠️ **Important Notice on Schedule Adjustment**
@@ -25,6 +39,10 @@ In the June 16 version, although the ground-truth annotations have been removed 
 No. The JSON files under EgoBench/scenarios/final, as well as any information contained in them, must not be directly accessed or used by the service agent. The service agent is only allowed to obtain information from the video and the Simulated User’s feedback. In the evaluation workflow, the files under EgoBench/scenarios/final are intended to be used only by the Simulated User. Moreover, the remaining key-value pairs in these files were included merely as supplementary information to assist human annotators’ understanding, and they do not represent the ground truth used in the final evaluation.
 To avoid causing similar confusion for other participants, we will remove irrelevant information from the files under EgoBench/scenarios/final. In addition, during the evaluation phase, we will also strictly examine whether the service agent designed by any participant directly uses information from the files under EgoBench/scenarios/final. Any such use will be considered cheating and handled accordingly.
 
+#### Q2:
+In the order2 scenario, we still found that the descriptions of four tasks contain taste attributes that do not belong to the predefined enum list. How should we handle these cases?
+#### A2:
+For the final evaluation, when selecting the 50–100 tasks to be included in the participant answer assessment, we will avoid choosing tasks with this issue. Therefore, there is no need to be overly concerned about the answers to these few tasks. You may handle them in whatever way you consider most appropriate.
 
 ### How to Run the Final Evaluation Scenarios (has released on 2026.06.16)
 

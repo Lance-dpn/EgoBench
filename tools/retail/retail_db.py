@@ -287,13 +287,13 @@ class RetailDB:
         matches = self._find_matching_products(product_name)
         if not matches:
             return {"status": "error", "message": f"No matching products found for '{product_name}'."}
-        
+
         # Return nutrition information for all matching products
         results = []
         for p in matches:
             nutrition_dict = asdict(p.nutrition)
             results.append({"product_name": p.name, "nutrition": nutrition_dict})
-        
+
         return {"products": results, "count": len(results)}
 
     def find_products_by_allergen(self, allergen: str) -> Dict[str, Any]:

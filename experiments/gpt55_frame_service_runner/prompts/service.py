@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-SERVICE_PROMPT_VERSION = "gpt55_frame_service_prompt_v48_restaurant_name_dialogue_only"
+SERVICE_PROMPT_VERSION = "gpt55_frame_service_prompt_v54_order_setmeal_payment_allergen"
 
 
 SCENARIO_RULES = {
@@ -28,7 +28,7 @@ SCENARIO_RULES = {
         "- For complex cart tasks, work in stages: visual product, branch decision, candidate filtering, cart mutation, shopping-list reconciliation, final computation.",
         "- Keep a compact remaining-task checklist internally. After each tool result, advance to the next unfinished stage instead of rechecking completed stages.",
         "- Once a candidate set has been filtered enough to identify the item or tied items requested by the user, perform the requested cart action and move on.",
-        "- During shopping-list reconciliation, compare the shopping list with the current cart once, add only missing or insufficient quantities, then proceed to the requested final calculation.",
+        "- During shopping-list reconciliation, explicitly compare the official shopping list with the current cart before mutating. List each missing or insufficient item internally, add only those missing/insufficient quantities, and do not rely on memory or broad product searches to decide list completion.",
     ],
     "restaurant": [
         "- Before judging top/bottom/left/right or nearby text, decide whether the menu view is rotated; if so, use the menu text's normal reading orientation as the coordinate frame.",
@@ -37,8 +37,11 @@ SCENARIO_RULES = {
         "- A visible drink label such as F, H, T, U, R, or E is an exact visual menu anchor. If an official lookup returns a matching_dishes entry whose key exactly matches that letter case-insensitively, treat that exact letter entry as the canonical target for later facts, mutations, and calculations.",
         "- Do not let substring matches from the same single-letter lookup, such as latte, americano, flat white, affogato, or tiramisu, override the exact visual letter anchor. Use those substring matches only if the exact letter is absent and other visual/menu evidence supports them.",
         "- If a single-letter label lookup returns multiple dishes including the exact label, use the exact-label facts for branch decisions and state-changing calls. Do not ask the user to clarify merely because substring matches also appeared.",
+        "- When an exact single-letter drink anchor is the branch predicate and a tag/list lookup returns that exact letter among qualifying dishes, treat the predicate as proven for that letter. Do not drift into the else branch or require evidence for else-branch candidates unless the exact letter is absent from the qualifying set.",
         "- The exact single-letter anchor applies to that pointed/located beverage only. If a later branch asks for drinks/options on the menu without restricting to those letter-labeled specials, build the candidate set from the whole relevant drink/menu catalog, including named beverages such as espresso, latte, flat white, teas, and cold brew.",
         "- In restaurant5, category names `Cold Brew` and `Espresso` may return only the illustrated letter specials. Do not treat those two category results as the complete drink menu unless the user's visual boundary specifically limits the task to those illustrated letter panels.",
+        "- For restaurant food-property filters, distinguish nutritional tags from allergens. If a user asks for a property such as gluten-free, dairy-free, egg-free, nut-free, no gluten, no dairy, no egg, no nuts, or containing/excluding an allergen, and the nutritional-tag lookup returns no candidates, verify the allergen field before concluding no item qualifies. Treat gluten-free as no gluten allergen when the DB has no usable gluten_free tag.",
+        "- Conversely, if the user explicitly asks for a label/tag such as `with a gluten_free label` or `official gluten-free tag`, use the official nutritional tag first, but if that tag lookup is empty and the task appears to be an allergen-safety request, check allergens as fallback evidence before refusing.",
         "- Use tools for: dish facts, allergens, nutrition, recommendations, orders, menu state, and calculations.",
         "- First classify the user's visual referent as one mode: DISH_POINTING, CATEGORY_LOCALIZATION, or DISH_WITHIN_CATEGORY.",
         "- Use DISH_POINTING only when the user asks for a specific pointed dish/item name or a dish among pointed dishes.",
@@ -68,17 +71,18 @@ SCENARIO_RULES = {
         "- Do not directly guess a recipe name from vision. First identify visible ingredients and action, then compare against recipe ingredients and cooking steps using tools.",
         "- For recipe/action questions, combine visible cooking evidence with recipe and ingredient tools instead of relying on vision alone.",
         "- When a task asks for picked, remaining, added, or current-step ingredients, distinguish the visible ingredient role before applying recipe or inventory logic.",
-        "- Preserve process-distinct shopping-list mutations. If the same ingredient must be added from different instruction stages or recipe occurrences, prefer separate add_to_shopping_list calls in that order. Only merge quantities when the user explicitly asks for a combined total or a single restock amount.",
+        "- Preserve process-distinct shopping-list mutations. If the same ingredient must be added from different instruction stages or recipe occurrences, do not aggregate them: emit separate add_to_shopping_list calls in the original recipe/stage order, with that occurrence's required quantity. Only use one combined quantity when the user explicitly asks for a combined total or one single restock amount.",
         "- For expiry decisions, use only a current date explicitly stated by the user; if missing, ask for it instead of assuming the runtime date.",
         "- For kitchen recipe allergens, normalize plain-language singular/plural aliases to the DB field. In particular, if the user says egg allergen and `find_recipes_by_allergen(\"egg\")` returns empty, retry `eggs` before concluding no recipes qualify.",
         "- When the user asks for a highest, lowest, most, fewest, cheapest, largest, or smallest ingredient/recipe by a numeric property, call tools to gather that numeric property for the whole active candidate set, then rank by those values. Do not replace a requested numeric ranking with a broad tag such as high_protein, low_fat, high_fiber, or low_calories unless the user specifically asked for that tag.",
         "- When judging an ingredient property such as staple food, dry goods, vegetable, meat, seasoning, or storage/category membership, use the ingredient category or location returned by official DB tools. Do not infer category from the ingredient name, recipe role, or common sense.",
+        "- Kitchen category wording can have semantic aliases. Treat user wording such as staple, staple food, dry goods, pantry grains, or staple/dry goods as compatible with the official `carbs/grains` category when the DB uses that category for ingredients such as flour, rice, oats, pasta, beans, quinoa, or other grain/legume staples. Still use official DB category/location evidence to decide the mapped category.",
     ],
     "order": [
         "- Use frames for: menu screen, pointed dishes or categories, set-meal text, spatial references, and ordinal references. Do not use frames, visible menu titles, logos, OCR, or brand text to determine the DB restaurant_name.",
         "- Use tools for: restaurant state, dish/category facts, set meals, order changes, totals, tax, payment, and aggregate facts.",
         "- The DB restaurant_name must come from the user's dialogue only: the user's current request, prior user turns, or an explicit user confirmation. Never infer, replace, or canonicalize restaurant_name from visual menu titles, logos, OCR, image text, or visible brand names.",
-        "- In order nutritional-tag requests, normalize plain-language wording to official enums before calling tools: `high calorie`, `high-calorie`, or `high calories` -> `high_calories`; `low calorie`, `low-calorie`, or `low calories` -> `low_calories`; `gluten-free` or `gluten free` -> `gluten_free`.",
+        "- In order nutritional-tag requests, normalize plain-language wording to official enums before calling tools: `high calorie`, `high-calorie`, or `high calories` -> `high_calories`; `low calorie`, `low-calorie`, or `low calories` -> `low_calories`; `gluten-free` or `gluten free` -> `gluten_free`. If a gluten_free tag lookup is empty or incomplete and the user wording is allergen-safety oriented, verify the allergen field and treat gluten-free as no gluten allergen before concluding no candidate qualifies.",
         "- Do not tell the user that a restaurant is named according to visible menu/OCR text. If you need to refer to a chosen restaurant, use the name or description supplied by the user, or ask the user to provide the exact full name.",
         "- Order restaurant names often follow the pattern `<name> <nation> Restaurant`. When the user provides partial restaurant wording with enough parts, form a likely complete restaurant_name only from the user's words, not from visual/OCR text. If a user-supplied restaurant_name is unsupported, re-check whether the same user wording contains a name part, a nation/cuisine part, and `Restaurant`; if so, try that structured complete form once before asking. If any part is missing, ask the user instead of inventing the missing nation/cuisine.",
         "- If the user asks you to choose a restaurant and later perform DB-backed ordering, choose among the restaurant names supplied in the user's dialogue. Visual menu content can support the choice, but cannot introduce or rename the restaurant.",
@@ -93,8 +97,11 @@ SCENARIO_RULES = {
         "- Keep the visually identified section constraint stable while ranking candidates; do not drift to a broader or neighboring section without clear evidence.",
         "- For set meals, use set-meal-aware tools when available; otherwise query the relevant set-meal details before calculating or ordering.",
         "- Treat an expanded page, menu page, section, or visible menu region as a hard candidate boundary. If the user asks for an item on a numbered expanded page, first identify that page's visible dish set; do not substitute a global-menu extremum.",
-        "- Before adding or removing by set meal name, verify whether the target is a set meal or an individual dish. Use set-meal tools for set meals and dish tools for individual dishes.",
+        "- Before adding or removing by set meal name, verify whether the target is a set meal or an individual dish. Use set-meal tools for set meals and dish tools for individual dishes. If the user points to or asks about a `dish`, `item`, or individual menu entry, do not replace that target with a set meal merely because a set meal contains it or has a higher/lower price. Operate on the individual dish unless the user explicitly asks for a set meal, combo, package, or all items containing a property.",
+        "- For allergen inclusion/exclusion over the current order, set-meal ingredients count as part of the order. Retrieve set-meal details and include the included dishes when deciding whether the order contains seafood/gluten/dairy/nuts/egg or when removing all allergen-containing items. Only ignore set-meal contents when the user explicitly restricts the scope to non-set-meal or loose individual dishes.",
+        "- When removing an order item and the user gives no explicit quantity clue such as one portion, two portions, or a remaining count, remove the item's entire current quantity from the order. Use get_user_order_summary or prior successful order-state evidence to determine that quantity.",
         "- For order totals and price-threshold branches, inspect the current order state with the official order-summary tool, then use official price/compute tools. Do not estimate the threshold from remembered or partial state.",
+        "- If the final answer asks for discount, payment, amount payable, final bill, total cost, or price after discounts, call `compute_total_payment` over the verified current order/candidate scope. Do not substitute manual arithmetic from unit price and discount, even when the arithmetic looks simple.",
     ],
 }
 
@@ -169,6 +176,11 @@ dialogue, attached frames, tool results, and tool catalog.
 ## Tool Strategy
 - Use official tools for facts, current state, calculations, and every requested
   state change. Prefer the most direct tool and exact schema/enum values.
+- Before selecting or calling any tool, read its declared description,
+  parameters, enum values, and return scope in the Tool Catalog. Do not infer a
+  tool's capability from its name alone. For example, a compute/payment tool may
+  calculate over explicitly supplied items rather than automatically reading all
+  items in a user's cart, order, menu, or shopping list.
 - Execute every task as this sequence: resolve visual/dialogue anchor -> map it
   to a DB canonical field -> decide the current branch -> build the active
   candidate set -> gather the requested ranking/filter fields for that set ->
@@ -178,13 +190,41 @@ dialogue, attached frames, tool results, and tool catalog.
 - Before any mutation, verify it is requested, not already completed, and
   supported by read-only evidence for the canonical target, quantity, active
   branch, filters, ranks, ties, and state target.
+- Before any state-changing mutation in a conditional task, the branch predicate
+  that activates that mutation must already be proven by official tool results
+  or by an explicitly confirmed user answer. Do not add/remove/update items
+  first and explain the branch later. If the predicate is missing, call read-only
+  tools for that predicate before mutating.
 - Preserve required state-changing steps as tool calls. Do not collapse add ->
   remove -> add into only the final state, and do not merge process-distinct
   mutations unless the user explicitly asks for one combined quantity.
+- When removing an item from a cart, order, shopping list, or similar state, use
+  the user's quantity wording. If there is no explicit quantity clue, remove the
+  target item's full current quantity; first retrieve or rely on current-state
+  evidence for that quantity.
 - For final totals, payment, tax, discount-adjusted price, set-meal totals, or
   aggregate summaries, use the official compute/tally/total tool after the
   required state and candidate inputs are known. Do not hand-compute final
   numeric answers when such a tool exists.
+- Before any compute/tally/total call, determine the calculation scope from the
+  user's wording and current task state. If the user asks about all items in the
+  current cart/order/shopping list, all dishes in a menu/category, all products
+  on a list, or a branch-selected candidate set, first retrieve or verify that
+  full state/candidate list with the appropriate cat/menu/list/cart/order tools
+  unless it is already established by prior successful tool results. Pass the
+  exact explicit inputs required by the compute tool description; do not assume
+  the compute tool will discover missing items by itself.
+- Build compute/tally/total inputs only from current official canonical state or
+  a verified candidate list. Never pass uncanonicalized natural-language cart,
+  order, menu, or shopping-list text into compute tools, and never include names
+  with embedded quantity suffixes or stray OCR/punctuation such as `item*2` as
+  if they were canonical DB items.
+- For condition checks and later rankings/removals, distinguish item-level
+  properties from aggregate contributions. Phrases such as a dish/product's
+  content, unit price, per-serving, or per-100g describe a single item property;
+  phrases such as total in the order/cart/list, current order total, or all
+  selected items describe an aggregate. Keep the same measurement scope for the
+  downstream branch action unless the user explicitly changes it.
 - Treat visual sections, shelves, cards, panels, folds, menu regions, selected
   groups, and pointed categories as bounded candidate sets. Verify the boundary
   first, intersect later tag/list/filter outputs with it, and rank or mutate only
@@ -210,6 +250,18 @@ dialogue, attached frames, tool results, and tool catalog.
   `high calorie`, `low calorie`, and `gluten-free` map to official enums
   `high_calories`, `low_calories`, and `gluten_free` when those are the legal
   tool values.
+- If a lookup/filter/list tool returns an empty result, treat it as evidence
+  that the queried field or spelling may be wrong, not immediate proof that the
+  user-requested item/category has no match. Check the tool schema for enum
+  values, legal field names, and parameter descriptions; then retry with one to
+  three representative distinctive words, canonical enum aliases, singular/
+  plural variants, or a relevant candidate-list tool before concluding no
+  candidate exists. Do not repeatedly retry generic words.
+- If a food feature/tag lookup returns empty and the requested feature can also
+  be represented as an allergen inclusion or exclusion, verify the allergen
+  field before concluding that no candidate satisfies the feature. Examples:
+  gluten-free may mean no gluten allergen; dairy-free may mean no dairy allergen;
+  egg-free may mean no egg/eggs allergen; nut-free may mean no nut/nuts allergen.
 - Remove candidates disproven by tool results, preserve user-stated identifiers
   and ordered references, and apply every requested tied mutation supported by
   tool results.
@@ -217,6 +269,10 @@ dialogue, attached frames, tool results, and tool catalog.
 ## Conditional Branch Execution
 - For conditional requests, prove the branch condition first, then execute only
   the active branch.
+- A branch predicate only decides which branch is active. It does not become an
+  extra filter for that branch's candidate set unless the branch wording itself
+  repeats that filter. After the branch is active, apply only the candidate
+  constraints explicitly stated in that branch.
 - If the user says "if A then B, otherwise C", gather only the evidence needed
   to decide A, decide A, and then execute B or C. Do not pre-query candidates
   for both B and C before A is known.

@@ -1458,6 +1458,15 @@
         }
       },
       {
+        "tool_name": "remove_dish_from_order",
+        "parameters": {
+          "restaurant_name": "Mediterranean Greek Restaurant",
+          "user_id": "customer_006",
+          "dish_name": "Greek Yogurt with Honey & Nuts",
+          "quantity": 2
+        }
+      },
+      {
         "tool_name": "compute_total_nutrition",
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
@@ -1478,10 +1487,6 @@
             {
               "dish_name": "Tzatziki",
               "quantity": 1
-            },
-            {
-              "dish_name": "Greek Yogurt with Honey & Nuts",
-              "quantity": 2
             },
             {
               "dish_name": "Grilled Halloumi Cheese",
@@ -2321,8 +2326,8 @@
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_005",
-          "dish_name": "Feta & Tomato Spaghetti",
-          "quantity": 1
+          "dish_name": "Vanilla pudding",
+          "quantity": 2
         }
       },
       {
@@ -2348,8 +2353,8 @@
               "quantity": 3
             },
             {
-              "dish_name": "Vanilla pudding",
-              "quantity": 2
+              "dish_name": "Feta & Tomato Spaghetti",
+              "quantity": 1
             },
             {
               "dish_name": "Dolmades",
@@ -2953,12 +2958,12 @@
         }
       },
       {
-        "tool_name": "remove_dish_from_order",
+        "tool_name": "remove_set_meal_from_order",
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_003",
-          "dish_name": "Vanilla pudding",
-          "quantity": 3
+          "set_meal_name": "Greek Classic Set",
+          "quantity": 2
         }
       },
       {
@@ -2980,12 +2985,12 @@
               "quantity": 2
             },
             {
-              "dish_name": "Tzatziki",
-              "quantity": 1
+              "dish_name": "Vanilla pudding",
+              "quantity": 3
             },
             {
-              "dish_name": "Greek Classic Set",
-              "quantity": 2
+              "dish_name": "Tzatziki",
+              "quantity": 1
             }
           ]
         }
@@ -3009,12 +3014,12 @@
               "quantity": 2
             },
             {
-              "dish_name": "Tzatziki",
-              "quantity": 1
+              "dish_name": "Vanilla pudding",
+              "quantity": 3
             },
             {
-              "dish_name": "Greek Classic Set",
-              "quantity": 2
+              "dish_name": "Tzatziki",
+              "quantity": 1
             }
           ]
         }
@@ -3455,8 +3460,8 @@
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_008",
-          "dish_name": "Santarini Seafood Rice",
-          "quantity": 1
+          "dish_name": "Pita Bread",
+          "quantity": 2
         }
       },
       {
@@ -3478,8 +3483,8 @@
               "quantity": 1
             },
             {
-              "dish_name": "Pita Bread",
-              "quantity": 2
+              "dish_name": "Santarini Seafood Rice",
+              "quantity": 1
             },
             {
               "dish_name": "Pasta Lovers Set",
@@ -3507,8 +3512,8 @@
               "quantity": 1
             },
             {
-              "dish_name": "Pita Bread",
-              "quantity": 2
+              "dish_name": "Santarini Seafood Rice",
+              "quantity": 1
             },
             {
               "dish_name": "Pasta Lovers Set",
@@ -6961,37 +6966,29 @@
         }
       },
       {
+        "tool_name": "clear_user_order",
+        "parameters": {
+          "restaurant_name": "Mediterranean Greek Restaurant",
+          "user_id": "customer_007"
+        }
+      },
+      {
+        "tool_name": "add_dish_to_order",
+        "parameters": {
+          "restaurant_name": "Mediterranean Greek Restaurant",
+          "user_id": "customer_007",
+          "dish_name": "Falafel Wrap",
+          "quantity": 1
+        }
+      },
+      {
         "tool_name": "compute_total_nutrition",
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_007",
           "dishes": [
             {
-              "dish_name": "Greek Village Roast Chicken Leg",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Grilled Octopus",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Spaghetti Bolognese",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Moussaka",
-              "quantity": 2
-            },
-            {
-              "dish_name": "Spanakopita",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Greek Lamb Chops",
-              "quantity": 2
-            },
-            {
-              "dish_name": "Dessert Pairing Set",
+              "dish_name": "Falafel Wrap",
               "quantity": 1
             }
           ]
@@ -7616,38 +7613,30 @@
         }
       },
       {
+        "tool_name": "clear_user_order",
+        "parameters": {
+          "restaurant_name": "Mediterranean Greek Restaurant",
+          "user_id": "customer_007"
+        }
+      },
+      {
+        "tool_name": "add_dish_to_order",
+        "parameters": {
+          "restaurant_name": "Mediterranean Greek Restaurant",
+          "user_id": "customer_007",
+          "dish_name": "Tzatziki",
+          "quantity": 2
+        }
+      },
+      {
         "tool_name": "compute_total_payment",
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
           "user_id": "customer_007",
           "dishes": [
             {
-              "dish_name": "Greek Village Roast Chicken Leg",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Grilled Octopus",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Spaghetti Bolognese",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Moussaka",
+              "dish_name": "Tzatziki",
               "quantity": 2
-            },
-            {
-              "dish_name": "Spanakopita",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Pork Gyro Plate",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Dessert Pairing Set",
-              "quantity": 1
             }
           ]
         }
@@ -7659,32 +7648,8 @@
           "user_id": "customer_007",
           "dishes": [
             {
-              "dish_name": "Greek Village Roast Chicken Leg",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Grilled Octopus",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Spaghetti Bolognese",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Moussaka",
+              "dish_name": "Tzatziki",
               "quantity": 2
-            },
-            {
-              "dish_name": "Spanakopita",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Pork Gyro Plate",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Dessert Pairing Set",
-              "quantity": 1
             }
           ]
         }
@@ -7914,6 +7879,15 @@
         }
       },
       {
+        "tool_name": "remove_set_meal_from_order",
+        "parameters": {
+          "restaurant_name": "Mediterranean Greek Restaurant",
+          "user_id": "customer_010",
+          "set_meal_name": "Seafood Lover's Set",
+          "quantity": 1
+        }
+      },
+      {
         "tool_name": "add_dish_to_order",
         "parameters": {
           "restaurant_name": "Mediterranean Greek Restaurant",
@@ -7947,10 +7921,6 @@
             {
               "dish_name": "Melitzanosalata",
               "quantity": 1
-            },
-            {
-              "dish_name": "Seafood Lover's Set",
-              "quantity": 1
             }
           ]
         }
@@ -7979,10 +7949,6 @@
             },
             {
               "dish_name": "Melitzanosalata",
-              "quantity": 1
-            },
-            {
-              "dish_name": "Seafood Lover's Set",
               "quantity": 1
             }
           ]
@@ -8690,7 +8656,7 @@
     ]
   },
   {
-    "Instruction": "This is a family gathering, and you plan to order takeout for everyone to enjoy. You have found the menus of two restaurants you have visited before: Mediterranean Greek Restaurant and Annie Italian Restaurant. Your family enjoys poultry meat but dislikes hard-to-handle or difficult-to-eat parts such as chicken feet and chicken wings. Please ask the AI Service Agent to consult and select the more suitable restaurant. Once the restaurant is selected, inform the AI service agent that all subsequent tasks will be based on this chosen restaurant, and you won’t need to reiterate it. You are a seasoned orderer who knows how to snag the best deals (User ID: customer_001). You tapped the second item in the text list on the right side of the 5th expanded page. Ask the AI Service Agent to verify the natural price of this dish and its associated set meal. Ask the AI Service Agent to determine if the bundle price of the \"Enthusiast Set Meal\" containing this dish is truly lower than the cumulative total price of ordering each item individually. If it is, ask the AI Service Agent to select the dish with the largest discount among all dishes containing gluten allergens and add one portion to the order. If there are multiple dishes tied for the largest discount, add one portion of each of those tied dishes. Otherwise, ask the AI Service Agent to find the dish with the lowest unit price among all mild-flavored dishes and add two portions to the order. If there are multiple dishes tied for the lowest unit price, add two portions of each of those tied dishes. Subsequently, ask the AI Service Agent to determine if the order currently has no set meal discounts attached. If so, ask the AI Service Agent to match the dishes in the order to corresponding set meals and convert them into set meals. Finally, ask the AI Service Agent to calculate the total payable amount after discounts and the total sugar content.",
+    "Instruction": "This is a family gathering, and you plan to order takeout for everyone to enjoy. You have found the menus of two restaurants you have visited before: Mediterranean Greek Restaurant and Annie Italian Restaurant. Your family enjoys poultry meat but dislikes hard-to-handle or difficult-to-eat parts such as chicken feet and chicken wings. Please ask the AI Service Agent to consult and select the more suitable restaurant. Once the restaurant is selected, inform the AI service agent that all subsequent tasks will be based on this chosen restaurant, and you won’t need to reiterate it. You are a seasoned orderer who knows how to snag the best deals (User ID: customer_001). You tapped the second item in the text list on the right side of the 5th expanded page. Ask the AI Service Agent to verify the natural price of this dish and its associated set meal. Ask the AI Service Agent to determine if the bundle price of this set meal containing this dish is truly lower than the cumulative total price of ordering each item individually. If it is, ask the AI Service Agent to select the dish with the largest discount among all dishes containing gluten allergens and add one portion to the order. If there are multiple dishes tied for the largest discount, add one portion of each of those tied dishes. Otherwise, ask the AI Service Agent to find the dish with the lowest unit price among all mild-flavored dishes and add two portions to the order. If there are multiple dishes tied for the lowest unit price, add two portions of each of those tied dishes. Subsequently, ask the AI Service Agent to determine if the order currently has no set meal discounts attached. If so, ask the AI Service Agent to match the dishes in the order to corresponding set meals and convert them into set meals. Finally, ask the AI Service Agent to calculate the total payable amount after discounts and the total sugar content.",
     "image_name": "order2",
     "image_path": "greek_annie_1.mp4",
     "key": "dish_name",

@@ -2899,7 +2899,7 @@ restaurant_init_data5 = {
       "tax_rate": 0.08,
       "discount": 1.0,
       "nutritional_characteristics": [
-        "high_calorie"
+        "high_calories"
       ],
       "taste": [
         "sweet"
@@ -3463,7 +3463,7 @@ restaurant_init_data5 = {
       "nutritional_characteristics": [
         "high_protein",
         "high_calcium",
-        "high_calorie"
+        "high_calories"
       ],
       "taste": [
         "sweet"
