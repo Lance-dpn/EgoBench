@@ -26,6 +26,15 @@ eval_result/
 logs/
 *.log
 vocab_debug.log
+*.zip
+
+# Local review notes and generated benchmark analyses
+scenarios/final/manual_check.md
+scenarios/final/*_checked.json
+experiments/visual_observer_runner/docs/
+experiments/visual_observer_runner/eval/
+test_*.py
+纠错.md
 
 # Experiment caches and generated media
 experiments/**/cache/
