@@ -399,26 +399,24 @@ def qwen_vl_env(args: argparse.Namespace, stage: str = "event") -> tuple[str, st
 
     stage_api_key = (
         getattr(args, f"qwen_{stage}_api_key", None)
-        or os.environ.get(f"QW_{stage.upper()}_OBSERVER_API_KEY")
-        or (os.environ.get("QW_OBSERVER_API_KEY") if stage == "detail" else None)
+        or os.environ.get(f"OBSERVER_{stage.upper()}_API_KEY")
+        or (os.environ.get("OBSERVER_API_KEY") if stage == "detail" else None)
     )
     stage_base_url = (
         getattr(args, f"qwen_{stage}_api_base_url", None)
-        or os.environ.get(f"QW_{stage.upper()}_OBSERVER_API_BASE_URL")
-        or (os.environ.get("QW_OBSERVER_API_BASE_URL") if stage == "detail" else None)
+        or os.environ.get(f"OBSERVER_{stage.upper()}_API_BASE_URL")
+        or (os.environ.get("OBSERVER_API_BASE_URL") if stage == "detail" else None)
     )
     stage_model = (
         getattr(args, f"qwen_{stage}_model", None)
-        or os.environ.get(f"QW_{stage.upper()}_OBSERVER_MODEL_NAME")
-        or (os.environ.get("QW_OBSERVER_MODEL_NAME") if stage == "detail" else None)
+        or os.environ.get(f"OBSERVER_{stage.upper()}_MODEL_NAME")
+        or (os.environ.get("OBSERVER_MODEL_NAME") if stage == "detail" else None)
     )
 
     api_key = (
         stage_api_key
         or args.qwen_api_key
-        or os.environ.get("QWEN_VL_API_KEY")
-        or os.environ.get("QW_SERVICE_API_KEY")
-        or os.environ.get("QW_API_KEY")
+        or os.environ.get("OBSERVER_ONLINE_API_KEY")
         or os.environ.get("SERVICE_API_KEY")
         or os.environ.get("API_KEY")
         or "EMPTY"
@@ -426,18 +424,15 @@ def qwen_vl_env(args: argparse.Namespace, stage: str = "event") -> tuple[str, st
     base_url = (
         stage_base_url
         or args.qwen_api_base_url
-        or os.environ.get("QWEN_VL_API_BASE_URL")
-        or os.environ.get("QW_SERVICE_API_BASE_URL")
-        or os.environ.get("QW_LLM_API_BASE_URL")
+        or os.environ.get("OBSERVER_ONLINE_BASE_URL")
         or os.environ.get("SERVICE_API_BASE_URL")
         or os.environ.get("LLM_API_BASE_URL")
     )
     model = (
         stage_model
         or args.qwen_model
-        or (os.environ.get("QW_OBSERVER_MODEL_NAME") if stage == "event" else None)
-        or os.environ.get("QWEN_VL_MODEL")
-        or os.environ.get("QW_SERVICE_MODEL_NAME")
+        or (os.environ.get("OBSERVER_MODEL_NAME") if stage == "event" else None)
+        or os.environ.get("OBSERVER_ONLINE_MODEL")
         or "qwen3-vl-225b"
     )
     if not base_url:
@@ -1774,7 +1769,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--qwen_video_url_mode",
         choices=["auto", "local", "url"],
-        default=os.environ.get("OBSERVER_QWEN_VIDEO_URL_MODE", "auto"),
+        default=os.environ.get("OBSERVER_VIDEO_URL_MODE", "auto"),
         help="Video URL mode for qwen_video event localization. auto uses file:// for local APIs and public URLs for remote APIs.",
     )
     parser.add_argument(
@@ -1790,12 +1785,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--qwen_video_fps",
         type=float,
-        default=float(os.environ.get("OBSERVER_QWEN_VIDEO_FPS", "2")),
+        default=float(os.environ.get("OBSERVER_VIDEO_FPS", "2")),
         help="fps field sent with OpenAI-compatible video_url input.",
     )
     parser.add_argument("--qwen_temperature", type=float, default=0.0)
     parser.add_argument("--qwen_max_tokens", type=int, default=1024)
-    parser.add_argument("--qwen_timeout", type=float, default=float(os.environ.get("OBSERVER_QWEN_TIMEOUT", "300")))
+    parser.add_argument("--qwen_timeout", type=float, default=float(os.environ.get("OBSERVER_TIMEOUT", "300")))
     parser.add_argument("--qwen_enable_thinking", action="store_true")
     parser.add_argument("--qwen_thinking_budget", type=int, default=None)
     parser.add_argument(

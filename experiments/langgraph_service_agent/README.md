@@ -15,9 +15,10 @@ pip install -U langgraph
 
 The runner also uses the same `.env` keys as the frame runner:
 
+- `SERVICE_MODEL_NAME`
 - `SERVICE_API_KEY` or `OPENAI_API_KEY`
 - `SERVICE_API_BASE_URL` or `OPENAI_BASE_URL`
-- optional `LANCE_SERVICE_MODEL_NAME` / `SERVICE_MODEL_NAME`
+- optional `USER_MODEL_NAME`, `USER_API_KEY`, and `USER_API_BASE_URL`
 
 ## Run
 

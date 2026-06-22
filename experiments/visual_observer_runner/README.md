@@ -24,7 +24,7 @@ scenario tools.
 Run commands from EgoBench:
 
 ```bash
-cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench
+cd <repo-root>
 ```
 
 The observer startup script loads `.env` automatically.
@@ -118,9 +118,9 @@ export OBSERVER_DETAIL_THINKING="off"
 export OBSERVER_DETAIL_MAX_TOKENS="2048"
 export OBSERVER_DETAIL_THINKING_BUDGET="512"
 export OBSERVER_DETAIL_HIGH_RESOLUTION_IMAGES="on"
-export OBSERVER_QWEN_TIMEOUT="300"
+export OBSERVER_TIMEOUT="300"
 
-export OBSERVER_QWEN_VIDEO_FPS="2"
+export OBSERVER_VIDEO_FPS="2"
 
 export VIDEO_URL_BASE="https://egolink.yan2u.top"
 export OBSERVER_VIDEO_URL_BASE="https://egolink.yan2u.top"
@@ -280,7 +280,7 @@ OBSERVER_EVENT_THINKING=on \
 OBSERVER_DETAIL_THINKING=on \
 OBSERVER_EVENT_THINKING_BUDGET=512 \
 OBSERVER_DETAIL_THINKING_BUDGET=512 \
-OBSERVER_QWEN_TIMEOUT=240 \
+OBSERVER_TIMEOUT=240 \
   bash experiments/visual_observer_runner/start_observer.sh
 ```
 
@@ -327,7 +327,7 @@ curl -sS --max-time 240 \
     "task_id": "manual_order1_1_turn2",
     "request_key": "manual_first_pointed_dish",
     "scenario": "order",
-    "video_path": "/mnt/sda/dpn/egolink2026/code/track2/EgoBench/videos/greek_annie_1.mp4",
+    "video_path": "<repo-root>/videos/greek_annie_1.mp4",
     "image_description": "You and your friend are in a order. You look at the menu and point to three dishes in succession.",
     "current_user_message": "Identify the first dish the user is pointing at in the current sequence on Menu 2 from Annie Italian Restaurant.\nVisual referent to resolve: first pointed dish"
   }' | jq '{elapsed_seconds, trace_path, observation}'
@@ -343,7 +343,7 @@ curl -sS --max-time 240 \
     "task_id": "manual_order1_1_turn2",
     "request_key": "manual_top_left_card",
     "scenario": "order",
-    "video_path": "/mnt/sda/dpn/egolink2026/code/track2/EgoBench/videos/greek_annie_1.mp4",
+    "video_path": "<repo-root>/videos/greek_annie_1.mp4",
     "image_description": "You and your friend are in a order. You look at the menu and point to three dishes in succession.",
     "current_user_message": "Identify the category title at the top of the far left side of Menu 2, shown as an independent small card.\nVisual referent to resolve: top far-left independent small card category"
   }' | jq '{elapsed_seconds, trace_path, observation}'
@@ -359,7 +359,7 @@ curl -sS --max-time 240 \
     "task_id": "manual_order1_1_turn2",
     "request_key": "manual_bottom_middle_hand",
     "scenario": "order",
-    "video_path": "/mnt/sda/dpn/egolink2026/code/track2/EgoBench/videos/greek_annie_1.mp4",
+    "video_path": "<repo-root>/videos/greek_annie_1.mp4",
     "image_description": "You and your friend are in a order. You look at the menu and point to three dishes in succession.",
     "current_user_message": "Identify the category title at the very bottom of the middle fold of Menu 2, with a small hand illustration on the left side of the title.\nVisual referent to resolve: bottom middle-fold category with hand illustration"
   }' | jq '{elapsed_seconds, trace_path, observation}'
@@ -471,11 +471,11 @@ visual recognition quality.
 Start the local OpenAI-compatible vLLM server in tmux:
 
 ```bash
-cd /mnt/sda/dpn/egolink2026
+cd <workspace-root>
 
 tmux kill-session -t qwen36 2>/dev/null || true
 tmux new-session -d -s qwen36 \
-  'cd /mnt/sda/dpn/egolink2026/model && exec env CUDA_VISIBLE_DEVICES=1,2 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_LOGGING_LEVEL=INFO ./vllm-venv/bin/vllm serve /mnt/sda/dpn/egolink2026/model/Qwen3.6-27B-FP8 --served-model-name qwen3.6-27b-fp8 --host 0.0.0.0 --port 8000 --tensor-parallel-size 2 --max-model-len 32768 --gpu-memory-utilization 0.88 --trust-remote-code --reasoning-parser qwen3 --max-num-seqs 8 --allowed-local-media-path /mnt/sda/dpn/egolink2026'
+  'cd <workspace-root>/model && exec env CUDA_VISIBLE_DEVICES=1,2 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_LOGGING_LEVEL=INFO ./vllm-venv/bin/vllm serve <workspace-root>/model/Qwen3.6-27B-FP8 --served-model-name qwen3.6-27b-fp8 --host 0.0.0.0 --port 8000 --tensor-parallel-size 2 --max-model-len 32768 --gpu-memory-utilization 0.88 --trust-remote-code --reasoning-parser qwen3 --max-num-seqs 8 --allowed-local-media-path <workspace-root>'
 ```
 
 The important flags are:
@@ -483,7 +483,7 @@ The important flags are:
 ```text
 --served-model-name qwen3.6-27b-fp8
 --reasoning-parser qwen3
---allowed-local-media-path /mnt/sda/dpn/egolink2026
+--allowed-local-media-path <workspace-root>
 ```
 
 `--reasoning-parser qwen3` lets vLLM separate thinking text from
@@ -495,11 +495,11 @@ If startup hangs with shared-memory or custom-all-reduce errors, use the stable
 fallback:
 
 ```bash
-cd /mnt/sda/dpn/egolink2026
+cd <workspace-root>
 
 tmux kill-session -t qwen36 2>/dev/null || true
 tmux new-session -d -s qwen36 \
-  'cd /mnt/sda/dpn/egolink2026/model && exec env CUDA_VISIBLE_DEVICES=1,2 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_LOGGING_LEVEL=INFO ./vllm-venv/bin/vllm serve /mnt/sda/dpn/egolink2026/model/Qwen3.6-27B-FP8 --served-model-name qwen3.6-27b-fp8 --host 0.0.0.0 --port 8000 --tensor-parallel-size 2 --max-model-len 32768 --gpu-memory-utilization 0.88 --trust-remote-code --reasoning-parser qwen3 --enforce-eager --disable-custom-all-reduce --max-num-seqs 8 --allowed-local-media-path /mnt/sda/dpn/egolink2026'
+  'cd <workspace-root>/model && exec env CUDA_VISIBLE_DEVICES=1,2 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_LOGGING_LEVEL=INFO ./vllm-venv/bin/vllm serve <workspace-root>/model/Qwen3.6-27B-FP8 --served-model-name qwen3.6-27b-fp8 --host 0.0.0.0 --port 8000 --tensor-parallel-size 2 --max-model-len 32768 --gpu-memory-utilization 0.88 --trust-remote-code --reasoning-parser qwen3 --enforce-eager --disable-custom-all-reduce --max-num-seqs 8 --allowed-local-media-path <workspace-root>'
 ```
 
 Verify readiness:

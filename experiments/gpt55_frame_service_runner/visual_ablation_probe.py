@@ -124,9 +124,9 @@ def parse_args() -> argparse.Namespace:
         "--frame_cache_dir",
         default=str(PROJECT_ROOT / "experiments" / "gpt55_frame_service_runner" / "cache" / "manual_reasoning_probe"),
     )
-    parser.add_argument("--service_model_name", default=os.environ.get("LANCE_SERVICE_MODEL_NAME") or os.environ.get("SERVICE_MODEL_NAME") or "gpt-5.5")
-    parser.add_argument("--service_api_key", default=os.environ.get("LANCE_SERVICE_API_KEY") or os.environ.get("SERVICE_API_KEY") or os.environ.get("OPENAI_API_KEY"))
-    parser.add_argument("--service_api_base_url", default=os.environ.get("LANCE_SERVICE_API_BASE_URL") or os.environ.get("SERVICE_API_BASE_URL") or os.environ.get("OPENAI_BASE_URL"))
+    parser.add_argument("--service_model_name", default=os.environ.get("SERVICE_MODEL_NAME") or os.environ.get("OPENAI_MODEL_NAME") or "gpt-5.5")
+    parser.add_argument("--service_api_key", default=os.environ.get("SERVICE_API_KEY") or os.environ.get("OPENAI_API_KEY"))
+    parser.add_argument("--service_api_base_url", default=os.environ.get("SERVICE_API_BASE_URL") or os.environ.get("OPENAI_BASE_URL"))
     parser.add_argument("--max_output_tokens", type=int, default=2048)
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--max_retries", type=int, default=3)

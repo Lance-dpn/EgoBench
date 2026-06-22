@@ -398,23 +398,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--user_api_key",
         default=(
-            os.environ.get("LANCE_API_KEY")
-            or os.environ.get("LANCE_SERVICE_API_KEY")
-            or os.environ.get("GPT_API_KEY")
-            or os.environ.get("GPT_SERVICE_API_KEY")
-            or os.environ.get("QW_SERVICE_API_KEY")
+            os.environ.get("USER_API_KEY")
+            or os.environ.get("SERVICE_API_KEY")
+            or os.environ.get("OPENAI_API_KEY")
             or os.environ.get("API_KEY")
         ),
     )
     parser.add_argument(
         "--user_api_base_url",
         default=(
-            os.environ.get("LANCE_LLM_API_BASE_URL")
-            or os.environ.get("LANCE_SERVICE_API_BASE_URL")
-            or os.environ.get("GPT_LLM_API_BASE_URL")
-            or os.environ.get("GPT_SERVICE_API_BASE_URL")
-            or os.environ.get("QW_SERVICE_API_BASE_URL")
-            or os.environ.get("QW_SERVICE_BASE_URL")
+            os.environ.get("USER_API_BASE_URL")
+            or os.environ.get("SERVICE_API_BASE_URL")
+            or os.environ.get("OPENAI_BASE_URL")
             or os.environ.get("LLM_API_BASE_URL")
         ),
     )
@@ -426,20 +421,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--service_api_key",
         default=(
-            os.environ.get("LANCE_SERVICE_API_KEY")
-            or os.environ.get("GPT_SERVICE_API_KEY")
-            or os.environ.get("AIGPT_SERVICE_API_KEY")
-            or os.environ.get("SERVICE_API_KEY")
+            os.environ.get("SERVICE_API_KEY")
             or os.environ.get("OPENAI_API_KEY")
         ),
     )
     parser.add_argument(
         "--service_api_base_url",
         default=(
-            os.environ.get("LANCE_SERVICE_API_BASE_URL")
-            or os.environ.get("GPT_SERVICE_API_BASE_URL")
-            or os.environ.get("AIGPT_SERVICE_API_BASE_URL")
-            or os.environ.get("SERVICE_API_BASE_URL")
+            os.environ.get("SERVICE_API_BASE_URL")
             or os.environ.get("OPENAI_BASE_URL")
         ),
     )

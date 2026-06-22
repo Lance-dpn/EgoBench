@@ -71,24 +71,26 @@ Use the existing project environment:
 
 ```bash
 source .env
-/home/dpn/miniconda3/envs/egolink/bin/python --version
+python --version
 ```
 
-The frame runner reads model settings from environment variables. The Lance-prefixed variables take priority:
+The frame runner reads generic OpenAI-compatible environment variables:
 
 ```bash
-LANCE_SERVICE_MODEL_NAME
-LANCE_SERVICE_API_KEY
-LANCE_SERVICE_API_BASE_URL
+SERVICE_MODEL_NAME
+SERVICE_API_KEY
+SERVICE_API_BASE_URL
 ```
 
 The simulated user and summary/check calls use the configured user model variables, including:
 
 ```bash
-QW_USER_MODEL_NAME
-QW_SERVICE_API_KEY
-QW_SERVICE_API_BASE_URL
+USER_MODEL_NAME
+USER_API_KEY
+USER_API_BASE_URL
 ```
+
+The correction agent uses `CORRECTION_*` when set; otherwise it reuses the service model settings.
 
 Do not commit `.env` or any plaintext API key.
 
@@ -98,7 +100,7 @@ Direct run example:
 
 ```bash
 source .env
-/home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 4 \
   --num_tasks 5 \
@@ -154,7 +156,7 @@ These scripts split long task sets across multiple tmux windows and write realti
 experiments/gpt55_frame_service_runner/cache/run_logs/<RUN_ID>/
 ```
 
-The scripts currently contain the local project root and Python path used on the Lance-dpn machine. If the repository is cloned elsewhere, update `ROOT` and `PY` before running them.
+The scripts resolve the project root from their own location. Set `PYTHON=/path/to/python` if you need a specific interpreter; otherwise they use `python`.
 
 ## Correction Agent
 
@@ -183,7 +185,7 @@ When correction rejects a state-changing tool batch and the max correction round
 Evaluate the current clean submission staging directory:
 
 ```bash
-/home/dpn/miniconda3/envs/egolink/bin/python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
+python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
   submission/Lance-dpn_track2/results/Lance-dpn \
   --output eval_result/submission_lance_dpn_track2_eval.json
 ```
@@ -191,7 +193,7 @@ Evaluate the current clean submission staging directory:
 Evaluate any result directory:
 
 ```bash
-/home/dpn/miniconda3/envs/egolink/bin/python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
+python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
   results/<run_name> \
   --output eval_result/<run_name>/task_id_aligned_eval.json
 ```
@@ -199,7 +201,7 @@ Evaluate any result directory:
 For split reruns, pass all split result directories:
 
 ```bash
-/home/dpn/miniconda3/envs/egolink/bin/python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
+python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
   results/<part1> results/<part2> results/<part3> \
   --output eval_result/<rerun_name>/eval_task_id_aligned.json
 ```

@@ -420,15 +420,17 @@ class ChatCompletionsCorrectionClient:
         self.api_key = (
             api_key
             or os.environ.get("CORRECTION_API_KEY")
-            or os.environ.get("Deepseek_API_KEY")
+            or os.environ.get("CORRECTION_SERVICE_API_KEY")
             or os.environ.get("DEEPSEEK_API_KEY")
+            or os.environ.get("Deepseek_API_KEY")
             or ""
         )
         self.base_url = (
             base_url
             or os.environ.get("CORRECTION_API_BASE_URL")
-            or os.environ.get("Deepseek_SERVICE_API_BASE_URL")
+            or os.environ.get("CORRECTION_SERVICE_API_BASE_URL")
             or os.environ.get("DEEPSEEK_API_BASE_URL")
+            or os.environ.get("Deepseek_SERVICE_API_BASE_URL")
             or "https://api.deepseek.com"
         ).rstrip("/")
         self.max_tokens = max_tokens
@@ -1164,10 +1166,10 @@ def failure_decision(exc: Exception, *, failure_policy: str) -> CorrectionDecisi
 def env_default_model() -> str:
     return (
         os.environ.get("CORRECTION_MODEL_NAME")
-        or os.environ.get("LANCE_SERVICE_MODEL_NAME")
         or os.environ.get("SERVICE_MODEL_NAME")
-        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
+        or os.environ.get("OPENAI_MODEL_NAME")
         or os.environ.get("DEEPSEEK_MODEL_NAME")
+        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
         or "gpt-5.5"
     )
 
@@ -1175,7 +1177,7 @@ def env_default_model() -> str:
 def env_chat_completions_model() -> str:
     return (
         os.environ.get("CORRECTION_MODEL_NAME")
-        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
         or os.environ.get("DEEPSEEK_MODEL_NAME")
+        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
         or "deepseek-v4-flash"
     )

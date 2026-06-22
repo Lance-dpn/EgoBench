@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="/mnt/sda/dpn/egolink2026/code/track2/EgoBench"
-PY="/home/dpn/miniconda3/envs/egolink/bin/python"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PY="${PYTHON:-python}"
 RUN_ID="${RUN_ID:-20260622-rerun-kitchen4-newdb-4way-$(date +%H%M%S)}"
 SESSION="${SESSION:-kitchen4_newdb_4way_${RUN_ID##*-}}"
 LOG_DIR="$ROOT/experiments/gpt55_frame_service_runner/cache/run_logs/$RUN_ID"

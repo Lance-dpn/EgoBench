@@ -36,17 +36,14 @@ def load_env_file(path: Path) -> None:
 load_env_file(PROJECT_ROOT / ".env")
 
 DEFAULT_SERVICE_MODEL_NAME = (
-    os.environ.get("LANCE_SERVICE_MODEL_NAME")
-    or os.environ.get("SERVICE_MODEL_NAME")
+    os.environ.get("SERVICE_MODEL_NAME")
+    or os.environ.get("OPENAI_MODEL_NAME")
     or "gpt-5.5"
 )
 DEFAULT_USER_MODEL_NAME = (
-    os.environ.get("LANCE_USER_MODEL_NAME")
-    or os.environ.get("LANCE_SERVICE_MODEL_NAME")
-    or os.environ.get("GPT_USER_MODEL_NAME")
-    or os.environ.get("GPT_SERVICE_MODEL_NAME")
-    or os.environ.get("USER_MODEL_NAME")
-    or os.environ.get("QW_USER_MODEL_NAME")
+    os.environ.get("USER_MODEL_NAME")
+    or os.environ.get("SERVICE_MODEL_NAME")
+    or os.environ.get("OPENAI_MODEL_NAME")
     or "qwen3.5-397b-a17b"
 )
 VIDEO_LOCAL_PATH = os.environ.get("VIDEO_LOCAL_PATH", "./videos")
@@ -571,6 +568,9 @@ def prepare_frames(args: argparse.Namespace, video_path: Path) -> list[SampledFr
 
 def configure_user_model_env(args: argparse.Namespace) -> None:
     os.environ["USER_MODEL_NAME"] = args.user_model_name
+    os.environ["USER_API_KEY"] = args.user_api_key or ""
+    os.environ["USER_API_BASE_URL"] = args.user_api_base_url or ""
+    # Legacy aliases for older official helper code paths.
     os.environ["API_KEY"] = args.user_api_key or ""
     os.environ["LLM_API_BASE_URL"] = args.user_api_base_url or ""
     os.environ["USER_TEMPERATURE"] = str(args.user_temperature)
@@ -1810,22 +1810,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--user_api_key",
         default=(
-            os.environ.get("LANCE_API_KEY")
-            or os.environ.get("LANCE_SERVICE_API_KEY")
-            or os.environ.get("GPT_API_KEY")
-            or os.environ.get("GPT_SERVICE_API_KEY")
-            or os.environ.get("QW_SERVICE_API_KEY")
+            os.environ.get("USER_API_KEY")
+            or os.environ.get("SERVICE_API_KEY")
+            or os.environ.get("OPENAI_API_KEY")
             or os.environ.get("API_KEY")
         ),
     )
     parser.add_argument(
         "--user_api_base_url",
         default=(
-            os.environ.get("LANCE_LLM_API_BASE_URL")
-            or os.environ.get("LANCE_SERVICE_API_BASE_URL")
-            or os.environ.get("GPT_LLM_API_BASE_URL")
-            or os.environ.get("GPT_SERVICE_API_BASE_URL")
-            or os.environ.get("QW_SERVICE_API_BASE_URL")
+            os.environ.get("USER_API_BASE_URL")
+            or os.environ.get("SERVICE_API_BASE_URL")
+            or os.environ.get("OPENAI_BASE_URL")
             or os.environ.get("LLM_API_BASE_URL")
         ),
     )
@@ -1860,16 +1856,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--service_api_key",
         default=(
-            os.environ.get("LANCE_SERVICE_API_KEY")
-            or os.environ.get("SERVICE_API_KEY")
+            os.environ.get("SERVICE_API_KEY")
             or os.environ.get("OPENAI_API_KEY")
         ),
     )
     parser.add_argument(
         "--service_api_base_url",
         default=(
-            os.environ.get("LANCE_SERVICE_API_BASE_URL")
-            or os.environ.get("SERVICE_API_BASE_URL")
+            os.environ.get("SERVICE_API_BASE_URL")
             or os.environ.get("OPENAI_BASE_URL")
         ),
     )

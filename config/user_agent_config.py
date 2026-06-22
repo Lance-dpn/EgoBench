@@ -8,8 +8,9 @@ Participants should modify this file to use their preferred model for user simul
 Default: Qwen3.5-397B-A17B
 
 Environment Variables Required:
-- API_KEY: Your API key for the user simulation model
-- LLM_API_BASE_URL: Base URL for the API endpoint (optional)
+- USER_API_KEY: API key for the user simulation model
+- USER_API_BASE_URL: Base URL for the API endpoint
+- USER_MODEL_NAME: Model name for user simulation
 """
 
 import os
@@ -19,24 +20,19 @@ from openai import OpenAI
 # USER SIMULATION MODEL CONFIGURATION
 # ==============================================================================
 
-# Model name for user simulation. Prefer the LANCE GPT-5.5 user/service model
-# when present, then fall back to the legacy generic user model variable.
+# Model name for user simulation.
 USER_MODEL_NAME = (
-    os.environ.get("LANCE_USER_MODEL_NAME")
-    or os.environ.get("LANCE_SERVICE_MODEL_NAME")
-    or os.environ.get("GPT_USER_MODEL_NAME")
-    or os.environ.get("GPT_SERVICE_MODEL_NAME")
-    or os.environ.get("USER_MODEL_NAME")
+    os.environ.get("USER_MODEL_NAME")
+    or os.environ.get("SERVICE_MODEL_NAME")
+    or os.environ.get("OPENAI_MODEL_NAME")
     or "Qwen3.5-397B-A17B"
 )
 
-# API Key for user simulation model. Prefer LANCE credentials so the user
-# model can use the same GPT-5.5 endpoint family as the service model.
+# API key for user simulation model.
 USER_API_KEY = (
-    os.environ.get("LANCE_API_KEY")
-    or os.environ.get("LANCE_SERVICE_API_KEY")
-    or os.environ.get("GPT_API_KEY")
-    or os.environ.get("GPT_SERVICE_API_KEY")
+    os.environ.get("USER_API_KEY")
+    or os.environ.get("SERVICE_API_KEY")
+    or os.environ.get("OPENAI_API_KEY")
     or os.environ.get("API_KEY")
     or ""
 )
@@ -45,10 +41,9 @@ USER_API_KEY = (
 # Default: https://api.example.com/v1
 # Participants should set this according to their model deployment.
 USER_API_BASE_URL = (
-    os.environ.get("LANCE_LLM_API_BASE_URL")
-    or os.environ.get("LANCE_SERVICE_API_BASE_URL")
-    or os.environ.get("GPT_LLM_API_BASE_URL")
-    or os.environ.get("GPT_SERVICE_API_BASE_URL")
+    os.environ.get("USER_API_BASE_URL")
+    or os.environ.get("SERVICE_API_BASE_URL")
+    or os.environ.get("OPENAI_BASE_URL")
     or os.environ.get("LLM_API_BASE_URL")
     or "https://api.example.com/v1"
 )
@@ -143,10 +138,10 @@ def validate_config():
         tuple: (is_valid, error_message)
     """
     if not USER_API_KEY:
-        return False, "API_KEY environment variable is not set. Please set it before running."
-
+        return False, "USER_API_KEY environment variable is not set. Please set it before running."
+    
     if not USER_API_BASE_URL:
-        return False, "LLM_API_BASE_URL is not configured."
+        return False, "USER_API_BASE_URL is not configured."
 
     return True, None
 

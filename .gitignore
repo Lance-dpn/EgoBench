@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+bak.env
 
 # Python cache and build artifacts
 __pycache__/
@@ -33,6 +34,7 @@ scenarios/final/manual_check.md
 scenarios/final/*_checked.json
 experiments/visual_observer_runner/docs/
 experiments/visual_observer_runner/eval/
+experiments/aura_gpt_runner/
 test_*.py
 纠错.md
 

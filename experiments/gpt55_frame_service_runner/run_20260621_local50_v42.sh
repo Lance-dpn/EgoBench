@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="/mnt/sda/dpn/egolink2026/code/track2/EgoBench"
-PY="/home/dpn/miniconda3/envs/egolink/bin/python"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PY="${PYTHON:-python}"
 RUN_ID="20260621-local50-v42-002837"
 SESSION="local50_v42_002837"
 LOG_DIR="$ROOT/experiments/gpt55_frame_service_runner/cache/run_logs/$RUN_ID"

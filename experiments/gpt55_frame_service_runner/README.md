@@ -10,7 +10,7 @@ The official runner and the visual-observer runner are not modified.
 
 ```bash
 source .env
-/home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 2 \
   --num_tasks 10 \
@@ -38,9 +38,9 @@ source .env
 mkdir -p experiments/gpt55_frame_service_runner/cache/run_logs
 
 tmux new-session -d -s gpt55_frame_kitchen2_1920 \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
    source .env && \
-   /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+   python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
      --scenario kitchen \
      --scenario_number 2 \
      --num_tasks 10 \
@@ -170,7 +170,7 @@ Resume a stopped run with the same `--output_model_name`:
 
 ```bash
 source .env
-/home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 2 \
   --num_tasks 10 \
@@ -189,11 +189,11 @@ By default, a task-level failure is checkpointed and then stops the run so the
 error is visible. Add `--continue_on_task_error` to record the failed task and
 continue later tasks.
 
-The runner reads service model settings from `LANCE_SERVICE_MODEL_NAME`,
-`LANCE_SERVICE_API_KEY`, and `LANCE_SERVICE_API_BASE_URL` first, then falls back
-to `SERVICE_*` or `OPENAI_*` variables. The simulated user and user-summary
-calls are separated from the service model and read Qwen settings first:
-`QW_USER_MODEL_NAME`, `QW_SERVICE_API_KEY`, and `QW_SERVICE_API_BASE_URL`.
+The runner reads service model settings from the generic `SERVICE_MODEL_NAME`,
+`SERVICE_API_KEY`, and `SERVICE_API_BASE_URL` variables, with `OPENAI_*` and
+older local aliases accepted only as compatibility fallbacks. The simulated user
+and user-summary calls read `USER_MODEL_NAME`, `USER_API_KEY`, and
+`USER_API_BASE_URL`; if unset, they can reuse the service endpoint.
 
 `--multi_agent_user` enables the official user-side contradiction check and
 correction flow. `--summary_user` enables user-side dialogue summaries between
@@ -231,23 +231,23 @@ GPT-5.5 service configuration as the service agent:
 In this mode, unset correction fields reuse `--service_model_name`,
 `--service_api_key`, and `--service_api_base_url`.
 
-DeepSeek remains available only when explicitly requested through the
-OpenAI-compatible chat-completions path:
+An OpenAI-compatible chat-completions correction backend remains available only
+when explicitly requested:
 
 ```bash
 --correction_api_type chat_completions
-export Deepseek_API_KEY=...
-export Deepseek_SERVICE_API_BASE_URL=https://api.deepseek.com
-export Deepseek_SERVICE_MODEL_NAME=deepseek-v4-flash
+export CORRECTION_API_KEY=...
+export CORRECTION_API_BASE_URL=https://api.example.com/v1
+export CORRECTION_MODEL_NAME=correction-model
 ```
 
 `CORRECTION_API_KEY`, `CORRECTION_API_BASE_URL`, and `CORRECTION_MODEL_NAME`
-override the chat-completions defaults in that mode. Uppercase
-`DEEPSEEK_API_KEY`, `DEEPSEEK_API_BASE_URL`, and `DEEPSEEK_MODEL_NAME` are also
-accepted as fallback aliases. The correction context includes the latest user
-request, summarized dialogue, recent service-agent history, the full official
-scenario tool catalog, previous executed tool results, and the currently
-proposed tool batch or reply. It does not access the database directly.
+override the chat-completions defaults in that mode. Older provider-specific
+aliases are accepted only as compatibility fallbacks. The correction context
+includes the latest user request, summarized dialogue, recent service-agent
+history, the full official scenario tool catalog, previous executed tool
+results, and the currently proposed tool batch or reply. It does not access the
+database directly.
 
 By default, read-only batches using `find_*`, `get_*`, `tally_*`, or `compute_*`
 are automatically approved. This preserves the service agent's ability to turn
@@ -312,9 +312,9 @@ conda run --no-capture-output -n egolink python experiments/gpt55_frame_service_
 
 ```bash
 tmux new-session -d -s gpt55-retail3-correction-low-5task \
-'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+'cd <repo-root> && \
 source .env && \
-/home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario retail \
   --scenario_number 3 \
   --num_task 5 \
@@ -328,9 +328,9 @@ source .env && \
 
 ```bash
  tmux new-session -d -s gpt55-restaurant3-correction-low-5task \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
   source .env && \
-  /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
     --scenario restaurant \
     --scenario_number 3 \
     --num_task 5 \
@@ -346,9 +346,9 @@ source .env && \
 ---
 ```bash
  tmux new-session -d -s gpt55-kitchen3-correction-low-5task \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
   source .env && \
-  /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
     --scenario kitchen \
     --scenario_number 3 \
     --num_task 5 \
@@ -362,9 +362,9 @@ source .env && \
 
 ```bash
  tmux new-session -d -s gpt55-order1-correction-low-5task \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
   source .env && \
-  /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
     --scenario order \
     --scenario_number 1 \
     --num_task 5 \
