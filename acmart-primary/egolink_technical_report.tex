@@ -1,5 +1,7 @@
 \documentclass[sigconf,nonacm]{acmart}
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
@@ -216,38 +218,38 @@ hash-damaging over-operation in multi-turn conversations.
   \label{fig:system-flow}
 \end{figure*}
 
-\begin{figure}[t]
+\begin{algorithm}[t]
 \caption{Frame-Grounded Service-Agent Inference}
 \label{alg:frame-agent}
 \small
-\begin{minipage}{\linewidth}
-\textbf{Inputs:} scenario task, official tool schema, task video, and fresh
-domain database.
-\begin{enumerate}
-  \item Sample and cache timestamped frames at 2 fps.
-  \item Initialize the official simulated user and service history.
-  \item For each user turn up to the turn limit:
-  \begin{enumerate}
-    \item Generate the next simulated-user message.
-    \item Set \textit{attachFrames} by the auto visual-reference policy.
-    \item For each inner service/tool round up to the tool-round limit:
-    \begin{enumerate}
-      \item Call the service model with dialogue and optional frames.
-      \item If the model outputs \texttt{NEED\_VISUAL\_CONTEXT}, retry this
-      turn with frames attached when allowed.
-      \item If the model outputs strict JSON tool calls, audit the proposed
-      batch, block duplicate successful mutations unless the user asks for
-      more, execute approved calls through official tools, and append results
-      to service history.
-      \item Otherwise, audit the final natural-language reply, show an approved
-      reply to the simulated user, and leave the inner loop.
-    \end{enumerate}
-    \item Save the task trajectory checkpoint.
-    \item Stop the task if the simulated user outputs \texttt{STOP}.
-  \end{enumerate}
-\end{enumerate}
-\end{minipage}
-\end{figure}
+\begin{algorithmic}[1]
+\Require Scenario task, official tool schema, task video, fresh domain database
+\State Sample and cache timestamped frames at 2 fps.
+\State Initialize the official simulated user and service history.
+\For{each user turn up to the turn limit}
+  \State Generate the next simulated-user message.
+  \State Set \textit{attachFrames} by the auto visual-reference policy.
+  \For{each inner service/tool round up to the tool-round limit}
+    \State Call the service model with dialogue and optional frames.
+    \If{the model outputs \texttt{NEED\_VISUAL\_CONTEXT}}
+      \State Retry this turn with frames attached, if allowed.
+    \ElsIf{the model outputs strict JSON tool calls}
+      \State Audit the proposed batch with deterministic checks or correction agent.
+      \State Block duplicate successful mutations unless the user asks for more.
+      \State Execute approved calls through the official tool/database layer.
+      \State Append tool results to the service history.
+    \Else
+      \State Audit the final natural-language reply.
+      \State Show approved reply to the simulated user and leave the inner loop.
+    \EndIf
+  \EndFor
+  \State Save the task trajectory checkpoint.
+  \If{the simulated user outputs \texttt{STOP}}
+    \State End the task interaction.
+  \EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
 
 \section{Experimental Settings}
 
