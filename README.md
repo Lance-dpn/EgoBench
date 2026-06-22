@@ -14,24 +14,9 @@ The current branch is organized for the final five scenarios:
 | Restaurant 5 | `restaurant5_easy.json` | 50 |
 | Order 2 | `order2_easy.json` | 97 |
 
-Current staged submission evaluation:
-
-| Metric | Score |
-|---|---:|
-| Joint success | 259 / 309 = 83.82% |
-| Tool success | 262 / 309 = 84.79% |
-| Result success | 265 / 309 = 85.76% |
-| Micro tool accuracy | 89.81% |
-
-Per scenario:
-
-| Scenario | Joint |
-|---|---:|
-| `kitchen4` | 48 / 50 = 96.00% |
-| `order2` | 73 / 97 = 75.26% |
-| `restaurant5` | 46 / 50 = 92.00% |
-| `retail10` | 57 / 63 = 90.48% |
-| `retail6` | 35 / 49 = 71.43% |
+The staged submission files are kept under `submission/Lance-dpn_track2/`.
+Local GT-based checks are used only for debugging and are not official
+benchmark results.
 
 ## Repository Layout
 

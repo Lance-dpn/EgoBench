@@ -67,6 +67,6 @@ cd acmart-primary
 - algorithm 伪代码；
 - TikZ 系统流程图；
 - experimental settings；
-- final evaluation results；
+- submission package 说明；
 - README 风格的实验复现说明；
 - limitations 和 references。

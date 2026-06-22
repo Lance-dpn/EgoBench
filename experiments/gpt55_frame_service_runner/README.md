@@ -214,7 +214,7 @@ The service prompt is intentionally strict:
 Add `--enable_correction_agent` to audit each proposed service-agent tool batch
 or final reply before execution. The service agent still uses the Responses API
 and frame inputs. The correction agent does not receive images and does not
-audit visual recognition accuracy.
+audit visual target correctness.
 
 The correction prompt is scenario-aware. At startup the runner builds a
 scenario-specific correction system prompt for `retail`, `restaurant`,
