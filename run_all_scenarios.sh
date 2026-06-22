@@ -47,20 +47,19 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Source environment variables if .env exists
+# Source environment variables if .env exists. Keep caller-provided values.
 if [ -f ".env" ]; then
+    set -a
+    # shellcheck disable=SC1091
     source ".env"
+    set +a
 fi
 
-# Your settings here
-export USER_MODEL_NAME="Qwen3.5-397B-A17B"
-export SERVICE_MODEL_NAME="Qwen3.5-397B-A17B"
-export USER_API_BASE_URL=""
-export SERVICE_API_BASE_URL=""
-export API_KEY=""
-export SERVICE_API_KEY=""
-export VIDEO_MODE="url"
-
+export USER_MODEL_NAME="${USER_MODEL_NAME:-Qwen3.5-397B-A17B}"
+export SERVICE_MODEL_NAME="${SERVICE_MODEL_NAME:-Qwen3.5-397B-A17B}"
+export USER_API_BASE_URL="${USER_API_BASE_URL:-${SERVICE_API_BASE_URL:-}}"
+export SERVICE_API_BASE_URL="${SERVICE_API_BASE_URL:-${USER_API_BASE_URL:-}}"
+export VIDEO_MODE="${VIDEO_MODE:-url}"
 
 # Print configuration
 echo "=========================================="

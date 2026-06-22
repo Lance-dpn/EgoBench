@@ -38,6 +38,14 @@ experiments/aura_gpt_runner/
 test_*.py
 纠错.md
 
+# Local experiment launch scripts
+experiments/gpt55_frame_service_runner/run_20*.sh
+experiments/gpt55_frame_service_runner/run_*failed*.sh
+experiments/gpt55_frame_service_runner/run_*rerun*.sh
+experiments/gpt55_frame_service_runner/run_*ablation*.sh
+experiments/gpt55_frame_service_runner/run_deepseek_correction_*.sh
+experiments/gpt55_frame_service_runner/run_restaurant3_native_*.sh
+
 # LaTeX report local artifacts
 acmart-primary/samples/
 acmart-primary/*.aux
