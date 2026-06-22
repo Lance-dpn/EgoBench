@@ -45,6 +45,7 @@ experiments/gpt55_frame_service_runner/run_*rerun*.sh
 experiments/gpt55_frame_service_runner/run_*ablation*.sh
 experiments/gpt55_frame_service_runner/run_deepseek_correction_*.sh
 experiments/gpt55_frame_service_runner/run_restaurant3_native_*.sh
+experiments/gpt55_frame_service_runner/*probe*.py
 
 # LaTeX report local artifacts
 acmart-primary/samples/
