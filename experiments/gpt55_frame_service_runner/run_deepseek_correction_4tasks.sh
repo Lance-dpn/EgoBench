@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PY="${PYTHON:-python}"
+cd "$ROOT"
 
 if [[ -f .env ]]; then
   set -a
@@ -23,7 +25,7 @@ run_task() {
   echo "scenario=${scenario}${scenario_number} task_id=${task_id}"
   echo "log=${log_file}"
 
-  conda run --no-capture-output -n egolink python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+  "$PY" -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
     --scenario "${scenario}" \
     --scenario_number "${scenario_number}" \
     --task_ids "${task_id}" \

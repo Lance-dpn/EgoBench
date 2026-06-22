@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+PY="${PYTHON:-python}"
+cd "$ROOT"
 
 if [[ -f .env ]]; then
   set -a
@@ -17,7 +19,7 @@ OUT_FILE="${OUT_DIR}/${RUN_NAME}.json"
 
 mkdir -p "${LOG_DIR}" "${OUT_DIR}"
 
-conda run --no-capture-output -n egolink python -u \
+"$PY" -u \
   experiments/gpt55_frame_service_runner/visual_ablation_probe.py \
   --video videos/restaurant3.mp4 \
   --scenario restaurant \

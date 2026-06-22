@@ -7,6 +7,7 @@ import argparse
 import concurrent.futures
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -35,13 +36,14 @@ def load_env_file(path: Path) -> None:
 load_env_file(PROJECT_ROOT / ".env")
 
 DEFAULT_SERVICE_MODEL_NAME = (
-    os.environ.get("LANCE_SERVICE_MODEL_NAME")
-    or os.environ.get("SERVICE_MODEL_NAME")
+    os.environ.get("SERVICE_MODEL_NAME")
+    or os.environ.get("OPENAI_MODEL_NAME")
     or "gpt-5.5"
 )
 DEFAULT_USER_MODEL_NAME = (
     os.environ.get("USER_MODEL_NAME")
-    or os.environ.get("QW_USER_MODEL_NAME")
+    or os.environ.get("SERVICE_MODEL_NAME")
+    or os.environ.get("OPENAI_MODEL_NAME")
     or "qwen3.5-397b-a17b"
 )
 VIDEO_LOCAL_PATH = os.environ.get("VIDEO_LOCAL_PATH", "./videos")
@@ -89,6 +91,7 @@ from experiments.gpt55_frame_service_runner.tool_call_correction import (  # noq
     env_default_model,
     env_chat_completions_model,
     failure_decision,
+    is_mutation_call,
     normalize_calls,
     review_with_agent,
     write_correction_log,
@@ -211,6 +214,54 @@ def is_visual_context_request(text: str) -> bool:
     return str(text or "").strip() == VISUAL_CONTEXT_REQUEST
 
 
+def is_stale_visual_context_rejection(decision: CorrectionDecision) -> bool:
+    """Detect correction rejections that contradict already-attached frames."""
+    if decision.approved:
+        return False
+    text = str(decision.reason or "").lower()
+    if not text:
+        return False
+    stale_markers = (
+        "no attached frames",
+        "no frames are attached",
+        "no current frames",
+        "no frames or tool results",
+        "fresh visual context",
+        "need_visual_context",
+        "key_frames",
+        "key frames",
+        "request visual context",
+        "visual context before",
+    )
+    return any(marker in text for marker in stale_markers)
+
+
+def sanitize_correction_revise(
+    decision: CorrectionDecision,
+    proposed_calls: list[dict[str, Any]],
+) -> CorrectionDecision:
+    """Do not let correction directly replace state-changing tool calls."""
+    if decision.decision != "REVISE" or not decision.calls:
+        return decision
+    if any(is_mutation_call(call) for call in proposed_calls + decision.calls):
+        return CorrectionDecision(
+            decision="REJECT",
+            reason=(
+                "decision: REJECT\n"
+                "error_type: state_change\n"
+                "visible_evidence: not audited\n"
+                "reason: Correction proposed replacement mutation; mutations must be replanned by the service agent, not auto-rewritten.\n"
+                "suggestion: Gather or cite official evidence, then let the service agent emit the correct mutation.\n"
+                "replan: Continue without executing replacement_calls."
+            ),
+            raw_text=decision.raw_text,
+            input_tokens=decision.input_tokens,
+            output_tokens=decision.output_tokens,
+            error=decision.error,
+        )
+    return decision
+
+
 def message_likely_needs_visual(text: str) -> bool:
     value = str(text or "")
     if VISUAL_REFERENCE_PATTERN.search(value):
@@ -319,6 +370,14 @@ def is_internal_service_history_message(message: dict[str, Any]) -> bool:
     if not content:
         return True
     if role == "user":
+        if content.startswith("Internal preflight review") and any(
+            marker in content.lower()
+            for marker in (
+                "unsupported order restaurant_name",
+                "unsupported restaurant_name",
+            )
+        ):
+            return False
         return (
             content.startswith("Tool execution result:")
             or content.startswith("Internal preflight review")
@@ -509,6 +568,9 @@ def prepare_frames(args: argparse.Namespace, video_path: Path) -> list[SampledFr
 
 def configure_user_model_env(args: argparse.Namespace) -> None:
     os.environ["USER_MODEL_NAME"] = args.user_model_name
+    os.environ["USER_API_KEY"] = args.user_api_key or ""
+    os.environ["USER_API_BASE_URL"] = args.user_api_base_url or ""
+    # Legacy aliases for older official helper code paths.
     os.environ["API_KEY"] = args.user_api_key or ""
     os.environ["LLM_API_BASE_URL"] = args.user_api_base_url or ""
     os.environ["USER_TEMPERATURE"] = str(args.user_temperature)
@@ -1156,7 +1218,9 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         service_prompt=service_agent_sys_prompt,
                         tool_catalog=tools_list,
                         key_frames=[],
+                        service_frames_attached=frames_sent_this_turn,
                         tool_logs=local_tool_logs,
+                        prior_tool_logs=history_log["tool_calls"],
                         proposed=proposed_calls,
                         proposed_kind="tool_calls",
                         max_tool_log_entries=args.correction_max_tool_log_entries,
@@ -1170,7 +1234,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                             audit_context=audit_context,
                         )
                         decision.audit_context_stats = audit_context_stats(audit_context)  # type: ignore[attr-defined]
-                        return decision
+                        return sanitize_correction_revise(decision, proposed_calls)
                     except Exception as exc:
                         return failure_decision(exc, failure_policy=args.correction_failure_policy)
 
@@ -1179,7 +1243,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         return CorrectionDecision(decision="APPROVE", reason="Correction agent disabled.")
                     deterministic_feedback = deterministic_reply_feedback(
                         proposed_reply,
-                        local_tool_logs,
+                        history_log["tool_calls"] + local_tool_logs,
                     )
                     if deterministic_feedback:
                         return CorrectionDecision(decision="REJECT", reason=deterministic_feedback)
@@ -1194,7 +1258,9 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         service_prompt=service_agent_sys_prompt,
                         tool_catalog=tools_list,
                         key_frames=[],
+                        service_frames_attached=frames_sent_this_turn,
                         tool_logs=local_tool_logs,
+                        prior_tool_logs=history_log["tool_calls"],
                         proposed=proposed_reply,
                         proposed_kind="final_reply",
                         max_tool_log_entries=args.correction_max_tool_log_entries,
@@ -1208,6 +1274,17 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                             audit_context=audit_context,
                         )
                         decision.audit_context_stats = audit_context_stats(audit_context)  # type: ignore[attr-defined]
+                        if frames_sent_this_turn and is_stale_visual_context_rejection(decision):
+                            return CorrectionDecision(
+                                decision="APPROVE",
+                                reason=(
+                                    "Correction rejection ignored: service already received frames this turn; "
+                                    "visual recognition/key-frame availability is outside correction scope."
+                                ),
+                                input_tokens=decision.input_tokens,
+                                output_tokens=decision.output_tokens,
+                                raw_text=decision.raw_text,
+                            )
                         return decision
                     except Exception as exc:
                         return failure_decision(exc, failure_policy=args.correction_failure_policy)
@@ -1512,6 +1589,14 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
                         approved_calls = decision.calls
                     elif not decision.approved:
                         if correction_rounds >= args.max_correction_rounds:
+                            rejected_state_change = any(
+                                is_state_changing_tool(str(call.get("tool_name") or call.get("name") or ""))
+                                for call in proposed_calls
+                            )
+                            if rejected_state_change:
+                                agent_final_reply = "[Interaction stopped: correction rejected a state-changing tool batch]"
+                                print("🛑 [Correction] Rejected state-changing tool batch was not executed.")
+                                break
                             if args.correction_on_max_tool_rounds == "stop":
                                 agent_final_reply = "[Interaction stopped: correction rounds exceeded]"
                                 break
@@ -1725,14 +1810,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--user_api_key",
         default=(
-            os.environ.get("QW_SERVICE_API_KEY")
+            os.environ.get("USER_API_KEY")
+            or os.environ.get("SERVICE_API_KEY")
+            or os.environ.get("OPENAI_API_KEY")
             or os.environ.get("API_KEY")
         ),
     )
     parser.add_argument(
         "--user_api_base_url",
         default=(
-            os.environ.get("QW_SERVICE_API_BASE_URL")
+            os.environ.get("USER_API_BASE_URL")
+            or os.environ.get("SERVICE_API_BASE_URL")
+            or os.environ.get("OPENAI_BASE_URL")
             or os.environ.get("LLM_API_BASE_URL")
         ),
     )
@@ -1767,16 +1856,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--service_api_key",
         default=(
-            os.environ.get("LANCE_SERVICE_API_KEY")
-            or os.environ.get("SERVICE_API_KEY")
+            os.environ.get("SERVICE_API_KEY")
             or os.environ.get("OPENAI_API_KEY")
         ),
     )
     parser.add_argument(
         "--service_api_base_url",
         default=(
-            os.environ.get("LANCE_SERVICE_API_BASE_URL")
-            or os.environ.get("SERVICE_API_BASE_URL")
+            os.environ.get("SERVICE_API_BASE_URL")
             or os.environ.get("OPENAI_BASE_URL")
         ),
     )

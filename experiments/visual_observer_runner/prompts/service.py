@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v13_restaurant_drink_name_labels"
+SERVICE_PROMPT_VERSION = "visual_service_prompt_builder_v14_tool_description_compute_scope"
 
 
 @dataclass(frozen=True)
@@ -194,6 +194,11 @@ TOOL_USE_REQUIREMENTS = PromptSection(
     """
 - Invoke tools only when they are needed to identify a visual referent, query a
   database fact, inspect state, calculate an aggregate, or modify state.
+- Before selecting or calling any tool, check its declared description,
+  parameter schema, enum values, and return scope in the tool catalog. Do not
+  infer a tool's capability from its name alone. A compute/payment tool may
+  require explicit item inputs rather than automatically reading every item in a
+  user's cart, order, menu, category, or shopping list.
 - Tool-call formatting is strict. If any tool call is needed, the entire
   assistant message must be exactly one JSON array and nothing else. Do not add
   markdown fences, explanations, observations, final answers, prefixes, suffixes,
@@ -212,10 +217,22 @@ TOOL_USE_REQUIREMENTS = PromptSection(
   enum-constrained parameters, use them to choose valid modes/categories/fields,
   and do not invent values outside the enum unless the tool schema explicitly
   allows free-form input.
+- If a lookup/filter/list tool returns an empty result, treat it as a possible
+  field, spelling, or enum mismatch before concluding no match exists. Check the
+  tool description and enum values, then retry with one to three representative
+  distinctive words, canonical aliases, singular/plural variants, or a relevant
+  candidate-list tool when available. Avoid repeated generic-word retries.
 - You may call multiple independent tools in one JSON array.
 - When a user asks to calculate information related to current persistent state,
   prefer tools whose parameters accept lists or aggregate state instead of
   calling one-object tools repeatedly.
+- Before any compute/tally/total call, determine the requested calculation
+  scope from the user's wording. If the request covers all current cart/order/
+  shopping-list items, all items in a menu/category/list, or a branch-selected
+  candidate set, first retrieve or verify that full state/candidate set with
+  the appropriate cart/order/list/category/menu tools unless it is already
+  established by prior successful tool results. Pass the explicit inputs
+  required by the compute tool description.
 - Before modifying persistent state, ensure the modification is explicitly
   requested by the user or required by the user's stated condition. Do not
   remove or replace unrelated existing entries.
@@ -356,7 +373,8 @@ FINAL_EXECUTION_CHECKLIST = PromptSection(
 - If choosing among restaurants, use tools for every candidate before answering.
 - If a visual clue names an item, verify it with scenario tools before acting.
 - If modifying an order, call the mutation tool; if calculating a total, call
-  the aggregate tool.
+  the aggregate tool only after confirming the exact item/state scope required
+  by the user and by that tool's description.
 - Tool calls must be a JSON array with no surrounding prose.
 """,
 )

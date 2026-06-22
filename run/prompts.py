@@ -31,8 +31,26 @@ SERVICE_AGENT_PROMPT_BASE = '''
 
 ### Tool-Use Rules
 - **Necessity Principle**: Invoke tools only when needed to progress the task.
+- **Tool Description Authority**: Before selecting or calling a tool, rely on
+  the tool's declared description, parameter schema, enum values, and return
+  scope. Do not infer capability from the tool name alone. For example, a
+  compute/payment tool may require explicit item inputs rather than
+  automatically reading all items in a cart, order, menu, category, or shopping
+  list.
 - **Parallel Execution**: You may call multiple logically independent tools in a single response to improve efficiency.
 - **Parameter Completeness**: Ensure all required parameters are understood and available before calling any tool.
+- **Empty Result Handling**: If a lookup, filter, or list tool returns empty,
+  treat the queried field, spelling, or enum as possibly wrong before
+  concluding no match exists. Check the tool description and enum values, then
+  retry with representative distinctive words, canonical aliases,
+  singular/plural variants, or a relevant candidate-list tool when available.
+- **Computation Scope**: Before any compute, tally, total, tax, nutrition, or
+  payment tool call, determine the exact calculation scope from the user's
+  wording. If the request covers all current cart/order/shopping-list items, all
+  items in a menu/category/list, or a branch-selected candidate set, first
+  retrieve or verify that full state/candidate set unless prior successful tool
+  results already establish it. Pass the explicit inputs required by the compute
+  tool description; do not assume the compute tool discovers missing items.
 - **Strict Output Format**: 
   - When calling tool(s), output **ONLY** a JSON array: `[{{"tool_name": "...", "parameters": {{...}}}}, ...]`(e.g. [{{"tool_name": "find_ingredient_category", "parameters": {{"ingredient_name": "cornmeal"}}}}, {{"tool_name": "get_ingredient_nutrition", "parameters": {{"ingredient_name": "cornmeal"}}}}])
   - No extra text, no Markdown, no explanations mixed with tool calls.
@@ -100,6 +118,7 @@ USER_TEXT_ONLY_PROMPT_EASY = '''
 - **Knowledge Limitation**: 
   - Do not fabricate information not present in the `Task` or `Action Description`. If asked about unknown details, simply reply that you don't know.
   - **Product Name Blindness**: You do not know the specific product name. Even if the `Task` mentions it or the agent uses it, refer to the item using generic descriptions from your experience. If the agent asks for the product name, state that you don't know it.
+  - **Order Restaurant Name Source**: For order tasks, restaurant names must come from the `Task` text and the conversation, not from visible menu titles, logos, OCR, or video text. Preserve restaurant names exactly as written in the `Task` when you mention them. If the agent asks for a restaurant name that is not in the `Task`, say you do not know it rather than reading or inventing it from the video.
 - **Interaction Style**: 
   - If the agent asks multiple questions, answer only the minimum necessary to keep the conversation realistic.
   - Raise a maximum of **one** request or point per turn.

@@ -10,7 +10,7 @@ The official runner and the visual-observer runner are not modified.
 
 ```bash
 source .env
-/home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 2 \
   --num_tasks 10 \
@@ -38,9 +38,9 @@ source .env
 mkdir -p experiments/gpt55_frame_service_runner/cache/run_logs
 
 tmux new-session -d -s gpt55_frame_kitchen2_1920 \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
    source .env && \
-   /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+   python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
      --scenario kitchen \
      --scenario_number 2 \
      --num_tasks 10 \
@@ -170,7 +170,7 @@ Resume a stopped run with the same `--output_model_name`:
 
 ```bash
 source .env
-/home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 2 \
   --num_tasks 10 \
@@ -189,11 +189,11 @@ By default, a task-level failure is checkpointed and then stops the run so the
 error is visible. Add `--continue_on_task_error` to record the failed task and
 continue later tasks.
 
-The runner reads service model settings from `LANCE_SERVICE_MODEL_NAME`,
-`LANCE_SERVICE_API_KEY`, and `LANCE_SERVICE_API_BASE_URL` first, then falls back
-to `SERVICE_*` or `OPENAI_*` variables. The simulated user and user-summary
-calls are separated from the service model and read Qwen settings first:
-`QW_USER_MODEL_NAME`, `QW_SERVICE_API_KEY`, and `QW_SERVICE_API_BASE_URL`.
+The runner reads service model settings from the generic `SERVICE_MODEL_NAME`,
+`SERVICE_API_KEY`, and `SERVICE_API_BASE_URL` variables, with `OPENAI_*` and
+older local aliases accepted only as compatibility fallbacks. The simulated user
+and user-summary calls read `USER_MODEL_NAME`, `USER_API_KEY`, and
+`USER_API_BASE_URL`; if unset, they can reuse the service endpoint.
 
 `--multi_agent_user` enables the official user-side contradiction check and
 correction flow. `--summary_user` enables user-side dialogue summaries between
@@ -231,23 +231,23 @@ GPT-5.5 service configuration as the service agent:
 In this mode, unset correction fields reuse `--service_model_name`,
 `--service_api_key`, and `--service_api_base_url`.
 
-DeepSeek remains available only when explicitly requested through the
-OpenAI-compatible chat-completions path:
+An OpenAI-compatible chat-completions correction backend remains available only
+when explicitly requested:
 
 ```bash
 --correction_api_type chat_completions
-export Deepseek_API_KEY=...
-export Deepseek_SERVICE_API_BASE_URL=https://api.deepseek.com
-export Deepseek_SERVICE_MODEL_NAME=deepseek-v4-flash
+export CORRECTION_API_KEY=...
+export CORRECTION_API_BASE_URL=https://api.example.com/v1
+export CORRECTION_MODEL_NAME=correction-model
 ```
 
 `CORRECTION_API_KEY`, `CORRECTION_API_BASE_URL`, and `CORRECTION_MODEL_NAME`
-override the chat-completions defaults in that mode. Uppercase
-`DEEPSEEK_API_KEY`, `DEEPSEEK_API_BASE_URL`, and `DEEPSEEK_MODEL_NAME` are also
-accepted as fallback aliases. The correction context includes the latest user
-request, summarized dialogue, recent service-agent history, the full official
-scenario tool catalog, previous executed tool results, and the currently
-proposed tool batch or reply. It does not access the database directly.
+override the chat-completions defaults in that mode. Older provider-specific
+aliases are accepted only as compatibility fallbacks. The correction context
+includes the latest user request, summarized dialogue, recent service-agent
+history, the full official scenario tool catalog, previous executed tool
+results, and the currently proposed tool batch or reply. It does not access the
+database directly.
 
 By default, read-only batches using `find_*`, `get_*`, `tally_*`, or `compute_*`
 are automatically approved. This preserves the service agent's ability to turn
@@ -261,6 +261,21 @@ region, ingredient, action, OCR text, or spatial relation was visually
 recognized correctly. Use `--no-correction_auto_approve_read_only` to force
 read-only batches through the correction model as well.
 
+Canonicalization policy: when a visual/OCR lookup returns no result, the service
+prompt tells the agent to retry a small number of distinctive tokens or stable
+substrings before giving up. Once a tool returns a clear canonical field such as
+`product_name`, `dish_name`, `category`, or `restaurant_name`, later calls and
+final replies should use that DB field rather than the preliminary visual
+spelling. In restaurant menu boards, a large uppercase label above a drink image
+is treated as that drink's menu name; in order scenes, an unsupported or
+incomplete restaurant name should be clarified with the user before dish/order
+mutations.
+
+For payment, tax, discount-adjusted price, and set-meal totals, the official
+`compute_*`/total tool output is the source of truth. These DB methods apply
+catalog discounts and set-meal discounts, so final replies should not hand-compute
+totals from undiscounted price facts.
+
 The default correction retry budget is `--max_correction_rounds 5`. Every
 correction decision is printed in the run log, including APPROVE decisions and
 their compact summaries, and is also written to the correction jsonl log. When a
@@ -272,9 +287,12 @@ shown to the user. Rejection feedback includes the exact rejected output plus
 tool/schema/evidence/state/calculation issues, not visual target correction.
 
 Correction jsonl records include `audit_context` stats for model-reviewed
-decisions, including context character count and whether the full audit context
-was truncated. Deterministic read-only approvals do not call the correction
-model, so their `audit_context` field is empty.
+decisions, including context character count. The correction audit context is no
+longer truncated: `--correction_max_tool_log_entries`,
+`--correction_max_tool_result_chars`, and `--correction_max_audit_context_chars`
+are deprecated no-ops kept for CLI compatibility. Deterministic read-only
+approvals do not call the correction model, so their `audit_context` field is
+empty.
 
 Example single-task replay:
 
@@ -294,9 +312,9 @@ conda run --no-capture-output -n egolink python experiments/gpt55_frame_service_
 
 ```bash
 tmux new-session -d -s gpt55-retail3-correction-low-5task \
-'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+'cd <repo-root> && \
 source .env && \
-/home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario retail \
   --scenario_number 3 \
   --num_task 5 \
@@ -310,9 +328,9 @@ source .env && \
 
 ```bash
  tmux new-session -d -s gpt55-restaurant3-correction-low-5task \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
   source .env && \
-  /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
     --scenario restaurant \
     --scenario_number 3 \
     --num_task 5 \
@@ -328,9 +346,9 @@ source .env && \
 ---
 ```bash
  tmux new-session -d -s gpt55-kitchen3-correction-low-5task \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
   source .env && \
-  /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
     --scenario kitchen \
     --scenario_number 3 \
     --num_task 5 \
@@ -344,9 +362,9 @@ source .env && \
 
 ```bash
  tmux new-session -d -s gpt55-order1-correction-low-5task \
-  'cd /mnt/sda/dpn/egolink2026/code/track2/EgoBench && \
+  'cd <repo-root> && \
   source .env && \
-  /home/dpn/miniconda3/envs/egolink/bin/python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
     --scenario order \
     --scenario_number 1 \
     --num_task 5 \

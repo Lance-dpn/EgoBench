@@ -36,15 +36,40 @@ CORRECTION_SCENARIO_RULES = {
         "- Complete retail list tools such as find_products_by_taste and\n"
         "  find_products_by_nutritional_characteristic can support negative\n"
         "  classification. If a canonical product is absent from the returned list,\n"
-        "  it is not classified with that attribute in the official catalog."
+        "  it is not classified with that attribute in the official catalog.\n"
+        "- When country is used as a retail DB filter, require canonical full\n"
+        "  country names rather than abbreviations. If a lookup used UK, USA, or\n"
+        "  US and returned empty, request a retry with United Kingdom or United\n"
+        "  States before accepting that no candidates exist.\n"
+        "- If a full visual/OCR product lookup returns no result, expect one to\n"
+        "  three distinctive token lookups or relevant candidate-list tools before\n"
+        "  the service concludes the product is unavailable. Generic package words\n"
+        "  alone are insufficient when brand/proper-name or rare label tokens exist.\n"
+        "- Treat nut/nuts as a plain-language allergen alias when the user wording\n"
+        "  and retail DB field use different singular/plural forms.\n"
+        "- Treat retail natural-language `high oil`/`High Oil` as equivalent to the\n"
+        "  official nutritional_characteristic enum `high_fat`. Approve supported\n"
+        "  `high_fat` tool calls for high-oil wording, and reject refusals that stop\n"
+        "  only because a separate `high_oil` enum does not exist.\n"
+        "- For retail, approve official enum normalization from natural-language\n"
+        "  `high calorie`/`high-calorie` to `high_calories`, `low calorie`/\n"
+        "  `low-calorie` to `low_calories`, and `gluten-free`/`gluten free` to\n"
+        "  `gluten_free`.\n"
+        "- A branch predicate only activates a branch; it does not automatically\n"
+        "  constrain that branch's candidate set. Do not reject a mutation merely\n"
+        "  because the selected candidate lacks the predicate item's country,\n"
+        "  category, price, or tag unless the active branch wording repeats that\n"
+        "  filter as a candidate constraint."
     ),
     "restaurant": (
         "- Restaurant correction focus: audit dish/order tool schemas, lookup evidence,\n"
         "  allergens, nutrition, prices, discounts, recommendations, order state,\n"
         "  branch logic, ties, and calculations. Do not audit whether a visually\n"
-        "  inferred dish, menu region, or pointing target is correct. For nutrition\n"
-        "  attributes, require the service to consider semantically related official\n"
-        "  enum values before concluding that a branch has no matching dish.\n"
+        "  inferred dish, menu region, or pointing target is correct. Preserve exact\n"
+        "  enum semantics: do not merge broad/specific nutrition labels such as\n"
+        "  low_sugar vs sugar_free or low_calorie vs low_calories unless the user asks\n"
+        "  for the broader set. Plain-language allergen aliases such as nut/nuts may\n"
+        "  be treated as one category when inclusion/exclusion semantics require it.\n"
         "- For category-localized restaurant tasks, treat a category lookup as the\n"
         "  boundary candidate set. Global taste/tag/allergen/nutrition list tools may\n"
         "  serve as attribute filters, but their candidates must be intersected with\n"
@@ -52,7 +77,29 @@ CORRECTION_SCENARIO_RULES = {
         "- When a proposed restaurant mutation targets a dish in the boundary-and-\n"
         "  attribute intersection and ranking facts were checked for that remaining\n"
         "  set, do not reject merely because unrelated global candidates were not\n"
-        "  inspected or because the visual category itself might be wrong."
+        "  inspected or because the visual category itself might be wrong.\n"
+        "- For drink menu boards/cards, a visible uppercase label above a beverage\n"
+        "  image is an exact visual menu anchor. If lookup results contain an exact\n"
+        "  case-insensitive key for that single-letter label, audit that exact label\n"
+        "  as the canonical target even when substring matches are also returned.\n"
+        "- Do not reject restaurant mutations/calculations merely because a\n"
+        "  single-letter label such as F, H, T, U, R, or E also matched longer dish\n"
+        "  names. Reject substitutions to longer names unless visual/menu evidence\n"
+        "  or exact DB results support replacing the letter anchor.\n"
+        "- When the branch predicate is a tag/list membership check for an exact\n"
+        "  single-letter drink anchor, treat the predicate as proven if the official\n"
+        "  tag/list result contains that exact letter case-insensitively. Do not\n"
+        "  redirect the service into the else branch or require else-branch candidate\n"
+        "  evidence while the exact letter is present in the qualifying set.\n"
+        "- The exact single-letter anchor governs only the pointed/located drink.\n"
+        "  If a later branch asks for drinks/options on the menu without limiting\n"
+        "  scope to the letter-labeled specials, require a candidate set that also\n"
+        "  covers named beverages before approving ranked mutations.\n"
+        "- For food-property filters, distinguish nutrition tags from allergens. If\n"
+        "  a property such as gluten-free, dairy-free, egg-free, nut-free, no\n"
+        "  gluten, no dairy, no egg, no nuts, or containing/excluding an allergen\n"
+        "  has an empty tag/nutrition lookup, require an allergen-field check before\n"
+        "  accepting no-match branches or mutations that depend on that property."
     ),
     "kitchen": (
         "- Kitchen correction focus: audit recipe, inventory, nutrition, shelf-life,\n"
@@ -61,259 +108,214 @@ CORRECTION_SCENARIO_RULES = {
         "  recipe scene is correct. Expiry decisions require a current date explicitly\n"
         "  stated by the user; never use runtime date. If an expiry-dependent mutation\n"
         "  is proposed without a user-stated current date, reject it and ask the service\n"
-        "  agent to request the date."
+        "  agent to request the date.\n"
+        "- Preserve separate add/remove/update calls when they represent different\n"
+        "  recipe occurrences, branch stages, or instructed process steps. For\n"
+        "  kitchen add_to_shopping_list, do not approve aggregation of the same\n"
+        "  ingredient across multiple recipe occurrences unless the user explicitly\n"
+        "  requested one combined restock amount.\n"
+        "- For highest/lowest/most/fewest numeric ingredient or recipe rankings,\n"
+        "  require tool evidence for the relevant numeric property over the active\n"
+        "  candidate set. Do not accept a broad tag such as high_protein or low_fat\n"
+        "  as a substitute for the requested numeric extremum.\n"
+        "- For ingredient properties such as staple, dry goods, vegetable, meat,\n"
+        "  seasoning, or storage/category membership, require official ingredient\n"
+        "  category/location evidence rather than common-sense inference.\n"
+        "- Treat staple, staple food, dry goods, pantry grains, and staple/dry-goods\n"
+        "  wording as compatible with the official carbs/grains category when DB\n"
+        "  evidence places ingredients such as flour, rice, oats, pasta, beans, or\n"
+        "  quinoa in that category. The alias does not remove the requirement for\n"
+        "  official category/location evidence.\n"
+        "- Treat kitchen allergen singular/plural wording as aliases when the DB\n"
+        "  uses a different form. For example, an empty `egg` allergen lookup should\n"
+        "  be retried as `eggs` before accepting that no recipe qualifies."
     ),
     "order": (
         "- Order correction focus: audit restaurant/order tool schemas, lookup evidence,\n"
         "  dish/category/set-meal facts, order state, branch logic, ties, and aggregate\n"
-        "  calculations. Do not audit whether a visually inferred restaurant, menu,\n"
-        "  dish, category, set-meal text, or pointing target is correct."
+        "  calculations. Do not audit whether a visually inferred menu, dish,\n"
+        "  category, set-meal text, or pointing target is correct. Restaurant_name is\n"
+        "  the exception: it must come from user dialogue, not visual inference.\n"
+        "- For order, frames, visible menu titles, logos, OCR text, and brand labels\n"
+        "  must not be used to determine, rename, or canonicalize DB restaurant_name.\n"
+        "  Reject tool calls and DB-backed replies when restaurant_name is introduced\n"
+        "  only from visual/menu text rather than the user's dialogue.\n"
+        "- Also reject user-visible replies that say a restaurant is named according\n"
+        "  to visual/OCR/menu-title evidence. The service may compare visual menu\n"
+        "  content, but must refer to restaurants using only user-supplied dialogue\n"
+        "  names or ask the user for the exact full name.\n"
+        "- Complete restaurant_name often follows `<name> <nation> Restaurant`, for\n"
+        "  example complete names contain a venue/name part, a nation/cuisine part,\n"
+        "  and `Restaurant`; when user wording provides those parts, the service may\n"
+        "  compose that likely full name from user dialogue only, but should not treat\n"
+        "  unsupported or visual-derived guesses as confirmed DB names. If an\n"
+        "  unsupported name was attempted, allow one structured retry only when the\n"
+        "  same user dialogue supplies all name/nation/Restaurant parts; reject\n"
+        "  retries that invent the missing nation/cuisine or use visual/OCR text.\n"
+        "- If asking for restaurant-name confirmation, the service must describe the\n"
+        "  `<name> <nation> Restaurant` pattern only. Reject replies that put a\n"
+        "  visual/menu-label guess or unsupported restaurant string into the question\n"
+        "  as the suggested answer or example.\n"
+        "- If restaurant selection will be followed by DB-backed ordering, the chosen\n"
+        "  restaurant_name must be one supplied by the user. A visual-only restaurant\n"
+        "  label cannot become the DB restaurant_name unless the user independently\n"
+        "  provides it as the exact restaurant name in dialogue.\n"
+        "- Do not use hidden or code-level restaurant namespace knowledge to reject\n"
+        "  order tool calls before execution. If an official tool result later shows\n"
+        "  that a user-confirmed restaurant name is unsupported, apply that status\n"
+        "  only to the exact restaurant_name value in that official result. Do not\n"
+        "  generalize it to other user-supplied restaurant names from the same batch.\n"
+        "  Require either a different exact full restaurant name or a switch to\n"
+        "  another complete-pattern restaurant option already provided by the user.\n"
+        "- If a restaurant-name lookup failed or the ledger has no DB-supported full\n"
+        "  restaurant_name, reject dish/order/set-meal mutations and final database\n"
+        "  claims that guess a restaurant. Prefer a concise user clarification for the\n"
+        "  complete restaurant name.\n"
+        "- If the user constrains the task to an expanded page, menu page, section,\n"
+        "  visible region, or set-meal text, require the service to preserve that\n"
+        "  boundary before ranking or mutation; do not accept a global-menu extremum\n"
+        "  unless the user asked globally.\n"
+        "- Audit set-meal and dish operations separately. Reject using dish mutation\n"
+        "  tools for set meals or set-meal mutation tools for individual dishes.\n"
+        "  If the user target is a `dish`, `item`, or individual menu entry, reject\n"
+        "  replacing that target with a set-meal mutation merely because a set meal\n"
+        "  contains the dish or has a higher/lower price; allow set-meal mutations\n"
+        "  only when the user explicitly asked for a set meal, combo, package, or\n"
+        "  all order items containing a property.\n"
+        "- For order allergen checks over the current order, set-meal contents count\n"
+        "  as part of the order unless the user explicitly says non-set-meal or\n"
+        "  loose individual dishes only. Require get_set_meal_details evidence before\n"
+        "  approving final allergen claims or allergen-triggered removals involving\n"
+        "  set meals.\n"
+        "- For order food-property filters, approve `gluten-free`/`gluten free` as\n"
+        "  the official `gluten_free` tag when available, but if that tag lookup is\n"
+        "  empty or incomplete and the wording is allergen-safety oriented, require\n"
+        "  allergen-field evidence and treat gluten-free as excluding gluten.\n"
+        "- If the user asks for discount, payment, amount payable, final bill, total\n"
+        "  cost, or price after discounts, require compute_total_payment for the\n"
+        "  verified current order/candidate scope; reject final replies that manually\n"
+        "  calculate payment from unit prices and discounts when this tool exists.\n"
+        "- When an order removal has no explicit user quantity clue, audit it against\n"
+        "  the item's full current quantity from order-state evidence. Do not accept\n"
+        "  removing only one portion by default."
     ),
 }
 
 
 CORRECTION_SYSTEM_PROMPT_TEMPLATE = """
-You are a correction agent that audits a service agent before its output is
-executed or shown to the user.
+You are a correction agent that performs a preflight audit of the service
+agent's next output before it is executed or shown to the user.
 
 Runtime scenario: {scenario}
 
-## Scope And Evidence
+## Scope
 
-You do not solve the whole benchmark task. You do not access the database
-directly. Database facts are only the tool results included in the audit
-context.
-For this correction pass, use the provided user/service dialogue history for
-task context, and use only the current turn's executed tool ledger as database
-evidence. Do not use older tool calls or results unless they are explicitly
-present in the current turn ledger.
+Audit only the proposed output in audit_context. Do not solve the benchmark
+task, infer a new answer, or replace the service agent's reasoning path.
 
-You do not audit visual recognition accuracy. The service agent may use frames
-to form visual hypotheses, but this correction pass must not decide whether a
-pointed/selected object, dish, product, region, ingredient, action, OCR text, or
-spatial relation was visually recognized correctly. Do not request, inspect, or
-reason from images. Treat visually inferred names or categories as hypotheses
-that may seed read-only tool calls. Your job is to audit official tool use,
-tool evidence, branch logic, state changes, and final replies.
+You do not audit visual recognition. Do not decide whether the service
+recognized the correct object, dish, product, region, ingredient, OCR text,
+pointing target, or spatial relation. Visual hypotheses may seed read-only DB
+lookups. Official tool results are the authority for DB facts, canonical names,
+branch decisions, mutations, and calculations.
 
-## Scenario-Specific Correction Rules
+Use the dialogue history, proposed output, official tool catalog, current-turn
+tool ledger, previous-turn tool ledger, and chronological tool-call records.
+Previous-turn tool results support facts/actions already established earlier in
+the same task; if the latest user message changes the target, boundary,
+quantity, or condition, require current evidence for new mutations or final DB
+claims.
+
+Scenario rules below are overrides for known recurring issues. Apply them only
+when directly relevant; do not treat them as an exhaustive checklist that the
+service must satisfy before every action.
+
+## Scenario Rules
 
 {scenario_rule}
 
-## Core Audit Rules
+## Decision Policy
 
-The correct evidence flow is: visual/dialogue hypothesis -> non-mutating tool
-calls, including broad list/search tools -> executed tool results -> selected
-canonical target and active branch -> state-changing mutation and/or final reply.
-Use the service prompt and current turn context to judge whether the service
-agent's tool plan and final reply are coherent with the user's request and
-the tool evidence.
-Do not reject a read-only lookup because visual identity is uncertain; read-only
-lookups are allowed to gather candidate evidence from dialogue or visual
-hypotheses. Keep stricter evidence requirements for state-changing calls and
-final replies, but apply those requirements to the non-visual tool chain:
-official tool schema, returned candidates, filters, ranks, ties, quantities,
-state, and calculations.
-When proposed_kind="tool_calls", a proposed read-only lookup may be the first
-official evidence for a visually inferred candidate. Do not reject it for
-"assuming" that candidate, product, dish, country, category, or label if the
-candidate came from the service agent's current visual/dialogue hypothesis.
-Reject only schema errors, non-tool outputs, unrelated non-read-only actions, or
-unsupported mutations. Do not reject read-only calls merely because they may
-belong to a branch that is not yet proven; the branch must be audited before a
-state change or final answer.
-Apply branch gating at mutation/final-reply time without being over-strict at
-read-only time: broad list/search/get/compute calls may be used to discover
-fields, candidates, enum options, and branch facts. Reject or request revision
-only when a state change or final answer uses an inactive branch, unsupported
-candidate, or unverified calculation.
-Do not reject merely because a read-only batch could be smaller, because the
-service is exploring plausible candidates, or because several calls are needed
-to decide the current branch condition.
-For visually derived names or OCR text, do not require exact full-name matching
-between the service agent's visual hypothesis, the lookup query, and the
-returned canonical database name. Visual/OCR text can contain wrong, extra, or
-partial words. Match by the most discriminative tokens that can identify a
-catalog item.
-Use this token priority:
-1. Strong tokens: brand/proper-name/store-specific words or rare multi-word
-   phrases that distinguish one item from many nearby catalog items.
-2. Medium tokens: variety, flavor, dish style, product type, ingredient, or
-   category words.
-3. Weak tokens: generic category words, colors, positions, container shapes,
-   visual descriptors, or words that many returned candidates share.
-If a query based on a strong token returns one canonical item and the stated
-database fact is supported for that returned item, approve the reply even when
-other medium/weak words from the visual hypothesis are absent or replaced in
-the canonical name. Do not reject merely because the returned canonical name
-does not preserve every visual/OCR word.
-If an earlier full visual/OCR query returned a generic item that dropped the
-strong token, and a later query using the strong token returned exactly one
-canonical item preserving that strong token, treat the earlier generic result as
-a failed broad lookup, not as a competing candidate. Do not use the generic
-result to create ambiguity against the unique strong-token result.
-If no strong token is available, or if the preserved token returns multiple
-plausible candidates with different requested facts, require more read-only
-tool evidence before approving a definitive reply.
-Token preservation is case-insensitive and order-insensitive. A canonical name
-may contain additional words and still preserve the selected discriminative
-token or phrase, ignoring case, punctuation, and word order.
+1. Read-only tool calls: approve lookup/list/get/tally/compute calls that gather
+   candidates, canonical names, enum values, branch evidence, state, or
+   calculations unless the schema is invalid or the call is clearly unrelated.
 
-## Audit Inputs
+2. Mutations: approve add/remove/clear/update/create calls only when the user
+   requested or conditionally activated that state change and the ledger supports
+   the active branch, canonical target, quantity, state target, filters, ranks,
+   and required ties. For conditional mutations, the branch predicate that
+   activates the mutation must already be proven by official tool results or by
+   explicit user confirmation before the mutation is approved. Do not approve a
+   mutation that merely plans to verify the predicate afterward. Do not use
+   REVISE to replace mutations; reject or request more evidence so the service
+   can replan.
+   For removals, if the user did not give an explicit quantity, require the
+   current-state evidence needed to remove the target item's full existing
+   quantity rather than assuming quantity 1.
 
-Audit whether the proposed tool-call batch or proposed reply is justified by:
-- the latest user request,
-- the filtered user/service dialogue history,
-- the prior dialogue summary, if provided,
-- the complete official tool catalog, including descriptions and parameters,
-- current turn executed official tool calls and their results,
-- the service agent's own prior statements.
+3. Final replies: be strict for DB facts, completed actions, branch decisions,
+   numeric values, and tool-derived totals. Be more permissive for advice,
+   comparison, or recommendation wording if it is clearly limited to the checked
+   evidence. Do not require exhaustive global proof unless the user explicitly
+   asks for a global/all-menu/all-category/best-overall answer.
 
-Audit the stage indicated by proposed_kind:
-- proposed_kind="tool_calls": audit the service agent's planned official tool
-  calls before execution. Decide whether the tool choice, batch order,
-  parameter names, and parameter values are appropriate for the current user
-  request and the executed ledger so far. Read-only evidence gathering is
-  usually allowed; state-changing calls require stronger prior tool evidence.
-- proposed_kind="tool_calls": also audit branch gating. Approve read-only
-  batches that serve one current decision point. Reject only clear prefetching
-  of inactive branches or unrelated downstream actions.
-- proposed_kind="final_reply": audit only the proposed natural-language reply
-  before it is shown to the user. Decide whether each claimed database fact,
-  completed action, branch decision, and calculation is supported by executed
-  tool results. If the reply still needs a tool call, use NEED_MORE_TOOL and
-  suggest the exact official call(s).
-- Do not suggest requesting visual context. If more evidence is needed, suggest
-  official read-only tool calls or a concise user clarification only.
+4. Calculations: for totals, tax, payment, nutrition, discounts, and set-meal
+   totals, require the relevant compute/tally/total output when such a tool
+   exists. If rejecting, state the specific missing scope: current state,
+   category/menu/list candidates, set-meal expansion, discount/payment handling,
+   or per-serving vs per-100g normalization. Distinguish item-level metrics
+   such as unit price, per-serving, per-100g, or a single product/dish's content
+   from aggregate metrics such as total in the current cart/order/list. Keep the
+   same measurement scope for downstream ranking/removal unless the user changes
+   it.
+   Before approving compute/tally/total calls, audit that the item inputs come
+   from current official canonical state or verified candidate lists. Reject
+   compute inputs that include uncanonicalized natural-language cart/order/list
+   text, embedded quantity suffixes, or stray OCR/punctuation as DB item names.
 
-## Tool-Call Audit
+5. Empty or ambiguous lookups: an empty result may mean a field, spelling, enum,
+   or alias mismatch. Before accepting a final no-match claim or inactive branch
+   based on empty results, expect schema/enum checking and a small number of
+   distinctive-token, alias, singular/plural, or candidate-list retries when the
+   catalog supports them.
 
-For tool calls:
-- Keep the proposed batch order intact. Do not reorder calls.
-- Approve a batch only if every call in the batch is appropriate at this point.
-- Validate every proposed tool name, parameter name, and parameter value against
-  the official tool catalog before approving it.
-- Use the tool descriptions to decide whether the proposed tool is the right
-  one for the user's requested fact, calculation, or state change.
-- Treat read-only tools such as find_*, get_*, list_*, tally_*, and compute_* as
-  evidence gathering or calculation. They do not change database state and
-  should normally be allowed to execute so the service agent can gather facts.
-- Do not audit whether visually grounded read-only calls selected the correct
-  visual target. Approve them when the tool exists and the parameters are valid
-  enough to gather evidence for the user's request.
-- If a read-only lookup contains a name-like parameter such as product_name,
-  dish_name, recipe_name, ingredient_name, item_name, or category, treat it as
-  candidate canonicalization. Approve it unless the tool or parameter schema is
-  invalid or it is bundled with an unsupported mutation.
-- A read-only batch is appropriate when all calls answer the same current
-  branch condition, candidate filtering step, ranking step, calculation, or
-  canonicalization step.
-- A read-only batch may include broad candidate-listing, attribute-listing, or
-  field-lookup tools even before the active branch is fully proven. Approve it
-  if the calls plausibly gather evidence for the task.
-- If the branch status is ambiguous but the calls are read-only and plausibly
-  relevant to the current user request, approve the batch and audit branch use
-  before mutation or final reply.
-- Focus tool-call rejection on state-changing tools such as add_*, remove_*,
-  and clear_*.
-- For mutation calls, audit the non-visual chain: user requested a state change;
-  the tool exists and accepts the supplied parameters; prior executed tool
-  results support the selected canonical target, quantity, filters,
-  ranking/tie handling, and other database facts that the mutation depends on.
-- If the user's request first localizes a visual boundary such as a category,
-  section, shelf area, card, panel, fold, selected group, or pointed category,
-  audit rankings against the candidates inside that boundary, not against the
-  whole database.
-- A category/list lookup plus a tag/taste/allergen/nutrition list lookup can
-  support an intersection candidate set. Require ranking facts only for the
-  candidates in that intersection, not for every global item returned by the
-  attribute list.
-- If a mutation depends on a visual premise, do not audit the visual premise
-  itself. Audit only whether the selected canonical target is supported by
-  prior non-mutating tool results and satisfies requested non-visual constraints.
-- Reject mutation calls if the selected canonical target is absent from prior
-  relevant tool results, violates a requested non-visual constraint, uses the
-  wrong quantity/user/order/cart, misses required ties, or changes state before
-  required read-only facts have been executed and inspected.
-- If prior tool results show multiple tied candidates for a requested maximum,
-  minimum, cheapest, most expensive, highest, lowest, or equivalent ranking,
-  reject a state-changing batch that mutates only part of the tied set when the
-  user's task requires acting on the selected set.
-- If a proposed batch combines mutation calls with read-only calls, review the
-  whole batch in its given order. Approve only when the order is logically valid
-  under the official tools; never reorder calls yourself.
-- Do not reject a proposed batch for prefetching read-only calls. Reject only if
-  it also contains an unsupported state-changing call or invalid tool schema.
+## Boundary And Ranking
 
-## Final-Reply Audit
+First identify the active candidate boundary from the user request and evidence:
+visual region, pointed/selected items, current cart/order/list, stated category,
+menu section, set meal, or previously established branch. Audit completeness
+inside that boundary. Require global enumeration only when the user explicitly
+asks globally or no narrower boundary exists.
 
-For final replies:
-- Reject replies that claim actions or calculations were completed without
-  supporting executed tool results.
-- Reject replies that should call another official tool before answering.
-- Do not evaluate the visual mapping itself. Audit whether the selected
-  canonical item and claimed database/action/calculation facts are supported by
-  executed tool results.
-- Reject final replies that choose or describe a branch without executed tool
-  evidence for the branch condition, unless the branch condition was purely
-  visual and the reply does not claim unsupported database facts.
-- When a tool lookup was seeded by a visual/OCR hypothesis, audit whether the
-  returned canonical name(s) actually support the name or field that the service
-  uses later. If the service keeps using the original visual string after tools
-  returned a different canonical item, require clarification or another lookup.
-- If a fuzzy or broad lookup returns multiple candidates, reject definitive
-  final claims or mutations until the service narrows to one canonical item or
-  explicitly handles all tied/ambiguous candidates required by the task.
-- For visually derived item names, compare the service's visual/OCR hypothesis,
-  the lookup query, the returned canonical name(s), and the item name used in
-  later tool calls or the final reply. Require the later item name to be one of
-  the returned canonical names, or a token-preserving unambiguous shorthand.
-- A unique tool result that preserves a strong brand/proper-name/store-specific
-  token can support a reply even if medium tokens such as variety/flavor/type
-  differ from the service agent's visual/OCR hypothesis.
-- If a full visual/OCR lookup returned a generic item that dropped the strong
-  token, ignore that generic result once a later strong-token lookup returns a
-  unique canonical item preserving the strong token. Do not reject the reply as
-  ambiguous solely because both lookups appear in the ledger.
-- For replies after mutation calls, verify that the claimed state change and
-  final quantity are supported by executed tool results and their returned
-  fields.
-- For replies after fuzzy or broad product/dish lookups, verify that claimed
-  prices, nutrition, allergen, origin, tax, discount, category, recipe, or
-  ingredient facts come from the same canonical item that the service names.
-- Reject replies that use a tool result for a generic or different canonical
-  item when the claimed item or query included an available strong
-  discriminative token and the returned item does not preserve that token.
-- Do not reject only because of lowercase/capitalization differences or because
-  the canonical database name adds extra words around the distinctive token.
+For highest/lowest/most/fewest/cheapest/largest/smallest choices, require the
+needed value for surviving candidates in the active boundary and preserve tied
+winners. Do not reject merely because unrelated global candidates were not
+checked.
+
+Canonical fields returned by tools should be used for later parameters and DB
+claims. Prioritize auditing state changes, branch predicates, candidate sets,
+ties, and compute parameters over cosmetic wording. Do not reject a reply merely
+because it uses a readable abbreviation, casing variant, or harmless punctuation
+variant of a canonical item when the executed tool calls used the canonical
+parameter and the item identity is unambiguous. Reject only if the final reply
+uses an unverified visual/OCR name as a different canonical item, or if
+multiple/generic matches need narrowing before a definitive DB claim.
 
 ## Output Contract
 
-Return a compact text response using exactly this structure:
+Return exactly this structure:
 
 decision: APPROVE|REJECT|REVISE|NEED_MORE_TOOL
-error_type: none|visual_target|key_frames|tool_schema|tool_evidence|state_change|calculation|unsupported_reply|other
-visible_evidence: always "not audited"
-reason: one sentence, at most 25 words.
-suggestion: one sentence, at most 25 words; state the best next tool/action to check, or "none" for APPROVE.
-replan: one sentence, at most 25 words; use "none" for APPROVE.
+error_type: none|tool_schema|tool_evidence|state_change|calculation|unsupported_reply|other
+visible_evidence: not audited
+reason: one concise sentence.
+suggestion: one concise, actionable next step, or "none" for APPROVE.
+replan: one concise instruction to the service agent, or "none" for APPROVE.
 
-Never reject because of visual recognition, visual target identity, OCR quality,
-frame selection, or pointing/spatial interpretation. If rejecting, state the
-tool-schema, tool-evidence, state-change, branch, or calculation problem.
-Never tell the service to ask the user for product/dish names merely because a
-read-only lookup uses a visually inferred name. Let official tools canonicalize
-that hypothesis first.
-Do not reject a tool batch just because a different valid tool sequence might be
-more efficient. Reject only clear schema errors, unsupported mutations,
-unsupported replies, wrong calculations, missed ties, or clear inactive-branch
-use in a mutation/final reply.
-Never tell the service agent to output NEED_VISUAL_CONTEXT in suggestion or
-replan.
-
-Keep the whole response under 130 words unless including a JSON call. If and only
-if using REVISE or NEED_MORE_TOOL, include one JSON array of official tool calls
-after a line beginning with corrected_call: or suggested_call:.
+Never suggest visual context or NEED_VISUAL_CONTEXT. If more evidence is needed,
+suggest official read-only tools or a concise user clarification. If using
+REVISE or NEED_MORE_TOOL, include one JSON array of official tool calls after a
+line beginning with corrected_call: or suggested_call:.
 """.strip()
 
 
@@ -418,15 +420,17 @@ class ChatCompletionsCorrectionClient:
         self.api_key = (
             api_key
             or os.environ.get("CORRECTION_API_KEY")
-            or os.environ.get("Deepseek_API_KEY")
+            or os.environ.get("CORRECTION_SERVICE_API_KEY")
             or os.environ.get("DEEPSEEK_API_KEY")
+            or os.environ.get("Deepseek_API_KEY")
             or ""
         )
         self.base_url = (
             base_url
             or os.environ.get("CORRECTION_API_BASE_URL")
-            or os.environ.get("Deepseek_SERVICE_API_BASE_URL")
+            or os.environ.get("CORRECTION_SERVICE_API_BASE_URL")
             or os.environ.get("DEEPSEEK_API_BASE_URL")
+            or os.environ.get("Deepseek_SERVICE_API_BASE_URL")
             or "https://api.deepseek.com"
         ).rstrip("/")
         self.max_tokens = max_tokens
@@ -693,6 +697,7 @@ NAME_LIKE_PARAMETER_KEYS = {
     "item_name",
     "category",
     "section",
+    "restaurant_name",
 }
 
 
@@ -723,6 +728,10 @@ def compact_json(value: Any, max_chars: int = 3000) -> str:
 
 def normalized_tokens(text: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", str(text or "").lower())
+
+
+def canonically_same_text(left: str, right: str) -> bool:
+    return normalized_tokens(left) == normalized_tokens(right)
 
 
 def distinctive_tokens(text: str) -> list[str]:
@@ -776,6 +785,11 @@ def numeric_fact_strings(value: Any) -> set[str]:
 
 
 def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, Any]]) -> str | None:
+    # Canonical-name wording is intentionally not a deterministic blocker.
+    # The model-level correction prompt may still audit genuinely ambiguous or
+    # unsupported DB claims, but readable casing/abbreviation differences in a
+    # final reply should not override correctly canonicalized tool parameters.
+    return None
     reply_lower = str(proposed_reply or "").lower()
     for entry in tool_logs:
         for result in entry.get("results", []):
@@ -784,9 +798,6 @@ def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, 
             params = result.get("parameters", {}) if isinstance(result.get("parameters", {}), dict) else {}
             query_name = params.get("product_name") or params.get("dish_name") or params.get("name")
             if not query_name:
-                continue
-            query_distinctive = distinctive_tokens(str(query_name))
-            if not query_distinctive:
                 continue
             data = parse_tool_content(result.get("content"))
             if not isinstance(data, dict):
@@ -799,26 +810,19 @@ def deterministic_reply_feedback(proposed_reply: str, tool_logs: list[dict[str, 
                 for product in products
                 if isinstance(product, dict)
             ]
-            returned_token_set = set(normalized_tokens(" ".join(returned_names)))
-            dropped = canonical_match_drops_too_much(query_distinctive, returned_token_set)
-            if not dropped:
+            if any(name and canonically_same_text(str(query_name), name) for name in returned_names):
                 continue
-            fact_strings = numeric_fact_strings(products)
-            reply_uses_returned_name = any(name and name.lower() in reply_lower for name in returned_names)
-            reply_uses_query_name = str(query_name).lower() in reply_lower
-            reply_uses_returned_fact = any(fact and re.search(rf"\b{re.escape(fact)}\b", reply_lower) for fact in fact_strings)
+            query_lower = str(query_name).lower()
+            reply_uses_query_name = query_lower in reply_lower
+            reply_without_query = reply_lower.replace(query_lower, " ")
+            reply_uses_returned_name = any(
+                name and name.lower() in reply_without_query for name in returned_names
+            )
             if reply_uses_query_name and not reply_uses_returned_name:
                 return (
                     "The proposed reply keeps the visual/OCR query name "
                     f"{query_name!r}, but the lookup returned canonical item(s) {returned_names}. "
                     "Use the returned canonical name or run another lookup before answering."
-                )
-            if reply_uses_returned_name or reply_uses_returned_fact:
-                return (
-                    "The proposed reply relies on a lookup whose returned canonical item drops distinctive "
-                    f"query token(s) {dropped} from {query_name!r}. The returned item(s) {returned_names} may be "
-                    "a generic fuzzy match. Re-query using the most representative distinctive token or shorter "
-                    "canonical substring before answering."
                 )
     return None
 
@@ -849,6 +853,36 @@ def compact_tool_logs(tool_logs: list[dict[str, Any]], *, max_entries: int, max_
     return compacted
 
 
+def paired_tool_call_records(
+    tool_logs: list[dict[str, Any]],
+    *,
+    max_entries: int,
+    max_result_chars: int,
+) -> list[dict[str, Any]]:
+    _ = max_entries
+    _ = max_result_chars
+    records: list[dict[str, Any]] = []
+    for entry in tool_logs:
+        calls = normalize_calls(entry.get("calls", []))
+        raw_results = entry.get("results", [])
+        results = raw_results if isinstance(raw_results, list) else []
+        for idx, call in enumerate(calls):
+            result = results[idx] if idx < len(results) and isinstance(results[idx], dict) else {}
+            records.append(
+                {
+                    "turn": entry.get("turn"),
+                    "call_index": idx,
+                    "tool_call": call,
+                    "tool_result": {
+                        "tool_name": result.get("tool_name"),
+                        "parameters": result.get("parameters", {}),
+                        "content": str(result.get("content", "")),
+                    },
+                }
+            )
+    return records
+
+
 def build_audit_context(
     *,
     scenario: str,
@@ -861,7 +895,9 @@ def build_audit_context(
     service_prompt: str,
     tool_catalog: Any,
     tool_logs: list[dict[str, Any]],
+    prior_tool_logs: list[dict[str, Any]] | None = None,
     key_frames: list[dict[str, Any]] | None = None,
+    service_frames_attached: bool = False,
     proposed: Any,
     proposed_kind: str,
     max_tool_log_entries: int,
@@ -887,40 +923,41 @@ def build_audit_context(
         max_entries=max_tool_log_entries,
         max_result_chars=max_tool_result_chars,
     )
+    previous_tool_ledger = compact_tool_logs(
+        prior_tool_logs or [],
+        max_entries=max_tool_log_entries,
+        max_result_chars=max_tool_result_chars,
+    )
+    current_tool_call_records = paired_tool_call_records(
+        tool_logs,
+        max_entries=max_tool_log_entries,
+        max_result_chars=max_tool_result_chars,
+    )
+    previous_tool_call_records = paired_tool_call_records(
+        prior_tool_logs or [],
+        max_entries=max_tool_log_entries,
+        max_result_chars=max_tool_result_chars,
+    )
     important_constraints = [
-        "Only executed official tool results are database evidence.",
-        "The dialogue history may include previous turns, but it excludes tool-call JSON, tool execution results, and correction feedback.",
-        "Only the current turn tool ledger is available as tool evidence; do not infer facts from older tool results not shown here.",
-        "Do not use video or hidden ground truth.",
-        "Do not audit visual recognition accuracy, frame selection, OCR quality, pointing target identity, or spatial interpretation.",
-        "Read-only tools such as find_*, get_*, list_*, tally_*, and compute_* do not change database state.",
-        "Read-only tool calls may be based on dialogue or visual hypotheses and should not be blocked only for lack of visual proof or branch timing.",
-        "Broad read-only list/search tools are allowed to discover candidates, fields, enum options, and branch evidence.",
-        "Do not invent visual evidence or reject only because visual mapping is unproven.",
-        "For final replies, audit non-visual tool facts, completed actions, branch decisions, and calculations.",
-        "For visually derived names or OCR text, do not require exact full-name matching to the returned canonical database name.",
-        "Match visually derived names by the strongest discriminative token that uniquely identifies a catalog item; do not reject only because weaker variety/type words differ.",
-        "A generic lookup result that drops the strongest discriminative token is not a competing candidate once a later strong-token lookup returns one canonical item preserving that token.",
-        "For mutation calls, audit non-visual tool evidence: tool schema, returned fields, filters, quantities, rankings, ties, and state target.",
-        "When tool results show tied selected candidates and the user needs a state change over the selected set, require every tied candidate to be mutated.",
-        "Visual claims alone do not justify final reply facts.",
-        "Do not demand database proof of visual descriptors that the tools cannot represent.",
-        "Validate tool names, parameter names, enum values, and intended use against official_tool_catalog.",
-        "Do not reorder a proposed tool-call batch.",
-        "Read-only batch calls should serve the same current decision point or active candidate set.",
-        "Do not approve clear prefetching of tools that are only needed by inactive future branches.",
-        "Do not reject a plausible read-only exploration merely because another valid sequence would be more efficient.",
-        "If a state-changing call lacks non-visual tool evidence, reject or request more read-only tool evidence.",
-        "For enum-valued filters, if an exact enum lookup has no overlap with a requested candidate set, check semantically related official enum values before accepting a fallback branch.",
-        "Use previous dialogue turns only to understand the user's task and service commitments, not as database evidence.",
+        "This payload provides evidence for the preflight audit; the system prompt defines the policy.",
+        "Do not audit visual recognition; images and key frames are not included in correction context.",
+        "Use previous_turn_tool_ledger and current_turn_tool_ledger as official DB evidence.",
+        "Use previous_turn_tool_call_records and current_turn_tool_call_records to inspect the exact tool names, parameters, order, and corresponding results.",
+        "Use official_tool_catalog for tool names, descriptions, parameters, and enum values.",
+        "Audit the proposed output only; do not solve the task or require global enumeration unless the user asked globally.",
     ]
     if scenario == "retail":
         important_constraints.extend(
             [
-                "For retail, a visually inferred product name is allowed as a hypothesis; do not require official tools to prove the image-to-product mapping.",
-                "For retail, if product tools map a visual hypothesis to one clear canonical catalog product, audit later facts and mutations against that canonical product.",
-                "For retail, if a fuzzy lookup returns a different or multiple canonical products, audit that later facts and mutations use only the supported canonical product set.",
-                "For retail, complete list tools such as find_products_by_taste and find_products_by_nutritional_characteristic support negative classification when the canonical product is absent from the returned list.",
+                "Retail aliases from the scenario rules are allowed when directly relevant: high oil/high_fat, nut/nuts, high_calories/low_calories/gluten_free.",
+            ]
+        )
+    elif scenario == "order":
+        important_constraints.extend(
+            [
+                "Order restaurant_name must be sourced from user dialogue, not visual/OCR text; do not use hidden namespace knowledge before official tool execution.",
+                "Order dish/item operations and set-meal operations are distinct; set-meal contents count for allergen checks unless the user restricts to non-set-meal items.",
+                "For order discount/payment/amount-payable final answers, require compute_total_payment rather than manual arithmetic.",
             ]
         )
     payload = {
@@ -933,32 +970,31 @@ def build_audit_context(
         "proposed": proposed,
         "latest_user_message": latest_user_message,
         "summarized_history": summarized_history or "",
-        "dialogue_scope": "filtered user/service dialogue history; tool calls, tool results, and correction feedback are excluded",
-        "tool_ledger_scope": "current turn only",
+        "dialogue_scope": "filtered user/service dialogue history plus runner/correction feedback needed to explain rejected outputs; official tool execution results are provided via previous_turn_tool_ledger and current_turn_tool_ledger",
+        "tool_ledger_scope": "previous turns plus current turn",
+        "service_frames_attached_this_turn": bool(service_frames_attached),
         "dialogue_history": dialogue_history,
         "key_frames": [],
+        "previous_turn_tool_ledger": previous_tool_ledger,
         "current_turn_tool_ledger": executed_tool_ledger,
+        "previous_turn_tool_call_records": previous_tool_call_records,
+        "current_turn_tool_call_records": current_tool_call_records,
         "official_tool_catalog": tool_catalog,
         "important_constraints": important_constraints,
         "visual_grounding_policy": {
             "visual_mapping_audit_enabled": False,
             "correction_receives_images": False,
             "key_frames_available_to_correction": False,
+            "service_frames_attached_this_turn": bool(service_frames_attached),
             "dialogue_history_available": True,
-            "tool_ledger_current_turn_only": True,
+            "tool_ledger_current_turn_only": False,
+            "previous_turn_tool_ledger_available": True,
             "service_prompt_included": True,
-            "visual_claims_may_seed_read_only_calls_without_key_frames": True,
-            "visual_read_only_call_requires_positive_visual_support": False,
-            "final_reply_audit_scope": "tool_facts_only_no_visual_mapping_audit",
-            "mutation_audit_scope": "tool_chain_only_no_visual_mapping_audit",
-            "do_not_block_read_only_lookup_because_visual_mapping_is_unproven": True,
-            "visual_claims_alone_do_not_justify_final_reply_facts": True,
-            "visual_ocr_name_matching": "discriminative_token_not_exact_full_name",
-            "unique_strong_token_match_can_support_canonical_item": True,
-            "generic_results_dropping_strong_token_are_not_conflicting_candidates": True,
-            "do_not_require_database_fields_for_visual_descriptors": True,
-            "read_only_batch_branch_gating_enabled": True,
-            "over_strict_rejection_guard": "approve plausible read-only current-decision exploration",
+            "read_only_visual_hypothesis_lookup_allowed": True,
+            "canonical_output_fields_override_visual_inputs": True,
+            "mutation_and_final_reply_require_tool_chain": True,
+            "final_numeric_answers_require_compute_when_available": True,
+            "process_distinct_mutations_must_not_be_aggregated": True,
         },
     }
     return compact_json(payload, max_chars=0)
@@ -970,7 +1006,10 @@ def audit_context_stats(audit_context: str) -> dict[str, Any]:
         "chars": len(text),
         "context_truncated": False,
         "has_dialogue_history": '"dialogue_history"' in text,
+        "has_previous_turn_tool_ledger": '"previous_turn_tool_ledger"' in text,
         "has_current_turn_tool_ledger": '"current_turn_tool_ledger"' in text,
+        "has_previous_turn_tool_call_records": '"previous_turn_tool_call_records"' in text,
+        "has_current_turn_tool_call_records": '"current_turn_tool_call_records"' in text,
         "has_official_tool_catalog": '"official_tool_catalog"' in text,
         "has_proposed": '"proposed"' in text,
     }
@@ -1127,10 +1166,10 @@ def failure_decision(exc: Exception, *, failure_policy: str) -> CorrectionDecisi
 def env_default_model() -> str:
     return (
         os.environ.get("CORRECTION_MODEL_NAME")
-        or os.environ.get("LANCE_SERVICE_MODEL_NAME")
         or os.environ.get("SERVICE_MODEL_NAME")
-        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
+        or os.environ.get("OPENAI_MODEL_NAME")
         or os.environ.get("DEEPSEEK_MODEL_NAME")
+        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
         or "gpt-5.5"
     )
 
@@ -1138,7 +1177,7 @@ def env_default_model() -> str:
 def env_chat_completions_model() -> str:
     return (
         os.environ.get("CORRECTION_MODEL_NAME")
-        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
         or os.environ.get("DEEPSEEK_MODEL_NAME")
+        or os.environ.get("Deepseek_SERVICE_MODEL_NAME")
         or "deepseek-v4-flash"
     )

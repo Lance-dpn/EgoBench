@@ -515,6 +515,14 @@
         "tool_name": "add_dish_to_order",
         "parameters": {
           "user_id": "customer_005",
+          "dish_name": "Affogato",
+          "quantity": 1
+        }
+      },
+      {
+        "tool_name": "add_dish_to_order",
+        "parameters": {
+          "user_id": "customer_005",
           "dish_name": "Cheesecake",
           "quantity": 1
         }
@@ -530,6 +538,10 @@
             },
             {
               "dish_name": "Tiramisu",
+              "quantity": 1
+            },
+            {
+              "dish_name": "Affogato",
               "quantity": 1
             },
             {

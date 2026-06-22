@@ -8,29 +8,45 @@ Participants should modify this file to use their preferred model for user simul
 Default: Qwen3.5-397B-A17B
 
 Environment Variables Required:
-- API_KEY: Your API key for the user simulation model
-- LLM_API_BASE_URL: Base URL for the API endpoint (optional)
+- USER_API_KEY: API key for the user simulation model
+- USER_API_BASE_URL: Base URL for the API endpoint
+- USER_MODEL_NAME: Model name for user simulation
 """
 
 import os
+from openai import OpenAI
 
 # ==============================================================================
 # USER SIMULATION MODEL CONFIGURATION
 # ==============================================================================
 
-# Model name for user simulation
-# Default: Qwen3.5-397B-A17B
-# You can change this to any model you prefer
-USER_MODEL_NAME = os.environ.get("USER_MODEL_NAME", "Qwen3.5-397B-A17B")
+# Model name for user simulation.
+USER_MODEL_NAME = (
+    os.environ.get("USER_MODEL_NAME")
+    or os.environ.get("SERVICE_MODEL_NAME")
+    or os.environ.get("OPENAI_MODEL_NAME")
+    or "Qwen3.5-397B-A17B"
+)
 
-# API Key for user simulation model
-# This should be set as an environment variable: export API_KEY="your-api-key"
-USER_API_KEY = os.environ.get("API_KEY", "")
+# API key for user simulation model.
+USER_API_KEY = (
+    os.environ.get("USER_API_KEY")
+    or os.environ.get("SERVICE_API_KEY")
+    or os.environ.get("OPENAI_API_KEY")
+    or os.environ.get("API_KEY")
+    or ""
+)
 
 # Base URL for the API endpoint
-# Default: https://api.example.com/v1/chat/completions
-# Participants should set this according to their model deployment
-USER_API_BASE_URL = os.environ.get("LLM_API_BASE_URL", "https://api.example.com/v1")
+# Default: https://api.example.com/v1
+# Participants should set this according to their model deployment.
+USER_API_BASE_URL = (
+    os.environ.get("USER_API_BASE_URL")
+    or os.environ.get("SERVICE_API_BASE_URL")
+    or os.environ.get("OPENAI_BASE_URL")
+    or os.environ.get("LLM_API_BASE_URL")
+    or "https://api.example.com/v1"
+)
 
 # Maximum tokens for user model responses
 USER_MAX_TOKENS = 8192
@@ -38,8 +54,14 @@ USER_MAX_TOKENS = 8192
 # Temperature for user model (0.0 - 2.0)
 USER_TEMPERATURE = 0.7
 
-# Whether to enable thinking mode (if supported by the model)
-USER_ENABLE_THINKING = False
+# Whether to enable thinking mode (if supported by the model). Leave unset by
+# default so GPT-compatible endpoints do not receive Qwen-specific extra_body.
+_USER_ENABLE_THINKING_RAW = os.environ.get("USER_ENABLE_THINKING")
+USER_ENABLE_THINKING = (
+    None
+    if _USER_ENABLE_THINKING_RAW is None or _USER_ENABLE_THINKING_RAW == ""
+    else _USER_ENABLE_THINKING_RAW.strip().lower() in {"1", "true", "yes", "on", "enabled"}
+)
 
 
 # ==============================================================================
@@ -77,8 +99,9 @@ def call_user_model(messages, max_retries=3, enable_thinking=None):
             kwargs = {
                 "model": USER_MODEL_NAME,
                 "messages": messages,
-                "extra_body": {"enable_thinking": enable_thinking}
             }
+            if enable_thinking is not None:
+                kwargs["extra_body"] = {"enable_thinking": enable_thinking}
             completion = client.chat.completions.create(**kwargs)
             content = completion.choices[0].message.content
 
@@ -115,10 +138,10 @@ def validate_config():
         tuple: (is_valid, error_message)
     """
     if not USER_API_KEY:
-        return False, "API_KEY environment variable is not set. Please set it before running."
-
+        return False, "USER_API_KEY environment variable is not set. Please set it before running."
+    
     if not USER_API_BASE_URL:
-        return False, "LLM_API_BASE_URL is not configured."
+        return False, "USER_API_BASE_URL is not configured."
 
     return True, None
 

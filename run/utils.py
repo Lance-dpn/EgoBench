@@ -25,6 +25,23 @@ from run.apis import call_llm
 
 # --- Media processing utility functions ---
 
+def normalize_json_numbers(value):
+    """Normalize floating-point noise before writing tool results to logs."""
+    if isinstance(value, dict):
+        return {k: normalize_json_numbers(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [normalize_json_numbers(v) for v in value]
+    if isinstance(value, tuple):
+        return [normalize_json_numbers(v) for v in value]
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, float):
+        rounded_value = round(value, 10)
+        if rounded_value.is_integer():
+            return int(rounded_value)
+        return rounded_value
+    return value
+
 def is_url(path):
     """Check if path is a URL"""
     try:
@@ -225,11 +242,12 @@ def execute_tool(db_instance, tool_calls_data):
                 method = getattr(db_instance, method_name)
                 result = method(**params)
                 print(f"  [Tool Execution] Return result: {result}")
+                normalized_result = normalize_json_numbers(result)
                 results.append({
                     "role": "tool",
                     "tool_name": method_name,
                     "parameters": params,
-                    "content": json.dumps(result, ensure_ascii=False, default=str)
+                    "content": json.dumps(normalized_result, ensure_ascii=False, default=str)
                 })
             else:
                 results.append({
