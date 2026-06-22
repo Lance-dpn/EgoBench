@@ -84,7 +84,7 @@ Each case can carry a case-level human review state:
 ```json
 {
   "human_review_status": "verified",
-  "human_reviewed_at": "2026-06-06T00:00:00+00:00",
+  "human_reviewed_at": "<iso-timestamp>",
   "human_reviewer": "manual_review"
 }
 ```

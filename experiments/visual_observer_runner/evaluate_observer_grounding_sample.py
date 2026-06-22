@@ -613,7 +613,7 @@ def main() -> None:
     parser.add_argument("--gt_path", type=Path)
     parser.add_argument("--observer_url", default="http://127.0.0.1:18082/observe")
     parser.add_argument("--timeout", type=float, default=300)
-    parser.add_argument("--seed", type=int, default=20260604)
+    parser.add_argument("--seed", type=int, default=12345)
     parser.add_argument("--sample_size", default=None, help="Number of cases to sample, or `all`.")
     parser.add_argument("--all", action="store_true", help="Evaluate all eligible cases.")
     parser.add_argument("--include_high_review", action="store_true")

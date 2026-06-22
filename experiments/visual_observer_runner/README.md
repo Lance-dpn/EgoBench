@@ -43,7 +43,7 @@ python -u experiments/visual_observer_runner/run_interaction.py \
   --visual_observer_url http://127.0.0.1:18082/observe \
   --multi_agent_user \
   --summary_user \
-  --output_model_name qwen36-online-url-observer-order1-task5
+  --output_model_name example-observer-order1-task5
 ```
 
 For standard experiments, keep `--multi_agent_user` and `--summary_user`
@@ -402,7 +402,7 @@ conda run --no-capture-output -n egolink \
     --observation_cache_dir experiments/visual_observer_runner/cache/visual_observations \
     --observe_once \
     --refresh_observation \
-    --output_model_name qwen36-online-url-observer-order1-smoke
+    --output_model_name example-observer-order1
 ```
 
 Results are written to:
@@ -428,11 +428,11 @@ conda run --no-capture-output -n egolink \
     --observation_cache_dir experiments/visual_observer_runner/cache/visual_observations \
     --observe_once \
     --refresh_observation \
-    --output_model_name order1-task3-debug
+    --output_model_name example-observer-order1-task3
 ```
 
 `--task_ids` also accepts comma-separated ids and ranges, for example
-`--task_ids 3,7,10-12`. Keep `--refresh_observation` when you want to rerun the
+`--task_ids 3,7,10-12`. Keep `--refresh_observation` when you want to repeat the
 observer and ignore stale cached visual results; remove it when intentionally
 reusing an existing observation cache.
 
@@ -440,7 +440,7 @@ Evaluate a finished run:
 
 ```bash
 bash analysis_scripts/run_eval.sh \
-  --model_name qwen36-online-url-observer-order1-smoke \
+  --model_name observer-order1-example \
   --num_samples 0
 ```
 
@@ -458,7 +458,7 @@ conda run --no-capture-output -n egolink \
     --num_tasks 1 \
     --visual_context_source scenario_value \
     --observe_once \
-    --output_model_name scenario-value-order1-smoke
+    --output_model_name example-scenario-value-order1
 ```
 
 This mode is useful for testing service-agent tool behavior independently of
@@ -544,7 +544,7 @@ OBSERVER_LOCAL_MODEL=qwen3.6-27b-fp8 \
   bash experiments/visual_observer_runner/start_observer.sh
 ```
 
-For local all-Qwen3.6 runs, the current recommended smoke-test command is:
+For local all-Qwen3.6 runs, the recommended quick-test command is:
 
 ```bash
 OBSERVER_MODEL_PROVIDER=local \
@@ -674,7 +674,7 @@ budget before generation starts.
 Fixes:
 
 ```bash
-# Prefer this for local temporal/ordinal smoke tests.
+# Prefer this for local temporal/ordinal quick tests.
 OBSERVER_TEMPORAL_EVENT_BACKEND=qwen_video
 
 # Or reduce the frame request if local qwen_frames is required.
@@ -769,9 +769,9 @@ Run:
 
 ```bash
 python experiments/visual_observer_runner/evaluate_observer_grounding_sample.py \
-  --seed 20260604 \
+  --seed 12345 \
   --sample_size 20 \
-  --experiment_id observer-grounding-order1-manual-$(date +%Y%m%d%H%M)
+  --experiment_id observer-grounding-order1-example
 ```
 
 The result summary includes three separate observer-stage diagnostics:

@@ -27,7 +27,7 @@ python -u experiments/langgraph_service_agent/run_langgraph_frame_agent.py \
   --scenario retail \
   --scenario_number 6 \
   --task_ids 1 \
-  --output_model_name gpt55-langgraph-retail6-smoke \
+  --output_model_name example-langgraph-retail6 \
   --multi_agent_user \
   --summary_user \
   --frame_fps 2 \

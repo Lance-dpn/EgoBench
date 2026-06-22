@@ -1,8 +1,8 @@
 # Lance-dpn EgoBench Track 2
 
-This repository is the Lance-dpn working branch for EgoLink 2026 Track 2 / EgoBench final evaluation. It keeps the official EgoBench sandbox, tools, scenarios, and evaluator, and adds our frame-based GPT-5.5 service runner, correction agent, rerun scripts, and clean final result staging files.
+This repository is the Lance-dpn working branch for EgoLink 2026 Track 2 / EgoBench final evaluation. It keeps the official EgoBench sandbox, tools, scenarios, and evaluator, and adds our frame-based GPT-5.5 service runner, correction agent, and clean final result staging files.
 
-Raw run logs, local evaluation outputs, GT audit notes, temporary zip files, and manual process reports are intentionally kept out of Git. They may exist on the Lance-dpn workstation for debugging, but they are not part of the GitHub development branch.
+Raw run logs, local evaluation outputs, GT audit notes, temporary zip files, and manual process reports are intentionally kept out of Git. They may exist on local development machines for debugging, but they are not part of the GitHub development branch.
 
 The current branch is organized for the final five scenarios:
 
@@ -89,7 +89,7 @@ python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 4 \
   --num_tasks 5 \
-  --output_model_name smoke-kitchen4 \
+  --output_model_name example-kitchen4-run \
   --multi_agent_user \
   --summary_user \
   --service_reasoning_effort low \
@@ -125,23 +125,29 @@ The final experiments used these sampling rates:
 
 The runner uses `--frame_attach_policy auto`: frames are attached immediately for visually phrased user turns; otherwise the service can request visual context by outputting `NEED_VISUAL_CONTEXT`.
 
-## Long Reruns
+## Long Runs
 
-Long runs should be launched in tmux and logged with `tee`. The repository includes helper scripts for the main final reruns:
+Long runs can be launched in tmux and logged with `tee`. Keep run names generic
+and write logs under ignored local cache directories:
 
 ```bash
 source .env
-bash experiments/gpt55_frame_service_runner/run_20260622_kitchen4_newdb_4way.sh
-bash experiments/gpt55_frame_service_runner/run_20260622_order2_remaining_3way.sh
+RUN_NAME=<run-name>
+mkdir -p experiments/gpt55_frame_service_runner/cache/run_logs
+tmux new-session -d -s "$RUN_NAME" \
+  "python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
+    --scenario kitchen \
+    --scenario_number 4 \
+    --output_model_name \"$RUN_NAME\" \
+    --multi_agent_user \
+    --summary_user \
+    --enable_correction_agent \
+    --resume \
+    2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/${RUN_NAME}.log"
 ```
 
-These scripts split long task sets across multiple tmux windows and write realtime logs under:
-
-```text
-experiments/gpt55_frame_service_runner/cache/run_logs/<RUN_ID>/
-```
-
-The scripts resolve the project root from their own location. Set `PYTHON=/path/to/python` if you need a specific interpreter; otherwise they use `python`.
+For large repeat runs, split task ids across multiple tmux sessions manually and
+write each session to a separate ignored log file.
 
 ## Correction Agent
 
@@ -183,12 +189,12 @@ python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
   --output eval_result/<run_name>/task_id_aligned_eval.json
 ```
 
-For split reruns, pass all split result directories:
+For split or repeated runs, pass all result directories:
 
 ```bash
 python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
   results/<part1> results/<part2> results/<part3> \
-  --output eval_result/<rerun_name>/eval_task_id_aligned.json
+  --output eval_result/<combined_run_name>/eval_task_id_aligned.json
 ```
 
 ## Submission Artifacts
@@ -262,7 +268,7 @@ Ignored runtime output:
 - `*.zip`
 - videos and frame caches
 - local `.env`
-- local manual review notes such as `scenarios/final/manual_check.md`
+- local manual review notes
 
 Avoid adding bulk replay, audit, and local review directories such as:
 

@@ -14,7 +14,7 @@ python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 2 \
   --num_tasks 10 \
-  --output_model_name 20260608-gpt55-frame-kitchen2-smoke \
+  --output_model_name example-kitchen2-run \
   --multi_agent_user \
   --summary_user \
   --frame_fps 2 \
@@ -37,14 +37,16 @@ realtime terminal output and a saved log file:
 source .env
 mkdir -p experiments/gpt55_frame_service_runner/cache/run_logs
 
-tmux new-session -d -s gpt55_frame_kitchen2_1920 \
+RUN_NAME=example-kitchen2-run
+
+tmux new-session -d -s "$RUN_NAME" \
   'cd <repo-root> && \
    source .env && \
    python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
      --scenario kitchen \
      --scenario_number 2 \
      --num_tasks 10 \
-     --output_model_name 20260608-gpt55-frame-kitchen2-smoke10-1920 \
+     --output_model_name example-kitchen2-run \
      --multi_agent_user \
      --summary_user \
      --frame_fps 2 \
@@ -52,19 +54,19 @@ tmux new-session -d -s gpt55_frame_kitchen2_1920 \
      --frame_rotation none \
      --image_detail high \
      --frame_attach_policy auto \
-     2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/20260608-gpt55-frame-kitchen2-smoke10-1920.log'
+     2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/example-kitchen2-run.log'
 ```
 
 Attach to the live run:
 
 ```bash
-tmux attach -t gpt55_frame_kitchen2_1920
+tmux attach -t example-kitchen2-run
 ```
 
 Follow the saved log without attaching:
 
 ```bash
-tail -f experiments/gpt55_frame_service_runner/cache/run_logs/20260608-gpt55-frame-kitchen2-smoke10-1920.log
+tail -f experiments/gpt55_frame_service_runner/cache/run_logs/example-kitchen2-run.log
 ```
 
 The runner itself prints to stdout only. Log files under
@@ -174,7 +176,7 @@ python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --scenario kitchen \
   --scenario_number 2 \
   --num_tasks 10 \
-  --output_model_name 20260608-gpt55-frame-kitchen2-smoke \
+  --output_model_name example-kitchen2-run \
   --multi_agent_user \
   --summary_user \
   --frame_fps 2 \
@@ -301,76 +303,13 @@ conda run --no-capture-output -n egolink python experiments/gpt55_frame_service_
   --scenario retail \
   --scenario_number 3 \
   --task_ids 7 \
-  --output_model_name 20260609-correction-agent-retail3-t7 \
+  --output_model_name example-retail3-task7 \
   --enable_correction_agent \
   --correction_on_max_rounds stop \
   --multi_agent_user \
   --summary_user
 ```
 
----
-
-```bash
-tmux new-session -d -s gpt55-retail3-correction-low-5task \
-'cd <repo-root> && \
-source .env && \
-python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
-  --scenario retail \
-  --scenario_number 3 \
-  --num_task 5 \
-  --output_model_name 20260613-auto-frame-low-retail3-visual-5task \
-  --frame_attach_policy auto \
-  --multi_agent_user \
-  --summary_user --service_reasoning_effort low \
-  --enable_correction_agent 2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/20260613-gpt55-frame-correction-low-retail3-visual-5task.log'
-```
----
-
-```bash
- tmux new-session -d -s gpt55-restaurant3-correction-low-5task \
-  'cd <repo-root> && \
-  source .env && \
-  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
-    --scenario restaurant \
-    --scenario_number 3 \
-    --num_task 5 \
-    --output_model_name 20260613-auto-frame-low-restaurant3-visual-5task \
-    --frame_attach_policy auto \
-    --multi_agent_user \
-    --summary_user \
-    --service_reasoning_effort low \
-    --enable_correction_agent \
-    --frame_rotation counterclockwise 2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/20260613-gpt55-frame-correction-low-restaurant3-visual-5task.log'
-```
-
----
-```bash
- tmux new-session -d -s gpt55-kitchen3-correction-low-5task \
-  'cd <repo-root> && \
-  source .env && \
-  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
-    --scenario kitchen \
-    --scenario_number 3 \
-    --num_task 5 \
-    --output_model_name 20260613-auto-frame-low-kitchen3-visual-5task \
-    --frame_attach_policy auto \
-    --multi_agent_user \
-    --summary_user --service_reasoning_effort low \
-    --enable_correction_agent 2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/20260613-gpt55-frame-correction-low-kitchen3-visual-5task.log'
-```
----
-
-```bash
- tmux new-session -d -s gpt55-order1-correction-low-5task \
-  'cd <repo-root> && \
-  source .env && \
-  python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
-    --scenario order \
-    --scenario_number 1 \
-    --num_task 5 \
-    --output_model_name 20260613-auto-frame-low-order1-visual-5task \
-    --frame_attach_policy auto \
-    --multi_agent_user \
-    --summary_user --service_reasoning_effort low \
-    --enable_correction_agent 2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/20260613-gpt55-frame-correction-low-order1-visual-5task.log'
-```
+For multi-task, split, or repeated runs, use the same command shape with a descriptive
+`--output_model_name`, explicit `--task_ids` or `--num_tasks`, and one ignored
+log file per tmux session.
