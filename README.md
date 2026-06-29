@@ -91,9 +91,12 @@ scenarios/final/                   # official scenario JSON files
 scenarios/test_GT/                 # selected local GT files for final-task checks
 tools/                             # official scenario DBs and tools
 fig/                               # README figures copied from the paper workspace
+MM2026_Egolink/                    # ACM MM technical-report source and figures
 ```
 
-The paper workspace, raw logs, local result directories, videos, frame caches, and submission zip files are intentionally kept out of Git.
+Raw logs, local result directories, videos, frame caches, submission zip files,
+and older draft workspaces are intentionally kept out of Git. The final ACM MM
+paper workspace is retained under `MM2026_Egolink/` for transparency.
 
 ## Environment
 
@@ -115,7 +118,7 @@ Do not commit `.env` or plaintext API keys.
 
 ## Running EgoInteract
 
-Example run on `kitchen4`:
+Example run on `kitchen4` using the final `kitchen4` frame rate:
 
 ```bash
 source .env
@@ -193,6 +196,15 @@ cd analysis_scripts
 python evaluate_interaction.py --model_name <run_name> --num_samples 5
 ```
 
+The paper tables are based on the official selected-task setting and the
+corrected official GT used for the final challenge evaluation. For final-task
+checks, use the selected-task helper:
+
+```bash
+cd analysis_scripts
+python evaluate_interaction_test.py --model_name <run_name>
+```
+
 The service agent must not read `scenarios/final/*.json`, GT annotations, audit reports, evaluation outputs, or database internals during official interaction. These files are for simulation, local checking, and debugging only.
 
 ## Git Hygiene
@@ -201,17 +213,19 @@ Keep the repository lightweight. The following are local-only:
 
 - `.env`, API keys, and credentials
 - `results/`, `eval_result/`, logs, caches, videos, and frame dumps
-- submission zip files and staged official-submission outputs
-- paper workspaces such as `MM2026_Egolink/` and `acmart-primary/`
-- agent notes such as `AGENT.MD`
 
-If `.gitignore` changes after files have already been tracked, remove those files from Git while keeping local copies:
-
-```bash
-git rm -r --cached <path>
-git commit -m "Remove local artifacts from tracking"
-```
 
 ## Citation
 
-If you use this repository, please cite the associated EgoInteract ACM MM 2026 EgoLink challenge paper once the official proceedings entry is available.
+If you use this repository, please cite the associated EgoInteract ACM MM 2026
+EgoLink challenge technical report:
+
+```bibtex
+@inproceedings{dai2026egointeract,
+  title     = {EgoInteract: An Interactive Multimodal Agent with Self-Correction for Egocentric Visual Understanding},
+  author    = {Dai, Punan and Wu, Yanxi and Chu, Lingxin and Xu, Jun and Cheng, Zhengxue and Song, Li},
+  booktitle = {Proceedings of the ACM International Conference on Multimedia},
+  year      = {2026},
+  note      = {EgoLink 2026 Challenge technical report}
+}
+```
