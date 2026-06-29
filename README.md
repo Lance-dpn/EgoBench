@@ -61,7 +61,7 @@ Per-scenario final evaluation:
 
 Ablation summary:
 
-| Setting | Joint ↑ | Micro ↑ | Result ↑ | Tool ↑ | Δ Joint ↓ |
+| Setting | Joint ↑ | Micro ↑ | Result ↑ | Tool ↑ | Δ Joint ↑ |
 |---|---:|---:|---:|---:|---:|
 | **Full system** | **0.844** | **0.916** | **0.875** | **0.854** | -- |
 | w/o Correction | 0.781 | 0.876 | 0.812 | 0.781 | -0.063 |
