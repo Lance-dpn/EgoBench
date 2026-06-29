@@ -5,7 +5,9 @@ This repository contains the EgoInteract system developed for the EgoLink 2026 T
 EgoInteract ranked first among the released teams on the official final EgoLink Track 2 evaluation, with **0.844 Joint Success Rate** and **0.916 Micro Accuracy**.
 
 <p align="center">
-  <img src="fig/overview.png" alt="EgoInteract overview" width="92%">
+  <img src="fig/teaser.png" alt="EgoInteract teaser" width="78%">
+  <br>
+  <em>Fig. 1. EgoInteract teaser from the final paper.</em>
 </p>
 
 ## Highlights
@@ -18,11 +20,21 @@ EgoInteract ranked first among the released teams on the official final EgoLink 
 ## Paper Figures
 
 <p align="center">
-  <img src="fig/runtime.png" alt="Runtime workflow" width="92%">
+  <img src="fig/overview.png" alt="EgoInteract overview" width="92%">
+  <br>
+  <em>Fig. 2. System overview: scenario-aware service agent plus scope-limited correction agent.</em>
 </p>
 
 <p align="center">
-  <img src="fig/teaser.png" alt="Per-scenario ablation teaser" width="70%">
+  <img src="fig/runtime.png" alt="Runtime workflow" width="92%">
+  <br>
+  <em>Fig. 3. Runtime workflow on a retail10 interaction with prompt snippets, tool calls, and correction audits.</em>
+</p>
+
+<p align="center">
+  <img src="fig/ablation_runtime.png" alt="Qualitative ablation trajectories" width="92%">
+  <br>
+  <em>Fig. 4. Qualitative ablation trajectories on the same order2 task.</em>
 </p>
 
 ## Official Results
@@ -58,6 +70,8 @@ Ablation summary:
 
 <p align="center">
   <img src="fig/ablation_scenario_bar.png" alt="Ablation results by scenario" width="76%">
+  <br>
+  <em>Fig. 5. Per-scenario joint success under full and ablated systems.</em>
 </p>
 
 ## Repository Layout
