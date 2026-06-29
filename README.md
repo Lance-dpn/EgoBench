@@ -1,87 +1,107 @@
-# Lance-dpn EgoBench Track 2
+# EgoInteract: Interactive Multimodal Agent for EgoLink Track 2
 
-This repository is the Lance-dpn working branch for EgoLink 2026 Track 2 / EgoBench final evaluation. It keeps the official EgoBench sandbox, tools, scenarios, and evaluator, and adds our frame-based GPT-5.5 service runner, correction agent, and clean final result staging files.
+This repository contains the EgoInteract system developed for the EgoLink 2026 Track 2 Interactive Agent Challenge. EgoInteract is an inference-time multimodal service agent for egocentric social-life task execution. It grounds user instructions in first-person visual streams, invokes official scenario tools, and uses a lightweight correction agent to audit state-changing tool calls and final replies before execution.
 
-Raw run logs, local evaluation outputs, GT audit notes, temporary zip files, and manual process reports are intentionally kept out of Git. They may exist on local development machines for debugging, but they are not part of the GitHub development branch.
+EgoInteract ranked first among the released teams on the official final EgoLink Track 2 evaluation, with **0.844 Joint Success Rate** and **0.916 Micro Accuracy**.
 
-The current branch is organized for the final five scenarios:
+<p align="center">
+  <img src="fig/overview.png" alt="EgoInteract overview" width="92%">
+</p>
 
-| Scenario | File | Tasks |
-|---|---|---:|
-| Retail 6 | `retail6_easy.json` | 49 |
-| Retail 10 | `retail10_easy.json` | 63 |
-| Kitchen 4 | `kitchen4_easy.json` | 50 |
-| Restaurant 5 | `restaurant5_easy.json` | 50 |
-| Order 2 | `order2_easy.json` | 97 |
+## Highlights
 
-The staged submission files are kept under `submission/Lance-dpn_track2/`.
-Local GT-based checks are used only for debugging and are not official
-benchmark results.
+- **Egocentric visual grounding:** sampled frames are used to resolve visually situated references such as products, dishes, ingredients, labels, menu regions, and spatial relations.
+- **Scenario-aware tool use:** the service agent adapts its grounding and tool policy to retail, kitchen, restaurant, and order scenarios.
+- **Pre-execution correction:** high-risk proposals are audited against dialogue context, visual hypotheses, tool observations, branch conditions, quantities, and current state.
+- **Evidence-managed interaction:** read-only retrieval and computation calls gather support; state-changing calls are blocked or revised when evidence is insufficient.
+
+## Paper Figures
+
+<p align="center">
+  <img src="fig/runtime.png" alt="Runtime workflow" width="92%">
+</p>
+
+<p align="center">
+  <img src="fig/teaser.png" alt="Per-scenario ablation teaser" width="70%">
+</p>
+
+## Official Results
+
+The official EgoLink evaluator reports Tool, Result, Joint, and Micro metrics. Joint Success Rate is the primary ranking metric.
+
+| Team | Joint ↑ | Micro ↑ | Result ↑ | Tool ↑ |
+|---|---:|---:|---:|---:|
+| **MediaLab / EgoInteract (Ours)** | **0.844** | **0.916** | 0.875 | **0.854** |
+| GML-MM Group | 0.823 | 0.914 | 0.854 | 0.823 |
+| BigVisionAgentGoGoGo | 0.781 | 0.889 | **0.896** | 0.802 |
+| uestc_goat | 0.729 | 0.814 | 0.760 | 0.740 |
+| EgoMinds | 0.604 | 0.733 | 0.646 | 0.615 |
+
+Per-scenario final evaluation:
+
+| Scenario | Tasks | Joint ↑ | Micro ↑ | Result ↑ | Tool ↑ |
+|---|---:|---:|---:|---:|---:|
+| retail6 | 20 | 1.000 | 1.000 | 1.000 | 1.000 |
+| retail10 | 20 | 0.700 | 0.840 | 0.750 | 0.700 |
+| kitchen4 | 18 | 0.944 | 0.984 | 1.000 | 0.944 |
+| restaurant5 | 18 | 0.833 | 0.950 | 0.833 | 0.889 |
+| order2 | 20 | 0.750 | 0.815 | 0.800 | 0.750 |
+
+Ablation summary:
+
+| Setting | Joint ↑ | Micro ↑ | Result ↑ | Tool ↑ | Δ Joint ↓ |
+|---|---:|---:|---:|---:|---:|
+| **Full system** | **0.844** | **0.916** | **0.875** | **0.854** | -- |
+| w/o Correction | 0.781 | 0.876 | 0.812 | 0.781 | -0.063 |
+| w/o Scenario | 0.646 | 0.807 | 0.698 | 0.667 | -0.198 |
+| w/o Both | 0.635 | 0.786 | 0.635 | 0.646 | -0.208 |
+
+<p align="center">
+  <img src="fig/ablation_scenario_bar.png" alt="Ablation results by scenario" width="76%">
+</p>
 
 ## Repository Layout
 
-Core files:
+```text
+analysis_scripts/
+  evaluate_interaction.py          # official-style local evaluator
+  evaluate_interaction_test.py     # final selected-task evaluation helper
 
-- `experiments/gpt55_frame_service_runner/run_frame_agent.py`  
-  Our frame-based service runner. It keeps the official simulated user flow and sends sampled video frames to the service model.
+experiments/gpt55_frame_service_runner/
+  run_frame_agent.py               # frame-based EgoInteract runner
+  frame_sampler.py                 # video frame sampling and resizing
+  prompts/service.py               # service-agent prompt and scenario rules
+  tool_call_correction.py          # correction-agent prompt and audit logic
 
-- `experiments/gpt55_frame_service_runner/prompts/service.py`  
-  Main service-agent prompt and scenario-specific rules.
+scenarios/final/                   # official scenario JSON files
+scenarios/test_GT/                 # selected local GT files for final-task checks
+tools/                             # official scenario DBs and tools
+fig/                               # README figures copied from the paper workspace
+```
 
-- `experiments/gpt55_frame_service_runner/tool_call_correction.py`  
-  Correction agent used to audit tool batches and replies before execution.
-
-- `experiments/gpt55_frame_service_runner/frame_sampler.py`  
-  Video frame sampling and resizing.
-
-- `experiments/langgraph_service_agent/evaluate_task_id_aligned.py`  
-  Task-id aligned evaluator used for local GT checks.
-
-- `scenarios/final/`  
-  Final scenario JSON files. In official evaluation, the service agent must not read these files directly.
-
-- `tools/`  
-  Official scenario tools and DB initializers, including the updated `kitchen4` DB.
-
-Important result location:
-
-- `submission/Lance-dpn_track2/results/Lance-dpn/`  
-  Clean submission staging directory containing the five required result JSON files.
-
-Local result zips and evaluator outputs should be generated when needed and are ignored by Git.
+The paper workspace, raw logs, local result directories, videos, frame caches, and submission zip files are intentionally kept out of Git.
 
 ## Environment
 
-Use the existing project environment:
+Create a local `.env` file with OpenAI-compatible model settings:
 
 ```bash
-source .env
-python --version
+SERVICE_MODEL_NAME=gpt-5.5
+SERVICE_API_KEY=...
+SERVICE_API_BASE_URL=...
+USER_MODEL_NAME=gpt-5.5
+USER_API_KEY=...
+USER_API_BASE_URL=...
+CORRECTION_MODEL_NAME=gpt-5.5
+CORRECTION_API_KEY=...
+CORRECTION_API_BASE_URL=...
 ```
 
-The frame runner reads generic OpenAI-compatible environment variables:
+Do not commit `.env` or plaintext API keys.
 
-```bash
-SERVICE_MODEL_NAME
-SERVICE_API_KEY
-SERVICE_API_BASE_URL
-```
+## Running EgoInteract
 
-The simulated user and summary/check calls use the configured user model variables, including:
-
-```bash
-USER_MODEL_NAME
-USER_API_KEY
-USER_API_BASE_URL
-```
-
-The correction agent uses `CORRECTION_*` when set; otherwise it reuses the service model settings.
-
-Do not commit `.env` or any plaintext API key.
-
-## Running A Scenario
-
-Direct run example:
+Example run on `kitchen4`:
 
 ```bash
 source .env
@@ -103,17 +123,17 @@ python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
   --frame_attach_policy auto
 ```
 
-Results are checkpointed after each task:
+Results are checkpointed to:
 
 ```text
 results/<output_model_name>/<scenario><scenario_number>_easy.json
 ```
 
-Use `--resume` with the same `--output_model_name` to continue a stopped run without overwriting completed records.
+Use `--resume` with the same `--output_model_name` to continue a stopped run.
 
-## Frame Sampling Rates
+## Final Frame Rates
 
-The final experiments used these sampling rates:
+The final configuration used adaptive frame sampling by scenario:
 
 | Scenario | FPS |
 |---|---:|
@@ -123,157 +143,61 @@ The final experiments used these sampling rates:
 | `restaurant5` | 1 |
 | `order2` | 2 |
 
-The runner uses `--frame_attach_policy auto`: frames are attached immediately for visually phrased user turns; otherwise the service can request visual context by outputting `NEED_VISUAL_CONTEXT`.
+## Ablation Flags
 
-## Long Runs
-
-Long runs can be launched in tmux and logged with `tee`. Keep run names generic
-and write logs under ignored local cache directories:
+The runner supports the paper ablations:
 
 ```bash
-source .env
-RUN_NAME=<run-name>
-mkdir -p experiments/gpt55_frame_service_runner/cache/run_logs
-tmux new-session -d -s "$RUN_NAME" \
-  "python -u experiments/gpt55_frame_service_runner/run_frame_agent.py \
-    --scenario kitchen \
-    --scenario_number 4 \
-    --output_model_name \"$RUN_NAME\" \
-    --multi_agent_user \
-    --summary_user \
-    --enable_correction_agent \
-    --resume \
-    2>&1 | tee experiments/gpt55_frame_service_runner/cache/run_logs/${RUN_NAME}.log"
-```
-
-For large repeat runs, split task ids across multiple tmux sessions manually and
-write each session to a separate ignored log file.
-
-## Correction Agent
-
-Enable correction with:
-
-```bash
+# Full system
 --enable_correction_agent
+
+# w/o Correction
+# omit --enable_correction_agent
+
+# w/o Scenario
+--enable_correction_agent --disable_scenario_prompt
+
+# w/o Both
+--disable_scenario_prompt
 ```
-
-The correction agent audits:
-
-- Whether a state-changing tool call is supported by branch-predicate evidence.
-- Whether tool parameters use canonical DB fields.
-- Whether a reply is consistent with executed tool results.
-- Whether set meals, allergens, per-100g conditions, final payment, tax, and nutrition computations use the correct tool and scope.
-
-Recent correction behavior is in:
-
-- `experiments/gpt55_frame_service_runner/tool_call_correction.py`
-- `experiments/gpt55_frame_service_runner/run_frame_agent.py`
-
-When correction rejects a state-changing tool batch and the max correction round is reached, the runner blocks execution instead of silently applying the rejected mutation.
 
 ## Evaluation
 
-Evaluate the current clean submission staging directory:
+Evaluate a generated result directory with the local evaluator. The evaluator
+expects result files under `results/<model_name>/` and writes reports to
+`eval_result/<model_name>/`:
 
 ```bash
-python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
-  submission/Lance-dpn_track2/results/Lance-dpn \
-  --output eval_result/submission_lance_dpn_track2_eval.json
+cd analysis_scripts
+python evaluate_interaction.py --model_name <run_name>
 ```
 
-Evaluate any result directory:
+Limit the number of evaluated tasks per scenario during debugging:
 
 ```bash
-python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
-  results/<run_name> \
-  --output eval_result/<run_name>/task_id_aligned_eval.json
+cd analysis_scripts
+python evaluate_interaction.py --model_name <run_name> --num_samples 5
 ```
 
-For split or repeated runs, pass all result directories:
-
-```bash
-python experiments/langgraph_service_agent/evaluate_task_id_aligned.py \
-  results/<part1> results/<part2> results/<part3> \
-  --output eval_result/<combined_run_name>/eval_task_id_aligned.json
-```
-
-## Submission Artifacts
-
-Official result staging:
-
-```text
-submission/Lance-dpn_track2/
-└── results/
-    └── Lance-dpn/
-        ├── retail6_easy.json
-        ├── retail10_easy.json
-        ├── kitchen4_easy.json
-        ├── restaurant5_easy.json
-        └── order2_easy.json
-```
-
-Results-only zip:
-
-```text
-Lance-dpn_track2_results_only_clean.zip
-```
-
-This zip should be generated locally when packaging results. It is intentionally not tracked in Git and should contain only:
-
-```text
-results/
-└── Lance-dpn/
-    ├── retail6_easy.json
-    ├── retail10_easy.json
-    ├── kitchen4_easy.json
-    ├── restaurant5_easy.json
-    └── order2_easy.json
-```
-
-For official submission, add the required technical report:
-
-```text
-Lance-dpn_track2.zip
-├── Lance-dpn.pdf
-└── results/
-    └── Lance-dpn/
-        ├── retail6_easy.json
-        ├── retail10_easy.json
-        ├── kitchen4_easy.json
-        ├── restaurant5_easy.json
-        └── order2_easy.json
-```
-
-Then send the final zip to the official submission email according to the competition instructions.
-
-## Important Fairness Constraints
-
-The service agent must not directly read or use `scenarios/final/*.json`, GT annotations, audit reports, evaluation outputs, or database internals during an official interaction. The service should obtain information only from:
-
-- the current user dialogue,
-- attached video frames,
-- official tools and their returned results.
-
-The files under `scenarios/final/`, local GT fields, replay reports, and eval outputs are for simulated-user execution, analysis, and local debugging only.
+The service agent must not read `scenarios/final/*.json`, GT annotations, audit reports, evaluation outputs, or database internals during official interaction. These files are for simulation, local checking, and debugging only.
 
 ## Git Hygiene
 
-Ignored runtime output:
+Keep the repository lightweight. The following are local-only:
 
-- `results/`
-- `eval_result/`
-- `experiments/**/cache/`
-- `experiments/visual_observer_runner/eval/`
-- `experiments/visual_observer_runner/docs/`
-- `*.zip`
-- videos and frame caches
-- local `.env`
-- local manual review notes
+- `.env`, API keys, and credentials
+- `results/`, `eval_result/`, logs, caches, videos, and frame dumps
+- submission zip files and staged official-submission outputs
+- paper workspaces such as `MM2026_Egolink/` and `acmart-primary/`
+- agent notes such as `AGENT.MD`
 
-Avoid adding bulk replay, audit, and local review directories such as:
+If `.gitignore` changes after files have already been tracked, remove those files from Git while keeping local copies:
 
-```text
-experiments/visual_observer_runner/eval/instruction_tool_runs/
+```bash
+git rm -r --cached <path>
+git commit -m "Remove local artifacts from tracking"
 ```
 
-unless there is a specific reason to publish them.
+## Citation
+
+If you use this repository, please cite the associated EgoInteract ACM MM 2026 EgoLink challenge paper once the official proceedings entry is available.
