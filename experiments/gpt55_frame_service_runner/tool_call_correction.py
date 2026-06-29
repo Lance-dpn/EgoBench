@@ -223,8 +223,7 @@ Use the dialogue history, proposed output, official tool catalog, current-turn
 tool ledger, previous-turn tool ledger, and chronological tool-call records.
 Previous-turn tool results support facts/actions already established earlier in
 the same task; if the latest user message changes the target, boundary,
-quantity, or condition, require current evidence for new mutations or final DB
-claims.
+quantity, or condition, require current evidence for new mutations or final DB claims.
 
 Scenario rules below are overrides for known recurring issues. Apply them only
 when directly relevant; do not treat them as an exhaustive checklist that the
@@ -319,11 +318,22 @@ line beginning with corrected_call: or suggested_call:.
 """.strip()
 
 
-def build_correction_system_prompt(*, scenario: str, scenario_number: int) -> str:
-    scenario_rule = CORRECTION_SCENARIO_RULES.get(
-        scenario,
-        "- Use the official tools to audit tool schemas, database facts, branch logic, calculations, and state changes. Do not audit visual recognition.",
-    )
+def build_correction_system_prompt(
+    *,
+    scenario: str,
+    scenario_number: int,
+    include_scenario_rules: bool = True,
+) -> str:
+    if include_scenario_rules:
+        scenario_rule = CORRECTION_SCENARIO_RULES.get(
+            scenario,
+            "- Use the official tools to audit tool schemas, database facts, branch logic, calculations, and state changes. Do not audit visual recognition.",
+        )
+    else:
+        scenario_rule = (
+            "- Use the official tools to audit tool schemas, database facts, branch logic, calculations, and state changes. "
+            "Do not audit visual recognition. Apply only general correction rules without scenario-specific hints."
+        )
     return CORRECTION_SYSTEM_PROMPT_TEMPLATE.format(
         scenario=f"{scenario}{scenario_number}",
         scenario_rule=scenario_rule,

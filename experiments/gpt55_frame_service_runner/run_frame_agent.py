@@ -895,6 +895,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
     correction_system_prompt = build_correction_system_prompt(
         scenario=args.scenario,
         scenario_number=args.scenario_number,
+        include_scenario_rules=not args.disable_scenario_prompt,
     )
     correction_log_file = PROJECT_ROOT / correction_log_path(output_path)
     if args.enable_correction_agent:
@@ -1024,6 +1025,7 @@ def run_simulation(input_path: str, tool_info_path: str, output_path: str, args:
             tool_descriptions=tool_descriptions,
             scenario=args.scenario,
             scenario_number=args.scenario_number,
+            include_scenario_rules=not args.disable_scenario_prompt,
         )
         service_history: list[dict[str, str]] = []
         rounds_count = 0
@@ -1883,6 +1885,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--log_service_payload_size", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--service_payload_warn_mb", type=float, default=2.5)
     parser.add_argument("--enable_correction_agent", action="store_true")
+    parser.add_argument(
+        "--disable_scenario_prompt",
+        action="store_true",
+        help=(
+            "Ablation flag: remove scenario-specific service and correction rules while keeping the generic prompts."
+        ),
+    )
     parser.add_argument(
         "--correction_api_type",
         choices=["responses", "response", "chat_completions", "chat_completion"],

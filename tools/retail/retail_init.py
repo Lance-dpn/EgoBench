@@ -13835,8 +13835,8 @@ retail_init_data6 = {
           "quantity": 2
         },
         {
-          "product_name": "highland speciality shortbread teddy bear*2\"",
-          "quantity": 1
+          "product_name": "highland speciality shortbread teddy bear",
+          "quantity": 2
         }
       ]
     },
@@ -19133,16 +19133,12 @@ retail_init_data10 = {
       "user_id": "user_202",
       "items": [
         {
-          "product_name": "blue cheese",
-          "quantity": 1
-        },
-        {
           "product_name": "brie cheese",
           "quantity": 1
         },
         {
           "product_name": "blue cheese",
-          "quantity": 2
+          "quantity": 3
         }
       ]
     },

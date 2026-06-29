@@ -106,11 +106,23 @@ SCENARIO_RULES = {
 }
 
 
-def build_service_agent_prompt(*, tool_descriptions: str, scenario: str, scenario_number: int) -> str:
-    scenario_rules = SCENARIO_RULES.get(
-        scenario,
-        ["- Use attached frames for visual evidence and scenario tools for database facts and state changes."],
-    )
+def build_service_agent_prompt(
+    *,
+    tool_descriptions: str,
+    scenario: str,
+    scenario_number: int,
+    include_scenario_rules: bool = True,
+) -> str:
+    if include_scenario_rules:
+        scenario_rules = SCENARIO_RULES.get(
+            scenario,
+            ["- Use attached frames for visual evidence and scenario tools for database facts and state changes."],
+        )
+    else:
+        scenario_rules = [
+            "- Use attached frames for visual evidence and official tools for database facts and state changes.",
+            "- Apply the general tool-use, conditional-branch, candidate-filtering, mutation, and computation rules above without scenario-specific hints.",
+        ]
     scenario_rule = "\n".join(scenario_rules)
     return f"""
 # Role
